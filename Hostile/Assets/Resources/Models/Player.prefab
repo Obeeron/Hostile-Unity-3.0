@@ -93,7 +93,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5652392742487851429}
   - component: {fileID: 2242973299712288355}
-  - component: {fileID: -1974760449221867742}
+  - component: {fileID: -561265539585281246}
+  - component: {fileID: -5457501643169651949}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -109,7 +110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7995119100650011310}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.18827438, y: 10.935179, z: -5.7988234}
+  m_LocalPosition: {x: -0.18827438, y: 10.935179, z: -4.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6337775024723413948}
@@ -134,7 +135,7 @@ MonoBehaviour:
   jumpSpeed: 9
   jumpHeight: 1.5
   gravity: 20
---- !u!114 &-1974760449221867742
+--- !u!114 &-561265539585281246
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,6 +147,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc0d1c284a444e41aeed5f693fd16b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 4836581905652859388}
+  playerBody: {fileID: -5457501643169651949}
+--- !u!143 &-5457501643169651949
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7995119100650011310}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1337278821872885926
 PrefabInstance:
   m_ObjectHideFlags: 0
