@@ -28,11 +28,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Jump"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""129e9be6-b0e6-4015-8361-77a2a77bb7d4"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press""
                 },
                 {
                     ""name"": ""SpeedOnHold"",
@@ -47,6 +47,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""type"": ""Button"",
                     ""id"": ""750a0c0f-4408-4c32-b346-01437a0b1ec0"",
                     ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MouseMovement"",
+                    ""type"": ""Value"",
+                    ""id"": ""d9febb41-48b6-461f-afb7-089991747a6d"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -139,6 +147,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""SpeedSwap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""024926ee-82ca-4d65-95d5-e5196e1070bb"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -151,6 +170,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_InGame_Jump = m_InGame.FindAction("Jump", throwIfNotFound: true);
         m_InGame_SpeedOnHold = m_InGame.FindAction("SpeedOnHold", throwIfNotFound: true);
         m_InGame_SpeedSwap = m_InGame.FindAction("SpeedSwap", throwIfNotFound: true);
+        m_InGame_MouseMovement = m_InGame.FindAction("MouseMovement", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -204,6 +224,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_InGame_Jump;
     private readonly InputAction m_InGame_SpeedOnHold;
     private readonly InputAction m_InGame_SpeedSwap;
+    private readonly InputAction m_InGame_MouseMovement;
     public struct InGameActions
     {
         private @PlayerControls m_Wrapper;
@@ -212,6 +233,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_InGame_Jump;
         public InputAction @SpeedOnHold => m_Wrapper.m_InGame_SpeedOnHold;
         public InputAction @SpeedSwap => m_Wrapper.m_InGame_SpeedSwap;
+        public InputAction @MouseMovement => m_Wrapper.m_InGame_MouseMovement;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -233,6 +255,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @SpeedSwap.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnSpeedSwap;
                 @SpeedSwap.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnSpeedSwap;
                 @SpeedSwap.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnSpeedSwap;
+                @MouseMovement.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnMouseMovement;
+                @MouseMovement.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnMouseMovement;
+                @MouseMovement.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnMouseMovement;
             }
             m_Wrapper.m_InGameActionsCallbackInterface = instance;
             if (instance != null)
@@ -249,6 +274,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @SpeedSwap.started += instance.OnSpeedSwap;
                 @SpeedSwap.performed += instance.OnSpeedSwap;
                 @SpeedSwap.canceled += instance.OnSpeedSwap;
+                @MouseMovement.started += instance.OnMouseMovement;
+                @MouseMovement.performed += instance.OnMouseMovement;
+                @MouseMovement.canceled += instance.OnMouseMovement;
             }
         }
     }
@@ -259,5 +287,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnSpeedOnHold(InputAction.CallbackContext context);
         void OnSpeedSwap(InputAction.CallbackContext context);
+        void OnMouseMovement(InputAction.CallbackContext context);
     }
 }

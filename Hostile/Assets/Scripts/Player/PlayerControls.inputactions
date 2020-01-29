@@ -15,11 +15,11 @@
                 },
                 {
                     "name": "Jump",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "129e9be6-b0e6-4015-8361-77a2a77bb7d4",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press"
                 },
                 {
                     "name": "SpeedOnHold",
@@ -34,6 +34,14 @@
                     "type": "Button",
                     "id": "750a0c0f-4408-4c32-b346-01437a0b1ec0",
                     "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MouseMovement",
+                    "type": "Value",
+                    "id": "d9febb41-48b6-461f-afb7-089991747a6d",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 }
@@ -124,6 +132,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SpeedSwap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "024926ee-82ca-4d65-95d5-e5196e1070bb",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseMovement",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
