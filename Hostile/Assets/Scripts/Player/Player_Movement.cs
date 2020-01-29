@@ -13,12 +13,14 @@ public class Player_Movement : MonoBehaviour
     
     public float walkingSpeed = 6.0f;
     public float runningSpeed = 9.0f;
-    public float jumpSpeed = 8.0f;
+    public float jumpSpeed = 30.0f;
     public float gravity = 20.0f;
 
     private PlayerControls controls;
     private float speed;
     public bool walking = true;
+    
+    public bool wasd = false;
     private Vector3 movement = Vector3.zero;
     
     //called before Start
@@ -47,7 +49,9 @@ public class Player_Movement : MonoBehaviour
             }.normalized;
             movement *= speed;
 
-            controls.InGame.Jump.performed += jumping => movement.y = jumpSpeed;
+            if(controls.InGame.Jump.triggered){
+                movement.y = jumpSpeed;
+            }
         }
 
         movement.y -= gravity * Time.deltaTime;
@@ -55,7 +59,9 @@ public class Player_Movement : MonoBehaviour
     }
     
     public void speedChange() => walking = !walking;
-    private void OnEnable() => controls.InGame.Enable();
+    private void OnEnable(){
+        controls.InGame.Enable();
+    } 
     private void OnDisable() => controls.InGame.Disable();
         //controls.Menu.disable might be used here
 }

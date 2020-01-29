@@ -197,13 +197,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201741958}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 72, y: 188, z: -236.8}
-  m_LocalScale: {x: 1.0076, y: 1.6678659, z: 1.0076}
+  m_LocalRotation: {x: 0.37815642, y: -0, z: -0, w: 0.92574173}
+  m_LocalPosition: {x: 0.19, y: 2.57, z: -3.08}
+  m_LocalScale: {x: 0.03508626, y: -0.06405537, z: 0.05038}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1802599403}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 44.439003, y: 0, z: 0}
 --- !u!1 &1246880941
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,9 +294,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1473030333
+--- !u!1 &1664383408
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -304,9 +304,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1473030336}
-  - component: {fileID: 1473030335}
-  - component: {fileID: 1473030334}
+  - component: {fileID: 1664383411}
+  - component: {fileID: 1664383410}
+  - component: {fileID: 1664383409}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -314,27 +314,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!154 &1473030334
+--- !u!154 &1664383409
 TerrainCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1473030333}
+  m_GameObject: {fileID: 1664383408}
   m_Material: {fileID: 0}
   m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: d350d983ba1a4d9409d3508afbef7264, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 4dbda3d013cd1834bb88033216fe24d7, type: 2}
   m_EnableTreeColliders: 1
---- !u!218 &1473030335
+--- !u!218 &1664383410
 Terrain:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1473030333}
+  m_GameObject: {fileID: 1664383408}
   m_Enabled: 1
   serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: d350d983ba1a4d9409d3508afbef7264, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 4dbda3d013cd1834bb88033216fe24d7, type: 2}
   m_TreeDistance: 5000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
@@ -358,19 +358,19 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
---- !u!4 &1473030336
+--- !u!4 &1664383411
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1473030333}
+  m_GameObject: {fileID: 1664383408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -250, y: 0, z: -250}
-  m_LocalScale: {x: 50, y: 1, z: 50}
+  m_LocalPosition: {x: -104.4, y: 0, z: -190}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1802599399
 GameObject:
@@ -462,11 +462,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1802599399}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.7, y: 166.8, z: 106.8949}
-  m_LocalScale: {x: 206.09999, y: -68, z: 20}
-  m_Children: []
+  m_LocalPosition: {x: -15.7, y: 13, z: -27.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children:
+  - {fileID: 1201741961}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1802599404
 MonoBehaviour:
@@ -481,10 +482,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSpeed: 6
-  runningSpeed: 9
-  jumpSpeed: 8
+  runningSpeed: 90
+  jumpSpeed: 80
   gravity: 20
   walking: 1
+  wasd: 0
 --- !u!143 &1802599405
 CharacterController:
   m_ObjectHideFlags: 0
