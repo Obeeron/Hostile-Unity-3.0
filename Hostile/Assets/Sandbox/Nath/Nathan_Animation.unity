@@ -163,7 +163,7 @@ MonoBehaviour:
   jumpSpeed: 15
   jumpHeight: 3.5
   gravity: 20
-  animator: {fileID: 0}
+  animator: {fileID: 158201131}
 --- !u!114 &158201130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +178,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1172011220}
   playerBody: {fileID: 158201128}
+--- !u!95 &158201131 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 320b1c2af77554f99a1658df4a6d3d5c,
+    type: 3}
+  m_PrefabInstance: {fileID: 898857964}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &225039691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -327,6 +333,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
 --- !u!4 &898857966 stripped
