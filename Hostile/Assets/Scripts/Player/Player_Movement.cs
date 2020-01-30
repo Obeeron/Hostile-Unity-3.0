@@ -21,7 +21,7 @@ public class Player_Movement : MonoBehaviour
     private PlayerControls controls;
     private float speed;
     private bool walking = true;
-    
+    public Animator animator;
     private Vector3 movement = Vector3.zero;
     
     //called before Start
@@ -53,6 +53,9 @@ public class Player_Movement : MonoBehaviour
                 x = moveDirection.x,
                 z = moveDirection.y
             }.normalized;
+
+            animator.SetFloat("Speed", moveDirection.x);
+            animator.SetFloat("TurnSpeed", moveDirection.y);
             movement *= speed;
 
             if(controls.InGame.Jump.triggered){
