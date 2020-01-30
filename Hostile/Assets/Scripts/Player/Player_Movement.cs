@@ -9,13 +9,13 @@ using UnityEngine.InputSystem;
 public class Player_Movement : MonoBehaviour
 {
     
-    CharacterController character;
+    public CharacterController character;
     
     //private after test in unity
     public float walkingSpeed = 6.0f;
     public float runningSpeed = 9.0f;
-    public float jumpSpeed = 9.0f;
-    public float jumpHeight = 1.5f;
+    public float jumpSpeed = 15.0f;
+    public float jumpHeight = 3.5f;
     public float gravity = 20.0f;
 
     private PlayerControls controls;
@@ -33,7 +33,7 @@ public class Player_Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        character = GetComponent<CharacterController>();
+
     }
 
     // Update is called once per frame
@@ -55,9 +55,9 @@ public class Player_Movement : MonoBehaviour
             }.normalized;
             movement *= speed;
 
-            // if(controls.InGame.Jump.triggered){
-            //    Jump();
-            // }
+            if(controls.InGame.Jump.triggered){
+                Jump();
+            }
         }
         else
         {

@@ -31,7 +31,7 @@ public class Camera_Movement : MonoBehaviour
 
         float xMouse = mouse.x * mouseSensi * Time.deltaTime;
         xRotation -= mouse.y * mouseSensi * Time.deltaTime;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        xRotation = Mathf.Clamp(xRotation, -85f, 70f);
 
         playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.transform.Rotate(Vector3.up * xMouse);
