@@ -49,10 +49,7 @@ public class Player_Movement : MonoBehaviour
         if (character.isGrounded)
         {
             var moveDirection = controls.InGame.Movement.ReadValue<Vector2>();
-            movement = new Vector3{
-                x = moveDirection.x,
-                z = moveDirection.y
-            }.normalized;
+            movement = (moveDirection.y * transform.forward + moveDirection.x * transform.right).normalized;
 
             animator.SetFloat("Speed", moveDirection.x);
             animator.SetFloat("TurnSpeed", moveDirection.y);
