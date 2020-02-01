@@ -82,7 +82,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""f4114dc2-1087-4daf-b660-94efb41f3051"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -104,7 +104,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""8b298c47-67ff-4976-bede-b4f2ac000882"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
