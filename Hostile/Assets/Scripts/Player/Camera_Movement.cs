@@ -13,8 +13,8 @@ public class Camera_Movement : MonoBehaviour
     
     
     private PlayerControls controls;
-    private float xRotation;
-    /*private Vector2 mouseRotate;*/
+    private float yRotation;
+    private Vector2 mouseRotate;
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class Camera_Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        xRotation = 0f;
+        yRotation = 0f;
         smoothness = 0.8f;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -33,16 +33,16 @@ public class Camera_Movement : MonoBehaviour
     {
         Vector2 mouse = controls.InGame.MouseMovement.ReadValue<Vector2>();
         
-        /*mouseRotate.x = Mathf.Lerp(mouse.x, mouseRotate.x, smoothness);
-        mouseRotate.y = Mathf.Lerp(mouse.y,mouseRotate.y, smoothness);*/
+        mouseRotate.x = Mathf.Lerp(mouse.x * mouseSensi * Time.deltaTime, mouseRotate.x, smoothness);
+        mouseRotate.y = Mathf.Lerp(mouse.y * mouseSensi * Time.deltaTime,mouseRotate.y, smoothness);
 
-        float xMouse = mouse.x * mouseSensi * Time.deltaTime;
-        xRotation -= mouse.y * mouseSensi * Time.deltaTime;
-        xRotation = Mathf.Clamp(xRotation, -85f, 70f);
+        float xRotation = mouseRotate.x ;
+        yRotation -= mouseRotate.y;
+        yRotation = Mathf.Clamp(yRotation, -85f, 70f);
 
 
-        playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        playerBody.transform.Rotate(Vector3.up * xMouse);
+        playerCamera.transform.localRotation = Quaternion.Euler(yRotation, 0f, 0f);
+        playerBody.transform.Rotate(Vector3.up * xRotation);
     }
 
     //enables controls input

@@ -57,6 +57,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""cf134d64-8e0f-4f62-8c58-36d18d73d17f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -158,6 +166,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""MouseMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f83799b3-2ebd-4db5-a5fa-d4d506471b92"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -171,6 +190,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_InGame_SpeedOnHold = m_InGame.FindAction("SpeedOnHold", throwIfNotFound: true);
         m_InGame_SpeedSwap = m_InGame.FindAction("SpeedSwap", throwIfNotFound: true);
         m_InGame_MouseMovement = m_InGame.FindAction("MouseMovement", throwIfNotFound: true);
+        m_InGame_Crouch = m_InGame.FindAction("Crouch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -225,6 +245,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_InGame_SpeedOnHold;
     private readonly InputAction m_InGame_SpeedSwap;
     private readonly InputAction m_InGame_MouseMovement;
+    private readonly InputAction m_InGame_Crouch;
     public struct InGameActions
     {
         private @PlayerControls m_Wrapper;
@@ -234,6 +255,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @SpeedOnHold => m_Wrapper.m_InGame_SpeedOnHold;
         public InputAction @SpeedSwap => m_Wrapper.m_InGame_SpeedSwap;
         public InputAction @MouseMovement => m_Wrapper.m_InGame_MouseMovement;
+        public InputAction @Crouch => m_Wrapper.m_InGame_Crouch;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +280,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @MouseMovement.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnMouseMovement;
                 @MouseMovement.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnMouseMovement;
                 @MouseMovement.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnMouseMovement;
+                @Crouch.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnCrouch;
+                @Crouch.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnCrouch;
+                @Crouch.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnCrouch;
             }
             m_Wrapper.m_InGameActionsCallbackInterface = instance;
             if (instance != null)
@@ -277,6 +302,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @MouseMovement.started += instance.OnMouseMovement;
                 @MouseMovement.performed += instance.OnMouseMovement;
                 @MouseMovement.canceled += instance.OnMouseMovement;
+                @Crouch.started += instance.OnCrouch;
+                @Crouch.performed += instance.OnCrouch;
+                @Crouch.canceled += instance.OnCrouch;
             }
         }
     }
@@ -288,5 +316,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnSpeedOnHold(InputAction.CallbackContext context);
         void OnSpeedSwap(InputAction.CallbackContext context);
         void OnMouseMovement(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
     }
 }

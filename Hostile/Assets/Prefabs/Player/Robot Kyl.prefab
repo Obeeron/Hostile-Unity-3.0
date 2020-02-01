@@ -113,6 +113,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0da409db2f45954499cd32caf2fa3f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxLife: 0
+  life: 0
+  isAlive: 1
+  damage: 0
+  stamina: 0
   animator: {fileID: 8549611328968766765}
 --- !u!114 &1693732076659911468
 MonoBehaviour:
@@ -126,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc0d1c284a444e41aeed5f693fd16b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoothness: 0
   playerCamera: {fileID: 8712326255855236572}
   playerBody: {fileID: 882748657470933272}
 --- !u!114 &3760938420053520622
