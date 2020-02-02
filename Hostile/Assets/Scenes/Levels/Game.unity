@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.5589622, g: 0.6357302, b: 0.745283, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.009
@@ -319,7 +319,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {x: 506, y: 39, z: 506}
-  ignoredComponents: []
 --- !u!4 &696703762
 Transform:
   m_ObjectHideFlags: 0

@@ -213,9 +213,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 2413785946090234010}
-  normalSpeed: 4
-  runningSpeed: 6
-  jumpHeight: 0.7
+  normalSpeed: 5.5
+  runningSpeed: 7.5
+  jumpHeight: 1
   groundLerp: 0.8
   airLerp: 0.95
   airSpeedMultiplier: 0.55
@@ -231,8 +231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d28db7682d89a4881a2faf2c1f7e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 200
-  smoothness: 0.8
+  mouseSensitivity: 100
+  smoothness: 0.55
 --- !u!114 &2335749375552170081
 MonoBehaviour:
   m_ObjectHideFlags: 0
