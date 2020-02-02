@@ -8,7 +8,6 @@ namespace Joueur
     public class Player_Stats : MonoBehaviour 
     {
 
-        //?stamina de crouch?
         private float MaxLife = 100f;
         private float CurrentLife;
         private float MaxStamina = 200f;
@@ -68,6 +67,27 @@ namespace Joueur
                         Stamina = value;
                     }
                 }
+            }
+        }
+
+        public float HasLife
+        {
+            get => CurrentLife;
+            set
+            {
+                if (value > MaxLife)
+                {
+                    CurrentLife = MaxLife;
+                }
+                else if (value < 0f)
+                {
+                    CurrentLife = -1f;
+                }
+                else
+                {
+                    CurrentLife = value;
+                }
+                Debug.Log($"current life = {this.CurrentLife}");
             }
         }
         //end of getters and setters

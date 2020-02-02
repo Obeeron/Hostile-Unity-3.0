@@ -27,7 +27,7 @@ namespace Joueur
         void Start()
         {
             yRotation = 0f;
-            smoothness = 0.8f;
+            smoothness = 0.74f;
             Cursor.lockState = CursorLockMode.Locked;
         }
 

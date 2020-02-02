@@ -15,14 +15,14 @@ namespace Joueur
         
         
         //values of speed and jump
-        [SerializeField] private float crouchSpeed = 0.8f;
-        [SerializeField] private float walkingSpeed = 6.0f;
-        [SerializeField] private float runningSpeed = 15.0f;
+        [SerializeField] private float crouchSpeed = 3.0f;
+        [SerializeField] private float walkingSpeed = 5.0f;     // les animations change la vitesse
+        [SerializeField] private float runningSpeed = 9.0f;
         [SerializeField] private float noStaminaSpeed = 3f;
-        [SerializeField] private float jumpHeight = 2.2f;
-        [SerializeField] private float gravity = 10.0f;
+        [SerializeField] private float jumpHeight = 2.0f;
+        [SerializeField] private float gravity = 3.0f;
 
-        //values of stmaina
+        //values of stamina
         private float staminaTimer = 0.0f;
         private float jumpStamina = 10.0f;
         private float runningStamina = 5.0f;
@@ -35,8 +35,8 @@ namespace Joueur
         private PlayerControls controls;
         private Vector3 fallingVelocity;
         private float speed;
-        private float groundLerp;
-        private float airLerp;
+        private float groundLerp = 0.8f;
+        private float airLerp = 0.95f;
         
         public Animator animator;
         private Vector3 movement;
@@ -52,8 +52,6 @@ namespace Joueur
         void Start()
         {
             character = GetComponent<CharacterController>();
-            groundLerp = 0.8f;
-            airLerp = 0.95f;
             //initialise les statistiques du joueur. Sera dans un autre fichiers lorsque le choix de points de compétences sera mis en place.
             player.Choosing(0,0,0,0);
         }
@@ -76,6 +74,8 @@ namespace Joueur
             if (player.IsWorn || player.IsHungry)
             {
                 speed = noStaminaSpeed;
+                running = false;
+                walking = true;
             }
             else
             {
@@ -102,6 +102,10 @@ namespace Joueur
 
             if (character.isGrounded)
             {
+                /*if (fallingVelocity.y < -20f) //not fully functionnal
+                {
+                    player.HasLife -= 5f;
+                }*/
                 movement = Vector3.Lerp(currentMovement * speed * Time.deltaTime, movement, groundLerp);
                 animator.SetFloat("Speed", moveDirection.x);
                 animator.SetFloat("TurnSpeed", moveDirection.y);
@@ -110,8 +114,11 @@ namespace Joueur
                 animator.SetFloat("Jump", moveDirection.y);
 
                 if (controls.InGame.Jump.triggered){
-                    StartCoroutine(Jump());
-                    hasJumped = true;
+                    if (!player.IsWorn)//checking stamina
+                    {
+                        StartCoroutine(Jump());
+                        hasJumped = true;
+                    }
                 }
                 else if (fallingVelocity.y < 0)
                 {
@@ -121,15 +128,15 @@ namespace Joueur
                 //modifying stamina
                 if (hasJumped)
                 {
-                    player.HasStamina -= jumpStamina;
+                    player.HasStamina -= jumpStamina; //perte de stamina à cause du saut
                     staminaTimer = 0f;
                 }
                 if (running && moveDirection != Vector2.zero)
                 {
-                    player.HasStamina -= runningStamina * Time.deltaTime;
+                    player.HasStamina -= runningStamina * Time.deltaTime; //perte de stamina en fonction du temps passé à courir
                     staminaTimer = 0f;
                 }
-                if (!hasJumped && (!running || moveDirection == Vector2.zero))
+                if (!hasJumped && (!running || moveDirection == Vector2.zero)) //regain de stamina si le joueur ne court pas ou est à l'arret
                 {
                     if (staminaTimer >= 2f)
                     {
@@ -139,8 +146,8 @@ namespace Joueur
                     {
                         staminaTimer += Time.deltaTime;
                     }
-                    
                 }
+                //end of modifying stamina
             }
             else
             {
@@ -187,13 +194,13 @@ namespace Joueur
             }
         }
 
-        // une seule vitesse en étant accroupi? ou deux? // une seule je pense :)
         private void Crouching()
         {
             if (crouch)
             {
                 animator.SetBool("Crouch", false);
                 walking = true;
+                running = false;
                 crouch = false;
             }
             else
