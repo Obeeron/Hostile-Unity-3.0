@@ -172,7 +172,8 @@ BlendTree:
     m_DirectBlendParameter: 
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 1cb8ed3cbba15f0479fbae54e0a963df, type: 3}
+    m_Motion: {fileID: -203655887218126122, guid: 821b3d00cae5a034e88a9f8c1ebcc68e,
+      type: 3}
     m_Threshold: 0.8095238
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1.25
@@ -180,38 +181,22 @@ BlendTree:
     m_DirectBlendParameter: 
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400002, guid: f2bed5dc5afacff44a00de8daae9703b, type: 3}
-    m_Threshold: 0.95238096
-    m_Position: {x: -0.7, y: 0}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: 
-    m_Mirror: 0
-  - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: f2bed5dc5afacff44a00de8daae9703b, type: 3}
-    m_Threshold: 1.0476191
-    m_Position: {x: 0.7, y: 0}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: 
-    m_Mirror: 0
-  - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 16d5a4bcf63607a47a3b2299a3117054,
       type: 3}
-    m_Threshold: 1.1428573
+    m_Threshold: 0.95238096
     m_Position: {x: -1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
-    m_DirectBlendParameter: Forward
+    m_DirectBlendParameter: 
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 16d5a4bcf63607a47a3b2299a3117054,
       type: 3}
-    m_Threshold: 1.2380955
+    m_Threshold: 1.0476191
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0.5
-    m_DirectBlendParameter: Forward
+    m_DirectBlendParameter: 
     m_Mirror: 1
   m_BlendParameter: Speed
   m_BlendParameterY: TurnSpeed
@@ -219,7 +204,7 @@ BlendTree:
   m_MaxThreshold: 0.95238096
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
-  m_BlendType: 3
+  m_BlendType: 1
 --- !u!206 &20600002
 BlendTree:
   m_ObjectHideFlags: 1
@@ -416,8 +401,8 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: 
     m_Mirror: 0
-  m_BlendParameter: Speed
-  m_BlendParameterY: TurnSpeed
+  m_BlendParameter: Turn
+  m_BlendParameterY: Forward
   m_MinThreshold: 0
   m_MaxThreshold: 0.5952381
   m_UseAutomaticThresholds: 1

@@ -106,7 +106,10 @@ namespace Joueur
                 animator.SetFloat("Speed", moveDirection.x);
                 animator.SetFloat("TurnSpeed", moveDirection.y);
 
-                if(controls.InGame.Jump.triggered){
+                animator.SetFloat("JumpLeg", moveDirection.x);
+                animator.SetFloat("Jump", moveDirection.y);
+
+                if (controls.InGame.Jump.triggered){
                     StartCoroutine(Jump());
                     hasJumped = true;
                 }
@@ -155,6 +158,7 @@ namespace Joueur
         
         private IEnumerator Jump()
         {
+            animator.SetBool("OnGround", false);
             character.slopeLimit = 90f;
             speed /= 1.8f;
             fallingVelocity.y = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
@@ -162,6 +166,7 @@ namespace Joueur
             {
                 yield return null;
             } while (!character.isGrounded);
+            animator.SetBool("OnGround", true);
             character.slopeLimit = 45f;
         }
 
@@ -182,11 +187,12 @@ namespace Joueur
             }
         }
 
-        // une seule vitesse en étant accroupi? ou deux?
+        // une seule vitesse en étant accroupi? ou deux? // une seule je pense :)
         private void Crouching()
         {
             if (crouch)
             {
+                animator.SetBool("Crouch", false);
                 walking = true;
                 crouch = false;
             }
@@ -195,6 +201,9 @@ namespace Joueur
                 walking = false;
                 running = false;
                 crouch = true;
+                animator.SetBool("Crouch", true);
+                animator.SetFloat("Forward", movement.x);
+                animator.SetFloat("Turn", movement.y);
             }
         }
 
