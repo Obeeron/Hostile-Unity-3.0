@@ -10,7 +10,7 @@ namespace Joueur
 
         private float MaxLife = 100f;
         private float CurrentLife;
-        private float MaxStamina = 200f;
+        private float MaxStamina = 10f;
         [SerializeField] private float Stamina;
         private float MaxHunger = 250f;
         private float Hunger;

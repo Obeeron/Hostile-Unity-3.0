@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7993658708914185136}
   - component: {fileID: 3608798387547067647}
   m_Layer: 8
-  m_Name: PostProcessing
+  m_Name: DayPPP_P
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
