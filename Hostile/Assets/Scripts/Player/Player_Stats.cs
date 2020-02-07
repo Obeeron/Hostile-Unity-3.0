@@ -17,7 +17,7 @@ namespace Joueur
         [SerializeField] private float Dexterity;
         private float Hunger;
         //if we allow a more important inventory
-        [SerializeField] private int MaxInventory;
+        [SerializeField] private float Strength;
 
 
         //getters == IsSomething ## getters AND setters == HasSomething
@@ -93,19 +93,15 @@ namespace Joueur
         }
         //end of getters and setters
 
-        public void Choosing(int healthPoints, int hungerPoints, int staminaPoints, int inventoryPoints, float AgilityPoints, float DexterityPoints)
+        public void Choosing(int healthPoints, int hungerPoints, int staminaPoints, float strengthPoints, float AgilityPoints, float DexterityPoints)
         {
-            MaxLife = 100 + healthPoints * 10;
-            MaxHunger = 180 + hungerPoints * 10;
-            MaxStamina = 125 + staminaPoints * 7;
-            MaxInventory = 15 + inventoryPoints;
-            Agility = 1f + 0.1f * AgilityPoints;
-            Dexterity = 1f + 0.1f * DexterityPoints;
-            starting();
-        }
+            MaxLife = healthPoints;
+            MaxHunger = hungerPoints;
+            MaxStamina = staminaPoints;
+            Strength = strengthPoints;
+            Agility = AgilityPoints;
+            Dexterity = DexterityPoints;
 
-        private void starting()
-        {
             CurrentLife = MaxLife;
             Hunger = MaxHunger;
             Stamina = MaxStamina;

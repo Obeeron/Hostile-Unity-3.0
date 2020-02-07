@@ -72,8 +72,8 @@ namespace Joueur
             // définition de la vitesse en fonction de la stamina et du choix du joueur
             if (playerStats.IsWorn || playerStats.IsHungry)
             {
-                running = true;
-                walking = false;
+                running = false;
+                walking = true;
                 speed = walkingSpeed;
             }
             else

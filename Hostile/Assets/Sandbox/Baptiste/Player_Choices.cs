@@ -9,82 +9,159 @@ namespace Joueur
     {
         public GameObject Pannel;
         private GameObject PrefabPlayer;
+        private Text remainingPoints;
+        private Text LifeText;
+        private Text AgilityText;
+        private Text DexterityText;
+        private Text StrengthText;
+        private Text StaminaText;
+        private Text HungerText;
         
         private int Skills = 5;
-        private int LifePoints = 0;
-        private float AgilityPoints = 0;
-        private float DexterityPoints = 0;
-        private int HungerPoints = 0;
-        private int StaminaPoints = 0;
-        private int StrengthPoints = 0;
+        private int LifePoints = 100;
+        private float AgilityPoints = 1f;
+        private float DexterityPoints = 1f;
+        private int HungerPoints = 130;
+        private int StaminaPoints = 120;
+        private float StrengthPoints = 1f;
 
 
         public void Start()
         {
             PrefabPlayer = this.gameObject;
             Pannel.SetActive(true);
+            remainingPoints = Pannel.transform.Find("Points").GetComponent<Text>();
+            LifeText = Pannel.transform.Find("LifeStats").GetComponent<Text>();
+            AgilityText = Pannel.transform.Find("AgilityStats").GetComponent<Text>();
+            DexterityText = Pannel.transform.Find("DexterityStats").GetComponent<Text>();
+            StrengthText = Pannel.transform.Find("StrengthStats").GetComponent<Text>();
+            StaminaText = Pannel.transform.Find("StaminaStats").GetComponent<Text>();
+            HungerText = Pannel.transform.Find("HungerStats").GetComponent<Text>();
             Cursor.lockState = CursorLockMode.None;
-        }
-
-        public void Update()
-        {
+            remainingPoints.text = "" + Skills;
+            LifeText.text = "" + LifePoints;
+            AgilityText.text = "" + AgilityPoints;
+            DexterityText.text = "" + DexterityPoints;
+            StrengthText.text = "" + StrengthPoints;
+            StaminaText.text = "" + StaminaPoints;
+            HungerText.text = "" + HungerPoints;
             StartCoroutine(EndChoice());
         }
 
-        public void LifeUp()
+        public void LifeUp(bool up)
         {
-            LifePoints++;
-            Skills--;
+            if (up)
+            {
+                LifePoints += 10;
+                Skills--;
+            }
+            else if (LifePoints > 100)
+            {
+                LifePoints -= 10;
+                Skills++;
+            }
+            remainingPoints.text = "" + Skills;
+            LifeText.text = "" + LifePoints;
             if (Skills == 0)
             {
                 Pannel.SetActive(false);
             }
         }
 
-        public void HungerUp()
+        public void HungerUp(bool up)
         {
-            HungerPoints++;
-            Skills--;
+           if (up)
+            {
+                HungerPoints += 10;
+                Skills--;
+            }
+            else if (HungerPoints > 130)
+            {
+                HungerPoints -= 10;
+                Skills++;
+            }
+            remainingPoints.text = "" + Skills;
+            HungerText.text = "" + HungerPoints;
             if (Skills == 0)
             {
                 Pannel.SetActive(false);
             }
         }
 
-        public void StaminaUp()
+        public void StaminaUp(bool up)
         {
-            StaminaPoints++;
-            Skills--;
-            if(Skills == 0)
+            if (up)
             {
-                Pannel.SetActive(false);
+                StaminaPoints += 5;
+                Skills--;
             }
-        }
-
-        public void StrengthUp()
-        {
-            StrengthPoints++;
-            Skills--;
+            else if (StaminaPoints > 120)
+            {
+                StaminaPoints -= 5;
+                Skills++;
+            }
+            remainingPoints.text = "" + Skills;
+            StaminaText.text = "" + StaminaPoints;
             if (Skills == 0)
             {
                 Pannel.SetActive(false);
             }
         }
 
-        public void AgilityUp()
+        public void StrengthUp(bool up)
         {
-            AgilityPoints++;
-            Skills--;
+            if (up)
+            {
+                StrengthPoints += 0.1f;
+                Skills--;
+            }
+            else if (StrengthPoints > 0.1f)
+            {
+                StrengthPoints -= 0.1f;
+                Skills++;
+            }
+            remainingPoints.text = "" + Skills;
+            StrengthText.text = "" + StrengthPoints;
             if (Skills == 0)
             {
                 Pannel.SetActive(false);
             }
         }
 
-        public void DexterityUp()
+        public void AgilityUp(bool up)
         {
-            DexterityPoints++;
-            Skills--;
+            if (up)
+            {
+                AgilityPoints += 0.1f;
+                Skills--;
+            }
+            else if (AgilityPoints > 0.1f)
+            {
+                AgilityPoints -= 0.1f;
+                Skills++;
+            }
+            remainingPoints.text = "" + Skills;
+            AgilityText.text = "" + AgilityPoints;
+            if (Skills == 0)
+            {
+                Pannel.SetActive(false);
+            }
+        }
+
+        public void DexterityUp(bool up)
+        {
+            if (up)
+            {
+                DexterityPoints += 0.1f;
+                Skills--;
+            }
+            else if (StrengthPoints > 0.1f)
+            {
+                DexterityPoints -= 0.1f;
+                Skills++;
+            }
+            remainingPoints.text = "" + Skills;
+            DexterityText.text = "" + DexterityPoints;
             if (Skills == 0)
             {
                 Pannel.SetActive(false);
