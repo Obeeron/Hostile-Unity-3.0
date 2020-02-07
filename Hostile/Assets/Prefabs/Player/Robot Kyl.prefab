@@ -147,29 +147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8549611328968766765}
---- !u!114 &8185313190975024691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8549611328959399757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68829970953577841a66aa28aa2165a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crouchSpeed: 0.8
-  walkingSpeed: 6
-  runningSpeed: 9
-  noStaminaSpeed: 3
-  jumpHeight: 3.5
-  gravity: 20
-  walking: 1
-  running: 0
-  crouch: 0
-  animator: {fileID: 8549611328968766765}
-  player: {fileID: 4890004066927207090}
 --- !u!114 &4890004066927207090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +159,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8bf4b0cb525ea946ab36eea5b789590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxLife: 0
+  MaxStamina: 0
+  Stamina: 0
+  MaxHunger: 0
+  Agility: 0
+  Dexterity: 0
+  MaxInventory: 0
+--- !u!114 &8185313190975024691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8549611328959399757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68829970953577841a66aa28aa2165a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxLife: 0
+  MaxStamina: 0
+  Stamina: 0
+  MaxHunger: 0
+  Agility: 0
+  Dexterity: 0
+  MaxInventory: 0
+  crouchSpeed: 0.8
+  walkingSpeed: 6
+  runningSpeed: 9
+  noStaminaSpeed: 3
+  jumpHeight: 3.5
+  gravity: 20
+  walking: 1
+  running: 0
+  crouch: 0
 --- !u!1001 &8549611328959299661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -241,6 +253,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
+    - target: {fileID: 9500000, guid: 349beeb20b6327e4386bb274767aab7e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 349beeb20b6327e4386bb274767aab7e, type: 3}
 --- !u!1 &8549611328959399757 stripped

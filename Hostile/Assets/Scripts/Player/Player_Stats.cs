@@ -8,15 +8,16 @@ namespace Joueur
     public class Player_Stats : MonoBehaviour 
     {
 
-        private float MaxLife = 100f;
+        [SerializeField] private float MaxLife;
         private float CurrentLife;
-        private float MaxStamina = 10f;
+        [SerializeField] private float MaxStamina;
         [SerializeField] private float Stamina;
-        private float MaxHunger = 250f;
+        [SerializeField] private float MaxHunger;
+        [SerializeField] private float Agility;
+        [SerializeField] private float Dexterity;
         private float Hunger;
         //if we allow a more important inventory
-        private int MaxInventory = 15;
-        private int InventoryCount = 15;
+        [SerializeField] private int MaxInventory;
 
 
         //getters == IsSomething ## getters AND setters == HasSomething
@@ -79,7 +80,7 @@ namespace Joueur
                 {
                     CurrentLife = MaxLife;
                 }
-                else if (value < 0f)
+                else if (value <= 0f)
                 {
                     CurrentLife = -1f;
                 }
@@ -92,12 +93,14 @@ namespace Joueur
         }
         //end of getters and setters
 
-        public void Choosing(int healthPoints, int hungerPoints, int staminaPoints, int inventoryPoints)
+        public void Choosing(int healthPoints, int hungerPoints, int staminaPoints, int inventoryPoints, float AgilityPoints, float DexterityPoints)
         {
-            MaxLife += healthPoints * 10;
-            MaxHunger += hungerPoints * 10;
-            MaxStamina += staminaPoints * 10;
-            MaxInventory += inventoryPoints * 10;
+            MaxLife = 100 + healthPoints * 10;
+            MaxHunger = 180 + hungerPoints * 10;
+            MaxStamina = 125 + staminaPoints * 7;
+            MaxInventory = 15 + inventoryPoints;
+            Agility = 1f + 0.1f * AgilityPoints;
+            Dexterity = 1f + 0.1f * DexterityPoints;
             starting();
         }
 
@@ -106,7 +109,6 @@ namespace Joueur
             CurrentLife = MaxLife;
             Hunger = MaxHunger;
             Stamina = MaxStamina;
-            InventoryCount = MaxInventory;
         }
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
     
 namespace Joueur
 {
-    public class Player_Movement : MonoBehaviour
+    public class Player_Movement : Player_Stats
     {
         
         CharacterController character;
@@ -17,7 +17,6 @@ namespace Joueur
         [SerializeField] private float crouchSpeed = 3.0f;
         [SerializeField] private float walkingSpeed = 5.0f;     // les animations change la vitesse
         [SerializeField] private float runningSpeed = 9.0f;
-        [SerializeField] private float noStaminaSpeed = 3f;
         [SerializeField] private float jumpHeight = 2.0f;
         [SerializeField] private float gravity = 3.0f;
 
@@ -37,9 +36,9 @@ namespace Joueur
         private float groundLerp = 0.8f;
         private float airLerp = 0.95f;
         
-        public Animator animator;
+        protected Animator animator;
         private Vector3 movement;
-        public Player_Stats player;
+        protected Player_Stats playerStats;
         
         //called before Start
         private void Awake()
@@ -48,11 +47,12 @@ namespace Joueur
         }
 
         // Start is called before the first frame update
-        void Start()
+        void OnEnable()
         {
+            controls.InGame.Enable();
+            playerStats = this.gameObject.GetComponent<Player_Stats>();
+            animator = this.gameObject.GetComponent<Animator>();
             character = GetComponent<CharacterController>();
-            //initialise les statistiques du joueur. Sera dans un autre fichiers lorsque le choix de points de compétences sera mis en place.
-            player.Choosing(0,0,0,0);
         }
 
         // Update is called once per frame
@@ -70,14 +70,22 @@ namespace Joueur
             }
 
             // définition de la vitesse en fonction de la stamina et du choix du joueur
-            if (player.IsWorn || player.IsHungry)
+            if (playerStats.IsWorn || playerStats.IsHungry)
             {
-                speed = noStaminaSpeed;
-                running = false;
-                walking = true;
+                running = true;
+                walking = false;
+                speed = walkingSpeed;
             }
             else
             {
+                if (playerStats.IsHungry)
+                {
+                    regenStamina = 10f;
+                }
+                else
+                {
+                    regenStamina = 20f;
+                }
                 if (walking)
                 {
                     speed = walkingSpeed;
@@ -113,7 +121,7 @@ namespace Joueur
                 animator.SetFloat("Jump", moveDirection.y);
 
                 if (controls.InGame.Jump.triggered){
-                    if (!player.IsWorn)//checking stamina
+                    if (!playerStats.IsWorn)//checking stamina
                     {
                         StartCoroutine(Jump());
                         hasJumped = true;
@@ -127,19 +135,19 @@ namespace Joueur
                 //modifying stamina
                 if (hasJumped)
                 {
-                    player.HasStamina -= jumpStamina; //perte de stamina à cause du saut
+                    playerStats.HasStamina -= jumpStamina; //perte de stamina à cause du saut
                     staminaTimer = 0f;
                 }
                 if (running && moveDirection != Vector2.zero)
                 {
-                    player.HasStamina -= runningStamina * Time.deltaTime; //perte de stamina en fonction du temps passé à courir
+                    playerStats.HasStamina -= runningStamina * Time.deltaTime; //perte de stamina en fonction du temps passé à courir
                     staminaTimer = 0f;
                 }
                 if (!hasJumped && (!running || moveDirection == Vector2.zero)) //regain de stamina si le joueur ne court pas ou est à l'arret
                 {
                     if (staminaTimer >= 2f)
                     {
-                        player.HasStamina += regenStamina * Time.deltaTime;
+                        playerStats.HasStamina += regenStamina * Time.deltaTime;
                     }
                     else
                     {
@@ -214,7 +222,7 @@ namespace Joueur
         }
 
         //enables controls input
-        private void OnEnable() => controls.InGame.Enable(); 
+        // private void OnEnable() => controls.InGame.Enable(); 
         private void OnDisable() => controls.InGame.Disable();
             //controls.Menu.disable might be used here
     }
