@@ -22,7 +22,7 @@ public class Scritable_Items : ScriptableObject
     };*/
 
     private Button slot;
-    private TextMeshPro txt;
+    private TextMeshProUGUI txt;
     private GameObject gm;
     public void OnEnter()
     {
@@ -39,33 +39,36 @@ public class Scritable_Items : ScriptableObject
 
                         slot = gm.GetComponent<Button>();
                         gm.transform.Find("Needed_Number_1").gameObject.SetActive(true);
-                        txt = gm.transform.Find("Needed_Number_1").gameObject.GetComponent<TextMeshPro>();
-
-                        //txt.text = Number[i].ToString();
+                        txt = gm.transform.Find("Needed_Number_1").gameObject.GetComponent<TextMeshProUGUI>();
+                        txt.text = Number[i].ToString();
+                        txt.fontSize = 105;
                         break;
                     case 1:
                         gm = GameObject.Find("Needed_2");
 
                         slot = gm.GetComponent<Button>();
                         gm.transform.Find("Needed_Number_2").gameObject.SetActive(true);
-                        txt = GameObject.Find("Needed_2").GetComponentInChildren<TextMeshPro>();
-                        //txt.text = Number[i].ToString();
+                        txt = GameObject.Find("Needed_2").GetComponentInChildren<TextMeshProUGUI>();
+                        txt.text = Number[i].ToString();
+                        txt.fontSize = 105;
                         break;
                     case 2:
                         gm = GameObject.Find("Needed_3");
 
                         slot = gm.GetComponent<Button>();
                         gm.transform.Find("Needed_Number_3").gameObject.SetActive(true);
-                        txt = GameObject.Find("Needed_3").GetComponentInChildren<TextMeshPro>();
-                        //txt.text = Number[i].ToString();
+                        txt = GameObject.Find("Needed_3").GetComponentInChildren<TextMeshProUGUI>();
+                        txt.text = Number[i].ToString();
+                        txt.fontSize = 105;
                         break;
                     default:
                         gm = GameObject.Find("Needed_1");
 
                         slot = gm.GetComponent<Button>();
                         gm.transform.Find("Needed_Number_1").gameObject.SetActive(true);
-                        txt = GameObject.Find("Needed_1").GetComponentInChildren<TextMeshPro>();
-                        //txt.text = Number[i].ToString();
+                        txt = GameObject.Find("Needed_1").GetComponentInChildren<TextMeshProUGUI>();
+                        txt.text = Number[i].ToString();
+                        txt.fontSize = 105;
                         break;
                 }
 
