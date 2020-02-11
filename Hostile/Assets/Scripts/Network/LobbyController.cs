@@ -7,6 +7,7 @@ using Photon.Realtime;
 public class LobbyController : MonoBehaviourPunCallbacks
 {
 #pragma warning disable 649
+    [SerializeField] private int waitingSceneIndex;
     [SerializeField] private int nbPlayerMax;
 #pragma warning restore 649
 
@@ -46,5 +47,14 @@ public class LobbyController : MonoBehaviourPunCallbacks
     {
         Debug.Log("Failed to create new room. Trying again..");
         CreateRoom();
+    }
+
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("Room joined");
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel(waitingSceneIndex);
+        }
     }
 }
