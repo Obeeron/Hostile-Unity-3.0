@@ -179,7 +179,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -627,7 +627,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -787,7 +787,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2926,7 +2926,6 @@ GameObject:
   - component: {fileID: 1492300354}
   - component: {fileID: 1492300356}
   - component: {fileID: 1492300357}
-  - component: {fileID: 1492300358}
   - component: {fileID: 1492300359}
   m_Layer: 0
   m_Name: MainController
@@ -2993,20 +2992,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30725b9b35464b4488a0fef074160c94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitingSceneIndex: 1
   nbPlayerMax: 3
---- !u!114 &1492300358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492300353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44efa2ca93cb185438e3cac4fb3e55f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  multiSceneIndex: 1
 --- !u!114 &1492300359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3839,7 +3826,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
