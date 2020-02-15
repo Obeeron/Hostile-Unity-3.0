@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class FarmingItem : Interraction
+public class FarmingItem : MonoBehaviourPunCallbacks
 {
     public float life = 10f;
     private bool isAlive = true;
     private PhotonView item;
-    private Rigidbody itembody;
-    [SerializeField] float distance;
+    private GameObject itembody;
     //public GameObject dropedItems;
 
     public void Start()
     {
         item = this.GetComponent<PhotonView>();
-        itembody = this.GetComponent<Rigidbody>();
+        itembody = this.gameObject;
     }
 
     public void Update()
@@ -23,14 +22,18 @@ public class FarmingItem : Interraction
         AliveUpdate();
     }
 
-    public override void Interact()
+    public void Interact(float strength, float weapon)
     {
-        LifeDown();
+        float mult = strength*weapon;
+        LifeDown(mult);
     }
 
-    private void LifeDown()
+    private void LifeDown(float mult)
     {
-        life--;
+        if (isAlive)
+        {
+            life -= 1*mult;
+        }   
     }
 
     private void AliveUpdate()
@@ -41,21 +44,24 @@ public class FarmingItem : Interraction
             StartCoroutine(Destroying());
         }
     }
-    
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, distance);
-
-    }
 
     private IEnumerator Destroying()
     {
-        itembody.AddForce(new Vector3(1,-1,0));
-        yield return new WaitForSeconds(1.5f);
+        Rigidbody itemRigid = itembody.AddComponent<Rigidbody>();
+        itemRigid.mass = 1;
+        itemRigid.AddForce(new Vector3(4,-5f,0));
+        yield return new WaitForSeconds(4f);
         Vector3 dropPosition = itembody.transform.position;
         PhotonNetwork.Destroy(item);
         //drop new items hear
-        PhotonNetwork.Instantiate("Robot Kyl", dropPosition, Quaternion.identity);
+        Debug.Log("Droping Itmes at position : " + dropPosition);
+        //PhotonNetwork.Instantiate("Robot Kyl", dropPosition, Quaternion.identity);
+    }
+
+    //permet de voir la range d'interaction
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, 2f);
     }
 }

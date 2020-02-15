@@ -91,6 +91,21 @@ namespace Joueur
                 Debug.Log($"current life = {this.CurrentLife}");
             }
         }
+
+        public float GetStrength
+        {
+            get => Strength;
+        }
+
+        public float GetAgility
+        {
+            get => Agility;
+        }
+
+        public float GetDexterity
+        {
+            get => Dexterity;
+        }
         //end of getters and setters
 
         public void Choosing(int healthPoints, int hungerPoints, int staminaPoints, float strengthPoints, float AgilityPoints, float DexterityPoints)
