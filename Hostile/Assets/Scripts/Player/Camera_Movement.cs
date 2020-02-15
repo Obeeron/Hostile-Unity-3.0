@@ -11,8 +11,8 @@ namespace Joueur
         protected float mouseSensi = 8f;
         public float smoothness;
 
-        public Camera playerCamera;
-        public CharacterController playerBody;
+        private Camera playerCamera;
+        private CharacterController playerBody;
         
         
         private PlayerControls controls;
@@ -29,6 +29,8 @@ namespace Joueur
             yRotation = 0f;
             smoothness = 0.74f;
             Cursor.lockState = CursorLockMode.Locked;
+            playerCamera = GetComponentInChildren<Camera>();
+            playerBody = GetComponent<CharacterController>();
         }
 
         // Update is called once per frame

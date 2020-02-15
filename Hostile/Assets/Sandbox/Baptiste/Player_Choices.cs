@@ -170,7 +170,7 @@ namespace Joueur
 
         private IEnumerator EndChoice()
         {
-            yield return new WaitForSeconds(15);
+            yield return new WaitForSeconds(5);
             if (Skills > 0)
             {
                 Pannel.SetActive(false);

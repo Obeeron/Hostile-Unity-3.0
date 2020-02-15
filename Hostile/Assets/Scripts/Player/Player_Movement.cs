@@ -109,7 +109,7 @@ namespace Joueur
 
             if (character.isGrounded)
             {
-                /*if (fallingVelocity.y < -20f) //not fully functionnal
+                /*if (fallingVelocity.y < -20f) //degats de chute not fully functionnal
                 {
                     player.HasLife -= 5f;
                 }*/
@@ -145,7 +145,7 @@ namespace Joueur
                 }
                 if (!hasJumped && (!running || moveDirection == Vector2.zero)) //regain de stamina si le joueur ne court pas ou est à l'arret
                 {
-                    if (staminaTimer >= 2f)
+                    if (staminaTimer >= 1.3f)
                     {
                         playerStats.HasStamina += regenStamina * Time.deltaTime;
                     }
