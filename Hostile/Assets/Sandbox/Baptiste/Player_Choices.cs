@@ -115,7 +115,7 @@ namespace Joueur
                 StrengthPoints += 0.1f;
                 Skills--;
             }
-            else if (StrengthPoints > 0.1f)
+            else if (StrengthPoints > 1f)
             {
                 StrengthPoints -= 0.1f;
                 Skills++;
@@ -135,7 +135,7 @@ namespace Joueur
                 AgilityPoints += 0.1f;
                 Skills--;
             }
-            else if (AgilityPoints > 0.1f)
+            else if (AgilityPoints > 1f)
             {
                 AgilityPoints -= 0.1f;
                 Skills++;
@@ -155,7 +155,7 @@ namespace Joueur
                 DexterityPoints += 0.1f;
                 Skills--;
             }
-            else if (StrengthPoints > 0.1f)
+            else if (StrengthPoints > 1f)
             {
                 DexterityPoints -= 0.1f;
                 Skills++;
@@ -177,7 +177,7 @@ namespace Joueur
             }
             while (Skills > 0)
             {
-                LifePoints++;
+                LifePoints += 10;
                 Skills--;
             }
             PrefabPlayer.GetComponent<Player_Stats>().Choosing(LifePoints, HungerPoints, StaminaPoints, StrengthPoints, AgilityPoints, DexterityPoints);

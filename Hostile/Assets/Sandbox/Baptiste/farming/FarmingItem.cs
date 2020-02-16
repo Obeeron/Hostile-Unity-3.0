@@ -5,16 +5,35 @@ using Photon.Pun;
 
 public class FarmingItem : MonoBehaviourPunCallbacks
 {
-    public float life = 10f;
     private bool isAlive = true;
     private PhotonView item;
     private GameObject itembody;
-    //public GameObject dropedItems;
+    enum Type
+    {
+        Tree,
+        Stone
+    };
+    [SerializeField] private Type type;
+    [SerializeField] private int DropNmb;
+    [SerializeField] private float life;
+    private string itemDroped;
 
     public void Start()
     {
         item = this.GetComponent<PhotonView>();
         itembody = this.gameObject;
+        switch (type)
+        {
+            case Type.Tree:
+                itemDroped = "Log";
+                break;
+            case Type.Stone:
+                itemDroped = "Stone";
+                break;
+            default:
+                itemDroped = " ";
+                break;
+        }
     }
 
     public void Update()
@@ -22,7 +41,7 @@ public class FarmingItem : MonoBehaviourPunCallbacks
         AliveUpdate();
     }
 
-    public void Interact(float strength, float weapon)
+    public void Interact(float strength = 1f, float weapon = 1f)
     {
         float mult = strength*weapon;
         LifeDown(mult);
@@ -53,9 +72,14 @@ public class FarmingItem : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(4f);
         Vector3 dropPosition = itembody.transform.position;
         PhotonNetwork.Destroy(item);
-        //drop new items hear
-        Debug.Log("Droping Itmes at position : " + dropPosition);
-        //PhotonNetwork.Instantiate("Robot Kyl", dropPosition, Quaternion.identity);
+        //drop new items here
+        while (DropNmb > 0)
+        {
+            DropNmb--;
+            Debug.Log("Droping Itmes at position : " + dropPosition);
+            PhotonNetwork.Instantiate(itemDroped, dropPosition, Quaternion.identity);
+            dropPosition.y += 0.1f;
+        }
     }
 
     //permet de voir la range d'interaction
