@@ -18,6 +18,5 @@ public class Interactable : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, distance);
-
     }
 }

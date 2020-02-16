@@ -12,13 +12,13 @@ public class basicmove : MonoBehaviour
     {
 
         if (Input.GetKey("q"))
-            player.AddForce(-sideForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            player.AddForce(-transform.right * sideForce * Time.deltaTime, ForceMode.VelocityChange);
         if (Input.GetKey("d"))
-            player.AddForce(sideForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            player.AddForce(transform.right * sideForce * Time.deltaTime, ForceMode.VelocityChange);
         if (Input.GetKey("z"))
-            player.AddForce(0, 0, forwardForce * Time.deltaTime, ForceMode.VelocityChange);
+            player.AddForce(transform.forward * forwardForce * Time.deltaTime, ForceMode.VelocityChange);
         if (Input.GetKey("s"))
-            player.AddForce(0, 0, -forwardForce * Time.deltaTime, ForceMode.VelocityChange);
+            player.AddForce(-transform.forward * forwardForce * Time.deltaTime, ForceMode.VelocityChange);
 
 
     }

@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Epee
   m_EditorClassIdentifier: 
   name: "\xE9p\xE9e"
-  icone: {fileID: 0}
-  isDefaultItem: 0
+  icone: {fileID: 21300000, guid: 1f33ce9c48375bd45a666d197f193fdb, type: 3}
+  maxUsure: 1
+  decayTime: -1
+  persistent: 1
+  mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}

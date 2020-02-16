@@ -13,12 +13,12 @@ public class PlayerKmy : MonoBehaviour
     {
         RaycastHit hit;
         //si on touche qlqhch vers la où la caméra regarde (jusqu'a 2 m)
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2))
+        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 10))
         {
             //on crée une interactable qui va contenir le composant Interacatable de ce qui a été touché
             Interactable interactable = hit.collider.GetComponent<Interactable>();
             //si ca a touché qlqch d'interactabel
-            if (interactable != null)
+            if (interactable != null && hit.distance <= interactable.distance)
                 interactable.Interact();
             else
                 Debug.Log("oops, object pas interactable");

@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class Inventaire : MonoBehaviour
 {
@@ -26,36 +28,74 @@ public class Inventaire : MonoBehaviour
 
 
     public int espaceDisponible = 20;
-    public List<Items> items = new List<Items>();
+    public List<Item> items = new List<Item>();
     public GameObject inventory;
+    public int nbSlots = 20;
+    public int nbSlotsHotbar = 5;
+    public Slots[] slots;
+    public Transform posPlayer;
+    public int selectedSlotIndex=0;
 
+    private void Start()
+    {
+        selectedSlotIndex = 0;
+    }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
             inventory.SetActive(!inventory.activeSelf);
+        else if (Input.GetKeyDown(KeyCode.W) && !slots[selectedSlotIndex].isEmpty)
+            Drop();
+        else if (Input.mouseScrollDelta.y != 0)
+            changeSelection();
     }
 
-    public bool Add(Items item)
+    private void Drop()
     {
-        
-        if (!item.isDefaultItem)
-        {
-            if (items.Count >= espaceDisponible)
-            {
-                Debug.Log("Pas assez d'espace dans l'inventaire");
-                return false;
-            }
-            items.Add(item);
-            return true;
- 
-        }
-        return false;
+        slots[selectedSlotIndex].item.Drop(posPlayer);
+        RemoveofList(slots[selectedSlotIndex].item);
+    }
+    public void changeSelection()
+    {
+        slots[selectedSlotIndex].Selected(false);
+
+        if (Input.mouseScrollDelta.y > 0) selectedSlotIndex--;
+        else selectedSlotIndex++;
+
+        selectedSlotIndex %= nbSlotsHotbar;
+
+        if (selectedSlotIndex < 0)
+            selectedSlotIndex = nbSlotsHotbar - 1;
+
+        slots[selectedSlotIndex].Selected(true);
     }
 
-    public void RemoveofList(Items item)
+    public bool Add(Item item)
+    {
+        if (items.Count >= espaceDisponible)
+        {
+            Debug.Log("Pas assez d'espace dans l'inventaire");
+            return false;
+        }
+
+        items.Add(item);
+
+        for (int i=0; i<nbSlots; i++)
+        {  
+            if (slots[i].isEmpty)
+            {
+                slots[i].Add(item);
+                return true;
+            }
+        }  
+        throw new Exception("Inventaire.Add : incohérence : espace dispo dans l'inventaire mais slot tous remplis");  
+    }
+
+    public void RemoveofList(Item item)
     {
         items.Remove(item);
+        slots[selectedSlotIndex].Reset2();
     }
 }
 
