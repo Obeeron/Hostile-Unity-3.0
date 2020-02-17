@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class CraftInventory : Player
+public class CraftInventory : MonoBehaviour
 {
     public GameObject inventory;
     public GameObject player;
@@ -9,7 +9,7 @@ public class CraftInventory : Player
   
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             if (inventory.activeSelf)
             {
