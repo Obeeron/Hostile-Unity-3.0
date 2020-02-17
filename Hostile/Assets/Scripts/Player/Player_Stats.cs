@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 
 namespace Joueur
 {
-    public class Player_Stats : MonoBehaviour 
+    public class Player_Stats : MonoBehaviour, IPunObservable
     {
 
         [SerializeField] private float MaxLife;
@@ -107,6 +108,18 @@ namespace Joueur
             get => Dexterity;
         }
         //end of getters and setters
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            if (stream.IsWriting)
+            {
+                stream.SendNext(CurrentLife);
+            }
+            else
+            {
+                this.CurrentLife = (float)stream.ReceiveNext();
+            }
+        }
+
 
         public void Choosing(int healthPoints, int hungerPoints, int staminaPoints, float strengthPoints, float AgilityPoints, float DexterityPoints)
         {

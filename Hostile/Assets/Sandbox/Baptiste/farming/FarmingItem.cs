@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class FarmingItem : MonoBehaviourPunCallbacks
+public class FarmingItem : MonoBehaviourPunCallbacks, IPunObservable
 {
     private bool isAlive = true;
     private PhotonView item;
@@ -39,6 +39,19 @@ public class FarmingItem : MonoBehaviourPunCallbacks
     public void Update()
     {
         AliveUpdate();
+    }
+
+    
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(life);
+        }
+        else
+        {
+            this.life = (float)stream.ReceiveNext();
+        }
     }
 
     public void Interact(float strength = 1f, float weapon = 1f)

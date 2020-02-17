@@ -167,7 +167,7 @@ namespace Joueur
             if (!character.isGrounded){fallingVelocity += (Physics.gravity * Time.deltaTime);} 
 
             character.Move(movement);
-            character.Move(fallingVelocity * Time.deltaTime);
+            character.Move(fallingVelocity * Time.fixedDeltaTime);
         }
         
         private IEnumerator Jump()
