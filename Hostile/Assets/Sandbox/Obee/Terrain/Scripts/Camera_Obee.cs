@@ -7,7 +7,7 @@ public class Camera_Obee : MonoBehaviour
     Transform playerCamera;
 
     public float mouseSensitivity = 150f;
-    public float smoothness;
+    public float smoothness = 0.85f;
 
     float yRotation;
 
@@ -21,7 +21,7 @@ public class Camera_Obee : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector2 newMouseRotation = new Vector2( Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime,
                                                 Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime);

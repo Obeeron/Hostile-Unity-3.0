@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb0225e5d0b118a4e8932c3c160b1ab4, type: 3}
-  m_Name: Wood
+  m_Name: Wood_Craft
   m_EditorClassIdentifier: Assembly-CSharp::Scritable_Materials
   name: Wood
   icone: {fileID: 21300000, guid: 5b1b2b1e65d0caf4bb64a3c566b1de0b, type: 3}

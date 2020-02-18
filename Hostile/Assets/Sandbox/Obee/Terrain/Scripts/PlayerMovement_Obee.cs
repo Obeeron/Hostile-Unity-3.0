@@ -3,23 +3,29 @@ using System.Collections;
 using UnityEngine;
 public class PlayerMovement_Obee : MonoBehaviour
 {
-    public CharacterController controller;
+    private CharacterController controller;
 
-    public float normalSpeed = 5f;
-    public float runningSpeed = 9f;
+    public float normalSpeed = 4.5f;
+    public float runningSpeed = 7.5f;
     private float speed;
     private Vector3 fallingVelocity;
 
     bool grounded;
     public float jumpHeight = 1f;
 
-    public float groundLerp;
-    public float airLerp;
-    public float airSpeedMultiplier;
+    [Range(0f, 1f)]
+    public float groundLerp = 0.7f;
+    [Range(0f, 1f)]
+    public float airLerp = 0.95f;
+    [Range(0f, 1f)]
+    public float airSpeedMultiplier = 0.6f;
     private Vector3 motion;
+
+    Vector3 direction; 
 
     private void Start()
     {
+        controller = GetComponent<CharacterController>();
         grounded = false;
     }
 
@@ -31,10 +37,7 @@ public class PlayerMovement_Obee : MonoBehaviour
         float x = Input.GetAxisRaw("Vertical");     //Get 2D movements inputs
         float y = Input.GetAxisRaw("Horizontal");
         
-        Vector3 direction = (x * transform.forward + y * transform.right).normalized;       //normalized direction to avoid faster diagonal movement
-
-        float lerpValue = (grounded) ? groundLerp : airLerp;                                //Lerp motion to smooth start and stop of player motion
-        motion = Vector3.Lerp(direction * speed * Time.deltaTime, motion, lerpValue);
+        direction = (x * transform.forward + y * transform.right).normalized;       //normalized direction to avoid faster diagonal movement
 
         if (grounded)
         {
@@ -63,11 +66,13 @@ public class PlayerMovement_Obee : MonoBehaviour
 
     private void FixedUpdate()
     {
+        float lerpValue = (grounded) ? groundLerp : airLerp;            //Lerp motion to smooth start and stop of player motion
+        motion = Vector3.Lerp(direction * speed, motion, lerpValue);
 
         if (!grounded)
-            fallingVelocity += (Physics.gravity * Time.deltaTime);  //Update fallingVelocity 
+            fallingVelocity += (Physics.gravity * Time.fixedDeltaTime); //Update fallingVelocity 
 
-        controller.Move(motion);                                    //Apply summed velocity
-        controller.Move(fallingVelocity * Time.deltaTime);
+        controller.Move(motion * Time.fixedDeltaTime);                  //Apply summed velocity
+        controller.Move(fallingVelocity * Time.fixedDeltaTime);
     }
 }

@@ -16,6 +16,7 @@ public class PlayerNetworkController : MonoBehaviour
             foreach (var script in ignoredScripts)
                 script.enabled = false;
             GetComponentInChildren<Camera>().enabled = false;
+            GetComponentInChildren<AudioListener>().enabled = false;
         }
     }
 }

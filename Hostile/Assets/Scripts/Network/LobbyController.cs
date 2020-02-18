@@ -7,16 +7,9 @@ using Photon.Realtime;
 public class LobbyController : MonoBehaviourPunCallbacks
 {
 #pragma warning disable 649
+    [SerializeField] private int waitingSceneIndex;
     [SerializeField] private int nbPlayerMax;
 #pragma warning restore 649
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log("Connecting to master server..");
-        PhotonNetwork.AutomaticallySyncScene = true;
-        PhotonNetwork.ConnectUsingSettings();
-    }
 
     public void JoinGame()
     {
@@ -46,5 +39,19 @@ public class LobbyController : MonoBehaviourPunCallbacks
     {
         Debug.Log("Failed to create new room. Trying again..");
         CreateRoom();
+    }
+
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("Room joined");
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel(waitingSceneIndex);
+        }
+    }
+
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
     }
 }
