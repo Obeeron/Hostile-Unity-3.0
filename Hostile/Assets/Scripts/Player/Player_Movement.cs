@@ -97,8 +97,6 @@ namespace Joueur
                         break;
                 }
 
-                movement = Vector3.Lerp(currentMovement * Speed* Time.deltaTime, movement, groundLerp);
-
                 //for animation
                 if (isThereAnimator)
                 {
@@ -171,16 +169,19 @@ namespace Joueur
                     }
                 }
             }
-            else
-            {
-                movement = Vector3.Lerp(currentMovement * Speed * Time.deltaTime, movement, airLerp);
-            }
         }
 
         private void FixedUpdate()
         {
             if (!character.isGrounded)
+            {
                 fallingVelocity += (Physics.gravity * Time.fixedDeltaTime);
+                movement = Vector3.Lerp(currentMovement * Speed* Time.fixedDeltaTime, movement, airLerp);
+            }
+            else
+            {
+                movement = Vector3.Lerp(currentMovement * Speed* Time.fixedDeltaTime, movement, groundLerp);
+            }
 
             character.Move(movement);
             character.Move(fallingVelocity * Time.fixedDeltaTime);
