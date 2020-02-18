@@ -20,6 +20,7 @@ namespace Joueur
         private PlayerControls controls;
         protected Animator animator;
         private Vector3 movement;
+        private Vector3 currentMovement;
         private Vector3 fallingVelocity;
         private bool isThereAnimator = true;
 
@@ -79,7 +80,7 @@ namespace Joueur
             }
 
             Vector2 moveDirection = controls.InGame.Movement.ReadValue<Vector2>();
-            Vector3 currentMovement = (moveDirection.y * transform.forward + moveDirection.x * transform.right).normalized;
+            currentMovement = (moveDirection.y * transform.forward + moveDirection.x * transform.right).normalized;
             
             if (character.isGrounded)
             {
