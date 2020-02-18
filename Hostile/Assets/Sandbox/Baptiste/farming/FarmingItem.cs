@@ -13,9 +13,11 @@ public class FarmingItem : MonoBehaviourPunCallbacks, IPunObservable
         Tree,
         Stone
     };
+#pragma warning disable 649
     [SerializeField] private Type type;
     [SerializeField] private int DropNmb;
     [SerializeField] private float life;
+#pragma warning restore
     private string itemDroped;
 
     public void Start()
