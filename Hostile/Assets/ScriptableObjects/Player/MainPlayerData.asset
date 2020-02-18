@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MainPlayerData
   m_EditorClassIdentifier: 
   Life: 100
-  MaxLife: 100
+  MaxLife: 150
   Stamina: 100
   MaxStamina: 100
   Hunger: 100

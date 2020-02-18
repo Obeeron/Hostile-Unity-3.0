@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +7,10 @@ namespace Joueur
 {
     public class Player_Choices : MonoBehaviour
     {
+    #pragma warning disable 649
+        [SerializeField] private PlayerData Data;
         public GameObject Pannel;
+    #pragma warning restore 649
         private GameObject PrefabPlayer;
         private Text remainingPoints;
         private Text LifeText;
@@ -16,175 +19,257 @@ namespace Joueur
         private Text StrengthText;
         private Text StaminaText;
         private Text HungerText;
-        
+
         private int Skills = 5;
-        private int LifePoints = 100;
-        private float AgilityPoints = 1f;
-        private float DexterityPoints = 1f;
-        private int HungerPoints = 130;
-        private int StaminaPoints = 120;
-        private float StrengthPoints = 1f;
+        private int Health = 100;
+        private int Hunger = 100;
+        private int Stamina = 100;
+        private float Agility = 1f;
+        private float Dexterity = 1f;
+        private float Strength = 1f;
 
 
         public void Start()
         {
-            PrefabPlayer = this.gameObject;
-            Pannel.SetActive(true);
-            remainingPoints = Pannel.transform.Find("Points").GetComponent<Text>();
-            LifeText = Pannel.transform.Find("LifeStats").GetComponent<Text>();
-            AgilityText = Pannel.transform.Find("AgilityStats").GetComponent<Text>();
-            DexterityText = Pannel.transform.Find("DexterityStats").GetComponent<Text>();
-            StrengthText = Pannel.transform.Find("StrengthStats").GetComponent<Text>();
-            StaminaText = Pannel.transform.Find("StaminaStats").GetComponent<Text>();
-            HungerText = Pannel.transform.Find("HungerStats").GetComponent<Text>();
-            Cursor.lockState = CursorLockMode.None;
-            remainingPoints.text = "" + Skills;
-            LifeText.text = "" + LifePoints;
-            AgilityText.text = "" + AgilityPoints;
-            DexterityText.text = "" + DexterityPoints;
-            StrengthText.text = "" + StrengthPoints;
-            StaminaText.text = "" + StaminaPoints;
-            HungerText.text = "" + HungerPoints;
-            StartCoroutine(EndChoice());
+            PrefabPlayer = GameObject.Find("Robot Kyl");
+            if (PrefabPlayer == null)
+            {
+                Debug.Log("An error has occured");
+                this.enabled = false;
+            }
+            else if (Pannel != null)
+            {
+                PrefabPlayer.GetComponent<Animator>().enabled = false;
+                PrefabPlayer.GetComponent<Player_Movement>().enabled = false;
+                PrefabPlayer.GetComponent<Camera_Movement>().enabled = false;
+                Pannel.SetActive(true);
+                remainingPoints = Pannel.transform.Find("Points").GetComponent<Text>();
+                LifeText = Pannel.transform.Find("LifeStats").GetComponent<Text>();
+                AgilityText = Pannel.transform.Find("AgilityStats").GetComponent<Text>();
+                DexterityText = Pannel.transform.Find("DexterityStats").GetComponent<Text>();
+                StrengthText = Pannel.transform.Find("StrengthStats").GetComponent<Text>();
+                StaminaText = Pannel.transform.Find("StaminaStats").GetComponent<Text>();
+                HungerText = Pannel.transform.Find("HungerStats").GetComponent<Text>();
+                Cursor.lockState = CursorLockMode.None;
+                remainingPoints.text = "" + Skills;
+                LifeText.text = "" + Health;
+                HungerText.text = "" + Hunger;
+                StaminaText.text = "" + Stamina;
+                AgilityText.text = "" + Agility;
+                DexterityText.text = "" + Dexterity;
+                StrengthText.text = "" + Strength;
+                StartCoroutine(EndChoice());
+            }
+            else 
+            {
+                Data.MaxLife = Health;
+                Data.MaxHunger = Hunger;
+                Data.MaxStamina = Stamina;
+                Data.Strength = Strength;
+                Data.Agility = Agility;
+                Data.Dexterity = Dexterity + 0.5f;
+                Data.Life = Health;
+                Data.Hunger = Hunger;
+                Data.Stamina = Stamina;
+
+                this.enabled = false;
+            }
         }
 
         public void LifeUp(bool up)
         {
             if (up)
             {
-                LifePoints += 10;
-                Skills--;
+                if (Skills > 0)
+                {
+                    Health += 10;
+                    Skills--;
+                }
             }
-            else if (LifePoints > 100)
+            else if (Health > 100)
             {
-                LifePoints -= 10;
+                Health -= 10;
                 Skills++;
             }
             remainingPoints.text = "" + Skills;
-            LifeText.text = "" + LifePoints;
-            if (Skills == 0)
-            {
-                Pannel.SetActive(false);
-            }
+            LifeText.text = "" + Health;
         }
 
         public void HungerUp(bool up)
         {
-           if (up)
+            if (up)
             {
-                HungerPoints += 10;
-                Skills--;
+                if (Skills > 0)
+                {
+                    Hunger += 10;
+                    Skills--;
+                }
             }
-            else if (HungerPoints > 130)
+            else if (Hunger > 100)
             {
-                HungerPoints -= 10;
+                Hunger -= 10;
                 Skills++;
             }
             remainingPoints.text = "" + Skills;
-            HungerText.text = "" + HungerPoints;
-            if (Skills == 0)
-            {
-                Pannel.SetActive(false);
-            }
+            HungerText.text = "" + Hunger;
         }
 
         public void StaminaUp(bool up)
         {
             if (up)
             {
-                StaminaPoints += 5;
-                Skills--;
+                if (Skills > 0)
+                {
+                    Stamina += 5;
+                    Skills--;
+                }
             }
-            else if (StaminaPoints > 120)
+            else if (Stamina > 100)
             {
-                StaminaPoints -= 5;
+                Stamina -= 5;
                 Skills++;
             }
             remainingPoints.text = "" + Skills;
-            StaminaText.text = "" + StaminaPoints;
-            if (Skills == 0)
-            {
-                Pannel.SetActive(false);
-            }
+            StaminaText.text = "" + Stamina;
         }
 
         public void StrengthUp(bool up)
         {
             if (up)
             {
-                StrengthPoints += 0.1f;
-                Skills--;
+                if (Skills > 0)
+                {
+                    Strength += 0.1f;
+                    Skills--;
+                }
             }
-            else if (StrengthPoints > 1f)
+            else if (Strength > 1f)
             {
-                StrengthPoints -= 0.1f;
+                Strength -= 0.1f;
                 Skills++;
             }
             remainingPoints.text = "" + Skills;
-            StrengthText.text = "" + StrengthPoints;
-            if (Skills == 0)
-            {
-                Pannel.SetActive(false);
-            }
+            StrengthText.text = "" + Strength;
         }
 
         public void AgilityUp(bool up)
         {
             if (up)
             {
-                AgilityPoints += 0.1f;
-                Skills--;
+                if (Skills > 0)
+                {
+                    Agility += 0.1f;
+                    Skills--;
+                }
             }
-            else if (AgilityPoints > 1f)
+            else if (Agility > 1f)
             {
-                AgilityPoints -= 0.1f;
+                Agility -= 0.1f;
                 Skills++;
             }
             remainingPoints.text = "" + Skills;
-            AgilityText.text = "" + AgilityPoints;
-            if (Skills == 0)
-            {
-                Pannel.SetActive(false);
-            }
+            AgilityText.text = "" + Agility;
         }
 
         public void DexterityUp(bool up)
         {
             if (up)
             {
-                DexterityPoints += 0.1f;
-                Skills--;
+                if (Skills > 0)
+                {
+                    Dexterity += 0.1f;
+                    Skills--;
+                }
             }
-            else if (StrengthPoints > 1f)
+            else if (Dexterity > 1f)
             {
-                DexterityPoints -= 0.1f;
+                Dexterity -= 0.1f;
                 Skills++;
             }
             remainingPoints.text = "" + Skills;
-            DexterityText.text = "" + DexterityPoints;
-            if (Skills == 0)
-            {
-                Pannel.SetActive(false);
-            }
+            DexterityText.text = "" + Dexterity;
         }
 
         private IEnumerator EndChoice()
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(15);
+            Choosing(false);
+        }
+
+
+        public void Choosing(bool IsQuiting)
+        {
+            //if the player quits the screen or if the the time has ended
+            if (IsQuiting)
+                StopCoroutine(EndChoice());
+            //if the player didn't choose, remainings points are put randomly into 1 stat only
             if (Skills > 0)
             {
-                Pannel.SetActive(false);
+                System.Random rand = new System.Random();
+                int rnd = rand.Next(6);
+                switch (rnd)
+                {
+                    case 1:
+                        while (Skills > 0)
+                        {
+                            Skills--;
+                            Health += 10;
+                        }
+                        break;
+                    case 2:
+                        while (Skills > 0)
+                        {
+                            Skills--;
+                            Hunger += 10;
+                        }
+                        break;
+                    case 3:
+                        while (Skills > 0)
+                        {
+                            Skills--;
+                            Stamina += 5;
+                        }
+                        break;
+                    case 4:
+                        while (Skills > 0)
+                        {
+                            Skills--;
+                            Strength += 0.1f;
+                        }
+                        break;
+                    case 5:
+                        while (Skills > 0)
+                        {
+                            Skills--;
+                            Agility += 0.1f;
+                        }
+                        break;
+                    default:
+                        while (Skills > 0)
+                        {
+                            Skills--;
+                            Dexterity += 0.1f;
+                        }
+                        break;
+                }
             }
-            while (Skills > 0)
-            {
-                LifePoints += 10;
-                Skills--;
-            }
-            PrefabPlayer.GetComponent<Player_Stats>().Choosing(LifePoints, HungerPoints, StaminaPoints, StrengthPoints, AgilityPoints, DexterityPoints);
+            //aplies choices to the player's Data
+            Data.MaxLife = Health;
+            Data.MaxHunger = Hunger;
+            Data.MaxStamina = Stamina;
+            Data.Strength = Strength;
+            Data.Agility = Agility;
+            Data.Dexterity = Dexterity;
+            Data.Life = Health;
+            Data.Hunger = Hunger;
+            Data.Stamina = Stamina;
+
+            Pannel.SetActive(false);
             PrefabPlayer.GetComponent<Animator>().enabled = true;
             PrefabPlayer.GetComponent<Player_Movement>().enabled = true;
             PrefabPlayer.GetComponent<Camera_Movement>().enabled = true;
-            PrefabPlayer.GetComponent<Player_Choices>().enabled = false;
+            this.enabled = false;
         }
     }
 }
+

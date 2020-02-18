@@ -307,7 +307,7 @@ Transform:
   - {fileID: 737539388}
   - {fileID: 1485462265}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &162698634
 GameObject:
@@ -476,7 +476,7 @@ Transform:
   m_LocalScale: {x: 1.645, y: 1, z: 31.830862}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -47.694004, y: 0, z: 0}
 --- !u!1 &295887194
 GameObject:
@@ -555,150 +555,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295887194}
   m_CullTransparentMesh: 0
---- !u!1001 &301101607
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8665031358987790116, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1693732076659911468, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3760938420053520622, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4519259920757515576, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: viewIdField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4890004066927207090, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: MaxStamina
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8185313190975024691, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: jumpHeight
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8185313190975024691, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: crouchSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8185313190975024691, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: walkingSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8185313190975024691, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8185313190975024691, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: MaxStamina
-      value: 125
-      objectReference: {fileID: 0}
-    - target: {fileID: 8185313190975024691, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: MaxLife
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8185313190975024691, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: MaxHunger
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 8185313190975024691, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: MaxInventory
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8185313190975024691, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: Agility
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 37.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 64.68
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 526.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328959399757, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_Name
-      value: Robot Kyl
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328968766765, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e2bc8c08c3386aa43aa244cc1c8a2679, type: 3}
 --- !u!1 &314905746
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,6 +809,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459119006}
   m_CullTransparentMesh: 0
+--- !u!1001 &472579126
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4519259920757515576, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 201.68297
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 21.364145
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 153.33148
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328959399757, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_Name
+      value: Robot Kyl
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e2bc8c08c3386aa43aa244cc1c8a2679, type: 3}
 --- !u!1 &481904650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1265,7 +1195,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 821543021}
+      - m_Target: {fileID: 1029668252}
         m_MethodName: DexterityUp
         m_Mode: 6
         m_Arguments:
@@ -1394,7 +1324,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 821543021}
+      - m_Target: {fileID: 1029668252}
         m_MethodName: LifeUp
         m_Mode: 6
         m_Arguments:
@@ -1703,7 +1633,7 @@ RectTransform:
   m_Children:
   - {fileID: 348905653}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1847,25 +1777,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820882676}
   m_CullTransparentMesh: 0
---- !u!1 &821543020 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8549611328959399757, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-    type: 3}
-  m_PrefabInstance: {fileID: 301101607}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &821543021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821543020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc36ee53a051b4a4baba4494ed1be91f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Pannel: {fileID: 348905650}
 --- !u!1 &824625029
 GameObject:
   m_ObjectHideFlags: 0
@@ -1948,7 +1859,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 821543021}
+      - m_Target: {fileID: 1029668252}
         m_MethodName: DexterityUp
         m_Mode: 6
         m_Arguments:
@@ -2154,7 +2065,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 821543021}
+      - m_Target: {fileID: 1029668252}
         m_MethodName: HungerUp
         m_Mode: 6
         m_Arguments:
@@ -2360,7 +2271,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 821543021}
+      - m_Target: {fileID: 1029668252}
         m_MethodName: LifeUp
         m_Mode: 6
         m_Arguments:
@@ -2407,6 +2318,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 967041621}
   m_CullTransparentMesh: 0
+--- !u!1 &1029668251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1029668253}
+  - component: {fileID: 1029668252}
+  m_Layer: 0
+  m_Name: ChoicesManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1029668252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029668251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b4ce48f366c26346bdf022f93881812, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Data: {fileID: 11400000, guid: 2f32f42aeb55de44591bc11906113bea, type: 2}
+  Pannel: {fileID: 348905650}
+--- !u!4 &1029668253
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029668251}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 194.21683, y: 21.919626, z: 150.49297}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1046756467
 GameObject:
   m_ObjectHideFlags: 0
@@ -2489,7 +2445,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 821543021}
+      - m_Target: {fileID: 1029668252}
         m_MethodName: StrengthUp
         m_Mode: 6
         m_Arguments:
@@ -2859,7 +2815,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1254745399
 GameObject:
@@ -3020,7 +2976,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 821543021}
+      - m_Target: {fileID: 1029668252}
         m_MethodName: HungerUp
         m_Mode: 6
         m_Arguments:
@@ -3149,9 +3105,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 821543021}
+      - m_Target: {fileID: 1029668252}
         m_MethodName: StaminaUp
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3337,7 +3293,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1469752156
 GameObject:
@@ -3574,7 +3530,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 821543021}
+      - m_Target: {fileID: 1029668252}
         m_MethodName: StrengthUp
         m_Mode: 6
         m_Arguments:
@@ -3897,7 +3853,7 @@ PrefabInstance:
     - target: {fileID: 7993658708914185136, guid: cfa96a05c5187c244b6a6076e052e086,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7993658708914185136, guid: cfa96a05c5187c244b6a6076e052e086,
         type: 3}
@@ -4080,7 +4036,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 821543021}
+      - m_Target: {fileID: 1029668252}
         m_MethodName: StaminaUp
         m_Mode: 6
         m_Arguments:
@@ -4295,7 +4251,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 3.9956}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1869876133
 GameObject:
@@ -4610,7 +4566,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 821543021}
+      - m_Target: {fileID: 1029668252}
         m_MethodName: AgilityUp
         m_Mode: 6
         m_Arguments:
@@ -4816,7 +4772,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 821543021}
+      - m_Target: {fileID: 1029668252}
         m_MethodName: AgilityUp
         m_Mode: 6
         m_Arguments:

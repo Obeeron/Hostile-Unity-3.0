@@ -121,80 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &288471723
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4519259920757515576, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: viewIdField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 194.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 20.492
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 149.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549611328959399757, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
-        type: 3}
-      propertyPath: m_Name
-      value: Robot Kyl
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e2bc8c08c3386aa43aa244cc1c8a2679, type: 3}
 --- !u!1001 &355452640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -296,7 +222,7 @@ Transform:
   - {fileID: 1131214544}
   - {fileID: 1036754311}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &662853614
 GameObject:
@@ -602,6 +528,80 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
+--- !u!1001 &1439550690
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4519259920757515576, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 195.87335
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 20.758348
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 151.54523
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328958913197, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549611328959399757, guid: e2bc8c08c3386aa43aa244cc1c8a2679,
+        type: 3}
+      propertyPath: m_Name
+      value: Robot Kyl
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e2bc8c08c3386aa43aa244cc1c8a2679, type: 3}
 --- !u!1 &1914127976
 GameObject:
   m_ObjectHideFlags: 0
