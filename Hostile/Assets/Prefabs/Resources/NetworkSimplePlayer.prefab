@@ -155,13 +155,13 @@ GameObject:
   - component: {fileID: 2413785946090234011}
   - component: {fileID: 2413785946090234010}
   - component: {fileID: 2413785946090234008}
-  - component: {fileID: 2413785946090234009}
+  - component: {fileID: 8072780893210528822}
   - component: {fileID: 2335749375552170081}
-  - component: {fileID: 8239965983717790354}
-  - component: {fileID: 8817495962973780642}
+  - component: {fileID: 4901375410651440671}
+  - component: {fileID: 347428493461394901}
   m_Layer: 0
   m_Name: NetworkSimplePlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,14 +213,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba27fa4fafae2184fbfc0e1943460192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 2413785946090234010}
   normalSpeed: 5.5
   runningSpeed: 7.5
   jumpHeight: 1
   groundLerp: 0.8
   airLerp: 0.95
   airSpeedMultiplier: 0.55
---- !u!114 &2413785946090234009
+--- !u!114 &8072780893210528822
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -229,11 +228,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2413785946090234005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45d28db7682d89a4881a2faf2c1f7e42, type: 3}
+  m_Script: {fileID: 11500000, guid: 4dc0d1c284a444e41aeed5f693fd16b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 100
-  smoothness: 0.55
+  mouseSensi: 8
+  smoothness: 0.74
 --- !u!114 &2335749375552170081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,8 +247,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoredScripts:
   - {fileID: 2413785946090234008}
-  - {fileID: 2413785946090234009}
---- !u!114 &8239965983717790354
+  - {fileID: 8072780893210528822}
+--- !u!114 &4901375410651440671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,11 +266,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 8817495962973780642}
+  - {fileID: 347428493461394901}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &8817495962973780642
+--- !u!114 &347428493461394901
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -280,12 +279,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 2413785946090234005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
 --- !u!1 &5962292244148225766
 GameObject:
   m_ObjectHideFlags: 0

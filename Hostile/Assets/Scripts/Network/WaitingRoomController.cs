@@ -3,26 +3,59 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using System;
-using Photon.Realtime;
 
 public class WaitingRoomController : MonoBehaviourPunCallbacks
 {
 #pragma warning disable 649
+    [SerializeField] private Text nbPlayerTxt;
     [SerializeField] private int minPlayerToStartGame;
 
     [SerializeField] private int multiSceneIndex;
-    [SerializeField] private Text nbPlayerTxt;
+
+    [SerializeField] private GameObject countdownPanel;
+    [SerializeField] private Text countdownTxt;
+    [SerializeField] private int fullTimer;
+    [SerializeField] private int shortTimer;
+
+    [SerializeField] private PhotonView phView;
+    private bool startingGame = false;
 #pragma warning restore 649
+
+    bool countingDown;
+    float currentTimer;
 
     public void Start()
     {
-        UpdatePlayerCount();
         Debug.Log("Waiting room joined");
+        phView = GetComponent<PhotonView>();
+        countingDown = false;
+        currentTimer = fullTimer;
+        UpdatePlayerCount();
     }
 
     public void Update()
     {
-        
+        if (countingDown)
+            UpdateTimer();
+    }
+
+
+    void StartGame()
+    {
+        startingGame = true;
+        Debug.Log("Starting game..");
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel(multiSceneIndex);
+        }
+    }
+
+    private void UpdateTimer()
+    {
+        currentTimer -= Time.deltaTime;
+        countdownTxt.text = string.Format("{0:00}", currentTimer);
+        if (currentTimer <= 0 && !startingGame)
+            StartGame();   
     }
 
     private void UpdatePlayerCount()
@@ -31,25 +64,38 @@ public class WaitingRoomController : MonoBehaviourPunCallbacks
         
         if(PhotonNetwork.CurrentRoom.PlayerCount >= minPlayerToStartGame)
         {
-            StartGame();
+            countingDown = true;
+            countdownPanel.SetActive(true);
+        }
+        else
+        {
+            countdownPanel.SetActive(false);
+            ResetTimer();
         }
     }
+
+    private void ResetTimer()
+    {
+        countingDown = false;
+        currentTimer = fullTimer;
+    }
+
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         UpdatePlayerCount();
+
+        if (PhotonNetwork.IsMasterClient)
+            phView.RPC("RPC_SynchTimer", RpcTarget.Others, currentTimer);
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         UpdatePlayerCount();
     }
-
-    void StartGame()
+    
+    [PunRPC]
+    private void RPC_SynchTimer(float timerValue)
     {
-        Debug.Log("Starting game..");
-        if (PhotonNetwork.IsMasterClient)
-        {
-            PhotonNetwork.LoadLevel(multiSceneIndex);
-        }
+        currentTimer = timerValue;
     }
 }
