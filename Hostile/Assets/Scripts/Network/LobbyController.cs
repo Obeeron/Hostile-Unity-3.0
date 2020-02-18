@@ -11,14 +11,6 @@ public class LobbyController : MonoBehaviourPunCallbacks
     [SerializeField] private int nbPlayerMax;
 #pragma warning restore 649
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log("Connecting to master server..");
-        PhotonNetwork.AutomaticallySyncScene = true;
-        PhotonNetwork.ConnectUsingSettings();
-    }
-
     public void JoinGame()
     {
         Debug.Log("Joining random room..");
@@ -56,5 +48,10 @@ public class LobbyController : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LoadLevel(waitingSceneIndex);
         }
+    }
+
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
     }
 }

@@ -3,25 +3,29 @@ using System.Collections;
 using UnityEngine;
 public class PlayerMovement_Obee : MonoBehaviour
 {
-    public CharacterController controller;
+    private CharacterController controller;
 
-    public float normalSpeed;
-    public float runningSpeed;
+    public float normalSpeed = 4.5f;
+    public float runningSpeed = 7.5f;
     private float speed;
     private Vector3 fallingVelocity;
 
     bool grounded;
-    public float jumpHeight;
+    public float jumpHeight = 1f;
 
-    public float groundLerp;
-    public float airLerp;
-    public float airSpeedMultiplier;
+    [Range(0f, 1f)]
+    public float groundLerp = 0.7f;
+    [Range(0f, 1f)]
+    public float airLerp = 0.95f;
+    [Range(0f, 1f)]
+    public float airSpeedMultiplier = 0.6f;
     private Vector3 motion;
 
     Vector3 direction; 
 
     private void Start()
     {
+        controller = GetComponent<CharacterController>();
         grounded = false;
     }
 

@@ -164,7 +164,7 @@ namespace Joueur
 
         private void FixedUpdate()
         {
-            if (!character.isGrounded){fallingVelocity += (Physics.gravity * Time.deltaTime);} 
+            if (!character.isGrounded){fallingVelocity += (Physics.gravity * Time.fixedDeltaTime);} 
 
             character.Move(movement);
             character.Move(fallingVelocity * Time.fixedDeltaTime);

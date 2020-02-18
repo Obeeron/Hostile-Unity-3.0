@@ -7,7 +7,7 @@ public class Camera_Obee : MonoBehaviour
     Transform playerCamera;
 
     public float mouseSensitivity = 150f;
-    public float smoothness;
+    public float smoothness = 0.85f;
 
     float yRotation;
 

@@ -8,50 +8,53 @@ namespace Joueur
 {
     public class Camera_Movement : MonoBehaviour
     {
-        protected float mouseSensi = 8f;
-        public float smoothness;
+        #region Variables
+        [Header("Camera Properties")]
+        public float mouseSensi = 8f;
+        public float smoothness = 0.74f;
 
-        private Camera playerCamera;
-        private CharacterController playerBody;
-        
+        private Transform playerCamera;
+
+        private Vector2 mouseRotate;
+
+        private float yRotation;
         
         private PlayerControls controls;
-        private float yRotation;
-        private Vector2 mouseRotate;
+        #endregion
 
         private void Awake()
         {
             controls = new PlayerControls();
-        }
-        // Start is called before the first frame update
-        void Start()
-        {
-            yRotation = 0f;
-            smoothness = 0.74f;
-            Cursor.lockState = CursorLockMode.Locked;
-            playerCamera = GetComponentInChildren<Camera>();
-            playerBody = GetComponent<CharacterController>();
+            playerCamera = GetComponentInChildren<Camera>().transform;
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             Vector2 mouse = controls.InGame.MouseMovement.ReadValue<Vector2>();
             
-            mouseRotate.x = Mathf.Lerp(mouse.x * mouseSensi * Time.deltaTime, mouseRotate.x, smoothness);
-            mouseRotate.y = Mathf.Lerp(mouse.y * mouseSensi * Time.deltaTime,mouseRotate.y, smoothness);
+            mouseRotate.x = Mathf.Lerp(mouse.x * mouseSensi * Time.fixedDeltaTime, mouseRotate.x, smoothness);
+            mouseRotate.y = Mathf.Lerp(mouse.y * mouseSensi * Time.fixedDeltaTime,mouseRotate.y, smoothness);
 
-            float xRotation = mouseRotate.x ;
             yRotation -= mouseRotate.y;
-            yRotation = Mathf.Clamp(yRotation, -85f, 70f);
-
+            yRotation = Mathf.Clamp(yRotation, -90f, 90f);
 
             playerCamera.transform.localRotation = Quaternion.Euler(yRotation, 0f, 0f);
-            playerBody.transform.Rotate(Vector3.up * xRotation);
+            transform.Rotate(Vector3.up * mouseRotate.x);
         }
 
-        //enables controls input
-        private void OnEnable() => controls.InGame.Enable(); 
-        private void OnDisable() => controls.InGame.Disable();
+        //enables controls input + Switch cursor state
+        private void OnEnable()
+        {
+            controls.InGame.Enable();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        private void OnDisable()
+        {
+            controls.InGame.Disable();
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
     }
 }
