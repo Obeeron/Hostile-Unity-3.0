@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Items_in_UI : MonoBehaviour
 {
-    public Scritable_Items item;
+    public Item item;
 
     public void DisplaySprite()
     {

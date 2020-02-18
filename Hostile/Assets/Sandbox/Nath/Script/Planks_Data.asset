@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960dcc9a7a781044595907f560c922fc, type: 3}
   m_Name: Planks_Data
   m_EditorClassIdentifier: 
-  name: nouvel item
+  name: Planks
   icone: {fileID: 0}
   maxUsure: 0
   decayTime: 0
   persistent: 0
   mesh: {fileID: 0}
+  Material: []
+  Number: 

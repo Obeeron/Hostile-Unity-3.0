@@ -7,7 +7,7 @@ using TMPro;
 
 public class Items_Crafting : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    private Scritable_Items item; // Public pour voir les changements ou pour debug
+    private Item item; // Public pour voir les changements ou pour debug
 
     public void Start()
     {

@@ -161,10 +161,14 @@ public class Item : Interactable
     public void OnClick()
     {
         List<int> count = CheckMaterials_In_Inventory();
+        foreach (var num in count)
+        {
+            Debug.Log(num);
+        }
         if (IsCraftable(count)) // on ajoute dans l'inventaire
         {
             Debug.Log("Crafted !");
-            Inventaire.instance.items.Add(this);
+            Inventaire.instance.Add(this);
         }
         else
         {
@@ -186,7 +190,6 @@ public class Item : Interactable
             {
                 foreach (Item item in Inventaire.instance.items)
                 {
-                    Debug.Log(item.itemData.name);
                     if (item.itemData.name == itemData.Material[i].name)
                     {
                         count[i] += 1;
@@ -200,7 +203,7 @@ public class Item : Interactable
     public bool IsCraftable(List<int> count)
     {
         List<int> indexToRemove = new List<int>();
-        if (count.Count == itemData.Material.Count) // Devrait toujours être false sinon c'est qu'il y a un problème dans les matériaux du scriptable_Object
+        if (count.Count == itemData.Material.Count) // Devrait toujours être true sinon c'est qu'il y a un problème dans les matériaux du scriptable_Object
         {
             bool isCraftable = true;
             int i = 0;
@@ -231,6 +234,7 @@ public class Item : Interactable
                     Inventaire.instance.items.RemoveAt(index);
                 }
             }
+
             return isCraftable;
         }
         Debug.Log("Error in Scriptable_Items : OnClick -> IsCraftable");

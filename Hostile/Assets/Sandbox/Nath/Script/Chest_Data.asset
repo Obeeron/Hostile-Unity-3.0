@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 960dcc9a7a781044595907f560c922fc, type: 3}
-  m_Name: Wood_Data
+  m_Name: Chest_Data
   m_EditorClassIdentifier: 
-  name: Wood
+  name: Chest
   icone: {fileID: 0}
   maxUsure: 0
   decayTime: 0
   persistent: 0
   mesh: {fileID: 0}
-  Material: []
-  Number: 
+  Material:
+  - {fileID: 11400000, guid: d3a36880a0252ed479cfd9f61ae6753e, type: 2}
+  - {fileID: 11400000, guid: bf32b98125ac7f64ca664c6b484474ed, type: 2}
+  Number: 0200000005000000
