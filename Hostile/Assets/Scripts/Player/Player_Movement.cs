@@ -1,229 +1,209 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-    
+
 namespace Joueur
 {
-    public class Player_Movement : Player_Stats
+    public class Player_Movement : MonoBehaviour
     {
-        
-        CharacterController character;
-        
-        
-        //values of speed and jump
-        [SerializeField] private float crouchSpeed = 3.0f;
-        [SerializeField] private float walkingSpeed = 5.0f;     // les animations change la vitesse
-        [SerializeField] private float runningSpeed = 9.0f;
-        [SerializeField] private float jumpHeight = 2.0f;
-        [SerializeField] private float gravity = 3.0f;
-
-        //values of stamina
+        private float Speed;
+        private float gravity = 3.0f;
         private float staminaTimer = 0.0f;
-        private float jumpStamina = 10.0f;
-        private float runningStamina = 5.0f;
-        private float regenStamina = 20.0f;
-
-        //modified valued every frame
-        [SerializeField] private bool walking = true;
-        [SerializeField] private bool running = false;
-        [SerializeField] private bool crouch = false;
-        private PlayerControls controls;
-        private Vector3 fallingVelocity;
-        private float speed;
         private float groundLerp = 0.8f;
         private float airLerp = 0.95f;
         
+        CharacterController character;
+#pragma warning disable 649
+        [SerializeField] private PlayerData Data;
+#pragma warning restore 649
+        private PlayerControls controls;
         protected Animator animator;
         private Vector3 movement;
-        protected Player_Stats playerStats;
-        
-        //called before Start
-        private void Awake()
-        {
-            controls = new PlayerControls();
-        }
+        private Vector3 fallingVelocity;
+        private bool isThereAnimator = true;
 
-        // Start is called before the first frame update
         void OnEnable()
         {
+            controls = new PlayerControls();
             controls.InGame.Enable();
-            playerStats = this.gameObject.GetComponent<Player_Stats>();
             animator = this.gameObject.GetComponent<Animator>();
+            if (animator == null)
+                isThereAnimator = false;
             character = GetComponent<CharacterController>();
         }
-
+        
         // Update is called once per frame
         void Update()
         {
             bool hasJumped = false;
-            // change la vitesse en fonction de la touche
+            // change l'état du joueur en fonction de la touche pressée
             if (controls.InGame.SpeedSwap.triggered)
             {
-                SpeedChange();
+                switch (Data.speedState)
+                {
+                    case PlayerData.State.walking:
+                        Data.speedState = PlayerData.State.running;
+                        break;
+                    case PlayerData.State.running:
+                        Data.speedState = PlayerData.State.walking;
+                        break;
+                    default:
+                        break;
+                }
             }
             else if (controls.InGame.Crouch.triggered)
             {
-                Crouching();
-            }
-
-            // définition de la vitesse en fonction de la stamina et du choix du joueur
-            if (playerStats.IsWorn || playerStats.IsHungry)
-            {
-                running = false;
-                walking = true;
-                speed = walkingSpeed;
-            }
-            else
-            {
-                if (playerStats.IsHungry)
+                if (Data.speedState == PlayerData.State.crouching)
                 {
-                    regenStamina = 10f;
+                    Data.speedState = PlayerData.State.walking;
+                    if (isThereAnimator)
+                            animator.SetBool("Crouch", false);
                 }
                 else
                 {
-                    regenStamina = 20f;
-                }
-                if (walking)
-                {
-                    speed = walkingSpeed;
-                }
-                else{
-                    if (crouch)
+                    Data.speedState = PlayerData.State.crouching;
+                    if (isThereAnimator)
                     {
-                        speed = crouchSpeed;
-                    }
-                    else 
-                    {
-                        speed = runningSpeed;
+                        animator.SetBool("Crouch", true);
+                        animator.SetFloat("Forward", movement.x);
+                        animator.SetFloat("Turn", movement.y);
                     }
                 }
             }
-                
+
+            if (Data.Hunger < Data.MaxHunger * 0.1f || Data.Stamina <= 0f) //if the player is hungry or worn, state switch to run state
+            {
+                if (Data.speedState == PlayerData.State.running)
+                    Data.speedState = PlayerData.State.walking;
+            }
 
             Vector2 moveDirection = controls.InGame.Movement.ReadValue<Vector2>();
             Vector3 currentMovement = (moveDirection.y * transform.forward + moveDirection.x * transform.right).normalized;
-
-
+            
             if (character.isGrounded)
             {
-                /*if (fallingVelocity.y < -20f) //degats de chute not fully functionnal
+                //modifying speed
+                switch (Data.speedState)
                 {
-                    player.HasLife -= 5f;
-                }*/
-                movement = Vector3.Lerp(currentMovement * speed * Time.deltaTime, movement, groundLerp);
-                animator.SetFloat("Speed", moveDirection.x);
-                animator.SetFloat("TurnSpeed", moveDirection.y);
+                    case PlayerData.State.crouching:
+                        Speed = 3.0f;
+                        break;
+                    case PlayerData.State.running:
+                        Speed = 9.0f;
+                        break;
+                    default:
+                        Speed = 5.0f;
+                        break;
+                }
 
-                animator.SetFloat("JumpLeg", moveDirection.x);
-                animator.SetFloat("Jump", moveDirection.y);
+                movement = Vector3.Lerp(currentMovement * Speed* Time.deltaTime, movement, groundLerp);
 
+                //for animation
+                if (isThereAnimator)
+                {
+                    animator.SetFloat("Speed", moveDirection.x);
+                    animator.SetFloat("TurnSpeed", moveDirection.y);
+
+                    animator.SetFloat("JumpLeg", moveDirection.x);
+                    animator.SetFloat("Jump", moveDirection.y);
+                }
                 if (controls.InGame.Jump.triggered){
-                    if (!playerStats.IsWorn)//checking stamina
+                    if (Data.Stamina > 0f)
                     {
                         StartCoroutine(Jump());
                         hasJumped = true;
                     }
                 }
-                else if (fallingVelocity.y < 0)
+                else if (fallingVelocity.y < 0f)
                 {
                     fallingVelocity.y = -gravity;
                 }
 
-                //modifying stamina
                 if (hasJumped)
                 {
-                    playerStats.HasStamina -= jumpStamina; //perte de stamina à cause du saut
+                    if (Data.Stamina >= 10f)
+                        Data.Stamina -= 10f;
+                    else
+                        Data.Stamina =0f;
                     staminaTimer = 0f;
                 }
-                if (running && moveDirection != Vector2.zero)
+                if (Data.speedState == PlayerData.State.running && moveDirection != Vector2.zero)
                 {
-                    playerStats.HasStamina -= runningStamina * Time.deltaTime; //perte de stamina en fonction du temps passé à courir
+                    if (Data.Stamina - 5.0f * Time.deltaTime >= 0f)
+                        Data.Stamina -= 5.0f * Time.deltaTime;
+                    else
+                        Data.Stamina = 0f;
                     staminaTimer = 0f;
                 }
-                if (!hasJumped && (!running || moveDirection == Vector2.zero)) //regain de stamina si le joueur ne court pas ou est à l'arret
+                if (!hasJumped && (Data.speedState != PlayerData.State.running || moveDirection == Vector2.zero))
                 {
-                    if (staminaTimer >= 1.3f)
+                    if (staminaTimer >= 1f)
                     {
-                        playerStats.HasStamina += regenStamina * Time.deltaTime;
+                        if (Data.Hunger <= 0f)
+                        {
+                            float newStamina = Data.Stamina + (7.5f * Time.deltaTime);
+                            if (newStamina >= Data.MaxStamina)
+                            {
+                                Data.Stamina = Data.MaxStamina;
+                            }
+                            else
+                            {
+                                Data.Stamina = newStamina;
+                            }
+                        }
+                        else 
+                        {
+                            float newStamina = Data.Stamina + (15f * Time.deltaTime);
+                            if (newStamina >= Data.MaxStamina)
+                            {
+                                Data.Stamina = Data.MaxStamina;
+                            }
+                            else
+                            {
+                                Data.Stamina = newStamina;
+                            }
+                        }
                     }
                     else
                     {
                         staminaTimer += Time.deltaTime;
                     }
                 }
-                //end of modifying stamina
             }
             else
             {
-                movement = Vector3.Lerp(currentMovement * speed * Time.deltaTime, movement, airLerp);
+                movement = Vector3.Lerp(currentMovement * Speed * Time.deltaTime, movement, airLerp);
             }
         }
 
         private void FixedUpdate()
         {
-            if (!character.isGrounded){fallingVelocity += (Physics.gravity * Time.fixedDeltaTime);} 
+            if (!character.isGrounded)
+                fallingVelocity += (Physics.gravity * Time.fixedDeltaTime);
 
             character.Move(movement);
             character.Move(fallingVelocity * Time.fixedDeltaTime);
         }
-        
+
         private IEnumerator Jump()
         {
-            animator.SetBool("OnGround", false);
+            if (isThereAnimator)
+                animator.SetBool("OnGround", false);
+
             character.slopeLimit = 90f;
-            speed /= 1.8f;
-            fallingVelocity.y = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
+            Speed /= 1.8f;
+            fallingVelocity.y = Mathf.Sqrt(-2f * Physics.gravity.y * 2.0f);
             do
             {
                 yield return null;
             } while (!character.isGrounded);
-            animator.SetBool("OnGround", true);
+            if (isThereAnimator)
+                animator.SetBool("OnGround", true);
+
             character.slopeLimit = 45f;
         }
 
-        private void SpeedChange()
-        {
-            if (!crouch)
-            {
-                if (walking)
-                {
-                    walking = false;
-                    running = true;
-                }
-                else
-                {
-                    walking = true;
-                    running = false;
-                }
-            }
-        }
-
-        private void Crouching()
-        {
-            if (crouch)
-            {
-                animator.SetBool("Crouch", false);
-                walking = true;
-                running = false;
-                crouch = false;
-            }
-            else
-            {
-                walking = false;
-                running = false;
-                crouch = true;
-                animator.SetBool("Crouch", true);
-                animator.SetFloat("Forward", movement.x);
-                animator.SetFloat("Turn", movement.y);
-            }
-        }
-
-        //enables controls input
-        // private void OnEnable() => controls.InGame.Enable(); 
         private void OnDisable() => controls.InGame.Disable();
-            //controls.Menu.disable might be used here
     }
 }

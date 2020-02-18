@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023d5097cc8b183438b6cab55334500d, type: 3}
+  m_Name: MainPlayerData
+  m_EditorClassIdentifier: 
+  Life: 100
+  MaxLife: 100
+  Stamina: 100
+  MaxStamina: 100
+  Hunger: 100
+  MaxHunger: 100
+  Agility: 1
+  Dexterity: 1
+  Strength: 1
+  speedState: 0

@@ -38,11 +38,6 @@ public class FarmingItem : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    public void Update()
-    {
-        AliveUpdate();
-    }
-
     
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -56,23 +51,18 @@ public class FarmingItem : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    public void Interact(float strength = 1f, float weapon = 1f)
-    {
-        float mult = strength*weapon;
-        LifeDown(mult);
-    }
-
-    private void LifeDown(float mult)
+    public void GetHit(float dmg)
     {
         if (isAlive)
         {
-            life -= 1*mult;
-        }   
+            life -= dmg;
+            AliveUpdate();
+        }
     }
 
     private void AliveUpdate()
     {
-        if (life < 0f && isAlive)
+        if (life < 0f)
         {
             isAlive = false;
             StartCoroutine(Destroying());
@@ -93,7 +83,6 @@ public class FarmingItem : MonoBehaviourPunCallbacks, IPunObservable
             DropNmb--;
             Debug.Log("Droping Itmes at position : " + dropPosition);
             PhotonNetwork.Instantiate(itemDroped, dropPosition, Quaternion.identity);
-            dropPosition.y += 0.1f;
         }
     }
 
