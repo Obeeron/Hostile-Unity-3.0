@@ -65,6 +65,22 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""561c4d02-7233-49ae-b6d7-1a5ccce1bf36"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""4fa900c3-0a79-4c71-83cd-a777f8efbcee"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -177,6 +193,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1745ebe3-5760-4a1b-a05d-095c0ceace45"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""286e56ef-15fb-436b-be19-97c2275c5cb2"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -191,6 +229,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_InGame_SpeedSwap = m_InGame.FindAction("SpeedSwap", throwIfNotFound: true);
         m_InGame_MouseMovement = m_InGame.FindAction("MouseMovement", throwIfNotFound: true);
         m_InGame_Crouch = m_InGame.FindAction("Crouch", throwIfNotFound: true);
+        m_InGame_Inventory = m_InGame.FindAction("Inventory", throwIfNotFound: true);
+        m_InGame_Interact = m_InGame.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -246,6 +286,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_InGame_SpeedSwap;
     private readonly InputAction m_InGame_MouseMovement;
     private readonly InputAction m_InGame_Crouch;
+    private readonly InputAction m_InGame_Inventory;
+    private readonly InputAction m_InGame_Interact;
     public struct InGameActions
     {
         private @PlayerControls m_Wrapper;
@@ -256,6 +298,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @SpeedSwap => m_Wrapper.m_InGame_SpeedSwap;
         public InputAction @MouseMovement => m_Wrapper.m_InGame_MouseMovement;
         public InputAction @Crouch => m_Wrapper.m_InGame_Crouch;
+        public InputAction @Inventory => m_Wrapper.m_InGame_Inventory;
+        public InputAction @Interact => m_Wrapper.m_InGame_Interact;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -283,6 +327,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Crouch.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnCrouch;
                 @Crouch.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnCrouch;
                 @Crouch.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnCrouch;
+                @Inventory.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnInventory;
+                @Interact.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_InGameActionsCallbackInterface = instance;
             if (instance != null)
@@ -305,6 +355,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Crouch.started += instance.OnCrouch;
                 @Crouch.performed += instance.OnCrouch;
                 @Crouch.canceled += instance.OnCrouch;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -317,5 +373,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnSpeedSwap(InputAction.CallbackContext context);
         void OnMouseMovement(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

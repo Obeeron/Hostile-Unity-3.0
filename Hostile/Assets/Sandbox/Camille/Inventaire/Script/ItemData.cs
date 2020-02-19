@@ -25,6 +25,4 @@ public class ItemData : ScriptableObject
     public Mesh mesh = null;
     public List<Scritable_Items> Material;
     public List<int> Number;
-
-
 }

@@ -4,9 +4,8 @@ using System;
 
 public class GameSetupManager : MonoBehaviourPunCallbacks
 {
-#pragma warning disable 649
-    [SerializeField] Vector3 spawnPoint;
-#pragma warning restore 649
+    public UI.UI_Controller_Game uiController;
+    public Vector3 spawnPoint;
 
     void Start()
     {
@@ -17,6 +16,16 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
     private void CreatePlayer()
     {
         GameObject player = PhotonNetwork.Instantiate("NetworkSimplePlayer", spawnPoint, Quaternion.identity);
-        Debug.Log("Avatar created by "+PhotonNetwork.LocalPlayer.NickName);
+        Debug.Log("Avatar created");
+        if (player.GetPhotonView().IsMine)
+        {
+            //UIModeSwitch Events
+            UIModeSwitcher uiSwitcher = player.GetComponent<UIModeSwitcher>();
+            uiController.OnUIModeEnable.AddListener(delegate { uiSwitcher.UIModeSwitchState(true); });
+            uiController.OnUIModeDisable.AddListener(delegate { uiSwitcher.UIModeSwitchState(false); });
+
+            //UI's player reference
+            Inventaire.instance.player = player;
+        }
     }
 }

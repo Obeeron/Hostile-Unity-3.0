@@ -157,7 +157,8 @@ GameObject:
   - component: {fileID: 2413785946090234008}
   - component: {fileID: 2413785946090234009}
   - component: {fileID: 8239965983717790354}
-  m_Layer: 0
+  - component: {fileID: 1844362399}
+  m_Layer: 12
   m_Name: SimplePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +211,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba27fa4fafae2184fbfc0e1943460192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 2413785946090234010}
   normalSpeed: 4
   runningSpeed: 6
   jumpHeight: 0.7
@@ -250,9 +250,21 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 0}
-  viewIdField: 0
+  viewIdField: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1844362399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2413785946090234005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b78133e851286f43b646138d97c7ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5962292244148225766
 GameObject:
   m_ObjectHideFlags: 0

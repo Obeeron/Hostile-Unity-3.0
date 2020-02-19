@@ -11,6 +11,7 @@ namespace UI
         #region Variables
         [Header("Main Properties")]
         public UI_Screen m_startScreen;
+        protected PlayerControls playerControls;
 
         [Header("System Events")]
         public UnityEvent onSwitchScreen = new UnityEvent();
@@ -31,6 +32,8 @@ namespace UI
         // Start is called before the first frame update
         void Start()
         {
+            playerControls = new PlayerControls();
+            playerControls.InGame.Enable();
             screens = GetComponentsInChildren<UI_Screen>(true);
             InitializeScreens();
 

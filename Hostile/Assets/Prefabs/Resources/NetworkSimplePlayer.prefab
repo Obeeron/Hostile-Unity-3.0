@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2413785944979055558}
   - component: {fileID: 2413785944979055553}
   - component: {fileID: 4834066523047944541}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2413785944979055552}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.56, z: 0.073}
+  m_LocalPosition: {x: 0, y: 0.56, z: 0.025}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2413785946090234011}
@@ -154,12 +154,15 @@ GameObject:
   m_Component:
   - component: {fileID: 2413785946090234011}
   - component: {fileID: 2413785946090234010}
-  - component: {fileID: 2413785946090234008}
   - component: {fileID: 8072780893210528822}
+  - component: {fileID: 6189788011213871594}
+  - component: {fileID: 1685636017}
+  - component: {fileID: 1715160708111878001}
+  - component: {fileID: 1626121454838540076}
   - component: {fileID: 2335749375552170081}
   - component: {fileID: 4901375410651440671}
   - component: {fileID: 347428493461394901}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: NetworkSimplePlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -201,24 +204,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2413785946090234008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2413785946090234005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba27fa4fafae2184fbfc0e1943460192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  normalSpeed: 5.5
-  runningSpeed: 7.5
-  jumpHeight: 1
-  groundLerp: 0.8
-  airLerp: 0.95
-  airSpeedMultiplier: 0.55
 --- !u!114 &8072780893210528822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,6 +218,82 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensi: 8
   smoothness: 0.74
+--- !u!114 &6189788011213871594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2413785946090234005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68829970953577841a66aa28aa2165a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Data: {fileID: 11400000, guid: 2f32f42aeb55de44591bc11906113bea, type: 2}
+--- !u!114 &1685636017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2413785946090234005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58051659f3ef70c48b17413c1ec97ce3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  espaceDisponible: 20
+  items: []
+  nbSlots: 20
+  nbSlotsHotbar: 5
+  slots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  selectedSlotIndex: 0
+  player: {fileID: 0}
+--- !u!114 &1715160708111878001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2413785946090234005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b78133e851286f43b646138d97c7ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1626121454838540076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2413785946090234005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6cfa5da751a6264ea7af6914e1fcbb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2335749375552170081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,8 +307,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ignoredScripts:
-  - {fileID: 2413785946090234008}
   - {fileID: 8072780893210528822}
+  - {fileID: 6189788011213871594}
 --- !u!114 &4901375410651440671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,7 +376,7 @@ GameObject:
   - component: {fileID: 4193102920137697269}
   - component: {fileID: 6290351093704841159}
   - component: {fileID: 5291345008694570711}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,7 +470,7 @@ GameObject:
   - component: {fileID: 4837685707572810579}
   - component: {fileID: 3806779479435717515}
   - component: {fileID: 2790413792327881472}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +485,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9080051387423035899}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0.35}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.295}
   m_LocalScale: {x: 0.5, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 2413785946090234011}

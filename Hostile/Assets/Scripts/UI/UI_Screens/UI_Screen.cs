@@ -49,6 +49,7 @@ namespace UI
             active = true;
             onScreenStart?.Invoke();
             HandleAnimator("show");
+            Debug.Log("startScreen");
         }
 
         public virtual void CloseScreen()
@@ -56,6 +57,7 @@ namespace UI
             active = false;
             onScreenClose?.Invoke();
             HandleAnimator("hide");
+            Debug.Log("closeScreen");
             //if(animator.runtimeAnimatorController == null)
             //    gameObject.SetActive(false);
         }

@@ -43,18 +43,14 @@ namespace Joueur
             transform.Rotate(Vector3.up * mouseRotate.x);
         }
 
-        //enables controls input + Switch cursor state
+        //enables controls input
         private void OnEnable()
         {
             controls.InGame.Enable();
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
         }
         private void OnDisable()
         {
             controls.InGame.Disable();
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
         }
     }
 }
