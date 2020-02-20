@@ -22,7 +22,7 @@ namespace Joueur
 
         private int Skills = 5;
         private int Health = 100;
-        private int Hunger = 100;
+        private int Hunger = 10;
         private int Stamina = 100;
         private float Agility = 1f;
         private float Dexterity = 1f;
@@ -101,13 +101,13 @@ namespace Joueur
             {
                 if (Skills > 0)
                 {
-                    Hunger += 10;
+                    Hunger += 1;
                     Skills--;
                 }
             }
-            else if (Hunger > 100)
+            else if (Hunger > 10)
             {
-                Hunger -= 10;
+                Hunger -= 1;
                 Skills++;
             }
             remainingPoints.text = "" + Skills;
@@ -220,7 +220,7 @@ namespace Joueur
                         while (Skills > 0)
                         {
                             Skills--;
-                            Hunger += 10;
+                            Hunger += 1;
                         }
                         break;
                     case 3:
@@ -255,13 +255,13 @@ namespace Joueur
             }
             //aplies choices to the player's Data
             Data.MaxLife = Health;
-            Data.MaxHunger = Hunger;
+            Data.MaxHunger = Hunger * 60f;
             Data.MaxStamina = Stamina;
             Data.Strength = Strength;
             Data.Agility = Agility;
             Data.Dexterity = Dexterity;
             Data.Life = Health;
-            Data.Hunger = Hunger;
+            Data.Hunger = Hunger * 60f;
             Data.Stamina = Stamina;
 
             Pannel.SetActive(false);

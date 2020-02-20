@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace Joueur
 {
     public class Player_Movement : MonoBehaviour
     {
-        private float Speed;
+        public UnityEvent onJump;
+
         private float gravity = 3.0f;
-        private float staminaTimer = 0.0f;
         private float groundLerp = 0.8f;
         private float airLerp = 0.95f;
         
@@ -37,40 +38,14 @@ namespace Joueur
         // Update is called once per frame
         void Update()
         {
-            bool hasJumped = false;
             // change l'état du joueur en fonction de la touche pressée
             if (controls.InGame.SpeedSwap.triggered)
             {
-                switch (Data.speedState)
-                {
-                    case PlayerData.State.walking:
-                        Data.speedState = PlayerData.State.running;
-                        break;
-                    case PlayerData.State.running:
-                        Data.speedState = PlayerData.State.walking;
-                        break;
-                    default:
-                        break;
-                }
+                stateSwap();
             }
             else if (controls.InGame.Crouch.triggered)
             {
-                if (Data.speedState == PlayerData.State.crouching)
-                {
-                    Data.speedState = PlayerData.State.walking;
-                    if (isThereAnimator)
-                            animator.SetBool("Crouch", false);
-                }
-                else
-                {
-                    Data.speedState = PlayerData.State.crouching;
-                    if (isThereAnimator)
-                    {
-                        animator.SetBool("Crouch", true);
-                        animator.SetFloat("Forward", movement.x);
-                        animator.SetFloat("Turn", movement.y);
-                    }
-                }
+                crouchSwap();
             }
 
             if (Data.Hunger < Data.MaxHunger * 0.1f || Data.Stamina <= 0f) //if the player is hungry or worn, state switch to run state
@@ -84,20 +59,6 @@ namespace Joueur
             
             if (character.isGrounded)
             {
-                //modifying speed
-                switch (Data.speedState)
-                {
-                    case PlayerData.State.crouching:
-                        Speed = 3.0f;
-                        break;
-                    case PlayerData.State.running:
-                        Speed = 9.0f;
-                        break;
-                    default:
-                        Speed = 5.0f;
-                        break;
-                }
-
                 //for animation
                 if (isThereAnimator)
                 {
@@ -111,7 +72,6 @@ namespace Joueur
                     if (Data.Stamina > 0f)
                     {
                         StartCoroutine(Jump());
-                        hasJumped = true;
                     }
                 }
                 else if (fallingVelocity.y < 0f)
@@ -119,56 +79,10 @@ namespace Joueur
                     fallingVelocity.y = -gravity;
                 }
 
-                if (hasJumped)
-                {
-                    if (Data.Stamina >= 10f)
-                        Data.Stamina -= 10f;
-                    else
-                        Data.Stamina =0f;
-                    staminaTimer = 0f;
-                }
-                if (Data.speedState == PlayerData.State.running && moveDirection != Vector2.zero)
-                {
-                    if (Data.Stamina - 5.0f * Time.deltaTime >= 0f)
-                        Data.Stamina -= 5.0f * Time.deltaTime;
-                    else
-                        Data.Stamina = 0f;
-                    staminaTimer = 0f;
-                }
-                if (!hasJumped && (Data.speedState != PlayerData.State.running || moveDirection == Vector2.zero))
-                {
-                    if (staminaTimer >= 1f)
-                    {
-                        if (Data.Hunger <= 0f)
-                        {
-                            float newStamina = Data.Stamina + (7.5f * Time.deltaTime);
-                            if (newStamina >= Data.MaxStamina)
-                            {
-                                Data.Stamina = Data.MaxStamina;
-                            }
-                            else
-                            {
-                                Data.Stamina = newStamina;
-                            }
-                        }
-                        else 
-                        {
-                            float newStamina = Data.Stamina + (15f * Time.deltaTime);
-                            if (newStamina >= Data.MaxStamina)
-                            {
-                                Data.Stamina = Data.MaxStamina;
-                            }
-                            else
-                            {
-                                Data.Stamina = newStamina;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        staminaTimer += Time.deltaTime;
-                    }
-                }
+                if (moveDirection == Vector2.zero)
+                    Data.isIdle = true;
+                else
+                    Data.isIdle = false;
             }
         }
 
@@ -177,11 +91,11 @@ namespace Joueur
             if (!character.isGrounded)
             {
                 fallingVelocity += (Physics.gravity * Time.fixedDeltaTime);
-                movement = Vector3.Lerp(currentMovement * Speed* Time.fixedDeltaTime, movement, airLerp);
+                movement = Vector3.Lerp(currentMovement * (Data.speed/1.8f)* Time.fixedDeltaTime, movement, airLerp);
             }
             else
             {
-                movement = Vector3.Lerp(currentMovement * Speed* Time.fixedDeltaTime, movement, groundLerp);
+                movement = Vector3.Lerp(currentMovement * Data.speed* Time.fixedDeltaTime, movement, groundLerp);
             }
 
             character.Move(movement);
@@ -190,11 +104,11 @@ namespace Joueur
 
         private IEnumerator Jump()
         {
+            onJump?.Invoke();
             if (isThereAnimator)
                 animator.SetBool("OnGround", false);
 
             character.slopeLimit = 90f;
-            Speed /= 1.8f;
             fallingVelocity.y = Mathf.Sqrt(-2f * Physics.gravity.y * 2.0f);
             do
             {
@@ -204,6 +118,41 @@ namespace Joueur
                 animator.SetBool("OnGround", true);
 
             character.slopeLimit = 45f;
+        }
+
+        private void stateSwap()
+        {
+            switch (Data.speedState)
+            {
+                case PlayerData.State.walking:
+                    Data.speedState = PlayerData.State.running;
+                    break;
+                case PlayerData.State.running:
+                    Data.speedState = PlayerData.State.walking;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void crouchSwap()
+        {
+            if (Data.speedState == PlayerData.State.crouching)
+            {
+                Data.speedState = PlayerData.State.walking;
+                if (isThereAnimator)
+                        animator.SetBool("Crouch", false);
+            }
+            else
+            {
+                Data.speedState = PlayerData.State.crouching;
+                if (isThereAnimator)
+                {
+                    animator.SetBool("Crouch", true);
+                    animator.SetFloat("Forward", movement.x);
+                    animator.SetFloat("Turn", movement.y);
+                }
+            }
         }
 
         private void OnDisable() => controls.InGame.Disable();
