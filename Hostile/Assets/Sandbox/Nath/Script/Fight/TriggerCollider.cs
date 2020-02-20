@@ -7,19 +7,15 @@ public class TriggerCollider : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         CharacterController main = this.GetComponentInParent<CharacterController>();
-        if (other != main)
+        if (other != main) // On vérifie qu'on ne se tappe pas soi-même
         {
             Debug.Log("Touched");
-            if (other.GetComponent<Player>() != null)
+            /*if (other.GetComponent<Entity>() != null)
             {
-                Player player = this.GetComponentInParent<FightSystem>();
-                Player ennemy = other.gameObject.GetComponent<Player>();
-                ennemy.life -= player.damage;
-                Debug.Log(ennemy.life);
-                ennemy.checkLife();
-            }
+                Entity player = GetComponent<Entity>();
+                Entity ennemy = other.gameObject.GetComponent<Entity>();
+                ennemy.getHit(player.Damage); //getHit() -->
+            }*/
         }
-        
-
     }
 }
