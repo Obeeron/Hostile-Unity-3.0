@@ -47,12 +47,10 @@ namespace Joueur
         private void OnEnable()
         {
             controls.InGame.Enable();
-            Cursor.lockState = CursorLockMode.Locked;
         }
         private void OnDisable()
         {
             controls.InGame.Disable();
-            Cursor.lockState = CursorLockMode.None;
         }
     }
 }

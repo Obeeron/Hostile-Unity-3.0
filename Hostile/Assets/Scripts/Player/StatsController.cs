@@ -67,6 +67,10 @@ namespace Joueur
                 looseHunger(1*Time.deltaTime);
             }
             hungerTimer -= Time.deltaTime;
+            if (Data.Hunger <= 0f)
+            {
+                looseLife(0.4f * Time.deltaTime);
+            }
         }
 
         private void checkTimer()

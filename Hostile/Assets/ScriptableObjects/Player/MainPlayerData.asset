@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023d5097cc8b183438b6cab55334500d, type: 3}
   m_Name: MainPlayerData
   m_EditorClassIdentifier: 
-  Life: 100
-  MaxLife: 150
-  Stamina: 100
+  MaxLife: 100
   MaxStamina: 100
-  Hunger: 100
-  MaxHunger: 100
+  MaxHunger: 780
+  Life: 93.245415
+  Stamina: 100
+  Hunger: 0
   Agility: 1
-  Dexterity: 1
+  Dexterity: 1.2
   Strength: 1
   speedState: 0
+  isIdle: 1
+  speed: 5
