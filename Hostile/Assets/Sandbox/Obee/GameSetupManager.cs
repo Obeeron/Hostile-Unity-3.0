@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using System;
+using Joueur;
 
 public class GameSetupManager : MonoBehaviourPunCallbacks
 {
     public UI.UI_Controller_Game uiController;
+    public StatsController statsController;
     public Vector3 spawnPoint;
 
     void Start()
@@ -26,6 +28,9 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
 
             //UI's player reference
             Inventaire.instance.player = player;
+            
+            //player movement event setup
+            player.GetComponent<Player_Movement>().onJump.AddListener(delegate { statsController.looseStamina(10f); });
         }
     }
 }
