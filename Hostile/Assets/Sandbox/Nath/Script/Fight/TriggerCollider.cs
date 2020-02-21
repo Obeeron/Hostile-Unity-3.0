@@ -15,22 +15,16 @@ public class TriggerCollider : MonoBehaviour
         CharacterController main = this.GetComponentInParent<CharacterController>();
         if (other != main) // On vérifie qu'on ne se tappe pas soi-même
         {
-            //PointerEventData pointerData = data as PointerEventData;
             PhotonView PV = PhotonView.Get(this);
-            PV.RPC("GetHit", RpcTarget.MasterClient, playerData.Strength,other);
+            PV.RPC("GetHit", RpcTarget.All, playerData.Strength,other);
             Debug.Log("Touched");
-            /*if (other.GetComponent<Entity>() != null)
-            {
-                Entity player = GetComponent<Entity>();
-                Entity ennemy = other.gameObject.GetComponent<Entity>();
-                ennemy.getHit(player.Damage); //getHit() -->
-            }*/
         }
     }
 
     [PunRPC]
     void GetHit(int dmg,Collider other)
     {
+        other.GetComponentInParent<Joueur.StatsController>().getHit(dmg);
         Debug.Log("ur getting hit");
     }
 }

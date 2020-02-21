@@ -131,6 +131,12 @@ namespace Joueur
             }
         }
 
+        public void getHit(int dmg)
+        {
+            looseLife(dmg);
+            Debug.Log("ur gettting hit from getHit in statsController");
+        }
+
         public void gainHunger(float gain)
         {
             hungerTimer = 30f;
