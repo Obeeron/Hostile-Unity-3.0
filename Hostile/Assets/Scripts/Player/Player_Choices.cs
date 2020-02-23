@@ -11,7 +11,6 @@ namespace Joueur
         [SerializeField] private PlayerData Data;
         public GameObject Pannel;
     #pragma warning restore 649
-        private GameObject PrefabPlayer;
         private Text remainingPoints;
         private Text LifeText;
         private Text AgilityText;
@@ -31,18 +30,8 @@ namespace Joueur
 
         public void Start()
         {
-            PrefabPlayer = GameObject.Find("Robot Kyl");
-            if (PrefabPlayer == null)
+            if (Pannel != null)
             {
-                Debug.Log("An error has occured");
-                this.enabled = false;
-            }
-            else if (Pannel != null)
-            {
-                PrefabPlayer.GetComponent<Animator>().enabled = false;
-                PrefabPlayer.GetComponent<Player_Movement>().enabled = false;
-                PrefabPlayer.GetComponent<Camera_Movement>().enabled = false;
-                Pannel.SetActive(true);
                 remainingPoints = Pannel.transform.Find("Points").GetComponent<Text>();
                 LifeText = Pannel.transform.Find("LifeStats").GetComponent<Text>();
                 AgilityText = Pannel.transform.Find("AgilityStats").GetComponent<Text>();
@@ -58,7 +47,6 @@ namespace Joueur
                 AgilityText.text = "" + Agility;
                 DexterityText.text = "" + Dexterity;
                 StrengthText.text = "" + Strength;
-                StartCoroutine(EndChoice());
             }
             else 
             {
@@ -190,18 +178,8 @@ namespace Joueur
             DexterityText.text = "" + Dexterity;
         }
 
-        private IEnumerator EndChoice()
+        public void Choosing()
         {
-            yield return new WaitForSeconds(15);
-            Choosing(false);
-        }
-
-
-        public void Choosing(bool IsQuiting)
-        {
-            //if the player quits the screen or if the the time has ended
-            if (IsQuiting)
-                StopCoroutine(EndChoice());
             //if the player didn't choose, remainings points are put randomly into 1 stat only
             if (Skills > 0)
             {
@@ -264,10 +242,6 @@ namespace Joueur
             Data.Hunger = Hunger * 60f;
             Data.Stamina = Stamina;
 
-            Pannel.SetActive(false);
-            PrefabPlayer.GetComponent<Animator>().enabled = true;
-            PrefabPlayer.GetComponent<Player_Movement>().enabled = true;
-            PrefabPlayer.GetComponent<Camera_Movement>().enabled = true;
             this.enabled = false;
         }
     }
