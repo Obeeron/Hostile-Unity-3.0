@@ -31,7 +31,7 @@ MonoBehaviour:
   RpcList:
   - ClickRpc
   - DestroyRpc
-  - RPC_SynchTimer
   - GetHit
+  - RPC_SynchTimer
   DisableAutoOpenWizard: 1
   ShowSettings: 0

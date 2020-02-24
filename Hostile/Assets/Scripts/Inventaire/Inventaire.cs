@@ -33,15 +33,23 @@ public class Inventaire : MonoBehaviour
     public int nbSlotsHotbar = 5;
     public Slots[] slots;
     public int selectedSlotIndex=0;
+
     public GameObject player;
 
     private void Start()
     {
         selectedSlotIndex = 0;
+        Slots[] unorderedSlots = GetComponentsInChildren<Slots>(true);
         slots = GetComponentsInChildren<Slots>(true);
-        for(int i = nbSlots-nbSlotsHotbar-1; i<nbSlots; i++) {
-            (slots[i],slots[nbSlots-i-1]) = (slots[nbSlots - i - 1],slots[i]);
+
+        for (int i = 0; i < nbSlotsHotbar; i++)
+        {
+            (slots[i]) = (unorderedSlots[i + nbSlots - nbSlotsHotbar]);
+            Debug.Log(string.Format("i={0}   (i+nbSlots-nbSlotsHotbar)={1}", i, i + nbSlots - nbSlotsHotbar));
         }
+            
+        for (int i = nbSlotsHotbar; i < nbSlots; i++)
+            (slots[i]) = (unorderedSlots[i-nbSlotsHotbar]);
     }
 
     void Update()

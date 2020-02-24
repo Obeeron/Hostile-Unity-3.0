@@ -64,7 +64,7 @@ namespace UI
 
         void HandleAnimator(string trigger)
         {
-            if(animator.runtimeAnimatorController != null)
+            if(animator != null && animator.runtimeAnimatorController != null)
                 animator.SetTrigger(trigger);                
         }
         #endregion

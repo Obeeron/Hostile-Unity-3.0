@@ -75,6 +75,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Craft"",
+                    ""type"": ""Button"",
+                    ""id"": ""068228ac-8189-432a-9a6e-1b7d3cee91a1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""4fa900c3-0a79-4c71-83cd-a777f8efbcee"",
@@ -215,6 +223,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e7b5056-42b2-42e7-885e-42be1b8eb1e3"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Craft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -230,6 +249,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_InGame_MouseMovement = m_InGame.FindAction("MouseMovement", throwIfNotFound: true);
         m_InGame_Crouch = m_InGame.FindAction("Crouch", throwIfNotFound: true);
         m_InGame_Inventory = m_InGame.FindAction("Inventory", throwIfNotFound: true);
+        m_InGame_Craft = m_InGame.FindAction("Craft", throwIfNotFound: true);
         m_InGame_Interact = m_InGame.FindAction("Interact", throwIfNotFound: true);
     }
 
@@ -287,6 +307,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_InGame_MouseMovement;
     private readonly InputAction m_InGame_Crouch;
     private readonly InputAction m_InGame_Inventory;
+    private readonly InputAction m_InGame_Craft;
     private readonly InputAction m_InGame_Interact;
     public struct InGameActions
     {
@@ -299,6 +320,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @MouseMovement => m_Wrapper.m_InGame_MouseMovement;
         public InputAction @Crouch => m_Wrapper.m_InGame_Crouch;
         public InputAction @Inventory => m_Wrapper.m_InGame_Inventory;
+        public InputAction @Craft => m_Wrapper.m_InGame_Craft;
         public InputAction @Interact => m_Wrapper.m_InGame_Interact;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
@@ -330,6 +352,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Inventory.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnInventory;
+                @Craft.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnCraft;
+                @Craft.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnCraft;
+                @Craft.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnCraft;
                 @Interact.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnInteract;
@@ -358,6 +383,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
+                @Craft.started += instance.OnCraft;
+                @Craft.performed += instance.OnCraft;
+                @Craft.canceled += instance.OnCraft;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
@@ -374,6 +402,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnMouseMovement(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnCraft(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }
 }

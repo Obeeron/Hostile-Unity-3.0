@@ -62,6 +62,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Craft",
+                    "type": "Button",
+                    "id": "068228ac-8189-432a-9a6e-1b7d3cee91a1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "4fa900c3-0a79-4c71-83cd-a777f8efbcee",
@@ -200,6 +208,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3e7b5056-42b2-42e7-885e-42be1b8eb1e3",
+                    "path": "<Keyboard>/c",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Craft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

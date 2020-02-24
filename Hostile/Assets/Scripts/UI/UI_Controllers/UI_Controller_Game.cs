@@ -49,26 +49,15 @@ namespace UI
         {
             if (inUIMode == state) return;
 
+            inUIMode = state;
+            Cursor.visible = inUIMode;
             if (state)
-            {
-                inUIMode = true;
-                Cursor.visible = inUIMode;
+            { 
                 Cursor.lockState = CursorLockMode.None;
-                if (OnUIModeEnable != null)
-                {
-                    Debug.Log(OnUIModeEnable.ToString());
-                    Debug.Log("Event has been filled");
-                }
-                else
-                {
-                    Debug.Log("Event is empty");
-                }
                 OnUIModeEnable?.Invoke();
             }
             else
             {
-                inUIMode = false;
-                Cursor.visible = inUIMode;
                 Cursor.lockState = CursorLockMode.Locked;
                 OnUIModeDisable?.Invoke();
             }
