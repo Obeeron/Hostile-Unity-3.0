@@ -44,6 +44,7 @@ public class WaitingRoomController : MonoBehaviourPunCallbacks
     {
         startingGame = true;
         Debug.Log("Starting game..");
+        this.GetComponent<Player_Choices>().Choosing();
         if (PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.LoadLevel(multiSceneIndex);
