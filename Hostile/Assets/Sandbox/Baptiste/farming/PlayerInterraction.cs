@@ -6,12 +6,10 @@ namespace Joueur
 {
     public class PlayerInterraction : MonoBehaviour
     {
-        Player_Stats plStats;
         Camera cam;
         // Start is called before the first frame update
         void Start()
         {
-            plStats = GetComponent<Player_Stats>();
             cam = GetComponentInChildren<Camera>();
         }
 
@@ -29,8 +27,7 @@ namespace Joueur
 
                     if (farming != null)
                     {
-                        float dmg = plStats.GetStrength* 1;
-                        farming.GetHit(dmg);
+                        farming.GetHit(1);
                     }
                 }
             }
