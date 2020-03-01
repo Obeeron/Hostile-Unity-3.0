@@ -34,11 +34,7 @@ public class FightSystem : MonoBehaviour
             if(GetComponentInChildren<BoxCollider>() != null)
             {
                 box = GetComponentInChildren<BoxCollider>();
-                if (canTouch)
-                {
-                    box.isTrigger = true; // Active le trigger de l'arme 
-                    canTouch = false;
-                }
+                updateCollider(box);
                 
                 // attendre 2sec;
                 StartCoroutine(DisableCollider(box)); // Redesactive le trigger de l'arme
@@ -46,6 +42,15 @@ public class FightSystem : MonoBehaviour
 
         }
         
+    }
+
+    void updateCollider(Collider box)
+    {
+        if (canTouch)
+        {
+            box.isTrigger = true; // Active le trigger de l'arme 
+            canTouch = false;
+        }
     }
    
 }

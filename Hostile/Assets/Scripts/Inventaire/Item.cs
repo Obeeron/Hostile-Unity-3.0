@@ -60,63 +60,47 @@ public class Item : Interactable
         gameObject.transform.position = pos.position;
         gameObject.SetActive(true);
     }
-    //Méthode
+    //Méthode Craft
     public void OnEnter()
     {
-
-        for (int i = 0; i < itemData.Material.Count; i++) // Je changerais ça par un foreach plus tard pour l'instant ça marche
+        Transform panel = GameObject.Find("Needed").transform;
+        int i = 0;
+        foreach (Transform child in panel)
         {
-            if (itemData.Number[i] > 0)
+            loadSprite(child, i);
+            loadNumber(child, i);
+            if (i < itemData.Material.Count)
+                i++;
+        }
+    }
+
+    private void loadSprite(Transform child,int i)
+    {
+        Sprite sp = Resources.Load<Sprite>("Sprites/inventorySlot"); ;
+        if (i < itemData.Material.Count)
+            sp = Resources.Load<Sprite>("Sprites/" + itemData.Material[i].name);
+
+        if (sp != null)
+            child.gameObject.GetComponent<Image>().sprite = sp;
+    }
+
+    private void loadNumber(Transform child, int i)
+    {
+        if (child.childCount == 2)
+        {
+            GameObject gm = child.GetChild(0).gameObject;
+            TextMeshProUGUI txt = gm.GetComponent<TextMeshProUGUI>();
+            if (i < itemData.Material.Count && txt != null)
             {
-                switch (i)
-                {
-                    case 0:
-                        gm = GameObject.Find("Needed_1");
-
-                        slot = gm.GetComponent<Button>();
-                        gm.transform.Find("Needed_Number_1").gameObject.SetActive(true);
-                        txt = gm.transform.Find("Needed_Number_1").gameObject.GetComponent<TextMeshProUGUI>();
-                        txt.text = itemData.Number[i].ToString();
-                        txt.fontSize = 105;
-                        break;
-                    case 1:
-                        gm = GameObject.Find("Needed_2");
-
-                        slot = gm.GetComponent<Button>();
-                        gm.transform.Find("Needed_Number_2").gameObject.SetActive(true);
-                        txt = GameObject.Find("Needed_2").GetComponentInChildren<TextMeshProUGUI>();
-                        txt.text = itemData.Number[i].ToString();
-                        txt.fontSize = 105;
-                        break;
-                    case 2:
-                        gm = GameObject.Find("Needed_3");
-
-                        slot = gm.GetComponent<Button>();
-                        gm.transform.Find("Needed_Number_3").gameObject.SetActive(true);
-                        txt = GameObject.Find("Needed_3").GetComponentInChildren<TextMeshProUGUI>();
-                        txt.text = itemData.Number[i].ToString();
-                        txt.fontSize = 105;
-                        break;
-                    default:
-                        gm = GameObject.Find("Needed_1");
-
-                        slot = gm.GetComponent<Button>();
-                        gm.transform.Find("Needed_Number_1").gameObject.SetActive(true);
-                        txt = GameObject.Find("Needed_1").GetComponentInChildren<TextMeshProUGUI>();
-                        txt.text = itemData.Number[i].ToString();
-                        txt.fontSize = 105;
-                        break;
-                }
-
-                slot.image.sprite = itemData.Material[i].icone;
-
+                txt.text = itemData.Number[i].ToString();
+                txt.fontSize = 105;
+                gm.SetActive(true);
             }
         }
     }
 
     public void OnExit()
     {
-
         Transform panel = GameObject.Find("Needed").transform;
         foreach (Transform child in panel)
         {
@@ -126,48 +110,24 @@ public class Item : Interactable
                 child.gameObject.GetComponent<Image>().sprite = sp;
 
             }
-            if (child.childCount == 1)
+            if (child.childCount == 2)
             {
                 child.GetChild(0).gameObject.SetActive(false);
-            }
-        }
-        for (int i = 0; i < itemData.Material.Count; i++) // pareil j'ai divisé des trucs dans cette fonction donc je metterai tout dans un foreach plus tard pour que ça soit opti et qu'on puisse changer les noms des slots dans le canvas
-        {
-            if (itemData.Number[i] > 0)
-            {
-                switch (i)
-                {
-                    case 0:
-                        gm = GameObject.Find("Needed_1");
-                        gm.transform.Find("Needed_Number_1").gameObject.SetActive(false);
-                        break;
-                    case 1:
-                        gm = GameObject.Find("Needed_2");
-                        gm.transform.Find("Needed_Number_2").gameObject.SetActive(false);
-                        break;
-                    case 2:
-                        gm = GameObject.Find("Needed_3");
-                        gm.transform.Find("Needed_Number_3").gameObject.SetActive(false);
-                        break;
-                    default:
-                        gm = GameObject.Find("Needed_1");
-                        gm.transform.Find("Needed_Number_1").gameObject.SetActive(false);
-                        break;
-                }
             }
         }
     }
 
     public void OnClick()
     {
+        //Debug.Log("Clicked");
         List<int> count = CheckMaterials_In_Inventory();
         foreach (var num in count)
         {
-            Debug.Log(num);
+            //Debug.Log(num);
         }
         if (IsCraftable(count)) // on ajoute dans l'inventaire
         {
-            Debug.Log("Crafted !");
+            //Debug.Log("Crafted !");
             Inventaire.instance.Add(this);
         }
         else
