@@ -50,11 +50,19 @@ public class Bindings : MonoBehaviour
         }
     }
 
+    public void RebindJump()
+    {
+        RemapButtonClicked(binds.InGame.Jump);
+        JumpText.text = "" + InputControlPath.ToHumanReadableString(binds.InGame.Jump.bindings[0].effectivePath).Split(new string[] {"[Keyb"}, StringSplitOptions.None)[0];
+    }
     
-    void RemapButtonClicked(InputAction actionToRebind)
+    public void RemapButtonClicked(InputAction actionToRebind)
     {
         var rebindOperation = actionToRebind
-            .PerformInteractiveRebinding().Start();
+            .PerformInteractiveRebinding()
+            .WithCancelingThrough("<Keyboard>/#(escape)")
+            .WithControlsExcluding("Mouse")
+            .Start();
     }
 
     public void OnBackBtnClick()

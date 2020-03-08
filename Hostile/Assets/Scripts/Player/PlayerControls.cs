@@ -106,7 +106,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""f4114dc2-1087-4daf-b660-94efb41f3051"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/#(Z)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -117,7 +117,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""70ce7037-bea8-437c-a7bb-6348a8ae65c5"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""path"": ""<Keyboard>/#(S)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -128,7 +128,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""8b298c47-67ff-4976-bede-b4f2ac000882"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/#(Q)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -139,7 +139,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""dab4fb2b-ed78-44d4-b012-f88ef92c15ea"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""path"": ""<Keyboard>/#(D)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -205,7 +205,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1745ebe3-5760-4a1b-a05d-095c0ceace45"",
-                    ""path"": ""<Keyboard>/i"",
+                    ""path"": ""<Keyboard>/#(i)"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -216,7 +216,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""286e56ef-15fb-436b-be19-97c2275c5cb2"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/#(E)"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -227,7 +227,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3e7b5056-42b2-42e7-885e-42be1b8eb1e3"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""path"": ""<Keyboard>/#(C)"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",

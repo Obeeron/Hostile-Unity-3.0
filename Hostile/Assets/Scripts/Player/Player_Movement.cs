@@ -39,14 +39,14 @@ namespace Joueur
         void Update()
         {
             // change l'état du joueur en fonction de la touche pressée
-            if (controls.InGame.SpeedSwap.triggered)
-            {
-                stateSwap();
-            }
-            else if (controls.InGame.Crouch.triggered)
-            {
-                crouchSwap();
-            }
+            // if (controls.InGame.SpeedSwap.triggered)
+            // {
+            //     stateSwap();
+            // }
+            // else if (controls.InGame.Crouch.triggered)
+            // {
+            //     crouchSwap();
+            // }
 
             if (Data.Hunger < Data.MaxHunger * 0.1f || Data.Stamina <= 0f) //if the player is hungry or worn, state switch to run state
             {
@@ -68,13 +68,13 @@ namespace Joueur
                     animator.SetFloat("JumpLeg", moveDirection.x);
                     animator.SetFloat("Jump", moveDirection.y);
                 }
-                if (controls.InGame.Jump.triggered){
-                    if (Data.Stamina > 0f)
-                    {
-                        StartCoroutine(Jump());
-                    }
-                }
-                else if (fallingVelocity.y < 0f)
+                // if (controls.InGame.Jump.triggered){
+                //     if (Data.Stamina > 0f)
+                //     {
+                //         StartCoroutine(Jump());
+                //     }
+                // }
+                if (fallingVelocity.y < 0f)
                 {
                     fallingVelocity.y = -gravity;
                 }
@@ -102,6 +102,21 @@ namespace Joueur
             character.Move(fallingVelocity * Time.fixedDeltaTime);
         }
 
+        //function for Player Input//
+        public void jump()
+        {
+            if (Data.Stamina > 0f && character.isGrounded)
+            {
+                StartCoroutine(Jump());
+            }
+        }
+
+        public void speed()
+        {
+            stateSwap();
+        }
+        
+        //END function for Player Input END//
         private IEnumerator Jump()
         {
             onJump?.Invoke();
@@ -135,7 +150,7 @@ namespace Joueur
             }
         }
 
-        private void crouchSwap()
+        public void crouchSwap()
         {
             if (Data.speedState == PlayerData.State.crouching)
             {
