@@ -174,8 +174,10 @@ public class Item : Interactable
                     count[i] = itemData.Number[i];
                     for (int j = 0; j < Inventaire.instance.items.Count; j++) // Tant qu'il reste des items 
                     {
-                        if (itemData.Material[i].name == Inventaire.instance.items[j].name && !Inventaire.instance.items.Contains(Inventaire.instance.items[j])) // si il a trouvé quelquechose
+                        //Debug.Log(itemData.Material[i].name + "  //   " + Inventaire.instance.items[j].name);
+                        if (itemData.Material[i].name == Inventaire.instance.items[j].name && !indexToRemove.Contains(Inventaire.instance.items[j])) // si il a trouvé quelquechose
                         {
+                            Debug.Log("Added");
                             indexToRemove.Add(Inventaire.instance.items[j]);
                         }
                     }
@@ -189,9 +191,19 @@ public class Item : Interactable
 
             if (isCraftable)
             {
+                int h = 0;
+                int ind = 0;
                 foreach (Item item in indexToRemove)
                 {
-                    Inventaire.instance.RemoveofList(item);
+                    ind = count[h];
+                    while(ind > 0)
+                    {
+                        Debug.Log("indexToRemoved");
+                        Inventaire.instance.RemoveofList(item);
+                        ind--;
+                    }
+                    h++;
+
                 }
             }
 
