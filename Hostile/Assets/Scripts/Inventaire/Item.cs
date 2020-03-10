@@ -162,7 +162,7 @@ public class Item : Interactable
 
     public bool IsCraftable(List<int> count)
     {
-        List<int> indexToRemove = new List<int>();
+        List<Item> indexToRemove = new List<Item>();
         if (count.Count == itemData.Material.Count) // Devrait toujours être true sinon c'est qu'il y a un problème dans les matériaux du scriptable_Object
         {
             bool isCraftable = true;
@@ -171,12 +171,12 @@ public class Item : Interactable
             {
                 if (itemData.Number[i] <= count[i])
                 {
+                    count[i] = itemData.Number[i];
                     for (int j = 0; j < Inventaire.instance.items.Count; j++) // Tant qu'il reste des items 
                     {
-                        int index = Inventaire.instance.items.FindIndex(a => a.name == itemData.Material[i].name); // je récupère le premier qui match le nom que je recherche
-                        if (index >= 0) // si il a trouvé quelquechose
+                        if (itemData.Material[i].name == Inventaire.instance.items[j].name && !Inventaire.instance.items.Contains(Inventaire.instance.items[j])) // si il a trouvé quelquechose
                         {
-                            indexToRemove.Add(index);
+                            indexToRemove.Add(Inventaire.instance.items[j]);
                         }
                     }
                 }
@@ -189,9 +189,9 @@ public class Item : Interactable
 
             if (isCraftable)
             {
-                foreach (int index in indexToRemove)
+                foreach (Item item in indexToRemove)
                 {
-                    Inventaire.instance.items.RemoveAt(index);
+                    Inventaire.instance.RemoveofList(item);
                 }
             }
 

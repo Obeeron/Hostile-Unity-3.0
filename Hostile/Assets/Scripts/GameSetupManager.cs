@@ -27,7 +27,7 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        GameObject player = PhotonNetwork.Instantiate("NetworkSimplePlayer", spawnPoint, Quaternion.identity);
+        GameObject player = PhotonNetwork.Instantiate("NetworkPlayer", spawnPoint, Quaternion.identity);
         Debug.Log("Avatar created");
         
         //UIModeSwitch Events

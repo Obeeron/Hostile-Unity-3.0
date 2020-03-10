@@ -15,14 +15,24 @@ public class TriggerCollider : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         CharacterController main = this.GetComponentInParent<CharacterController>();
+        PhotonView PV = PhotonView.Get(this);
         if (other != main) // On vérifie qu'on ne se tappe pas soi-même
         {
             ennemy = other;
-            /*PhotonView PV = PhotonView.Get(this);
-            PV.RPC("GetHit", RpcTarget.All, playerData.Strength,other);*/
-
-            //Local
-            Hit((int)playerData.Strength, other);
+            if(ennemy.GetComponentInParent<CharacterController>() != null)
+            {
+                PV.RPC("GetHit", RpcTarget.All, playerData.Strength, other);
+                Hit((int)playerData.Strength, other);
+            }
+            else
+            {
+                Debug.Log("not a player");
+                if(ennemy.GetComponent<FarmingItem>().GetComponent<CapsuleCollider>() != null)
+                {
+                    PV.RPC("GetHitFarm", RpcTarget.All, playerData.Strength, other);
+                }
+            }
+            
             Debug.Log("Touched");
             main.GetComponentInChildren<BoxCollider>().isTrigger = false;
         }
@@ -69,5 +79,11 @@ public class TriggerCollider : MonoBehaviour
     {
         other.GetComponentInParent<Joueur.StatsController>().getHit(dmg);
         Debug.Log("ur getting hit");
+    }
+
+    [PunRPC]
+    void GetHitFarm(int dmg, Collider other)
+    {
+        other.GetComponentInParent<FarmingItem>().GetHit(dmg);
     }
 }
