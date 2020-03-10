@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.EventSystems;
 
-public class Inventaire : MonoBehaviour
+public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, IDropHandler
+
 {
     #region Singleton 
     // design pattern pour restreindre l'instanciation d'une classe à un seul objet
@@ -33,6 +35,7 @@ public class Inventaire : MonoBehaviour
     public int nbSlotsHotbar = 5;
     public Slots[] slots;
     public int selectedSlotIndex=0;
+    public Slots hoveredSlot = null;
 
     public GameObject player;
 
@@ -112,6 +115,7 @@ public class Inventaire : MonoBehaviour
         items.Remove(item);
         slots[selectedSlotIndex].Reset2();
     }
+        
 }
 
 

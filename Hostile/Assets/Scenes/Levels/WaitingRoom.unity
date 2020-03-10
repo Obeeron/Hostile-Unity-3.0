@@ -2632,7 +2632,7 @@ MonoBehaviour:
   multiSceneIndex: 2
   countdownPanel: {fileID: 1532610357}
   countdownTxt: {fileID: 2123861084}
-  fullTimer: 0
+  fullTimer: 2
   shortTimer: 5
   phView: {fileID: 0}
 --- !u!4 &974533537

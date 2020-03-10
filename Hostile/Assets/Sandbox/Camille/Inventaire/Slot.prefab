@@ -207,4 +207,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   isEmpty: 1
-  icone: {fileID: 1123413186085863392}
+  icone: {fileID: 287427917799394487}
+  draggableItem: {fileID: 0}
+  slotSelected: {fileID: 0}
+  slotUnselected: {fileID: 0}
+  isSelected: 0
