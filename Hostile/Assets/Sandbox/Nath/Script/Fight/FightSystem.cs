@@ -55,5 +55,25 @@ public class FightSystem : MonoBehaviour
             canTouch = false;
         }
     }
-   
+
+    [PunRPC]
+    void GetHit(float dmg, int pv)
+    {
+        Debug.Log("YES");
+        if (GetComponentInParent<PhotonView>().ViewID == pv) // si c'est celui que j'ai tappé.
+        {
+            GameObject[] gm = FindObjectsOfType<GameObject>();
+            foreach (GameObject g in gm)
+            {
+                Debug.Log(g.name);
+                if (g.name == "StatsController")
+                {
+                    g.GetComponent<Joueur.StatsController>().getHit(dmg);
+                    Debug.Log("ur getting hit");
+                }
+            }
+        }
+        Debug.Log("someone is getting hit");
+    }
+
 }
