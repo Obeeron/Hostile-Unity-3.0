@@ -36,12 +36,20 @@ public class Bindings : MonoBehaviour
             RunSText = controllsPannel.transform.Find("RunSBtn").Find("RunStxt").GetComponent<Text>();
             CrouchSText = controllsPannel.transform.Find("CrouchSBtn").Find("CrouchStxt").GetComponent<Text>();
             //Printings Bindings//
+            //string str = "";
+            //binds.InGame.Movement.GetBindingDisplayString(1, out str, out str);
             Uptext.text = "" + InputControlPath.ToHumanReadableString(binds.InGame.Movement.bindings[1].effectivePath).Split(new string[] {"[Keyb"}, StringSplitOptions.None)[0];
-            DownText.text = "" + InputControlPath.ToHumanReadableString(binds.InGame.Movement.bindings[2].effectivePath).Split(new string[] {"[Keyb"}, StringSplitOptions.None)[0];
+            //binds.InGame.Movement.GetBindingDisplayString(2, out str, out str);
+            DownText.text =  "" + InputControlPath.ToHumanReadableString(binds.InGame.Movement.bindings[2].effectivePath).Split(new string[] {"[Keyb"}, StringSplitOptions.None)[0]; //str;
+            // binds.InGame.Movement.GetBindingDisplayString(3, out str, out str);
             LefttText.text = "" + InputControlPath.ToHumanReadableString(binds.InGame.Movement.bindings[3].effectivePath).Split(new string[] {"[Keyb"}, StringSplitOptions.None)[0];
-            RightText.text = "" + InputControlPath.ToHumanReadableString(binds.InGame.Movement.bindings[4].effectivePath).Split(new string[] {"[Keyb"}, StringSplitOptions.None)[0];
+            // binds.InGame.Movement.GetBindingDisplayString(4, out str, out str);
+            RightText.text = "" +  InputControlPath.ToHumanReadableString(binds.InGame.Movement.bindings[4].effectivePath).Split(new string[] {"[Keyb"}, StringSplitOptions.None)[0];
+            // binds.InGame.Jump.GetBindingDisplayString(0, out str, out str);
             JumpText.text = "" + InputControlPath.ToHumanReadableString(binds.InGame.Jump.bindings[0].effectivePath).Split(new string[] {"[Keyb"}, StringSplitOptions.None)[0];
+            // binds.InGame.SpeedSwap.GetBindingDisplayString(0, out str, out str);
             RunSText.text = "" + InputControlPath.ToHumanReadableString(binds.InGame.SpeedSwap.bindings[0].effectivePath).Split(new string[] {"[Keyb"}, StringSplitOptions.None)[0];
+            // binds.InGame.Crouch.GetBindingDisplayString(0, out str, out str);
             CrouchSText.text = "" + InputControlPath.ToHumanReadableString(binds.InGame.Crouch.bindings[0].effectivePath).Split(new string[] {"[Keyb"}, StringSplitOptions.None)[0];
         }
         else 
@@ -53,7 +61,7 @@ public class Bindings : MonoBehaviour
     public void RebindJump()
     {
         RemapButtonClicked(binds.InGame.Jump);
-        JumpText.text = "" + InputControlPath.ToHumanReadableString(binds.InGame.Jump.bindings[0].effectivePath).Split(new string[] {"[Keyb"}, StringSplitOptions.None)[0];
+        //JumpText.text = "" + InputControlPath.ToHumanReadableString(binds.InGame.Jump.bindings[0].effectivePath).Split(new string[] {"[Keyb"}, StringSplitOptions.None)[0];
     }
     
     public void RemapButtonClicked(InputAction actionToRebind)
@@ -62,7 +70,9 @@ public class Bindings : MonoBehaviour
             .PerformInteractiveRebinding()
             .WithCancelingThrough("<Keyboard>/#(escape)")
             .WithControlsExcluding("Mouse")
-            .Start();
+            .WithTimeout(2f);
+
+        rebindOperation.Start();
     }
 
     public void OnBackBtnClick()
