@@ -142,7 +142,7 @@ namespace Joueur
             barHealth?.Barupdate(Data.Life/Data.MaxLife);
         }
 
-        public void getHit(int dmg)
+        public void getHit(float dmg)
         {
             looseLife(dmg);
             Debug.Log("ur gettting hit from getHit in statsController");

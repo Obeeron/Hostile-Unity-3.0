@@ -77,14 +77,14 @@ public class TriggerCollider : MonoBehaviour
     }
 
     [PunRPC]
-    void GetHit(int dmg,Collider other)
+    void GetHit(float dmg,Collider other)
     {
         other.GetComponentInParent<Joueur.StatsController>().getHit(dmg);
         Debug.Log("ur getting hit");
     }
 
     [PunRPC]
-    void GetHitFarm(int dmg, Collider other)
+    void GetHitFarm(float dmg, Collider other)
     {
         other.GetComponentInParent<FarmingItem>().GetHit(dmg);
     }
