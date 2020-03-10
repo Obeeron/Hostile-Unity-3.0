@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 4534264641828652}
   - component: {fileID: 205477677417311662}
   - component: {fileID: 136397860403507302}
+  - component: {fileID: 8872789002201612620}
   m_Layer: 0
   m_Name: PF Conifer Tall BOTD
   m_TagString: Untagged
@@ -307,3 +308,18 @@ CapsuleCollider:
   m_Height: 6
   m_Direction: 1
   m_Center: {x: 0, y: 2.5, z: 0}
+--- !u!114 &8872789002201612620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743353957770956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a08d9e20d3d9148805aaa919deb071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  DropNmb: 5
+  life: 5

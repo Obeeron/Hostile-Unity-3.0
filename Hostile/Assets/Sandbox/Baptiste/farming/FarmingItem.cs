@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class FarmingItem : MonoBehaviourPunCallbacks, IPunObservable
+public class FarmingItem : MonoBehaviour
 {
     private bool isAlive = true;
-    private PhotonView item;
     private GameObject itembody;
     enum Type
     {
@@ -22,7 +21,6 @@ public class FarmingItem : MonoBehaviourPunCallbacks, IPunObservable
 
     public void Start()
     {
-        item = this.GetComponent<PhotonView>();
         itembody = this.gameObject;
         switch (type)
         {
@@ -35,19 +33,6 @@ public class FarmingItem : MonoBehaviourPunCallbacks, IPunObservable
             default:
                 itemDroped = " ";
                 break;
-        }
-    }
-
-    
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(life);
-        }
-        else
-        {
-            this.life = (float)stream.ReceiveNext();
         }
     }
 
@@ -65,18 +50,18 @@ public class FarmingItem : MonoBehaviourPunCallbacks, IPunObservable
         if (life < 0f)
         {
             isAlive = false;
-            StartCoroutine(Destroying());
+            StartCoroutine(Destroyinng());
         }
     }
 
-    private IEnumerator Destroying()
+    private IEnumerator Destroyinng()
     {
         Rigidbody itemRigid = itembody.AddComponent<Rigidbody>();
         itemRigid.mass = 1;
         itemRigid.AddForce(new Vector3(4,-5f,0));
         yield return new WaitForSeconds(4f);
         Vector3 dropPosition = itembody.transform.position;
-        PhotonNetwork.Destroy(item);
+        Destroy(itembody);
         //drop new items here
         while (DropNmb > 0)
         {
@@ -87,9 +72,9 @@ public class FarmingItem : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     //permet de voir la range d'interaction
-    void OnDrawGizmosSelected()
+    /*void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, 2f);
-    }
+    }*/
 }
