@@ -12,7 +12,14 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
     void Start()
     {
         Debug.Log("Room Joined");
+        SetupCamera();
         CreatePlayer();
+    }
+
+    private void SetupCamera()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void CreatePlayer()

@@ -400,7 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46991862249f7464bb98ec51d7950f71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spacing: 0.5
+  spacing: 2
   nbSpawnTriesMax: 3
   minScale: 1
   maxScale: 1
