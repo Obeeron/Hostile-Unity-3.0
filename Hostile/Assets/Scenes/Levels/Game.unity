@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.5589622, g: 0.6357302, b: 0.745283, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: ad47eda7d8e6dd244ac771597e30cc8b,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -1723,8 +1724,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.41666555, y: 0.41666555, z: 0.41666555}
   m_Children:
-  - {fileID: 1283669902}
   - {fileID: 1633790944}
+  - {fileID: 1283669902}
   m_Father: {fileID: 1409613017}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5514,7 +5515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiController: {fileID: 841533112}
   statsController: {fileID: 461612602}
-  spawnPoint: {x: 506, y: 39, z: 506}
+  spawnPoint: {x: 506, y: 40.5, z: 506}
 --- !u!4 &696703762
 Transform:
   m_ObjectHideFlags: 0
@@ -9166,7 +9167,7 @@ RectTransform:
   m_Children:
   - {fileID: 295859474}
   m_Father: {fileID: 145916096}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -10686,7 +10687,7 @@ RectTransform:
   m_Children:
   - {fileID: 601659249}
   m_Father: {fileID: 145916096}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

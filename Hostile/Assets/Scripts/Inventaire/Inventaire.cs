@@ -38,18 +38,18 @@ public class Inventaire : MonoBehaviour
 
     private void Start()
     {
-        selectedSlotIndex = 0;
-        Slots[] unorderedSlots = GetComponentsInChildren<Slots>(true);
-        slots = GetComponentsInChildren<Slots>(true);
+        InitializeInventory();
+        //Slots[] unorderedSlots = GetComponentsInChildren<Slots>(true);
+        //
 
-        for (int i = 0; i < nbSlotsHotbar; i++)
-        {
-            (slots[i]) = (unorderedSlots[i + nbSlots - nbSlotsHotbar]);
-            Debug.Log(string.Format("i={0}   (i+nbSlots-nbSlotsHotbar)={1}", i, i + nbSlots - nbSlotsHotbar));
-        }
+        //for (int i = 0; i < nbSlotsHotbar; i++)
+        //{
+        //    (slots[i]) = (unorderedSlots[i + nbSlots - nbSlotsHotbar]);
+        //    Debug.Log(string.Format("i={0}   (i+nbSlots-nbSlotsHotbar)={1}", i, i + nbSlots - nbSlotsHotbar));
+        //}
             
-        for (int i = nbSlotsHotbar; i < nbSlots; i++)
-            (slots[i]) = (unorderedSlots[i-nbSlotsHotbar]);
+        //for (int i = nbSlotsHotbar; i < nbSlots; i++)
+        //    (slots[i]) = (unorderedSlots[i-nbSlotsHotbar]);
     }
 
     void Update()
@@ -58,6 +58,12 @@ public class Inventaire : MonoBehaviour
             Drop();
         else if (Input.mouseScrollDelta.y != 0)
             changeSelection();
+    }
+
+    void InitializeInventory()
+    {
+        selectedSlotIndex = 0;
+        slots = GetComponentsInChildren<Slots>(true);
     }
 
     private void Drop()
