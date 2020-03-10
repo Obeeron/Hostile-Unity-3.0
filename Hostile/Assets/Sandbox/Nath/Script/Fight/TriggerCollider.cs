@@ -23,7 +23,8 @@ public class TriggerCollider : MonoBehaviour
             {
                 Debug.Log(ennemy.name);
                 Debug.Log(playerData.Strength);
-                PV.RPC("GetHit", RpcTarget.All, playerData.Strength, other);
+                int pv = other.GetComponentInParent<PhotonView>().ViewID;
+                PV.RPC("GetHit", RpcTarget.All, playerData.Strength, other, pv);
                 //Hit((int)playerData.Strength, other);
             }
             else
@@ -77,10 +78,22 @@ public class TriggerCollider : MonoBehaviour
     }
 
     [PunRPC]
-    void GetHit(float dmg,Collider other)
+    void GetHit(float dmg,Collider other, int pv)
     {
-        other.GetComponentInParent<Joueur.StatsController>().getHit(dmg);
-        Debug.Log("ur getting hit");
+        if(other.GetComponentInParent<PhotonView>().ViewID == pv) // si c'est celui que j'ai tappé.
+        {
+            GameObject[] gm = FindObjectsOfType<GameObject>();
+            foreach (GameObject g in gm)
+            {
+                Debug.Log(g.name);
+                if (g.name == "StatsController")
+                {
+                    g.GetComponent<Joueur.StatsController>().getHit(dmg);
+                    Debug.Log("ur getting hit");
+                }
+            }
+        }
+        Debug.Log("someone is getting hit");
     }
 
     [PunRPC]
