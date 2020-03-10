@@ -21,8 +21,10 @@ public class TriggerCollider : MonoBehaviour
             ennemy = other;
             if(ennemy.GetComponentInParent<CharacterController>() != null)
             {
+                Debug.Log(ennemy.name);
+                Debug.Log(playerData.Strength);
                 PV.RPC("GetHit", RpcTarget.All, playerData.Strength, other);
-                Hit((int)playerData.Strength, other);
+                //Hit((int)playerData.Strength, other);
             }
             else
             {

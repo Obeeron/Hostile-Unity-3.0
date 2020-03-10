@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class FightSystem : MonoBehaviour
 {
     public Animator animator;
     private bool usable;
     private bool canTouch;
+    private PhotonView PV;
 
     IEnumerator DisableCollider(Collider box)
     {
@@ -21,11 +23,12 @@ public class FightSystem : MonoBehaviour
     {
         usable = true;
         canTouch = true;
+        PV = PhotonView.Get(this);
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0) && usable)
+        if(Input.GetKeyDown(KeyCode.Mouse0) && usable && PV.IsMine)
         {
             usable = false;
             animator.SetLayerWeight(1, 1);

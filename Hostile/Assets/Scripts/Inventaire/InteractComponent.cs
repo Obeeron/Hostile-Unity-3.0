@@ -22,7 +22,7 @@ public class InteractComponent : MonoBehaviour
             if (interactable != null && hit.distance <= interactable.distance)
                 interactable.Interact();
             else
-                Debug.Log("oops, object pas interactable");
+                Debug.Log("oops, object pas interactable / distance : " + hit.distance);
         }
     }
   
