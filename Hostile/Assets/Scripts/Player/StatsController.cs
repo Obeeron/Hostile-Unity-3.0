@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 namespace Joueur
@@ -10,6 +11,9 @@ namespace Joueur
     #pragma warning disable 649
         [SerializeField] PlayerData Data;
     #pragma warning restore 649
+        public UIBarUpdate barStamina;
+        public UIBarUpdate barHealth;
+        public UIBarUpdate barHunger;
         private float staminaTimer = 0.0f;
         private float hungerTimer = 0.0f;
 
@@ -53,6 +57,7 @@ namespace Joueur
                         break;
                     case PlayerData.State.running:
                         looseStamina(5f * Time.deltaTime);
+                        
                         break;
                     default:
                         break;
@@ -76,7 +81,9 @@ namespace Joueur
         private void checkTimer()
         {
             if (staminaTimer >= 1f)
+            {
                 gainStamina(15f * Time.deltaTime);
+            }
             else
                 staminaTimer += Time.deltaTime;
         }
@@ -91,6 +98,7 @@ namespace Joueur
             {
                 Data.Stamina += gain;
             }
+            barStamina?.Barupdate(Data.Stamina/Data.MaxStamina);
         }
 
         public void looseStamina(float loss)
@@ -104,6 +112,7 @@ namespace Joueur
             {
                 Data.Stamina -= loss;
             }
+            barStamina?.Barupdate(Data.Stamina/Data.MaxStamina);
         }
 
         public void gainLife(float gain)
@@ -116,6 +125,7 @@ namespace Joueur
             {
                 Data.Life += gain;
             }
+            barHealth?.Barupdate(Data.Life/Data.MaxLife);
         }
 
         public void looseLife(float loss)
@@ -129,6 +139,7 @@ namespace Joueur
             {
                 Data.Life -= loss;
             }
+            barHealth?.Barupdate(Data.Life/Data.MaxLife);
         }
 
         public void getHit(int dmg)
@@ -148,6 +159,7 @@ namespace Joueur
             {
                 Data.Hunger += gain;
             }
+            barHunger?.Barupdate(Data.Hunger/Data.MaxHunger);
         }
 
         public void looseHunger(float loss)
@@ -159,6 +171,7 @@ namespace Joueur
             else{
                 Data.Hunger -= loss;
             }
+            barHunger?.Barupdate(Data.Hunger/Data.MaxHunger);
         }
     }
 }

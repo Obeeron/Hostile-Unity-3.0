@@ -347,6 +347,7 @@
               <e p="UI_Screen_MainMenu.cs" t="Include" />
               <e p="UI_SkillScreen.cs" t="Include" />
             </e>
+            <e p="UIBarUpdate.cs" t="Include" />
             <e p="UIModeSwitcher.cs" t="Include" />
           </e>
         </e>
