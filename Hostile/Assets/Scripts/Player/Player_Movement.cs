@@ -16,7 +16,6 @@ namespace Joueur
         private float airLerp = 0.95f;
         
         CharacterController character;
-        PhotonView phplayer;
 
 #pragma warning disable 649
         [SerializeField] private PlayerData Data;
@@ -32,7 +31,6 @@ namespace Joueur
         {
             controls = new PlayerControls();
             controls.InGame.Enable();
-            phplayer = PhotonView.Get(this);
             animator = this.gameObject.GetComponent<Animator>();
             if (animator == null)
                 isThereAnimator = false;
@@ -42,95 +40,87 @@ namespace Joueur
         // Update is called once per frame
         void Update()
         {
-            if(phplayer.IsMine)
+            // change l'état du joueur en fonction de la touche pressée
+            if (controls.InGame.SpeedSwap.triggered)
             {
-                // change l'état du joueur en fonction de la touche pressée
-                if (controls.InGame.SpeedSwap.triggered)
-                {
-                    stateSwap();
-                }
-                else if (controls.InGame.Crouch.triggered)
-                {
-                    crouchSwap();
-                }
+                stateSwap();
+            }
+            else if (controls.InGame.Crouch.triggered)
+            {
+                crouchSwap();
+            }
 
-                if (Data.Hunger < Data.MaxHunger * 0.1f || Data.Stamina <= 0f) //if the player is hungry or worn, state switch to run state
-                {
-                    if (Data.speedState == PlayerData.State.running)
-                        Data.speedState = PlayerData.State.walking;
-                }
+            if (Data.Hunger < Data.MaxHunger * 0.1f || Data.Stamina <= 0f) //if the player is hungry or worn, state switch to run state
+            {
+                if (Data.speedState == PlayerData.State.running)
+                    Data.speedState = PlayerData.State.walking;
+            }
 
-                Vector2 moveDirection = controls.InGame.Movement.ReadValue<Vector2>();
-                currentMovement = (moveDirection.y * transform.forward + moveDirection.x * transform.right).normalized;
-                
-                if (character.isGrounded)
+            Vector2 moveDirection = controls.InGame.Movement.ReadValue<Vector2>();
+            currentMovement = (moveDirection.y * transform.forward + moveDirection.x * transform.right).normalized;
+            
+            if (character.isGrounded)
+            {
+                //for animation
+                if (isThereAnimator)
                 {
-                    //for animation
-                    if (isThereAnimator)
+                    animator.SetFloat("Speed", moveDirection.x);
+                    animator.SetFloat("TurnSpeed", moveDirection.y);
+
+                    animator.SetFloat("JumpLeg", moveDirection.x);
+                    animator.SetFloat("Jump", moveDirection.y);
+                }
+                if (controls.InGame.Jump.triggered){
+                    if (Data.Stamina > 0f)
                     {
-                        animator.SetFloat("Speed", moveDirection.x);
-                        animator.SetFloat("TurnSpeed", moveDirection.y);
-
-                        animator.SetFloat("JumpLeg", moveDirection.x);
-                        animator.SetFloat("Jump", moveDirection.y);
+                        StartCoroutine(Jump());
                     }
-                    if (controls.InGame.Jump.triggered){
-                        if (Data.Stamina > 0f)
-                        {
-                            StartCoroutine(Jump());
-                        }
-                    }
-                    else if (fallingVelocity.y < 0f)
-                    {
-                        fallingVelocity.y = -gravity;
-                    }
-
-                    if (moveDirection == Vector2.zero)
-                        Data.isIdle = true;
-                    else
-                        Data.isIdle = false;
                 }
+                else if (fallingVelocity.y < 0f)
+                {
+                    fallingVelocity.y = -gravity;
+                }
+
+                if (moveDirection == Vector2.zero)
+                    Data.isIdle = true;
+                else
+                    Data.isIdle = false;
             }
         }
 
         private void FixedUpdate()
         {
-            if(phplayer.IsMine)
+            if (!character.isGrounded)
             {
-                if (!character.isGrounded)
-                {
-                    fallingVelocity += (Physics.gravity * Time.fixedDeltaTime);
-                    movement = Vector3.Lerp(Time.fixedDeltaTime * (Data.speed/1.8f)* currentMovement, movement, airLerp);
-                }
-                else
-                {
-                    movement = Vector3.Lerp(Time.fixedDeltaTime * Data.speed* currentMovement, movement, groundLerp);
-                }
-
-                character.Move(movement);
-                character.Move(fallingVelocity * Time.fixedDeltaTime);
+                fallingVelocity += (Physics.gravity * Time.fixedDeltaTime);
+                movement = Vector3.Lerp(Time.fixedDeltaTime * (Data.speed/1.8f)* currentMovement, movement, airLerp);
             }
+            else
+            {
+                movement = Vector3.Lerp(Time.fixedDeltaTime * Data.speed* currentMovement, movement, groundLerp);
+            }
+
+            character.Move(movement);
+            character.Move(fallingVelocity * Time.fixedDeltaTime);
+        
         }
 
         private IEnumerator Jump()
         {
-            if (phplayer.IsMine)
+            onJump?.Invoke();
+            if (isThereAnimator)
+                animator.SetBool("OnGround", false);
+
+            character.slopeLimit = 90f;
+            fallingVelocity.y = Mathf.Sqrt(-2f * Physics.gravity.y * 2.0f);
+            do
             {
-                onJump?.Invoke();
-                if (isThereAnimator)
-                    animator.SetBool("OnGround", false);
+                yield return null;
+            } while (!character.isGrounded);
+            if (isThereAnimator)
+                animator.SetBool("OnGround", true);
 
-                character.slopeLimit = 90f;
-                fallingVelocity.y = Mathf.Sqrt(-2f * Physics.gravity.y * 2.0f);
-                do
-                {
-                    yield return null;
-                } while (!character.isGrounded);
-                if (isThereAnimator)
-                    animator.SetBool("OnGround", true);
-
-                character.slopeLimit = 45f;
-            }
+            character.slopeLimit = 45f;
         }
 
         private void stateSwap()

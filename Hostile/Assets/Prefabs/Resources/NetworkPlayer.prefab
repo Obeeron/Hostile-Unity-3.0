@@ -211,25 +211,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b78133e851286f43b646138d97c7ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4890004066927207090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8549611328959399757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8bf4b0cb525ea946ab36eea5b789590, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxLife: 0
-  MaxStamina: 0
-  Stamina: 0
-  MaxHunger: 0
-  Agility: 0
-  Dexterity: 0
-  Strength: 0
 --- !u!114 &4966688725182889721
 MonoBehaviour:
   m_ObjectHideFlags: 0
