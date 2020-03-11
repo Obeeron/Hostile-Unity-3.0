@@ -60,20 +60,35 @@ public class FightSystem : MonoBehaviour
     void GetHit(float dmg, int pv)
     {
         Debug.Log("YES");
-        if (GetComponentInParent<PhotonView>().ViewID == pv) // si c'est celui que j'ai tappé.
+        Debug.Log(GetComponent<PhotonView>().ViewID);
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
         {
-            GameObject[] gm = FindObjectsOfType<GameObject>();
-            foreach (GameObject g in gm)
+            Debug.Log(player.name);
+            if(player.GetComponent<PhotonView>() != null)
             {
-                Debug.Log(g.name);
-                if (g.name == "StatsController")
+                if (player.GetComponent<PhotonView>().ViewID == pv) // si c'est celui que j'ai tappé.
                 {
-                    g.GetComponent<Joueur.StatsController>().getHit(dmg);
-                    Debug.Log("ur getting hit");
+                    GameObject[] gm = GameObject.FindGameObjectsWithTag ("GameController");
+                    foreach (GameObject g in gm)
+                    {
+                        Debug.Log(g.name);
+                        if (g.name == "StatsController")
+                        {
+                            g.GetComponent<Joueur.StatsController>().getHit(dmg);
+                            Debug.Log("ur getting hit");
+                        }
+                    }
                 }
             }
+            
         }
-        Debug.Log("someone is getting hit");
+    }
+
+    [PunRPC]
+    void GetHitFarm(float dmg, Collider other)
+    {
+        other.GetComponentInParent<FarmingItem>().GetHit(dmg);
     }
 
 }

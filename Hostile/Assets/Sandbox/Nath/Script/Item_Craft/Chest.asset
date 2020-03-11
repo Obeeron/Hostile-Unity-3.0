@@ -17,5 +17,4 @@ MonoBehaviour:
   Material:
   - {fileID: 11400000, guid: bf32b98125ac7f64ca664c6b484474ed, type: 2}
   - {fileID: 11400000, guid: d3a36880a0252ed479cfd9f61ae6753e, type: 2}
-  - {fileID: 11400000, guid: d2f7c3c65904d564ba44091f903d75f5, type: 2}
-  Number: 020000000500000000000000
+  Number: 0200000005000000

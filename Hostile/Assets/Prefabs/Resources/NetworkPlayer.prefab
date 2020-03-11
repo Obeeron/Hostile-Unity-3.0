@@ -364,6 +364,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 100096, guid: 349beeb20b6327e4386bb274767aab7e, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 400096, guid: 349beeb20b6327e4386bb274767aab7e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

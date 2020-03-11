@@ -26,7 +26,7 @@ public class TriggerCollider : MonoBehaviour
                 Debug.Log(ennemy.name);
                 Debug.Log(playerData.Strength);
                 int pv = other.GetComponentInParent<PhotonView>().ViewID;
-                Debug.Log(pv);
+                Debug.Log("MY PV :" + PV + " other pv : " + pv);
                 //byte codeHit = 2;
                 //PhotonNetwork.RaiseEvent(codeHit, new object[] { playerData.Strength, other, pv }, new RaiseEventOptions { Receivers = ReceiverGroup.All }, new SendOptions { Reliability = true });
                 float strenght = playerData.Strength;
@@ -85,11 +85,7 @@ public class TriggerCollider : MonoBehaviour
 
     
 
-    [PunRPC]
-    void GetHitFarm(float dmg, Collider other)
-    {
-        other.GetComponentInParent<FarmingItem>().GetHit(dmg);
-    }
+  
 
     private void OnEvent(byte eventcode, object content, int senderid)
     {
