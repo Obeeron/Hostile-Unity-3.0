@@ -4493,7 +4493,6 @@ MonoBehaviour:
   nbOctaves: 6
   persistance: 0.5
   lacunarity: 2
-  seed: 1
   offset: {x: 0, y: 0}
   autoUpdate: 0
   grounds: 
@@ -5783,7 +5782,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiController: {fileID: 841533112}
   statsController: {fileID: 461612602}
+  worldGenerator: {fileID: 415397196}
   spawnPoint: {x: 506, y: 70, z: 506}
+  terrain: {fileID: 0}
 --- !u!4 &696703762
 Transform:
   m_ObjectHideFlags: 0

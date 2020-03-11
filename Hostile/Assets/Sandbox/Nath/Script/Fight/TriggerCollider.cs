@@ -9,8 +9,10 @@ using ExitGames.Client.Photon;
 
 public class TriggerCollider : MonoBehaviour, IOnEventCallback
 {
+#pragma warning disable 649
     [SerializeField]
     private PlayerData playerData;
+#pragma warning restore 649
 
     private Vector3 impactForce;
     private Collider ennemy;

@@ -17,14 +17,13 @@ namespace Procedural
         [Min(0)] public int nbOctaves = 8;
         [Range(0f,1f)] public float persistance = 0.5f;
         [Min(1)] public float lacunarity = 2f;
-        public int seed = 42;
         public Vector2 offset = Vector2.zero;
     #endregion
 
         public bool autoUpdate;
         public TerrainType[] grounds;
         
-        public void GenerateTerrain()
+        public void GenerateTerrain(int seed)
         {
             TerrainData terrainData = terrain.terrainData;
             terrainData.heightmapResolution = height+1;

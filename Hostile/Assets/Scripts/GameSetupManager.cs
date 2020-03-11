@@ -7,10 +7,15 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
 {
     public UI.UI_Controller_Game uiController;
     public StatsController statsController;
+    public Procedural.WorldGenerator worldGenerator;
     public Vector3 spawnPoint;
 
     void Start()
     {
+        int seed;
+        if (!Int32.TryParse(PhotonNetwork.CurrentRoom.Name.Substring(5), out seed))
+            seed = 0;
+        worldGenerator.GenerateWorld(seed);
         Debug.Log("Room Joined");
         SetupCamera();
         CreatePlayer();

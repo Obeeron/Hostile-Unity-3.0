@@ -10,9 +10,14 @@ namespace Procedural
         {
             float[,] noiseMap = new float[mapWidth,mapHeight];
 
-            float rdmValue = new System.Random(seed).Next(-100000,100000);
-            offset.y += rdmValue;
-            offset.x += rdmValue;
+            System.Random rdm = new System.Random(seed);
+            Vector2[] octaveOffsets = new Vector2[nbOctaves];
+            for(int i=0; i<nbOctaves; i++)
+            {
+                float offsetX = rdm.Next(-100000, 100000) + offset.x;
+                float offsetY = rdm.Next(-100000, 100000) + offset.y;
+                octaveOffsets[i] = new Vector2(offsetX, offsetY);
+            }
 
             if(scale <= 0) scale = 0.0001f;
 
@@ -30,8 +35,8 @@ namespace Procedural
                     float noiseHeight = 0;
 
                     for(int i=0; i<nbOctaves; i++){
-                        float perlinY = (halfHeight-y)/scale * frequency+offset.y;
-                        float perlinX = (halfWidth-x)/scale * frequency+offset.x;
+                        float perlinY = (halfHeight-(float)y)/scale * frequency+ octaveOffsets[i].y;
+                        float perlinX = (halfWidth-(float)x)/scale * frequency+ octaveOffsets[i].x;
                     
                         float perlinValue = Mathf.PerlinNoise(perlinX,perlinY)*2f - 1f;
                         noiseHeight += perlinValue * amplitude;
