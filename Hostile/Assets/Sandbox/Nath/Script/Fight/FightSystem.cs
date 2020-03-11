@@ -59,36 +59,33 @@ public class FightSystem : MonoBehaviour
     [PunRPC]
     void GetHit(float dmg, int pv)
     {
-        Debug.Log("YES");
-        Debug.Log(GetComponent<PhotonView>().ViewID);
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in players)
+        PhotonView PV = GetComponent<PhotonView>();
+        int PVs = PV.ViewID;
+        if(PVs == pv)
         {
-            Debug.Log(player.name);
-            if(player.GetComponent<PhotonView>() != null)
+
+            GameObject[] gm = GameObject.FindGameObjectsWithTag("GameController");
+            foreach (GameObject g in gm)
             {
-                if (player.GetComponent<PhotonView>().ViewID == pv) // si c'est celui que j'ai tappé.
-                {
-                    GameObject[] gm = GameObject.FindGameObjectsWithTag ("GameController");
-                    foreach (GameObject g in gm)
+                
+                    if (g.name == "StatsController")
                     {
-                        Debug.Log(g.name);
-                        if (g.name == "StatsController")
-                        {
-                            g.GetComponent<Joueur.StatsController>().getHit(dmg);
-                            Debug.Log("ur getting hit");
-                        }
+                        Debug.Log(dmg);
+                        g.GetComponent<Joueur.StatsController>().getHit(dmg);
+                        Debug.Log("ur getting hit");
                     }
-                }
             }
-            
+
         }
+        
     }
 
     [PunRPC]
-    void GetHitFarm(float dmg, Collider other)
+    void GetHitFarm(float dmg)
     {
-        other.GetComponentInParent<FarmingItem>().GetHit(dmg);
+        GameObject gm = GameObject.FindGameObjectWithTag("Player");
+        gm.GetComponent<FarmingItem>().GetHit(dmg);
     }
 
 }

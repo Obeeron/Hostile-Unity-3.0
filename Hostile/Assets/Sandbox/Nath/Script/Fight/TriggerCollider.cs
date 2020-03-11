@@ -7,13 +7,23 @@ using UnityEngine.EventSystems;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
 
-public class TriggerCollider : MonoBehaviour
+public class TriggerCollider : MonoBehaviour, IOnEventCallback
 {
     [SerializeField]
     private PlayerData playerData;
 
     private Vector3 impactForce;
     private Collider ennemy;
+
+    public void OnEnable()
+    {
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+
+    public void OnDisable()
+    {
+        PhotonNetwork.RemoveCallbackTarget(this);
+    }
     private void OnTriggerEnter(Collider other)
     {
         CharacterController main = this.GetComponentInParent<CharacterController>();
@@ -23,22 +33,26 @@ public class TriggerCollider : MonoBehaviour
             ennemy = other;
             if(ennemy.GetComponentInParent<CharacterController>() != null)
             {
-                Debug.Log(ennemy.name);
-                Debug.Log(playerData.Strength);
                 int pv = other.GetComponentInParent<PhotonView>().ViewID;
-                Debug.Log("MY PV :" + PV + " other pv : " + pv);
-                //byte codeHit = 2;
-                //PhotonNetwork.RaiseEvent(codeHit, new object[] { playerData.Strength, other, pv }, new RaiseEventOptions { Receivers = ReceiverGroup.All }, new SendOptions { Reliability = true });
                 float strenght = playerData.Strength;
                 PV.RPC("GetHit", RpcTarget.All, strenght, pv);
-                //Hit((int)playerData.Strength, other);
+                Hit((int)playerData.Strength, other);
             }
             else
             {
-                Debug.Log("not a player");
-                if(ennemy.GetComponent<FarmingItem>().GetComponent<CapsuleCollider>() != null)
+                
+                if (ennemy.GetComponent<FarmingItem>() != null)   
                 {
-                    PV.RPC("GetHitFarm", RpcTarget.AllBuffered, playerData.Strength, other);
+                    if(ennemy.GetComponent<CapsuleCollider>() != null)
+                    {
+                        //Debug.Log("not a player");
+                        // On envoit un Event
+                        byte eventCode = 2;
+                        object[] content = new object[] { playerData.Strength};
+                        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+                        SendOptions send = new SendOptions { Reliability = true };
+                        PhotonNetwork.RaiseEvent(eventCode, content, raiseEventOptions, send);
+                    }
                 }
             }
             
@@ -87,11 +101,15 @@ public class TriggerCollider : MonoBehaviour
 
   
 
-    private void OnEvent(byte eventcode, object content, int senderid)
+    public void OnEvent(EventData photonEvent)
     {
-        if(eventcode == 2)
+        byte eventCode = photonEvent.Code;
+        Debug.Log("ON EVENT");
+        if(eventCode == 2)
         {
-            Debug.Log("test");
+            object[] data = (object[])photonEvent.CustomData;
+            float dmg = (float)data[0];
+            ennemy.GetComponent<FarmingItem>().GetHit(dmg);
         }
     }
 }
