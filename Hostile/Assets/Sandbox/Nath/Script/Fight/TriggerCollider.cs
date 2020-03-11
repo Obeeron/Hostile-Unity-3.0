@@ -121,8 +121,12 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
             Debug.Log("hit a tree");
             object[] data = (object[])photonEvent.CustomData;
             float dmg = (float)data[0];
-            if(ennemy.GetComponent<FarmingItem>() != null)
-                ennemy.GetComponent<FarmingItem>().GetHit(dmg);
+            if(ennemy != null)
+            {
+                if (ennemy.GetComponent<FarmingItem>() != null)
+                    ennemy.GetComponent<FarmingItem>().GetHit(dmg);
+            }
+            
         }
 
         if(eventCode == 3)
@@ -130,8 +134,8 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
             Debug.Log("hit a player");
             object[] data = (object[])photonEvent.CustomData;
             float dmg = (float)data[0];
-            int pv = (int)data[0];
-            PhotonView PV = PhotonView.Get(this);
+            int pv = (int)data[1];
+            PhotonView PV = this.GetComponentInParent<PhotonView>();
             Debug.Log("My pv " + PV.ViewID);
             if(PV.ViewID == pv)
             {

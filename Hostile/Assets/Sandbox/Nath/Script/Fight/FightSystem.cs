@@ -34,6 +34,7 @@ public class FightSystem : MonoBehaviour
             usable = false;
             animator.SetLayerWeight(1, 1);
             animator.Play("Sword_Right",1);
+            PV.RPC("playAnimation", RpcTarget.Others, "Sword_Right");
             Collider box;
             if(GetComponentInChildren<BoxCollider>() != null)
             {
@@ -56,6 +57,14 @@ public class FightSystem : MonoBehaviour
             canTouch = false;
         }
     }
+
+    [PunRPC]
+    void playAnimation(string animation)
+    {
+        Debug.Log("PLaying " + animation);
+        animator.Play(animation);
+    }
+
 
     [PunRPC]
     void GetHit(float dmg, int pv)
