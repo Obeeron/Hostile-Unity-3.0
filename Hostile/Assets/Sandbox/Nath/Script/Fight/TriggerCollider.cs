@@ -35,16 +35,25 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
             ennemy = other;
             if(ennemy.GetComponentInParent<CharacterController>() != null)
             {
-                int pv = other.GetComponentInParent<PhotonView>().ViewID;
+                Debug.Log("im hitting " + ennemy.name);
+                int pv = other.GetComponentInParent<PhotonView>().ViewID; // on récupère l'id de ce que l'on a touché
                 float strenght = playerData.Strength;
-                PV.RPC("GetHit", RpcTarget.All, strenght, pv);
-                Hit((int)playerData.Strength, other);
+
+                //On prépare l'event
+
+                byte eventCode = 3;
+                object[] content = new object[] { playerData.Strength,pv};
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+                SendOptions send = new SendOptions { Reliability = true };
+
+                PhotonNetwork.RaiseEvent(eventCode, content, raiseEventOptions, send);
+                //PV.RPC("GetHit", RpcTarget.All, strenght, pv);
+                //Hit((int)playerData.Strength, other);
             }
             else
-            {
-                
+            {  
                 if (ennemy.GetComponent<FarmingItem>() != null)   
-                {
+                {       
                     if(ennemy.GetComponent<CapsuleCollider>() != null)
                     {
                         //Debug.Log("not a player");
@@ -69,6 +78,7 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
         {
             if(impactForce.magnitude > 0.2)
             {
+                //Fonctionne en local seulement
                 ennemy.GetComponentInParent<CharacterController>().Move(impactForce * Time.deltaTime);
                 impactForce = Vector3.Lerp(impactForce, Vector3.zero, 5 * Time.deltaTime);
             }
@@ -106,12 +116,29 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
     public void OnEvent(EventData photonEvent)
     {
         byte eventCode = photonEvent.Code;
-        Debug.Log("ON EVENT");
         if(eventCode == 2)
         {
+            Debug.Log("hit a tree");
             object[] data = (object[])photonEvent.CustomData;
             float dmg = (float)data[0];
-            ennemy.GetComponent<FarmingItem>().GetHit(dmg);
+            if(ennemy.GetComponent<FarmingItem>() != null)
+                ennemy.GetComponent<FarmingItem>().GetHit(dmg);
+        }
+
+        if(eventCode == 3)
+        {
+            Debug.Log("hit a player");
+            object[] data = (object[])photonEvent.CustomData;
+            float dmg = (float)data[0];
+            int pv = (int)data[0];
+            PhotonView PV = PhotonView.Get(this);
+            Debug.Log("My pv " + PV.ViewID);
+            if(PV.ViewID == pv)
+            {
+                GameObject g = GameObject.Find("StatsController");
+                g.GetComponent<Joueur.StatsController>().getHit(dmg);
+                Debug.Log("ur getting hit");
+            }
         }
     }
 }

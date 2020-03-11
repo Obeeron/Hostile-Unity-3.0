@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class FightSystem : MonoBehaviour
 {
@@ -59,33 +60,33 @@ public class FightSystem : MonoBehaviour
     [PunRPC]
     void GetHit(float dmg, int pv)
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        PhotonView PV = GetComponent<PhotonView>();
         int PVs = PV.ViewID;
-        if(PVs == pv)
+        Debug.Log("ViewID " + PV + " touché " + pv);
+        if (PVs == pv)
         {
-
-            GameObject[] gm = GameObject.FindGameObjectsWithTag("GameController");
-            foreach (GameObject g in gm)
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in players)
             {
-                
-                    if (g.name == "StatsController")
-                    {
-                        Debug.Log(dmg);
-                        g.GetComponent<Joueur.StatsController>().getHit(dmg);
-                        Debug.Log("ur getting hit");
-                    }
-            }
+                Debug.Log(player.GetComponent<PhotonView>().ViewID + " /// Celui touché " + pv);
+                if (player.GetComponent<PhotonView>().ViewID == pv) // si c'est celui que j'ai tappé.
+                {
 
+                    GameObject[] gm = GameObject.FindGameObjectsWithTag("GameController");
+                    foreach (GameObject g in gm)
+                    {
+                        Debug.Log(g.name);
+                        if (g.name == "StatsController")
+                        {
+                            g.GetComponent<Joueur.StatsController>().getHit(dmg);
+                            Debug.Log("ur getting hit");
+                        }
+                    }
+                }
+            }
         }
+        
         
     }
 
-    [PunRPC]
-    void GetHitFarm(float dmg)
-    {
-        GameObject gm = GameObject.FindGameObjectWithTag("Player");
-        gm.GetComponent<FarmingItem>().GetHit(dmg);
-    }
 
 }
