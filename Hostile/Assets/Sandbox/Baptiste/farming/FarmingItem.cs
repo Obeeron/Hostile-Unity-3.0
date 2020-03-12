@@ -62,11 +62,12 @@ public class FarmingItem : MonoBehaviour
 
     private IEnumerator Falling()
     {
-        Rigidbody itemRigid = itembody.AddComponent<Rigidbody>();
-        itemRigid.mass = 3;
+        itembody.transform.position += new Vector3(0, 2f, 0);
         itembody.layer = 10;
-        itemRigid.constraints = RigidbodyConstraints.FreezeRotation;
-        yield return new WaitForSeconds(0.2f);
+        Rigidbody itemRigid = itembody.AddComponent<Rigidbody>();
+        itemRigid.mass = 1;
+        //itemRigid.constraints = RigidbodyConstraints.FreezeRotation;
+        //yield return new WaitForSeconds(0.2f);
         itemRigid.constraints = RigidbodyConstraints.FreezeRotationY;
         StartCoroutine(Timed());
         do
