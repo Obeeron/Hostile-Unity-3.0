@@ -211,7 +211,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b78133e851286f43b646138d97c7ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
 --- !u!114 &4966688725182889721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,10 +551,6 @@ PrefabInstance:
     - target: {fileID: 100096, guid: 349beeb20b6327e4386bb274767aab7e, type: 3}
       propertyPath: m_Name
       value: NetworkPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 100096, guid: 349beeb20b6327e4386bb274767aab7e, type: 3}
-      propertyPath: m_TagString
-      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 100096, guid: 349beeb20b6327e4386bb274767aab7e, type: 3}
       propertyPath: m_Layer

@@ -34,6 +34,11 @@ MonoBehaviour:
   - GetHit
   - RPC_SynchTimer
   - GetHitFarm
+  - Drop
+  - DisableItemOnNetwork
+  - GetHitFarm
   - playAnimation
+  - DisableItemNetwork
+  - DropOnNetwork
   DisableAutoOpenWizard: 1
   ShowSettings: 0

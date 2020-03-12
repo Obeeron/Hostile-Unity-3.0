@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using Photon.Pun;
+using Photon.Realtime;
+using ExitGames.Client.Photon;
+
 public class Item : Interactable
 {
+    public PhotonView photonView;
     public ItemData itemData;
     public int usure;
     public bool inInventory;
@@ -16,11 +21,9 @@ public class Item : Interactable
     private Button slot;
     private TextMeshProUGUI txt;
 
-
-
     private MeshFilter meshFilter;
 
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -36,28 +39,40 @@ public class Item : Interactable
         PickUp();
     }
 
-
+    
     void PickUp()
     {
-        Debug.Log("item " + itemData.name + " récupéré!");
-
         if (Inventaire.instance.Add(this))
         {
-            inInventory = true;
-            this.gameObject.SetActive(false);
+            Debug.Log("item " + itemData.name + " récupéré!");
+            photonView.RPC("DisableItemNetwork", RpcTarget.All);
         }
     }
+
+    [PunRPC]
+    void DisableItemNetwork()
+    {
+        inInventory = true;
+        gameObject.SetActive(false);
+    }
+
     void CalculTemps()
     {
         decayStart = Time.time;
         decayEnd = decayStart + itemData.decayTime;
     }
 
-    public void Drop(Transform pos)
+    public void Drop(Transform transform)
+    {
+        photonView.RPC("DropOnNetwork", RpcTarget.All, transform.position);
+    }
+
+    [PunRPC]
+    private void DropOnNetwork(Vector3 position)
     {
         inInventory = false;
         CalculTemps();
-        gameObject.transform.position = pos.position;
+        gameObject.transform.position = position;
         gameObject.SetActive(true);
     }
     //Méthode Craft
@@ -174,10 +189,8 @@ public class Item : Interactable
                     count[i] = itemData.Number[i];
                     for (int j = 0; j < Inventaire.instance.items.Count; j++) // Tant qu'il reste des items 
                     {
-                        //Debug.Log(itemData.Material[i].name + "  //   " + Inventaire.instance.items[j].name);
-                        if (itemData.Material[i].name == Inventaire.instance.items[j].name && !indexToRemove.Contains(Inventaire.instance.items[j])) // si il a trouvé quelquechose
+                        if (itemData.Material[i].name == Inventaire.instance.items[j].name && !Inventaire.instance.items.Contains(Inventaire.instance.items[j])) // si il a trouvé quelquechose
                         {
-                            Debug.Log("Added");
                             indexToRemove.Add(Inventaire.instance.items[j]);
                         }
                     }
@@ -191,19 +204,9 @@ public class Item : Interactable
 
             if (isCraftable)
             {
-                int h = 0;
-                int ind = 0;
                 foreach (Item item in indexToRemove)
                 {
-                    ind = count[h];
-                    while(ind > 0)
-                    {
-                        Debug.Log("indexToRemoved");
-                        Inventaire.instance.RemoveofList(item);
-                        ind--;
-                    }
-                    h++;
-
+                    Inventaire.instance.RemoveofList(item);
                 }
             }
 

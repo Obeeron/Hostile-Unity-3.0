@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 //classe qui permet d'interagir avec les items/coffres/ennemis
 public class Interactable : MonoBehaviour

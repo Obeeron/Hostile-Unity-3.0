@@ -18,7 +18,7 @@ public class InteractComponent : MonoBehaviour
         {
             //on crée une interactable qui va contenir le composant Interacatable de ce qui a été touché
             Interactable interactable = hit.collider.GetComponent<Interactable>();  
-            //si ca a touché qlqch d'interactabel
+            //si ca a touché qlqch d'interactable
             if (interactable != null && hit.distance <= interactable.distance)
                 interactable.Interact();
             else

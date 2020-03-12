@@ -4,6 +4,9 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.EventSystems;
+using ExitGames.Client.Photon;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, IDropHandler
 
@@ -28,6 +31,9 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
     }
     #endregion
 
+    PhotonView photonView;
+    const byte DROP_ITEM_EVENT = (byte)4;
+    const byte PICKUP_ITEM_EVENT = (byte)5;
 
     public int espaceDisponible = 20;
     public List<Item> items = new List<Item>();
@@ -36,23 +42,14 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
     public Slots[] slots;
     public int selectedSlotIndex=0;
     public Slots hoveredSlot = null;
+    Item itemNetwork;
 
     public GameObject player;
 
     private void Start()
     {
         InitializeInventory();
-        //Slots[] unorderedSlots = GetComponentsInChildren<Slots>(true);
-        //
-
-        //for (int i = 0; i < nbSlotsHotbar; i++)
-        //{
-        //    (slots[i]) = (unorderedSlots[i + nbSlots - nbSlotsHotbar]);
-        //    Debug.Log(string.Format("i={0}   (i+nbSlots-nbSlotsHotbar)={1}", i, i + nbSlots - nbSlotsHotbar));
-        //}
-            
-        //for (int i = nbSlotsHotbar; i < nbSlots; i++)
-        //    (slots[i]) = (unorderedSlots[i-nbSlotsHotbar]);
+        photonView = GetComponent<PhotonView>();
     }
 
     void Update()
@@ -69,11 +66,6 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
         slots = GetComponentsInChildren<Slots>(true);
     }
 
-    private void Drop()
-    {
-        slots[selectedSlotIndex].item.Drop(player.transform);
-        RemoveofList(slots[selectedSlotIndex].item);
-    }
     public void changeSelection()
     {
         slots[selectedSlotIndex].Selected(false);
@@ -88,7 +80,7 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
 
         slots[selectedSlotIndex].Selected(true);
     }
-
+    
     public bool Add(Item item)
     {
         if (items.Count >= espaceDisponible)
@@ -107,7 +99,15 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
                 return true;
             }
         }  
+
         throw new Exception("Inventaire.Add : incohérence : espace dispo dans l'inventaire mais slot tous remplis");  
+    }
+
+    private void Drop()
+    {
+        Item droppedItem = slots[selectedSlotIndex].item;
+        droppedItem.Drop(player.transform);
+        RemoveofList(slots[selectedSlotIndex].item);
     }
 
     public void RemoveofList(Item item)
@@ -115,7 +115,7 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
         items.Remove(item);
         slots[selectedSlotIndex].Reset2();
     }
-        
+    
 }
 
 
