@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Photon.Pun;
 
 
 namespace Joueur
@@ -11,6 +12,7 @@ namespace Joueur
     #pragma warning disable 649
         [SerializeField] PlayerData Data;
     #pragma warning restore 649
+        public UnityEvent OnDeath;
         public UIBarUpdate barStamina;
         public UIBarUpdate barHealth;
         public UIBarUpdate barHunger;
@@ -135,7 +137,8 @@ namespace Joueur
             staminaTimer = 0f;
             if (Data.Life + loss <= 0f)
             {
-                Data.Life = 0f;
+                Data.Life = -1f;
+                OnDeath?.Invoke();
             }
             else
             {
