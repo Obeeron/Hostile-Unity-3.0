@@ -40,7 +40,6 @@ namespace Procedural{
         void SpawnTrees()
         {
             treeGenerator.GenerateTrees(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm);
-            //GenerateRocks
         }
 
         public void SpawnGrass(){

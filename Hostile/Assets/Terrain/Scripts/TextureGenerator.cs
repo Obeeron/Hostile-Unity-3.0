@@ -77,11 +77,6 @@ namespace Procedural
 
                     float weightSum = textureWeightMap.Sum();
 
-                    //Apply default texture if there is no texture
-                    // if(Mathf.Approximately(weightSum,0f)){
-                    //     textureWeightMap[defaultTextureIndex] = 1f;
-                    //     Debug.Log(x+" "+y);
-                    // }
                     //Normalize the weight to make them add to 1
                     for(int i=0; i<nbTextures; i++){
                         splatMap[x,y,i] = textureWeightMap[i] / weightSum;
@@ -122,22 +117,6 @@ namespace Procedural
             }
             return terrainTypeMap;
         }
-
-        //Ajusts Height & Slope values
-        // void AjustParameters(){
-        //     //Switch minHeight-maxHeight minSlope-MaxSlope
-        //     for (int i = 0; i < terrainLayers.Length; i++) {
-        //         if (terrainLayers[i].minHeight > terrainLayers[i].maxHeight)
-        //             (terrainLayers [i].minHeight, terrainLayers [i].maxHeight) = (terrainLayers [i].maxHeight, terrainLayers[i].minHeight);
-
-        //         if (terrainLayers[i].minSlope > terrainLayers [i].maxSlope)
-        //             (terrainLayers [i].minSlope, terrainLayers [i].maxSlope) = (terrainLayers [i].maxSlope, terrainLayers [i].minSlope);
-        //     }
-
-        //     //if defaultTextureIndex points on not existing layer
-        //     if(defaultTextureIndex >= terrainLayers.Length)
-        //         defaultTextureIndex = 0;
-        // }
 
         public float GetTextureValueAt(TerrainLayer ground, float n_altitude, float steepness)
         {
