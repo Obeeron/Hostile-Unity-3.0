@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Wood_Data
   m_EditorClassIdentifier: 
   name: Wood
-  icone: {fileID: 0}
+  icone: {fileID: 21300000, guid: 5b1b2b1e65d0caf4bb64a3c566b1de0b, type: 3}
   maxUsure: 0
-  decayTime: 0
-  persistent: 0
-  mesh: {fileID: 0}
+  decayTime: -1
+  persistent: 1
+  mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
   Material: []
   Number: 

@@ -31,7 +31,7 @@ public class FarmingItem : MonoBehaviour
         switch (type)
         {
             case Type.Tree:
-                itemDroped = "Log";
+                itemDroped = "Logs";
                 break;
             case Type.Stone:
                 itemDroped = "Stone";
@@ -90,12 +90,11 @@ public class FarmingItem : MonoBehaviour
             DropNmb--;
             Debug.Log("Droping Items at position : " + dropPosition);
             GameObject drop = PhotonNetwork.Instantiate(itemDroped, dropPosition, Quaternion.identity);
-            drop.SetActive(true);
+            //Debug.Log(drop.name);
         }
     }
     private bool isonground()
     {
-        Debug.Log("test");
         RaycastHit hit;
         if (Physics.Raycast(groundcheck.transform.position, new Vector3(0, -1, 0), out hit, 1f))
         {
