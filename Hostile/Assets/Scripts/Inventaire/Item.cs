@@ -143,7 +143,10 @@ public class Item : Interactable
         if (IsCraftable(count)) // on ajoute dans l'inventaire
         {
             //Debug.Log("Crafted !");
+            GameObject gm = PhotonNetwork.Instantiate(itemData.mesh.name, Vector3.zero, Quaternion.identity);
+            gm.SetActive(true);
             Inventaire.instance.Add(this);
+
         }
         else
         {
@@ -187,11 +190,15 @@ public class Item : Interactable
                 if (itemData.Number[i] <= count[i])
                 {
                     count[i] = itemData.Number[i];
+                    int ind = count[i];
                     for (int j = 0; j < Inventaire.instance.items.Count; j++) // Tant qu'il reste des items 
                     {
-                        if (itemData.Material[i].name == Inventaire.instance.items[j].name && !Inventaire.instance.items.Contains(Inventaire.instance.items[j])) // si il a trouvé quelquechose
+                        Debug.Log(Inventaire.instance.items[j].GetComponent<Item>().itemData.name + " De l'inventaire et ///// " + itemData.Material[i].name + "de l'item à craft");
+                        if (itemData.Material[i].name == Inventaire.instance.items[j].GetComponent<Item>().itemData.name && ind > 0) // si il a trouvé quelquechose
                         {
+                            Debug.Log(Inventaire.instance.items[j].GetComponent<Item>().itemData.name + " is going to be destroyed");
                             indexToRemove.Add(Inventaire.instance.items[j]);
+                            ind--;
                         }
                     }
                 }
@@ -206,7 +213,7 @@ public class Item : Interactable
             {
                 foreach (Item item in indexToRemove)
                 {
-                    Inventaire.instance.RemoveofList(item);
+                    Inventaire.instance.RemoveofCraft(item);
                 }
             }
 

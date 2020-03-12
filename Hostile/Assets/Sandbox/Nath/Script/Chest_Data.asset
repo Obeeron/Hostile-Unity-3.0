@@ -15,10 +15,9 @@ MonoBehaviour:
   name: Chest
   icone: {fileID: 21300000, guid: 60d8fa1f04871c942876e985feb25f7f, type: 3}
   maxUsure: 0
-  decayTime: 0
-  persistent: 0
-  mesh: {fileID: 0}
+  decayTime: -1
+  persistent: 1
+  mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   Material:
   - {fileID: 11400000, guid: d3a36880a0252ed479cfd9f61ae6753e, type: 2}
-  - {fileID: 11400000, guid: bf32b98125ac7f64ca664c6b484474ed, type: 2}
-  Number: 0200000005000000
+  Number: 02000000

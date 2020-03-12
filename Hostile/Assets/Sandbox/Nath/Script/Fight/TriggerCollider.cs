@@ -16,7 +16,12 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
 
     private Vector3 impactForce;
     private Collider ennemy;
+    private PhotonView PV;
 
+    private void Start()
+    {
+        PV = GetComponentInParent<PhotonView>();
+    }
     public void OnEnable()
     {
         PhotonNetwork.AddCallbackTarget(this);
@@ -35,15 +40,14 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
             ennemy = other;
             if(ennemy.GetComponentInParent<CharacterController>() != null)
             {
-                Debug.Log("im hitting " + ennemy.name);
                 int pv = other.GetComponentInParent<PhotonView>().ViewID; // on récupère l'id de ce que l'on a touché
                 float strenght = playerData.Strength;
 
                 //On prépare l'event
 
                 byte eventCode = 3;
-                object[] content = new object[] { playerData.Strength,pv};
-                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+                object[] content = new object[] {playerData.Damage * playerData.Strength , pv};
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
                 SendOptions send = new SendOptions { Reliability = true };
 
                 PhotonNetwork.RaiseEvent(eventCode, content, raiseEventOptions, send);
@@ -66,8 +70,6 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
                     }
                 }
             }
-            
-            Debug.Log("Touched");
             main.GetComponentInChildren<BoxCollider>().isTrigger = false;
         }
     }
@@ -131,17 +133,15 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
 
         if(eventCode == 3)
         {
-            Debug.Log("hit a player");
             object[] data = (object[])photonEvent.CustomData;
             float dmg = (float)data[0];
             int pv = (int)data[1];
-            PhotonView PV = this.GetComponentInParent<PhotonView>();
-            Debug.Log("My pv " + PV.ViewID);
+            //Debug.Log("My pv " + PV.ViewID + "Ennemy pv is " + pv);
             if(PV.ViewID == pv)
             {
                 GameObject g = GameObject.Find("StatsController");
                 g.GetComponent<Joueur.StatsController>().getHit(dmg);
-                Debug.Log("ur getting hit");
+                //Debug.Log("ur getting hit");
             }
         }
     }

@@ -20,6 +20,7 @@ public class PlayerData : ScriptableObject
     public float Agility = 1;
     public float Dexterity = 1;
     public float Strength = 1;
+    public float Damage = 5;
     public State speedState;
     public bool isIdle;
     public bool isOnJump;

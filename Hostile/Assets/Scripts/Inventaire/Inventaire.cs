@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.EventSystems;
@@ -113,7 +114,27 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
     public void RemoveofList(Item item)
     {
         items.Remove(item);
+        
         slots[selectedSlotIndex].Reset2();
+    }
+
+    public void RemoveofCraft(Item item)
+    {
+        items.Remove(item);
+        GameObject gm = GameObject.Find("SlotHolder");
+        Slots[] Slots = gm.GetComponentsInChildren<Slots>();
+        bool end = false;
+        foreach (Slots slot in Slots)
+        {
+            if (slot.item == item && !end)
+            {
+                slot.isEmpty = true;
+                slot.item = null;
+                slot.icone.GetComponent<Image>().sprite = null;
+                slot.icone.SetActive(false);
+                end = true;
+            }
+        }
     }
     
 }

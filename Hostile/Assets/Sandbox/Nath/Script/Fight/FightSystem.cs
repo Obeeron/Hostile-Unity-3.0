@@ -61,12 +61,12 @@ public class FightSystem : MonoBehaviour
     [PunRPC]
     void playAnimation(string animation)
     {
-        Debug.Log("PLaying " + animation);
+        //Debug.Log("PLaying " + animation);
         animator.Play(animation);
     }
 
 
-    [PunRPC]
+    /*[PunRPC]
     void GetHit(float dmg, int pv)
     {
         int PVs = PV.ViewID;
@@ -92,10 +92,8 @@ public class FightSystem : MonoBehaviour
                     }
                 }
             }
-        }
-        
-        
+        } 
     }
 
-
+    */
 }
