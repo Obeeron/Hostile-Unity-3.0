@@ -3182,7 +3182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitingSceneIndex: 1
-  nbPlayerMax: 3
+  nbPlayerMax: 4
 --- !u!4 &1066941481
 Transform:
   m_ObjectHideFlags: 0

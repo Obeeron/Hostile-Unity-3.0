@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -2632,7 +2632,7 @@ MonoBehaviour:
   multiSceneIndex: 2
   countdownPanel: {fileID: 1532610357}
   countdownTxt: {fileID: 2123861084}
-  fullTimer: 2
+  fullTimer: 5
   shortTimer: 5
   phView: {fileID: 0}
 --- !u!4 &974533537
@@ -5005,7 +5005,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a41bc93eddc97046b4c5149288da51e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  proceduralDatas: {fileID: 11400000, guid: cf6b286afa7de6e439a28bd904ded88d, type: 2}
+  terrainGenerator: {fileID: 0}
+  treeGenerator: {fileID: 0}
+  grassGenerator: {fileID: 0}
+  textureGenerator: {fileID: 0}
+  terrain: {fileID: 0}
 --- !u!4 &1557533597
 Transform:
   m_ObjectHideFlags: 0
