@@ -13,11 +13,10 @@ namespace Procedural
 
         public GameObject parent;
         public GameObject[] treePrefabs;
-        public void GenerateTrees(TerrainData terrainData, Vector2 mapSize, TerrainType[,] terrainTypeMap, int seed)
+        public void GenerateTrees(TerrainData terrainData, Vector2 mapSize, TerrainType[,] terrainTypeMap, System.Random rdm)
         {
             if(treePrefabs.Length==0) return;
-            System.Random rdm = new System.Random(seed);
-            List<Vector2> tree_spawnPoints = PoissonDiscSampling.GenerateSpawnPoints(spacing, mapSize, nbSpawnTriesMax);
+            List<Vector2> tree_spawnPoints = PoissonDiscSampling.GenerateSpawnPoints(rdm, spacing, mapSize, nbSpawnTriesMax);
             Debug.Log(tree_spawnPoints.Count+" tree generated");
 
             foreach(Vector2 point in tree_spawnPoints)

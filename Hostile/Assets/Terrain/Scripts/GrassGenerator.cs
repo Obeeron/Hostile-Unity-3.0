@@ -15,13 +15,12 @@ namespace Procedural
         [Header("Grass gameobject")]
         public GameObject parent;
 
-        public void GenerateGrass(TerrainData terrainData, Vector2 mapSize, TerrainType[,] terrainTypeMap, int seed)
+        public void GenerateGrass(TerrainData terrainData, Vector2 mapSize, TerrainType[,] terrainTypeMap, System.Random rdm)
         {
             int nbGrassPrefabs = terrainData.detailPrototypes.Length;
             if(nbGrassPrefabs == 0) return;
-            System.Random rdm = new System.Random(seed);
 
-            List<Vector2> tree_spawnPoints = PoissonDiscSampling.GenerateSpawnPoints(spacing, mapSize, nbSpawnTriesMax);
+            List<Vector2> tree_spawnPoints = PoissonDiscSampling.GenerateSpawnPoints(rdm, spacing, mapSize, nbSpawnTriesMax);
             Debug.Log(tree_spawnPoints.Count+" grass point generated");
 
             List<int[,]> detailMapData = new List<int[,]>();
@@ -37,7 +36,7 @@ namespace Procedural
 
                 if(terrainTypeMap[splatPosX,splatPosY] == TerrainType.Plain)
                 {
-                    int grassPrefabIndex = rdm.Next(nbGrassPrefabs);
+                    int grassPrefabIndex = UnityEngine.Random.Range(0,nbGrassPrefabs);
                     detailMapData[grassPrefabIndex][detailPosY,detailPosX] = 1;
                 }
             }

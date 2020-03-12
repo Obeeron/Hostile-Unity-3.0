@@ -6,11 +6,10 @@ namespace Procedural
 {
     public static class PerlinNoise
     {
-        public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, float scale, int nbOctaves , float persistance, float lacunarity, int seed, Vector2 offset)
+        public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, float scale, int nbOctaves , float persistance, float lacunarity, System.Random rdm, Vector2 offset)
         {
             float[,] noiseMap = new float[mapWidth,mapHeight];
 
-            System.Random rdm = new System.Random(seed);
             Vector2[] octaveOffsets = new Vector2[nbOctaves];
             for(int i=0; i<nbOctaves; i++)
             {

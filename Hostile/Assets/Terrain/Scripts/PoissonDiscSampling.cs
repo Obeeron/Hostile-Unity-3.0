@@ -5,7 +5,7 @@ namespace Procedural
 {
     public class PoissonDiscSampling
     {
-        public static List<Vector2> GenerateSpawnPoints(float spacing, Vector2 regionSize, int nbSpawnTriesMax = 30)
+        public static List<Vector2> GenerateSpawnPoints(System.Random rdm, float spacing, Vector2 regionSize, int nbSpawnTriesMax = 30)
         {
             float cellSize = spacing/Mathf.Sqrt(2);         //Length grid cells
             
@@ -16,15 +16,15 @@ namespace Procedural
             frontier.Add(regionSize/2); //First spawn point set at the center of the terrain
 
             while(frontier.Count>0){
-                int frontierIndex = Random.Range(0,frontier.Count); //Geting a random index for choosing a point from the frontier
+                int frontierIndex = rdm.Next(frontier.Count); //Geting a random index for choosing a point from the frontier
                 Vector2 spawnCenter = frontier[frontierIndex];      //Getting the frontier's spawnpoint coordinates
                 bool candidateAccepted = false;            
 
                 //Trying to find space for a new spawnpoint around the randomly choosen frontier point 
                 for(int i=0; i<nbSpawnTriesMax; i++){
-                    float angle = Random.value * Mathf.PI * 2f;                                 //random direction
+                    float angle = (float)rdm.NextDouble() * Mathf.PI * 2f;                                 //random direction
                     Vector2 direction = new Vector2(Mathf.Sin(angle),Mathf.Cos(angle));         //normalized direction given an angle
-                    Vector2 candidate = spawnCenter+direction*Random.Range(spacing,2*spacing);  //random new spawn point
+                    Vector2 candidate = spawnCenter+direction*((float)(rdm.NextDouble()) * (2*spacing - spacing) + spacing);  //random new spawn point
 
                     if(IsValid(candidate,spacing, regionSize, cellSize, spawnPoints, grid)){         //If the new spawn point has a minimum spacing betwen the points around him
                         candidateAccepted = true;

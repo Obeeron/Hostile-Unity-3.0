@@ -23,13 +23,13 @@ namespace Procedural
         public bool autoUpdate;
         public TerrainType[] grounds;
         
-        public void GenerateTerrain(int seed)
+        public void GenerateTerrain(System.Random rdm)
         {
             TerrainData terrainData = terrain.terrainData;
             terrainData.heightmapResolution = height+1;
             terrainData.size = new Vector3(height,maxAltitude,width);
 
-            float[,] noiseMap = PerlinNoise.GenerateNoiseMap (width,height, noiseScale, nbOctaves, persistance, lacunarity, seed, offset);
+            float[,] noiseMap = PerlinNoise.GenerateNoiseMap (width,height, noiseScale, nbOctaves, persistance, lacunarity, rdm, offset);
             float[,] heightMap = GenerateHeightMap(noiseMap);
 
             terrainData.SetHeights(0,0,heightMap);

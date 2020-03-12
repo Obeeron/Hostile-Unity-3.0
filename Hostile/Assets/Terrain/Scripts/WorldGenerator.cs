@@ -14,12 +14,12 @@ namespace Procedural{
         List<Vector2> tree_spawnPoints;
         TerrainType[,] terrainTypeMap;
 
-        int seed;
+        System.Random rdm;
 
         // Start is called before the first frame update
         public void GenerateWorld(int seed)
         {
-            this.seed = seed;
+            rdm = new System.Random(seed);
             GenerateTerrain();
             GenerateTextures();
             SpawnTrees();
@@ -29,22 +29,22 @@ namespace Procedural{
         public void GenerateTerrain()
         {
             terrainTypeMap = new TerrainType[terrain.terrainData.alphamapHeight,terrain.terrainData.alphamapWidth]; 
-            terrainGenerator.GenerateTerrain(seed);
+            terrainGenerator.GenerateTerrain(rdm);
         }
 
         public void GenerateTextures()
         {
-            textureGenerator.GenerateTextures(terrain.terrainData, ref terrainTypeMap, terrainGenerator.maxAltitude, seed);
+            textureGenerator.GenerateTextures(terrain.terrainData, ref terrainTypeMap, terrainGenerator.maxAltitude, rdm);
         }
 
         void SpawnTrees()
         {
-            treeGenerator.GenerateTrees(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, seed);
+            treeGenerator.GenerateTrees(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm);
             //GenerateRocks
         }
 
         public void SpawnGrass(){
-            grassGenerator.GenerateGrass(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, seed);
+            grassGenerator.GenerateGrass(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm);
         }
     }
 

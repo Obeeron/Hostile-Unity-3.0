@@ -28,18 +28,18 @@ namespace Procedural
         // public TerrainLayer[] terrainLayers;
         // [Min(0)] public int defaultTextureIndex;
 
-        public void GenerateTextures(TerrainData terrainData,ref TerrainType[,] terrainTypeMap, float maxAltitude, int seed)
+        public void GenerateTextures(TerrainData terrainData,ref TerrainType[,] terrainTypeMap, float maxAltitude, System.Random rdm)
         {
             int width = terrainData.alphamapWidth;
             int height = terrainData.alphamapHeight;
             int nbTextures = terrainData.alphamapLayers;
             
             float[,] steepnessMap = GenerateSteepnessMap(terrainData, width, height);
-            float[,] grassMap = PerlinNoise.GenerateNoiseMap(width,height, width/plainFrequency, 9, plainPersistance, 2, seed, new Vector2(0,0));
+            float[,] grassMap = PerlinNoise.GenerateNoiseMap(width,height, width/plainFrequency, 9, plainPersistance, 2, rdm, new Vector2(0,0));
             terrainTypeMap = GenerateTerrainTypeMap(width, height, steepnessMap,grassMap);
             float[,,] splatMap = new float[width,height,nbTextures];
 
-            float[,] forestSoilMap = PerlinNoise.GenerateNoiseMap(width,height, width/forestSoilFrequency, 9, forestSoilPersistance, 2, seed, new Vector2(0,0));
+            float[,] forestSoilMap = PerlinNoise.GenerateNoiseMap(width,height, width/forestSoilFrequency, 9, forestSoilPersistance, 2, rdm, new Vector2(0,0));
 
             for(int y=0; y<height; y++){
                 for(int x=0; x<width; x++){
