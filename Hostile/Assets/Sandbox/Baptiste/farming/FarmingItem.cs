@@ -7,6 +7,7 @@ public class FarmingItem : MonoBehaviour
 {
     private bool isAlive = true;
     private GameObject itembody;
+    private GameObject groundcheck;
     enum Type
     {
         Tree,
@@ -22,6 +23,11 @@ public class FarmingItem : MonoBehaviour
     public void Start()
     {
         itembody = this.gameObject;
+        for(int i = 0; i < itembody.transform.childCount; i++)
+        {
+            if (itembody.transform.GetChild(i).name == "GroundCheck")
+                groundcheck = itembody.transform.GetChild(i).gameObject;
+        }
         switch (type)
         {
             case Type.Tree:
@@ -50,25 +56,53 @@ public class FarmingItem : MonoBehaviour
         if (life < 0f)
         {
             isAlive = false;
-            StartCoroutine(Destroyinng());
+            StartCoroutine(Falling());
         }
     }
 
-    private IEnumerator Destroyinng()
+    private IEnumerator Falling()
     {
         Rigidbody itemRigid = itembody.AddComponent<Rigidbody>();
         itemRigid.mass = 1;
-        itemRigid.AddForce(new Vector3(4,-5f,0));
+        itemRigid.AddForce(new Vector3(1f,-10f,0));
+        StartCoroutine(Timed());
+        do
+        {
+            yield return null;
+        }while (!isonground());
+        Destroying();
+    }
+
+    private IEnumerator Timed()
+    {
         yield return new WaitForSeconds(4f);
+        StopCoroutine(Falling());
+        Destroying();
+    }
+
+    private void Destroying()
+    {
         Vector3 dropPosition = itembody.transform.position;
         Destroy(itembody);
         //drop new items here
         while (DropNmb > 0)
         {
             DropNmb--;
-            Debug.Log("Droping Itmes at position : " + dropPosition);
-            PhotonNetwork.Instantiate(itemDroped, dropPosition, Quaternion.identity);
+            Debug.Log("Droping Items at position : " + dropPosition);
+            GameObject drop = PhotonNetwork.Instantiate(itemDroped, dropPosition, Quaternion.identity);
+            drop.SetActive(true);
         }
+    }
+    private bool isonground()
+    {
+        Debug.Log("test");
+        RaycastHit hit;
+        if (Physics.Raycast(groundcheck.transform.position, new Vector3(0, -1, 0), out hit, 1f))
+        {
+            if (hit.transform.name == "Terrain")
+                return true;
+        }
+        return false;
     }
 
     //permet de voir la range d'interaction

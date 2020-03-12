@@ -92,6 +92,11 @@ namespace Joueur
         {
             if (!character.isGrounded)
             {
+                float multiplyer = 1f;
+                if (fallingVelocity.y < 0f)
+                {
+                    multiplyer = 2.8f;
+                }
                 fallingVelocity += (Physics.gravity * Time.fixedDeltaTime);
                 movement = Vector3.Lerp(Time.fixedDeltaTime * (Data.speed/1.8f)* currentMovement, movement, airLerp);
             }
@@ -113,13 +118,15 @@ namespace Joueur
 
             character.slopeLimit = 90f;
             fallingVelocity.y = Mathf.Sqrt(-2f * Physics.gravity.y * 2.0f);
+            Data.isOnJump = true;
             do
             {
                 yield return null;
             } while (!character.isGrounded);
             if (isThereAnimator)
                 animator.SetBool("OnGround", true);
-
+            
+            Data.isOnJump = false;
             character.slopeLimit = 45f;
         }
 

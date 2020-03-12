@@ -22,5 +22,6 @@ public class PlayerData : ScriptableObject
     public float Strength = 1;
     public State speedState;
     public bool isIdle;
+    public bool isOnJump;
     public float speed;
 }

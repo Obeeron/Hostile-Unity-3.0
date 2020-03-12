@@ -33,10 +33,10 @@ namespace Joueur
                     Data.speed = 3.0f * Data.Agility;
                     break;
                 case PlayerData.State.running:
-                    Data.speed = 9.0f * Data.Agility;
+                    Data.speed = 7.0f * Data.Agility;
                     break;
                 default:
-                    Data.speed = 5.0f * Data.Agility;
+                    Data.speed = 3.0f * Data.Agility;
                     break;
             }
         }
@@ -45,7 +45,8 @@ namespace Joueur
         {
             if (Data.isIdle)
             {
-                checkTimer();
+                if(!Data.isOnJump)
+                    checkTimer();
             }
             else
             {
@@ -53,11 +54,12 @@ namespace Joueur
                 {
                     case PlayerData.State.walking:
                     case PlayerData.State.crouching:
-                        checkTimer();
+                        if(!Data.isOnJump)
+                            checkTimer();
                         break;
                     case PlayerData.State.running:
-                        looseStamina(5f * Time.deltaTime);
-                        
+                        if(!Data.isOnJump)
+                            looseStamina(5f * Time.deltaTime);
                         break;
                     default:
                         break;
