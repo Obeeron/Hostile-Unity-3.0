@@ -45,5 +45,6 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
             
         //player movement event setup
         player.GetComponent<Player_Movement>().onJump.AddListener(delegate { statsController.looseStamina(10f); });
+        statsController.OnDeath.AddListener(delegate {PhotonNetwork.Destroy(player.GetComponent<PhotonView>()); });
     }
 }
