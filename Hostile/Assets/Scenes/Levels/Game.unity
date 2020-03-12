@@ -2509,7 +2509,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8d908a7670de74b4e8342bdbb1bc3080,
+      objectReference: {fileID: 21300000, guid: 60d8fa1f04871c942876e985feb25f7f,
         type: 3}
     - target: {fileID: 5181658811131251743, guid: 250182226311d5d4d8b6da488cbc3d91,
         type: 3}
@@ -2646,6 +2646,12 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnRight
       value: 
       objectReference: {fileID: 1259683805}
+    - target: {fileID: 7548051821582946989, guid: 250182226311d5d4d8b6da488cbc3d91,
+        type: 3}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 60d8fa1f04871c942876e985feb25f7f,
+        type: 3}
     - target: {fileID: 8432352205139174626, guid: 250182226311d5d4d8b6da488cbc3d91,
         type: 3}
       propertyPath: m_CullTransparentMesh

@@ -143,8 +143,8 @@ public class Item : Interactable
         if (IsCraftable(count)) // on ajoute dans l'inventaire
         {
             //Debug.Log("Crafted !");
-            GameObject gm = PhotonNetwork.Instantiate(itemData.mesh.name, Vector3.zero, Quaternion.identity);
-            gm.SetActive(true);
+            //GameObject gm = PhotonNetwork.Instantiate(this.name, Vector3.zero, Quaternion.identity);
+            //gm.SetActive(true);
             Inventaire.instance.Add(this);
 
         }
