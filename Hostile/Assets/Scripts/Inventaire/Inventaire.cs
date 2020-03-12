@@ -121,13 +121,28 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
     public void RemoveofCraft(Item item)
     {
         items.Remove(item);
-        GameObject gm = GameObject.Find("SlotHolder");
+        GameObject gm = GameObject.Find("SlotHotBarHolder");
+        GameObject gm2 = GameObject.Find("SlotHolder");
         Slots[] Slots = gm.GetComponentsInChildren<Slots>();
+        Slots[] Slots2 = gm2.GetComponentsInChildren<Slots>();
         bool end = false;
         foreach (Slots slot in Slots)
         {
             if (slot.item == item && !end)
             {
+                Debug.Log(slot.name + "is getting wiped");
+                slot.isEmpty = true;
+                slot.item = null;
+                slot.icone.GetComponent<Image>().sprite = null;
+                slot.icone.SetActive(false);
+                end = true;
+            }
+        }
+        foreach(Slots slot in Slots2)
+        {
+            if (slot.item == item && !end)
+            {
+                Debug.Log(slot.name + "is getting wiped in slotHolder");
                 slot.isEmpty = true;
                 slot.item = null;
                 slot.icone.GetComponent<Image>().sprite = null;
