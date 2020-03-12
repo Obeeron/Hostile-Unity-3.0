@@ -53,7 +53,7 @@ public class FarmingItem : MonoBehaviour
 
     private void AliveUpdate()
     {
-        if (life < 0f)
+        if (life <= 0f)
         {
             isAlive = false;
             StartCoroutine(Falling());
@@ -63,8 +63,11 @@ public class FarmingItem : MonoBehaviour
     private IEnumerator Falling()
     {
         Rigidbody itemRigid = itembody.AddComponent<Rigidbody>();
-        itemRigid.mass = 1;
-        itemRigid.AddForce(new Vector3(1f,-10f,0));
+        itemRigid.mass = 3;
+        itembody.layer = 10;
+        itemRigid.constraints = RigidbodyConstraints.FreezeRotation;
+        yield return new WaitForSeconds(0.2f);
+        itemRigid.constraints = RigidbodyConstraints.FreezeRotationY;
         StartCoroutine(Timed());
         do
         {
@@ -75,7 +78,7 @@ public class FarmingItem : MonoBehaviour
 
     private IEnumerator Timed()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(6f);
         StopCoroutine(Falling());
         Destroying();
     }
