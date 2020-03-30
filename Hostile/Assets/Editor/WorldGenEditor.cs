@@ -13,13 +13,7 @@ public class WorldGenEditor : Editor
         DrawDefaultInspector(); 
 
         if(GUILayout.Button("Generate Terrain")){
-            worldGen.GenerateTerrain();
-            worldGen.GenerateTextures();
-            worldGen.SpawnGrass();
-        }
-
-        if(GUILayout.Button("Generate Textures")){
-            worldGen.GenerateTextures();
+            worldGen.GenerateViaEditor();
         }
     }
 }

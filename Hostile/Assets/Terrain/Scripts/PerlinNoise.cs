@@ -13,8 +13,8 @@ namespace Procedural
             Vector2[] octaveOffsets = new Vector2[nbOctaves];
             for(int i=0; i<nbOctaves; i++)
             {
-                float offsetX = rdm.Next(-100000, 100000) + offset.x;
-                float offsetY = rdm.Next(-100000, 100000) + offset.y;
+                float offsetX = rdm.Next(0, 100000) + offset.x;
+                float offsetY = rdm.Next(0, 100000) + offset.y;
                 octaveOffsets[i] = new Vector2(offsetX, offsetY);
             }
 
@@ -29,24 +29,24 @@ namespace Procedural
             for(int y=0; y<mapHeight; y++){
                 for(int x=0; x<mapWidth;x++){
 
-                    float amplitude = 1f;
-                    float frequency = 1f;
+                    float amplitude = 1;
+                    float frequency = 1;
                     float noiseHeight = 0;
 
                     for(int i=0; i<nbOctaves; i++){
-                        float perlinY = (halfHeight-(float)y)/scale * frequency+ octaveOffsets[i].y;
-                        float perlinX = (halfWidth-(float)x)/scale * frequency+ octaveOffsets[i].x;
-                    
-                        float perlinValue = Mathf.PerlinNoise(perlinX,perlinY)*2f - 1f;
+                        float perlinY = (y-halfHeight + octaveOffsets[i].y)/ scale * frequency;
+                        float perlinX = (x-halfWidth + octaveOffsets[i].x)/ scale * frequency;
+
+                        float perlinValue = Mathf.PerlinNoise(perlinX,perlinY)*2 - 1;
                         noiseHeight += perlinValue * amplitude;
 
                         amplitude *= persistance;
                         frequency *= lacunarity;
                     }
-                    noiseMap[x,y] += noiseHeight;
+                    noiseMap[x,y] = noiseHeight;
 
-                    if(noiseHeight>maxNoiseHeight) maxNoiseHeight = noiseHeight;
-                    if(noiseHeight<minNoiseHeight) minNoiseHeight = noiseHeight;
+                    if(noiseHeight>maxNoiseHeight) maxNoiseHeight = (float)noiseHeight;
+                    if(noiseHeight<minNoiseHeight) minNoiseHeight = (float)noiseHeight;
                 }
             }
 

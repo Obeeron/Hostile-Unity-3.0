@@ -23,6 +23,7 @@ public class ItemData : ScriptableObject
     };
     //public MeshFilter inHandModel = null;
     public Mesh mesh = null;
+    public Material material = null;
     public List<Scritable_Items> Material;
     public List<int> Number;
 }

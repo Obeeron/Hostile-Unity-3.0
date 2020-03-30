@@ -2628,11 +2628,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nbPlayerTxt: {fileID: 553511652}
-  minPlayerToStartGame: 2
+  minPlayerToStartGame: 1
   multiSceneIndex: 2
   countdownPanel: {fileID: 1532610357}
   countdownTxt: {fileID: 2123861084}
-  fullTimer: 30
+  fullTimer: 5
   shortTimer: 5
   phView: {fileID: 0}
 --- !u!4 &974533537

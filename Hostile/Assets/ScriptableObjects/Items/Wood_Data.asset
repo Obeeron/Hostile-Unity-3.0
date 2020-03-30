@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 960dcc9a7a781044595907f560c922fc, type: 3}
+  m_Name: Wood_Data
+  m_EditorClassIdentifier: 
+  name: Wood
+  icone: {fileID: 21300000, guid: 5b1b2b1e65d0caf4bb64a3c566b1de0b, type: 3}
+  maxUsure: 0
+  decayTime: -1
+  persistent: 1
+  mesh: {fileID: -237892737416494606, guid: f25fb2b066000e841a6fbfe9a798728c, type: 3}
+  material: {fileID: 2100000, guid: b08f5c68dbf8ab84c86164695880aaf5, type: 2}
+  Material: []
+  Number: 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class FarmingItem : MonoBehaviour
+public class FarmingItem : NetworkObject
 {
     private bool isAlive = true;
     private GameObject itembody;
@@ -56,8 +56,12 @@ public class FarmingItem : MonoBehaviour
         if (life <= 0f)
         {
             isAlive = false;
-            StartCoroutine(Falling());
+            TreeNetworkController.instance.Fall(ID);
         }
+    }
+
+    public void Fall(){
+        StartCoroutine(Falling());
     }
 
     private IEnumerator Falling()
@@ -87,7 +91,7 @@ public class FarmingItem : MonoBehaviour
     private void Destroying()
     {
         Vector3 dropPosition = itembody.transform.position;
-        Destroy(itembody);
+        TreeNetworkController.instance.DeleteNetworkObject(ID);
         //drop new items here
         while (DropNmb > 0)
         {

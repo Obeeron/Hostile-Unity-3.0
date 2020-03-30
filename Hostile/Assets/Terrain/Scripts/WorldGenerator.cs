@@ -45,6 +45,13 @@ namespace Procedural{
         public void SpawnGrass(){
             grassGenerator.GenerateGrass(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm);
         }
+
+        public void GenerateViaEditor(){
+            rdm = new System.Random();
+            GenerateTerrain();
+            GenerateTextures();
+            SpawnGrass();
+        }
     }
 
     public enum TerrainType{

@@ -35,11 +35,11 @@ namespace Procedural
             int nbTextures = terrainData.alphamapLayers;
             
             float[,] steepnessMap = GenerateSteepnessMap(terrainData, width, height);
-            float[,] grassMap = PerlinNoise.GenerateNoiseMap(width,height, width/plainFrequency, 9, plainPersistance, 2, rdm, new Vector2(0,0));
+            float[,] grassMap = PerlinNoise.GenerateNoiseMap(width,height, width/plainFrequency, 9, plainPersistance, 2, rdm, Vector2.zero);
             terrainTypeMap = GenerateTerrainTypeMap(width, height, steepnessMap,grassMap);
             float[,,] splatMap = new float[width,height,nbTextures];
 
-            float[,] forestSoilMap = PerlinNoise.GenerateNoiseMap(width,height, width/forestSoilFrequency, 9, forestSoilPersistance, 2, rdm, new Vector2(0,0));
+            float[,] forestSoilMap = PerlinNoise.GenerateNoiseMap(width,height, width/forestSoilFrequency, 9, forestSoilPersistance, 2, rdm, Vector2.zero);
 
             for(int y=0; y<height; y++){
                 for(int x=0; x<width; x++){

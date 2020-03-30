@@ -31,6 +31,7 @@ namespace Procedural
                     Quaternion rotation = Quaternion.Euler(rdm.Next(3),rdm.Next(360),rdm.Next(3));
                     GameObject tree = Instantiate(treePrefabs[rdm.Next(treePrefabs.Length)], spawnPoint, rotation,parent.transform);
                     tree.transform.localScale *=  (float)(minScale + rdm.NextDouble()*(maxScale-minScale));
+                    TreeNetworkController.instance.AddToList(tree.GetComponent<FarmingItem>());
                     //tree.transform.localScale = Vector3.one * rdm.(minScaleMultiplier,maxScaleMultiplier);
                 }
             }

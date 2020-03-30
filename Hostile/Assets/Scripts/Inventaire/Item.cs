@@ -21,14 +21,16 @@ public class Item : Interactable
     private Button slot;
     private TextMeshProUGUI txt;
 
-    private MeshFilter meshFilter;
-
     
     // Start is called before the first frame update
     void Start()
     {
-        meshFilter = GetComponent<MeshFilter>();
-        meshFilter.mesh = itemData.mesh;
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+
+        GetComponent<MeshFilter>().mesh = itemData.mesh;
+        gameObject.AddComponent(typeof(BoxCollider));
+        if(itemData.material != null)
+            meshRenderer.material = itemData.material;
         if (!inInventory)
             CalculTemps();
     }

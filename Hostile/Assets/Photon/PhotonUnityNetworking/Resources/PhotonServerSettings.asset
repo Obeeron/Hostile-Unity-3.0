@@ -31,14 +31,12 @@ MonoBehaviour:
   RpcList:
   - ClickRpc
   - DestroyRpc
-  - GetHit
-  - RPC_SynchTimer
-  - GetHitFarm
-  - Drop
-  - DisableItemOnNetwork
-  - GetHitFarm
-  - playAnimation
   - DisableItemNetwork
   - DropOnNetwork
+  - playAnimation
+  - RPC_SynchTimer
+  - AddNetObj_Rpc
+  - InstantiateNetworkObject_Rpc
+  - Fall_RPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
