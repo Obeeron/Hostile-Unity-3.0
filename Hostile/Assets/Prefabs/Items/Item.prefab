@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 317498271211545719}
   - component: {fileID: 9123443297512141059}
   - component: {fileID: 8036666843616754003}
-  - component: {fileID: 5016682566337892427}
+  - component: {fileID: 7545721795508337692}
   m_Layer: 10
   m_Name: Item
   m_TagString: Untagged
@@ -111,12 +111,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 5
-  photonView: {fileID: 5016682566337892427}
+  photonView: {fileID: 0}
   itemData: {fileID: 0}
   usure: 0
   inInventory: 0
   isSelected: 0
---- !u!114 &5016682566337892427
+--- !u!114 &7545721795508337692
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,8 +133,7 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 0
   OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
+  ObservedComponents: []
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

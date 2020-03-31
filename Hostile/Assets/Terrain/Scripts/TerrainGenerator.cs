@@ -41,7 +41,7 @@ namespace Procedural
 
             for(int y=0; y<height; y++){
                 for(int x=0; x<width; x++){
-                    heightMap[x,y] = noiseMap[x,y];
+                    heightMap[x,y] = heightCurve.Evaluate(noiseMap[x,y]);
                 }
             }
 

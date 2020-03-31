@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace Procedural{
         public TreeGenerator treeGenerator;
         public GrassGenerator grassGenerator;
         public TextureGenerator textureGenerator;
+        public RockGenerator rockGenerator;
 
         public Terrain terrain;
         List<Vector2> tree_spawnPoints;
@@ -22,6 +24,7 @@ namespace Procedural{
             rdm = new System.Random(seed);
             GenerateTerrain();
             GenerateTextures();
+            GenerateRock();
             SpawnTrees();
             SpawnGrass();
         }
@@ -40,6 +43,11 @@ namespace Procedural{
         void SpawnTrees()
         {
             treeGenerator.GenerateTrees(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm);
+        }
+        
+        private void GenerateRock()
+        {
+            rockGenerator.GenerateRocks(terrain.terrainData,terrainTypeMap,new Vector2(terrainGenerator.height,terrainGenerator.width),rdm);
         }
 
         public void SpawnGrass(){

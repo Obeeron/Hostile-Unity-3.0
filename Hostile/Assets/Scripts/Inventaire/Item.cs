@@ -25,6 +25,7 @@ public class Item : Interactable
     // Start is called before the first frame update
     void Start()
     {
+        photonView = GetComponent<PhotonView>();
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
 
         GetComponent<MeshFilter>().mesh = itemData.mesh;

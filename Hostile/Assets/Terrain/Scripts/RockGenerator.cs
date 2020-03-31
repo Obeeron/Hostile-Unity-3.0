@@ -1,0 +1,83 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+namespace Procedural
+{
+    public class RockGenerator : MonoBehaviour
+    {
+        [Header("Prefabs")]
+        public GameObject[] terrainRockPrefabs;
+        public GameObject farmableRockPrefab;
+
+        [Header("Parents")]
+        public Transform terrainRocksParent;
+        public Transform farmableRocksParent;
+
+        [Header("Attributes")]
+        public float terrainRockSpacing = 3f;
+        public float farmableRockSpacing = 40f;
+        public int maxClusterSize = 3;
+
+        public void GenerateRocks(TerrainData terrainData, Procedural.TerrainType[,] terrainTypeMap, Vector2 mapSize, System.Random rdm){
+            List<Vector2> terrainRocksSpawnPoints = PoissonDiscSampling.GenerateSpawnPoints(rdm,terrainRockSpacing,mapSize,5);
+            List<Vector2> farmableRocksSpawnPoints = PoissonDiscSampling.GenerateSpawnPoints(rdm,farmableRockSpacing,mapSize,5);
+
+            //TERRAIN ROCKS
+            foreach(Vector2 point in terrainRocksSpawnPoints){
+                int splatPosY = (int)(point.y*terrainData.alphamapHeight/mapSize.y);
+                int splatPosX = (int)(point.x*terrainData.alphamapWidth/mapSize.x);
+
+                if(terrainTypeMap[splatPosX,splatPosY] == TerrainType.Hill){
+                    Vector3 spawnPoint = new Vector3(point.x, terrainData.GetHeight((int)point.x,(int)point.y),point.y);
+                    RaycastHit hit;
+                    if (Physics.Raycast(new Vector3(spawnPoint.x,spawnPoint.y+1,spawnPoint.z), Vector3.down, out hit)) {
+                        int rockIndex = rdm.Next(terrainRockPrefabs.Length);
+                        
+                        GameObject go = Instantiate(terrainRockPrefabs[rockIndex],spawnPoint,Quaternion.identity,terrainRocksParent);
+                        
+                        go.transform.Rotate(GetSlopeRotation(hit.normal));
+                        // Debug.DrawLine(spawnPoint,spawnPoint+4*hit.normal,Color.green,1000000);
+                        // Debug.Log(direction.x+" "+direction.y+" "+yRotation);
+                        go.transform.localScale =  Vector3.one*(1+(float)rdm.NextDouble()*2);
+                    }
+                }
+            }
+
+            //FARMABLE ROCKS
+            foreach(Vector2 point in farmableRocksSpawnPoints){
+                int splatPosY = (int)(point.y*terrainData.alphamapHeight/mapSize.y);
+                int splatPosX = (int)(point.x*terrainData.alphamapWidth/mapSize.x);
+
+                if(terrainTypeMap[splatPosX,splatPosY] != TerrainType.Hill){
+                    Vector3 spawnPoint = new Vector3(point.x, terrainData.GetHeight((int)point.x,(int)point.y),point.y);
+                    RaycastHit hit;
+                    int layerMask = 1 << 11;
+                    if (Physics.Raycast(new Vector3(spawnPoint.x,spawnPoint.y+1,spawnPoint.z), Vector3.down, out hit, layerMask)){
+                        int clusterSize= rdm.Next(1,maxClusterSize);
+                        for(int i=0; i<clusterSize; i++){
+                            Quaternion rotation = Quaternion.Euler(0,rdm.Next(360),0) * Quaternion.FromToRotation(Vector3.up, hit.normal);
+                            spawnPoint = new Vector3(spawnPoint.x+1+(float)rdm.NextDouble()*2,  0,
+                                                    spawnPoint.z+1+(float)rdm.NextDouble()*2);
+                            spawnPoint = new Vector3(spawnPoint.x, terrainData.GetHeight((int)spawnPoint.x,(int)spawnPoint.z),spawnPoint.z);
+                            GameObject go = Instantiate(farmableRockPrefab,spawnPoint,rotation,farmableRocksParent);
+                            RockNetworkController.instance.AddToList(go.GetComponent<FarmingItem>());
+                        }
+                    }
+                }
+            }
+        }
+
+        Vector3 GetSlopeRotation(Vector3 normal){
+            Vector2 direction = new Vector2(normal.x, normal.z);
+            direction.Normalize();
+            if(normal.z>0)
+                return new Vector3(0,Mathf.Atan(direction.x/direction.y)*180/Mathf.PI-90,0);
+            else if(normal.z<0)
+                return new Vector3(0,Mathf.Atan(direction.x/direction.y)*180/Mathf.PI+90,0);
+            else
+                return new Vector3(0,direction.x*90,0);
+        }
+    }
+}

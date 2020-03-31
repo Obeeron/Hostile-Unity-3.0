@@ -29,8 +29,8 @@ public class NetworkObjectManager : MonoBehaviour
     [PunRPC]
     public void InstantiateNetworkObject_Rpc(int netObjPrefabID, Vector3 position, Vector3 rotation){
         try{
-            NetworkObject netObj = GameObject.Instantiate(netObjPrefabs[netObjPrefabID],position,Quaternion.Euler(rotation));
-            AddToList(netObj);
+            GameObject netObj = Instantiate(netObjPrefabs[netObjPrefabID].gameObject,position,Quaternion.Euler(rotation),parent.transform);
+            AddToList(netObj.GetComponent<NetworkObject>());
         }
         catch(Exception e){
             Debug.Log("InstantiateNetworkObject_Rpc: Could not instantiante Network Object");

@@ -42,6 +42,7 @@ public class WaitingRoomController : MonoBehaviourPunCallbacks
 
     void StartGame()
     {
+        countingDown = false;
         startingGame = true;
         Debug.Log("Starting game..");
         this.GetComponent<Joueur.Player_Choices>().Choosing();
@@ -86,7 +87,7 @@ public class WaitingRoomController : MonoBehaviourPunCallbacks
         UpdatePlayerCount();
 
         if (PhotonNetwork.IsMasterClient)
-            phView.RPC("RPC_SynchTimer", RpcTarget.Others, currentTimer);
+            phView.RPC("RPC_SynchTimer", RpcTarget.AllViaServer, currentTimer);
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
