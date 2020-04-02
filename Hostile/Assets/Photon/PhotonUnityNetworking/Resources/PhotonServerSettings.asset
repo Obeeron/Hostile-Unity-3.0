@@ -41,5 +41,7 @@ MonoBehaviour:
   - Synchronize_RPC
   - DestroyFarmingItem_RPC
   - InstantiateNetworkObject_Local
+  - DeleteNetworkObject_RPC
+  - SynchronizeItem_RPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0

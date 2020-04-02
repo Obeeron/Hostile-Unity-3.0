@@ -57,6 +57,7 @@ public class Item : Interactable
     public void Drop(Vector3 position)
     {
         CalculTemps();
+        position.y+=1;
         NetworkItemsController.instance.SynchronizeItem(ID,true,position);
     }
 

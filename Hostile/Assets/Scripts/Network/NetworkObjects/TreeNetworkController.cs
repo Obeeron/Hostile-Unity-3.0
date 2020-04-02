@@ -31,6 +31,6 @@ public class TreeNetworkController : NetworkObjectManager
     public void DestroyFarmingItem_RPC(int ID)
     {
         FarmingItem tree = (FarmingItem)GetNetworkObject(ID);
-        tree.DestroyFarmingItem();
+        tree?.DestroyFarmingItem();
     }
 }
