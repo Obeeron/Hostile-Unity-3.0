@@ -10,7 +10,7 @@ public class TreeNetworkController : NetworkObjectManager
     public static TreeNetworkController instance;
 
     //appelé avant le start
-    protected override void Awake ()
+    protected override void Awake()
     {
         base.Awake();
         if (instance != null)
@@ -22,19 +22,16 @@ public class TreeNetworkController : NetworkObjectManager
     }
     #endregion
 
-    public enum prefabID{
-        TREE1,
-        TREE2,
-        TREE3
-    };
-
-    public void Fall(int ID){
-        pv.RPC("Fall_RPC",RpcTarget.AllViaServer,ID);
+    public void DestroyFarmingItem(int ID)
+    {
+        pv.RPC("DestroyFarmingItem_RPC", RpcTarget.AllViaServer, ID);
     }
 
     [PunRPC]
-    public void Fall_RPC(int ID){
+    public void DestroyFarmingItem_RPC(int ID)
+    {
         FarmingItem tree = (FarmingItem)GetNetworkObject(ID);
-        tree.Fall();
+        tree.DestroyFarmingItem();
     }
 }
+

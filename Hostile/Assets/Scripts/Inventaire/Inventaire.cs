@@ -107,7 +107,7 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
     private void Drop()
     {
         Item droppedItem = slots[selectedSlotIndex].item;
-        droppedItem.Drop(player.transform);
+        droppedItem.Drop(player.transform.position);
         RemoveofList(slots[selectedSlotIndex].item);
     }
 

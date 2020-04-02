@@ -26,4 +26,5 @@ public class ItemData : ScriptableObject
     public Material material = null;
     public List<Scritable_Items> Material;
     public List<int> Number;
+    public int maxSizeStack;
 }

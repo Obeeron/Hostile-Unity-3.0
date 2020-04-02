@@ -6,7 +6,6 @@ using Photon.Pun;
 public class FarmingItem : NetworkObject
 {
     private bool isAlive = true;
-    private GameObject itembody;
     private GameObject groundcheck;
     enum Type
     {
@@ -18,26 +17,25 @@ public class FarmingItem : NetworkObject
     [SerializeField] private int DropNmb;
     [SerializeField] private float life;
 #pragma warning restore
-    private string itemDroped;
+    private int itemDroped;
 
     public void Start()
     {
-        itembody = this.gameObject;
-        for(int i = 0; i < itembody.transform.childCount; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
-            if (itembody.transform.GetChild(i).name == "GroundCheck")
-                groundcheck = itembody.transform.GetChild(i).gameObject;
+            if (transform.GetChild(i).name == "GroundCheck")
+                groundcheck = transform.GetChild(i).gameObject;
         }
         switch (type)
         {
             case Type.Tree:
-                itemDroped = "Logs";
+                itemDroped = (int)NetworkItemsController.prefabID.LOG;
                 break;
             case Type.Stone:
-                itemDroped = "Stone";
+                itemDroped = (int)NetworkItemsController.prefabID.STONE;
                 break;
             default:
-                itemDroped = " ";
+                itemDroped = -1;
                 break;
         }
     }
@@ -50,25 +48,33 @@ public class FarmingItem : NetworkObject
             AliveUpdate();
         }
     }
-
     private void AliveUpdate()
     {
         if (life <= 0f)
         {
             isAlive = false;
-            TreeNetworkController.instance.Fall(ID);
+            TreeNetworkController.instance.DestroyFarmingItem(ID);
         }
     }
 
-    public void Fall(){
-        StartCoroutine(Falling());
+    public void DestroyFarmingItem()
+    {
+        switch (type)
+        {
+            case Type.Tree:
+                StartCoroutine(Falling());
+                break;
+            case Type.Stone:
+                Destroying();
+                break;
+        }
     }
 
     private IEnumerator Falling()
     {
-        itembody.transform.position += new Vector3(0, 2f, 0);
-        itembody.layer = 10;
-        Rigidbody itemRigid = itembody.AddComponent<Rigidbody>();
+        transform.position += new Vector3(0, 2f, 0);
+        gameObject.layer = 10;
+        Rigidbody itemRigid = gameObject.AddComponent<Rigidbody>();
         itemRigid.mass = 1;
         //itemRigid.constraints = RigidbodyConstraints.FreezeRotation;
         //yield return new WaitForSeconds(0.2f);
@@ -77,7 +83,8 @@ public class FarmingItem : NetworkObject
         do
         {
             yield return null;
-        }while (!isonground());
+        } while (!isonground());
+        StopCoroutine(Timed());
         Destroying();
     }
 
@@ -90,17 +97,18 @@ public class FarmingItem : NetworkObject
 
     private void Destroying()
     {
-        Vector3 dropPosition = itembody.transform.position;
-        TreeNetworkController.instance.DeleteNetworkObject(ID);
+        Vector3 dropPosition = transform.position;
+        dropPosition.y += 1f;
+        Destroy(gameObject);
         //drop new items here
-        while (DropNmb > 0)
+        while (DropNmb-- > 0)
         {
-            DropNmb--;
-            Debug.Log("Droping Items at position : " + dropPosition);
-            GameObject drop = PhotonNetwork.Instantiate(itemDroped, dropPosition, Quaternion.identity);
+            Debug.Log("Droping Items " + itemDroped + " at position : " + dropPosition);
+            NetworkItemsController.instance.InstantiateNetworkObject(itemDroped, dropPosition, Vector3.zero);
             //Debug.Log(drop.name);
         }
     }
+
     private bool isonground()
     {
         RaycastHit hit;

@@ -18,5 +18,7 @@ MonoBehaviour:
   decayTime: 0
   persistent: 0
   mesh: {fileID: 0}
+  material: {fileID: 0}
   Material: []
   Number: 
+  maxSizeStack: 5

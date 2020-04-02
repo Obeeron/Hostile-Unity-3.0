@@ -18,5 +18,7 @@ MonoBehaviour:
   decayTime: -1
   persistent: 1
   mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  material: {fileID: 0}
   Material: []
   Number: 
+  maxSizeStack: 1

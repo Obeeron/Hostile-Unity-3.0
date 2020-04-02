@@ -29,15 +29,17 @@ MonoBehaviour:
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
+  - Break_RPC
   - ClickRpc
   - DestroyRpc
   - DisableItemNetwork
   - DropOnNetwork
+  - Fall_RPC
+  - InstantiateNetworkObject_Rpc
   - playAnimation
   - RPC_SynchTimer
-  - AddNetObj_Rpc
-  - InstantiateNetworkObject_Rpc
-  - Fall_RPC
-  - Break_RPC
+  - Synchronize_RPC
+  - DestroyFarmingItem_RPC
+  - InstantiateNetworkObject_Local
   DisableAutoOpenWizard: 1
   ShowSettings: 0

@@ -22,18 +22,24 @@ public class NetworkObjectManager : MonoBehaviour
         pv = GetComponent<PhotonView>();
     }
 
-    public void InstantiateNetworkObject(int netObjPrefabID, Vector3 position, Vector3 rotation){
-        pv.RPC("InstantiateNetworkObject_Rpc",RpcTarget.AllViaServer,netObjPrefabID,position, rotation);
+    public void InstantiateNetworkObject(int netObjPrefabID, Vector3 position, Vector3 rotation)
+    {
+        Debug.Log("spawning " + netObjPrefabID);
+        pv.RPC("InstantiateNetworkObject_Local", RpcTarget.AllViaServer, netObjPrefabID, position, rotation);
     }
 
     [PunRPC]
-    public void InstantiateNetworkObject_Rpc(int netObjPrefabID, Vector3 position, Vector3 rotation){
-        try{
-            GameObject netObj = Instantiate(netObjPrefabs[netObjPrefabID].gameObject,position,Quaternion.Euler(rotation),parent.transform);
+    public void InstantiateNetworkObject_Local(int netObjPrefabID, Vector3 position, Vector3 rotation)
+    {
+        try
+        {
+            GameObject netObj = Instantiate(netObjPrefabs[netObjPrefabID].gameObject, position, Quaternion.Euler(rotation), parent.transform);
             AddToList(netObj.GetComponent<NetworkObject>());
+            Debug.Log("spawned " + netObjPrefabID);
         }
-        catch(Exception e){
-            Debug.Log("InstantiateNetworkObject_Rpc: Could not instantiante Network Object");
+        catch (Exception e)
+        {
+            Debug.Log("InstantiateNetworkObject_Rpc: Could not instantiante Network Object: " + netObjPrefabID + " prefab list size: " + netObjPrefabs.Count);
             Debug.LogError(e);
         }
     }

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 //classe qui permet d'interagir avec les items/coffres/ennemis
-public class Interactable : MonoBehaviour
+public class Interactable : NetworkObject
 {
     //distance a laquelle il sera possible d'intéragir
     public float distance = 5f;

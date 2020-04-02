@@ -8,7 +8,6 @@ using ExitGames.Client.Photon;
 
 public class Item : Interactable
 {
-    public PhotonView photonView;
     public ItemData itemData;
     public int usure;
     public bool inInventory;
@@ -25,9 +24,7 @@ public class Item : Interactable
     // Start is called before the first frame update
     void Start()
     {
-        photonView = GetComponent<PhotonView>();
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
-
         GetComponent<MeshFilter>().mesh = itemData.mesh;
         gameObject.AddComponent(typeof(BoxCollider));
         if(itemData.material != null)
@@ -45,39 +42,23 @@ public class Item : Interactable
     
     void PickUp()
     {
-        if (Inventaire.instance.Add(this))
-        {
-            Debug.Log("item " + itemData.name + " récupéré!");
-            photonView.RPC("DisableItemNetwork", RpcTarget.All);
-        }
+        Inventaire.instance.Add(this);
+        NetworkItemsController.instance.SynchronizeItem(ID, false, transform.position);
     }
 
-    [PunRPC]
-    void DisableItemNetwork()
-    {
-        inInventory = true;
-        gameObject.SetActive(false);
-    }
-
+   
     void CalculTemps()
     {
         decayStart = Time.time;
         decayEnd = decayStart + itemData.decayTime;
     }
 
-    public void Drop(Transform transform)
+    public void Drop(Vector3 position)
     {
-        photonView.RPC("DropOnNetwork", RpcTarget.All, transform.position);
+        CalculTemps();
+        NetworkItemsController.instance.SynchronizeItem(ID, true, transform.position);
     }
 
-    [PunRPC]
-    private void DropOnNetwork(Vector3 position)
-    {
-        inInventory = false;
-        CalculTemps();
-        gameObject.transform.position = position;
-        gameObject.SetActive(true);
-    }
     //Méthode Craft
     public void OnEnter()
     {
@@ -232,6 +213,6 @@ public class Item : Interactable
     {
         if (!itemData.persistent && !inInventory)
             if (Time.time >= decayEnd)
-                Destroy(this.gameObject);
+                NetworkItemsController.instance.DeleteNetworkObject(ID);
     }
 }
