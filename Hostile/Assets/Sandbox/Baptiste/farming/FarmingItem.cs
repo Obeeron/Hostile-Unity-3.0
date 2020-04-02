@@ -57,10 +57,8 @@ public class FarmingItem : NetworkObject
         }
     }
 
-    public void DestroyFarmingItem()
-    {
-        switch (type)
-        {
+    public void DestroyFarmingItem(){
+        switch(type){
             case Type.Tree:
                 StartCoroutine(Falling());
                 break;
@@ -83,7 +81,7 @@ public class FarmingItem : NetworkObject
         do
         {
             yield return null;
-        } while (!isonground());
+        }while (!isonground());
         StopCoroutine(Timed());
         Destroying();
     }
@@ -103,7 +101,6 @@ public class FarmingItem : NetworkObject
         //drop new items here
         while (DropNmb-- > 0)
         {
-            Debug.Log("Droping Items " + itemDroped + " at position : " + dropPosition);
             NetworkItemsController.instance.InstantiateNetworkObject(itemDroped, dropPosition, Vector3.zero);
             //Debug.Log(drop.name);
         }

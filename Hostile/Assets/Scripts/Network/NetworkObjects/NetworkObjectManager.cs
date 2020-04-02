@@ -22,26 +22,26 @@ public class NetworkObjectManager : MonoBehaviour
         pv = GetComponent<PhotonView>();
     }
 
-    public void InstantiateNetworkObject(int netObjPrefabID, Vector3 position, Vector3 rotation)
-    {
-        Debug.Log("spawning " + netObjPrefabID);
-        pv.RPC("InstantiateNetworkObject_Local", RpcTarget.AllViaServer, netObjPrefabID, position, rotation);
-    }
-
-    [PunRPC]
-    public void InstantiateNetworkObject_Local(int netObjPrefabID, Vector3 position, Vector3 rotation)
-    {
-        try
-        {
-            GameObject netObj = Instantiate(netObjPrefabs[netObjPrefabID].gameObject, position, Quaternion.Euler(rotation), parent.transform);
-            AddToList(netObj.GetComponent<NetworkObject>());
-            Debug.Log("spawned " + netObjPrefabID);
-        }
-        catch (Exception e)
-        {
-            Debug.Log("InstantiateNetworkObject_Rpc: Could not instantiante Network Object: " + netObjPrefabID + " prefab list size: " + netObjPrefabs.Count);
-            Debug.LogError(e);
-        }
+    public void InstantiateNetworkObject(int netObjPrefabID, Vector3 position, Vector3 rotation)
+    {
+        Debug.Log("spawning " + netObjPrefabID);
+        pv.RPC("InstantiateNetworkObject_Local", RpcTarget.AllViaServer, netObjPrefabID, position, rotation);
+    }
+
+    [PunRPC]
+    public void InstantiateNetworkObject_Local(int netObjPrefabID, Vector3 position, Vector3 rotation)
+    {
+        try
+        {
+            GameObject netObj = Instantiate(netObjPrefabs[netObjPrefabID].gameObject, position, Quaternion.Euler(rotation), parent.transform);
+            AddToList(netObj.GetComponent<NetworkObject>());
+            Debug.Log("spawned " + netObjPrefabID);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("InstantiateNetworkObject_Rpc: Could not instantiante Network Object: " + netObjPrefabID + " prefab list size: " + netObjPrefabs.Count);
+            Debug.LogError(e);
+        }
     }
 
     public void AddToList(NetworkObject obj){
@@ -53,6 +53,11 @@ public class NetworkObjectManager : MonoBehaviour
     }
 
     public void DeleteNetworkObject(int ID){
+        pv.RPC("DeleteNetworkObject_RPC",RpcTarget.AllViaServer,ID);
+    }
+
+    [PunRPC]
+    public void DeleteNetworkObject_RPC(int ID){
         try{
             int listIndex = BinarySearch(ID);
             NetworkObject netObj = netObjList[listIndex];
@@ -64,6 +69,8 @@ public class NetworkObjectManager : MonoBehaviour
             Debug.LogError(e);
         }
     }
+
+    
 
     public NetworkObject GetNetworkObject(int ID){
         try{

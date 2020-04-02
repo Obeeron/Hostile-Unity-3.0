@@ -48,6 +48,7 @@ public class WaitingRoomController : MonoBehaviourPunCallbacks
         this.GetComponent<Joueur.Player_Choices>().Choosing();
         if (PhotonNetwork.IsMasterClient)
         {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.LoadLevel(multiSceneIndex);
         }
     }

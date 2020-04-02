@@ -42,11 +42,12 @@ public class Item : Interactable
     
     void PickUp()
     {
-        Inventaire.instance.Add(this);
-        NetworkItemsController.instance.SynchronizeItem(ID, false, transform.position);
+        if (Inventaire.instance.Add(this))
+        {
+            NetworkItemsController.instance.SynchronizeItem(ID,false,transform.position);
+        }
     }
 
-   
     void CalculTemps()
     {
         decayStart = Time.time;
@@ -56,7 +57,7 @@ public class Item : Interactable
     public void Drop(Vector3 position)
     {
         CalculTemps();
-        NetworkItemsController.instance.SynchronizeItem(ID, true, transform.position);
+        NetworkItemsController.instance.SynchronizeItem(ID,true,position);
     }
 
     //Méthode Craft

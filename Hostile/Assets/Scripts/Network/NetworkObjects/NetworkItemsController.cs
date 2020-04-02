@@ -44,4 +44,3 @@ public class NetworkItemsController : NetworkObjectManager
         item.gameObject.SetActive(state);
     }
 }
-
