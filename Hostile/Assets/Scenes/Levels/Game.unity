@@ -4645,10 +4645,10 @@ MonoBehaviour:
   forestGround1_textureIndex: 1
   forestGround2_textureIndex: 2
   rock_textureIndex: 3
-  minHillSlope: 22
-  plainDensity: 0.403
-  plainPersistance: 0.5
-  plainFrequency: 12
+  minHillSlope: 21
+  plainDensity: 0.4
+  plainPersistance: 0.48
+  plainFrequency: 14
   forestSoilDensity: 0.492
   forestSoilPersistance: 0.882
   forestSoilFrequency: 100
@@ -4667,7 +4667,7 @@ MonoBehaviour:
   spacing: 1
   nbSpawnTriesMax: 3
   minScale: 1
-  maxScale: 1
+  maxScale: 1.2
   parent: {fileID: 1693329}
 --- !u!114 &415397194
 MonoBehaviour:
@@ -4684,7 +4684,7 @@ MonoBehaviour:
   spacing: 7
   nbSpawnTriesMax: 3
   minScale: 0.7
-  maxScale: 1.6
+  maxScale: 2
   parent: {fileID: 1171633909}
   treePrefabs:
   - {fileID: 1743353957770956, guid: 539fa9bc6500e44708e0f7b2c78cbefe, type: 3}
@@ -4703,8 +4703,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrain: {fileID: 40343476}
-  width: 1024
-  height: 1024
+  width: 2048
+  height: 2048
   maxAltitude: 100
   heightCurve:
     serializedVersion: 2
@@ -4740,7 +4740,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   noiseScale: 400
-  nbOctaves: 7
+  nbOctaves: 8
   persistance: 0.45
   lacunarity: 2.05
   offset: {x: 0, y: 0}
@@ -4800,8 +4800,10 @@ MonoBehaviour:
   farmableRockPrefab: {fileID: 165230, guid: 751682349ef7b8546aff2c104411f6b3, type: 3}
   terrainRocksParent: {fileID: 1812196039}
   farmableRocksParent: {fileID: 291066440}
-  terrainRockSpacing: 4
+  terrainRockSpacing: 5
   farmableRockSpacing: 80
+  maxScale: 3
+  maxClusterSize: 3
 --- !u!1001 &424713235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6125,7 +6127,7 @@ MonoBehaviour:
   uiController: {fileID: 841533112}
   statsController: {fileID: 461612602}
   worldGenerator: {fileID: 415397196}
-  spawnPoint: {x: 506, y: 70, z: 506}
+  terrain: {fileID: 40343476}
 --- !u!4 &696703762
 Transform:
   m_ObjectHideFlags: 0

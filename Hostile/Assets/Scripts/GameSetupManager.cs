@@ -8,7 +8,7 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
     public UI.UI_Controller_Game uiController;
     public StatsController statsController;
     public Procedural.WorldGenerator worldGenerator;
-    public Vector3 spawnPoint;
+    public Terrain terrain;
 
     void Start()
     {
@@ -32,7 +32,7 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        GameObject player = PhotonNetwork.Instantiate("NetworkPlayer", spawnPoint, Quaternion.identity);
+        GameObject player = PhotonNetwork.Instantiate("NetworkPlayer", GetSpawnPoint(), Quaternion.identity);
         Debug.Log("Avatar created");
         
         //UIModeSwitch Events
@@ -46,5 +46,15 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
         //player movement event setup
         player.GetComponent<Player_Movement>().onJump.AddListener(delegate { statsController.looseStamina(10f); });
         statsController.OnDeath.AddListener(delegate {PhotonNetwork.Destroy(player.GetComponent<PhotonView>()); });
+    }
+
+    private Vector3 GetSpawnPoint(){
+        int midSize = terrain.terrainData.heightmapResolution/2;
+        Vector3 spawnPoint = new Vector3(midSize,terrain.terrainData.GetHeight(midSize,midSize)+10,midSize);
+        RaycastHit hit;
+        if(Physics.Raycast(spawnPoint,Vector3.down,out hit)){
+            return hit.point;
+        }
+        return spawnPoint;
     }
 }

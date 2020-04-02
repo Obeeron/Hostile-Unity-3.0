@@ -18,6 +18,7 @@ namespace Procedural
         [Header("Attributes")]
         public float terrainRockSpacing = 3f;
         public float farmableRockSpacing = 40f;
+        public float maxScale = 2;
         public int maxClusterSize = 3;
 
         public void GenerateRocks(TerrainData terrainData, Procedural.TerrainType[,] terrainTypeMap, Vector2 mapSize, System.Random rdm){
@@ -40,7 +41,7 @@ namespace Procedural
                         go.transform.Rotate(GetSlopeRotation(hit.normal));
                         // Debug.DrawLine(spawnPoint,spawnPoint+4*hit.normal,Color.green,1000000);
                         // Debug.Log(direction.x+" "+direction.y+" "+yRotation);
-                        go.transform.localScale =  Vector3.one*(1+(float)rdm.NextDouble()*2);
+                        go.transform.localScale =  Vector3.one*(1+(float)rdm.NextDouble()*maxScale);
                     }
                 }
             }

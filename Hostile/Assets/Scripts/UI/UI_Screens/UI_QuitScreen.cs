@@ -12,8 +12,7 @@ namespace UI
         [Header("Targeted Menu Properties")]
         public int mainMenuSceneIndex = 0;
         #endregion
-
-
+        
         public void OnQuitConfirm()
         {
             Debug.Log("Leaving " + PhotonNetwork.CurrentRoom.Name + "..");

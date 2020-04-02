@@ -24,6 +24,7 @@ namespace UI
 
         void HandleEscapeKeyPress()
         {
+            Debug.Log("quitscreen:"+quitScreen.Active);
             if (quitScreen.Active)
             {
                 quitScreen.CloseScreen();

@@ -98,8 +98,9 @@ namespace UI
         {
             foreach(var screen in screens)
             {
-                if(screen.GetComponent<Animator>().runtimeAnimatorController)
+                if(screen.GetComponent<Animator>().runtimeAnimatorController){
                     screen.gameObject.SetActive(true);
+                }
             }
         }
         #endregion

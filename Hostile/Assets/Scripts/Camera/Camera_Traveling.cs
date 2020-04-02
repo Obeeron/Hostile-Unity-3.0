@@ -6,10 +6,9 @@ public class Camera_Traveling : MonoBehaviour
 {
     #region Variables
     [Header("Traveling Properties")]
-    [Range(0f,1f)]
-    public float transitionLerpSpeed = 0.1f;
+    [Min(0.1f)]
+    public float transitionTime = 1;
 
-    private float minimumDistance = 0.02f;
     #endregion
 
     public void TravelingTo(Transform target)
@@ -20,10 +19,16 @@ public class Camera_Traveling : MonoBehaviour
 
     IEnumerator Traveling(Transform target)
     {
-        while (Vector3.Distance(transform.position, target.position) > minimumDistance)
+        float t = 0.0f;
+        Vector3 startingPos = transform.position;
+        Quaternion startingRot = transform.rotation;
+
+        while (t < 1f)
         {
-            transform.position = Vector3.Lerp(transform.position, target.position, transitionLerpSpeed);
-            transform.rotation = Quaternion.Lerp(transform.rotation, target.rotation, transitionLerpSpeed);
+            t += Time.deltaTime * (Time.timeScale/transitionTime);
+
+            transform.position = Vector3.Lerp(startingPos, target.position, t);
+            transform.rotation = Quaternion.Lerp(startingRot, target.rotation, t);
             yield return new WaitForEndOfFrame();
         }
 
