@@ -17,7 +17,7 @@ namespace UI
         public UnityEvent onScreenStart = new UnityEvent();
         public UnityEvent onScreenClose = new UnityEvent();
 
-        private Animator animator;
+        protected Animator animator;
         private bool active = false;
         public bool Active { get { return active; } }
         #endregion
@@ -58,8 +58,8 @@ namespace UI
             onScreenClose?.Invoke();
             HandleAnimator("hide");
             Debug.Log("closeScreen");
-            //if(animator.runtimeAnimatorController == null)
-            //    gameObject.SetActive(false);
+            if(animator == null)
+               gameObject.SetActive(false);
         }
 
         void HandleAnimator(string trigger)

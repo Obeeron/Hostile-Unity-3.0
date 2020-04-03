@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Procedural
 {
@@ -23,13 +24,17 @@ namespace Procedural
         public bool autoUpdate;
         public TerrainType[] grounds;
         
-        public void GenerateTerrain(System.Random rdm)
+        public IEnumerator GenerateTerrain(System.Random rdm,TMPro.TextMeshProUGUI textSub)
         {
             TerrainData terrainData = terrain.terrainData;
             terrainData.heightmapResolution = height+1;
             terrainData.size = new Vector3(height,maxAltitude,width);
 
+            textSub.text = "Generating Procedural Noise Map..";
+            yield return null;
             float[,] noiseMap = PerlinNoise.GenerateNoiseMap (width,height, noiseScale, nbOctaves, persistance, lacunarity, rdm, offset);
+            textSub.text = "Creating Height Map..";
+            yield return null;
             float[,] heightMap = GenerateHeightMap(noiseMap);
 
             terrainData.SetHeights(0,0,heightMap);

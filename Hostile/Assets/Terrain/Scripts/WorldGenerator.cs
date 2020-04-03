@@ -2,63 +2,88 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace Procedural{
     public class WorldGenerator : MonoBehaviour
     {
-        public TerrainGenerator terrainGenerator;
-        public TreeGenerator treeGenerator;
-        public GrassGenerator grassGenerator;
-        public TextureGenerator textureGenerator;
-        public RockGenerator rockGenerator;
+        private TerrainGenerator terrainGenerator;
+        private TreeGenerator treeGenerator;
+        private GrassGenerator grassGenerator;
+        private TextureGenerator textureGenerator;
+        private RockGenerator rockGenerator;
 
+        public TextMeshProUGUI textMain;  
+        public TextMeshProUGUI textSub;
         public Terrain terrain;
         List<Vector2> tree_spawnPoints;
-        TerrainType[,] terrainTypeMap;
+        TerrainType[][] terrainTypeMap;
 
         System.Random rdm;
 
+        void Start()
+        {
+            terrainGenerator = GetComponent<TerrainGenerator>();
+            treeGenerator = GetComponent<TreeGenerator>();
+            grassGenerator = GetComponent<GrassGenerator>();
+            textureGenerator = GetComponent<TextureGenerator>();
+            rockGenerator = GetComponent<RockGenerator>();
+        }
+
         // Start is called before the first frame update
-        public void GenerateWorld(int seed)
+        public IEnumerator GenerateWorld(int seed)
         {
             rdm = new System.Random(seed);
-            GenerateTerrain();
-            GenerateTextures();
-            GenerateRock();
-            SpawnTrees();
-            SpawnGrass();
+
+            textMain.text = "Generating Terrain..";
+            yield return StartCoroutine(GenerateTerrain());
+            textMain.text = "Generating Textures..";
+            yield return StartCoroutine(GenerateTextures());
+            textMain.text = "Generating Rocks..";
+            yield return StartCoroutine(GenerateRock());
+            textMain.text = "Generating Trees..";
+            yield return StartCoroutine(SpawnTrees());
+            textMain.text = "Generating Grass..";
+            yield return StartCoroutine(SpawnGrass());
+            GameObject.FindObjectOfType<GameSetupManager>().AfterWorldGeneration();
         }
 
-        public void GenerateTerrain()
+        public IEnumerator GenerateTerrain()
         {
-            terrainTypeMap = new TerrainType[terrain.terrainData.alphamapHeight,terrain.terrainData.alphamapWidth]; 
-            terrainGenerator.GenerateTerrain(rdm);
+            terrainTypeMap = new TerrainType[terrain.terrainData.alphamapHeight][];
+            for(int i=0; i<terrain.terrainData.alphamapHeight; i++)
+                terrainTypeMap[i] = new TerrainType[terrain.terrainData.alphamapWidth];
+            yield return StartCoroutine(terrainGenerator.GenerateTerrain(rdm,textSub));
         }
 
-        public void GenerateTextures()
+        public IEnumerator GenerateTextures()
         {
-            textureGenerator.GenerateTextures(terrain.terrainData, ref terrainTypeMap, terrainGenerator.maxAltitude, rdm);
-        }
-
-        void SpawnTrees()
-        {
-            treeGenerator.GenerateTrees(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm);
+            yield return StartCoroutine(textureGenerator.GenerateTextures(terrain.terrainData, terrainTypeMap, terrainGenerator.maxAltitude, rdm,textSub));
         }
         
-        private void GenerateRock()
+        private IEnumerator GenerateRock()
         {
-            rockGenerator.GenerateRocks(terrain.terrainData,terrainTypeMap,new Vector2(terrainGenerator.height,terrainGenerator.width),rdm);
+            yield return StartCoroutine(rockGenerator.GenerateRocks(terrain.terrainData,terrainTypeMap,new Vector2(terrainGenerator.height,terrainGenerator.width),rdm,textSub));
         }
 
-        public void SpawnGrass(){
-            grassGenerator.GenerateGrass(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm);
+        IEnumerator SpawnTrees()
+        {
+            yield return StartCoroutine(treeGenerator.GenerateTrees(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm,textSub));
+        }
+
+        public IEnumerator SpawnGrass()
+        {
+            yield return StartCoroutine(grassGenerator.GenerateGrass(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm,textSub));
         }
 
         public void GenerateViaEditor(){
             rdm = new System.Random();
-            GenerateTerrain();
-            GenerateTextures();
-            SpawnGrass();
+            terrainTypeMap = new TerrainType[terrain.terrainData.alphamapHeight][];
+            for(int i=0; i<terrain.terrainData.alphamapHeight; i++)
+                terrainTypeMap[i] = new TerrainType[terrain.terrainData.alphamapWidth];
+            terrainGenerator.GenerateTerrain(rdm,textSub);
+            textureGenerator.GenerateTextures(terrain.terrainData, terrainTypeMap, terrainGenerator.maxAltitude, rdm,textSub);
+            grassGenerator.GenerateGrass(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm,textSub);
         }
     }
 

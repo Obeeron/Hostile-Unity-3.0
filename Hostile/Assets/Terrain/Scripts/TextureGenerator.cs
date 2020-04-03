@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Linq;
+using System.Collections;
 
 namespace Procedural
 {
@@ -28,24 +29,34 @@ namespace Procedural
         // public TerrainLayer[] terrainLayers;
         // [Min(0)] public int defaultTextureIndex;
 
-        public void GenerateTextures(TerrainData terrainData,ref TerrainType[,] terrainTypeMap, float maxAltitude, System.Random rdm)
+        public IEnumerator GenerateTextures(TerrainData terrainData, TerrainType[][] terrainTypeMap, float maxAltitude, System.Random rdm, TMPro.TextMeshProUGUI textSub)
         {
             int width = terrainData.alphamapWidth;
             int height = terrainData.alphamapHeight;
             int nbTextures = terrainData.alphamapLayers;
             
+            textSub.text = "Creating Steepness Map..";
+            yield return null;
             float[,] steepnessMap = GenerateSteepnessMap(terrainData, width, height);
+            textSub.text = "Generating Grass Noise Map..";
+            yield return null;
             float[,] grassMap = PerlinNoise.GenerateNoiseMap(width,height, width/plainFrequency, 9, plainPersistance, 2, rdm, Vector2.zero);
-            terrainTypeMap = GenerateTerrainTypeMap(width, height, steepnessMap,grassMap);
+            textSub.text = "Creating Terrain Type Map..";
+            yield return null;
+            GenerateTerrainTypeMap(width, height, steepnessMap,grassMap,terrainTypeMap);
             float[,,] splatMap = new float[width,height,nbTextures];
 
+            textSub.text = "Generating Forest Soil Noise Map..";
+            yield return null;
             float[,] forestSoilMap = PerlinNoise.GenerateNoiseMap(width,height, width/forestSoilFrequency, 9, forestSoilPersistance, 2, rdm, Vector2.zero);
 
+            textSub.text = "Applying Textures to Splat Map..";
+            yield return null;
             for(int y=0; y<height; y++){
                 for(int x=0; x<width; x++){
                     float[] textureWeightMap = new float[nbTextures];
 
-                    switch(terrainTypeMap[y,x])
+                    switch(terrainTypeMap[y][x])
                     {
                         case TerrainType.Plain:
                             textureWeightMap[grass_textureIndex] = 1f;
@@ -99,23 +110,21 @@ namespace Procedural
             return steepnessMap;
         }
 
-        private TerrainType[,] GenerateTerrainTypeMap(int width, int height, float[,] steepnessMap, float[,] grassMap)
+        private void GenerateTerrainTypeMap(int width, int height, float[,] steepnessMap, float[,] grassMap,TerrainType[][] terrainTypeMap)
         {
-            TerrainType[,] terrainTypeMap = new TerrainType[height,width];
             
             for(int y=0; y<height; y++){
                 for(int x=0; x<width; x++){
                     float steepness = steepnessMap[y,x];
 
                     if (steepness > minHillSlope)
-                        terrainTypeMap[y,x] = TerrainType.Hill;
+                        terrainTypeMap[y][x] = TerrainType.Hill;
                     else if (grassMap[y,x] < plainDensity)
-                        terrainTypeMap[y,x] = TerrainType.Plain;
+                        terrainTypeMap[y][x] = TerrainType.Plain;
                     else
-                        terrainTypeMap[y,x] = TerrainType.Forest;
+                        terrainTypeMap[y][x] = TerrainType.Forest;
                 }
             }
-            return terrainTypeMap;
         }
 
         public float GetTextureValueAt(TerrainLayer ground, float n_altitude, float steepness)

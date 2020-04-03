@@ -6,6 +6,7 @@ using Joueur;
 public class GameSetupManager : MonoBehaviourPunCallbacks
 {
     public UI.UI_Controller_Game uiController;
+    public GameObject loadingScreen;
     public StatsController statsController;
     public Procedural.WorldGenerator worldGenerator;
     public Terrain terrain;
@@ -15,10 +16,13 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
         int seed;
         if (!Int32.TryParse(PhotonNetwork.CurrentRoom.Name.Substring(5), out seed))
             seed = 0;
-        worldGenerator.GenerateWorld(seed);
-        Debug.Log("Room Joined");
+        worldGenerator.StartCoroutine("GenerateWorld",seed);
+    }
+
+    public void AfterWorldGeneration(){ // à la rechercher d'un bon nom de fonction 
         SetupCamera();
         CreatePlayer();
+        loadingScreen.SetActive(false);
     }
 
     private void SetupCamera()
