@@ -4906,9 +4906,9 @@ MonoBehaviour:
   farmableRockPrefab: {fileID: 165230, guid: 751682349ef7b8546aff2c104411f6b3, type: 3}
   terrainRocksParent: {fileID: 1812196039}
   farmableRocksParent: {fileID: 291066440}
-  terrainRockSpacing: 5
+  terrainRockSpacing: 5.5
   farmableRockSpacing: 80
-  maxScale: 3
+  maxScale: 3.5
   maxClusterSize: 3
 --- !u!1001 &424713235
 PrefabInstance:
