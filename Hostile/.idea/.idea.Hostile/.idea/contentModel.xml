@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\babag\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\babag\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Hostile.924310229.00" t="ExcludeRecursive" />
-    <e p="C:\Users\babag\Documents\Epita\Projet_S2\Hostile-Unity-3.0\Hostile" t="IncludeRecursive">
+    <e p="C:\Users\babag\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Hostile.539417595.00" t="ExcludeRecursive" />
+    <e p="C:\Users\babag\Documents\Epita\Projet_S2\cache\Hostile-Unity-3.0\Hostile" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
@@ -305,9 +305,6 @@
           <e p="Camera" t="Include">
             <e p="Camera_Traveling.cs" t="Include" />
           </e>
-          <e p="Entity" t="Include">
-            <e p="Entity.cs" t="Include" />
-          </e>
           <e p="GameSetupManager.cs" t="Include" />
           <e p="Inventaire" t="Include">
             <e p="Interactable.cs" t="Include" />
@@ -316,12 +313,16 @@
             <e p="Item.cs" t="Include" />
             <e p="Slots.cs" t="Include" />
           </e>
-          <e p="Menus" t="Include">
-            <e p="Bindings.cs" t="Include" />
-          </e>
           <e p="Network" t="Include">
             <e p="LobbyController.cs" t="Include" />
             <e p="NetworkController.cs" t="Include" />
+            <e p="NetworkObjects" t="Include">
+              <e p="NetworkItemsController.cs" t="Include" />
+              <e p="NetworkObject.cs" t="Include" />
+              <e p="NetworkObjectManager.cs" t="Include" />
+              <e p="RockNetworkController.cs" t="Include" />
+              <e p="TreeNetworkController.cs" t="Include" />
+            </e>
             <e p="PlayerNetworkController.cs" t="Include" />
             <e p="RoomController.cs" t="Include" />
             <e p="WaitingRoomController.cs" t="Include" />
@@ -330,12 +331,13 @@
             <e p="Camera_Movement.cs" t="Include" />
             <e p="Player_Choices.cs" t="Include" />
             <e p="Player_Movement.cs" t="Include" />
-            <e p="Player_Stats.cs" t="Include" />
             <e p="PlayerControls.cs" t="Include" />
             <e p="StatsController.cs" t="Include" />
           </e>
           <e p="UI" t="Include">
-            <e p="Skill_Screen.cs" t="Include" />
+            <e p="Menus" t="Include">
+              <e p="Bindings.cs" t="Include" />
+            </e>
             <e p="UI_Controllers" t="Include">
               <e p="UI_Controller.cs" t="Include" />
               <e p="UI_Controller_Game.cs" t="Include" />
@@ -356,6 +358,7 @@
             <e p="GrassGenerator.cs" t="Include" />
             <e p="PerlinNoise.cs" t="Include" />
             <e p="PoissonDiscSampling.cs" t="Include" />
+            <e p="RockGenerator.cs" t="Include" />
             <e p="TerrainGenerator.cs" t="Include" />
             <e p="TextureGenerator.cs" t="Include" />
             <e p="TreeGenerator.cs" t="Include" />

@@ -31,17 +31,12 @@ MonoBehaviour:
   RpcList:
   - Break_RPC
   - ClickRpc
+  - DeleteNetworkObject_RPC
+  - DestroyFarmingItem_RPC
   - DestroyRpc
-  - DisableItemNetwork
-  - DropOnNetwork
-  - Fall_RPC
-  - InstantiateNetworkObject_Rpc
+  - InstantiateNetworkObject_Local
   - playAnimation
   - RPC_SynchTimer
-  - Synchronize_RPC
-  - DestroyFarmingItem_RPC
-  - InstantiateNetworkObject_Local
-  - DeleteNetworkObject_RPC
   - SynchronizeItem_RPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0

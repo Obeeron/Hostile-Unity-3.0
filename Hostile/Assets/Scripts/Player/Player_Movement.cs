@@ -11,9 +11,8 @@ namespace Joueur
     {
         public UnityEvent onJump;
 
-        private float gravity = 3.0f;
         private float groundLerp = 0.8f;
-        private float airLerp = 0.95f;
+        private float airLerp = 0.96f;
         
         CharacterController character;
 
@@ -73,12 +72,14 @@ namespace Joueur
                 if (controls.InGame.Jump.triggered){
                     if (Data.Stamina > 0f)
                     {
+//                        fallingVelocity.x = currentMovement.x * Data.speed;
+//                        fallingVelocity.z = currentMovement.z * Data.speed;
                         StartCoroutine(Jump());
                     }
                 }
-                else if (fallingVelocity.y < 0f)
+                else if (Math.Abs(fallingVelocity.y - Physics.gravity.y) > 0.0001f)
                 {
-                    fallingVelocity.y = -gravity;
+                    fallingVelocity.y = Physics.gravity.y;
                 }
 
                 if (moveDirection == Vector2.zero)
@@ -92,13 +93,13 @@ namespace Joueur
         {
             if (!character.isGrounded)
             {
-                float multiplyer = 1f;
-                if (fallingVelocity.y < 0f)
+                float multiplier = 1f;
+                if (fallingVelocity.y < 0f) 
                 {
-                    multiplyer = 2.8f;
+                    multiplier = 2.0f;//modify this multiplier to change the curve of the fall. closer to 0 mean curve symetrical else fall way faster.
                 }
-                fallingVelocity += (Physics.gravity * Time.fixedDeltaTime);
-                movement = Vector3.Lerp(Time.fixedDeltaTime * (Data.speed/1.8f)* currentMovement, movement, airLerp);
+                fallingVelocity.y += (Time.fixedDeltaTime * multiplier * Physics.gravity.y);// the longer the player fall, the faster he falls.
+                movement = Vector3.Lerp(Time.fixedDeltaTime * (Data.speed * 1.4f)* currentMovement, movement, airLerp);
             }
             else
             {
