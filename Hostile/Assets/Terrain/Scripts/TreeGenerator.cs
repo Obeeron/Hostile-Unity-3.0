@@ -22,7 +22,7 @@ namespace Procedural
             List<Vector2> tree_spawnPoints = PoissonDiscSampling.GenerateSpawnPoints(rdm, spacing, mapSize, nbSpawnTriesMax);
             Debug.Log(tree_spawnPoints.Count+" tree points generated");
 
-            int j=0;
+            int j=0,k=0;
             foreach(Vector2 point in tree_spawnPoints)
             {
                 int splatPosY = (int)(point.y*terrainData.alphamapHeight/mapSize.y);
@@ -44,6 +44,9 @@ namespace Procedural
                             yield return null;
                         }
                     }
+                }
+                else{
+                    k++;
                 }
             }
         }

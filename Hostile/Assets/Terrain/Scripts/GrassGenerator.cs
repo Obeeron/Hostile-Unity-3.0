@@ -31,7 +31,7 @@ namespace Procedural
             for(int i =0; i<nbGrassPrefabs; i++) 
                 detailMapData.Add(new int[terrainData.detailHeight, terrainData.detailWidth]);
             
-            int j=0;
+            int j=0,k=0;
             foreach(Vector2 point in grass_spawnPoints)
             {
                 int splatPosY = (int)(point.y*terrainData.alphamapHeight/mapSize.y);
@@ -44,10 +44,13 @@ namespace Procedural
                     j++;
                     int grassPrefabIndex = UnityEngine.Random.Range(0,nbGrassPrefabs);
                     detailMapData[grassPrefabIndex][detailPosY,detailPosX] = 1;
-                    if(j%1000==0){
-                        textSub.text = string.Format("[{0}/{1}] Grass Placed.",j,grass_spawnPoints.Count-j);
+                    if(j%10000==0){
+                        textSub.text = string.Format("[{0}/{1}] Grass Placed.",j,grass_spawnPoints.Count-k);
                         yield return null;
                     }
+                }
+                else{
+                    k++;
                 }
             }
 
