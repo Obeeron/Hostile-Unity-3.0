@@ -15,8 +15,8 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
 #pragma warning restore 649
 
     private Vector3 impactForce;
-    private Collider ennemy;
     private PhotonView PV;
+    private GameObject ennemy;
 
     private void Start()
     {
@@ -31,10 +31,10 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
     {
         PhotonNetwork.RemoveCallbackTarget(this);
     }
-    private void OnTriggerEnter(Collider other)
+    public void Raycast_hit(RaycastHit hit)
     {
-        CharacterController main = this.GetComponentInParent<CharacterController>();
-        PhotonView PV = GetComponentInParent<PhotonView>();
+        GameObject other = hit.collider.gameObject;
+        GameObject main = GetComponentInParent<CharacterController>().gameObject;
         if (other != main) // On vérifie qu'on ne se tappe pas soi-même
         {
             ennemy = other;
@@ -61,6 +61,7 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
                     if(ennemy.GetComponent<CapsuleCollider>() != null)
                     {
                         //Debug.Log("not a player");
+                        Debug.Log("hit a farmable item");
                         // On envoit un Event
                         byte eventCode = 2;
                         object[] content = new object[] { playerData.Strength};
@@ -70,7 +71,6 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
                     }
                 }
             }
-            main.GetComponentInChildren<BoxCollider>().isTrigger = false;
         }
     }
 
@@ -123,10 +123,18 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
             Debug.Log("hit a tree");
             object[] data = (object[])photonEvent.CustomData;
             float dmg = (float)data[0];
+            Debug.Log(ennemy.name);
             if(ennemy != null)
             {
+                Debug.Log("not null");
                 if (ennemy.GetComponent<FarmingItem>() != null)
+                {
+                    Debug.Log("Farming item");
+                    Debug.Log(ennemy.GetComponent<FarmingItem>().life);
                     ennemy.GetComponent<FarmingItem>().GetHit(dmg);
+                    Debug.Log(ennemy.GetComponent<FarmingItem>().life);
+                }
+                   
             }
             
         }

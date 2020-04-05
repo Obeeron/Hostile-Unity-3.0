@@ -49,6 +49,7 @@ public class NetworkObjectManager : MonoBehaviour
             obj.ID = 1;
         else
             obj.ID = netObjList[netObjList.Count-1].ID + 1;
+        Debug.Log(obj.name);
         netObjList.Add(obj);
     }
 

@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 789862288963163912}
   - component: {fileID: -3425066066111506857}
   - component: {fileID: 7405903539638824187}
-  - component: {fileID: -8180297395463575955}
-  - component: {fileID: 2346327733848892327}
   - component: {fileID: 8770955619730701183}
   m_Layer: 0
   m_Name: Chest
@@ -48,11 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26da4e8b3c7e0974b8e09c8fd95ba49c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 0
   distance: 5
-  photonView: {fileID: -8180297395463575955}
   itemData: {fileID: 11400000, guid: 453758ab86dbaf145a1d747b87d6cfec, type: 2}
   usure: 0
-  inInventory: 1
+  inInventory: 0
   isSelected: 0
 --- !u!54 &-3425066066111506857
 Rigidbody:
@@ -83,43 +81,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8180297395463575955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5345621574935126592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: 0
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 2346327733848892327}
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &2346327733848892327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5345621574935126592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
 --- !u!33 &8770955619730701183
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public class FarmingItem : NetworkObject
 #pragma warning disable 649
     [SerializeField] private Type type;
     [SerializeField] private int DropNmb;
-    [SerializeField] private float life;
+    [SerializeField] public float life;
 #pragma warning restore
     private int itemDroped;
 

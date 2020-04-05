@@ -20,16 +20,19 @@ namespace Joueur
         [SerializeField] private PlayerData Data;
 #pragma warning restore 649
         private PlayerControls controls;
+        private Camera camera;
         protected Animator animator;
         private Vector3 movement;
         private Vector3 currentMovement;
         private Vector3 fallingVelocity;
         private bool isThereAnimator = true;
+        public Animator animatorArms;
 
         void OnEnable()
         {
             controls = new PlayerControls();
             controls.InGame.Enable();
+            camera = Camera.main;
             animator = this.gameObject.GetComponent<Animator>();
             if (animator == null)
                 isThereAnimator = false;
@@ -39,6 +42,7 @@ namespace Joueur
         // Update is called once per frame
         void Update()
         {
+            //this.gameObject.transform.rotation = new Quaternion(camera.transform.localRotation.x, camera.transform.localRotation.y, 0,0);
             // change l'état du joueur en fonction de la touche pressée
             if (controls.InGame.SpeedSwap.triggered)
             {
@@ -63,8 +67,27 @@ namespace Joueur
                 //for animation
                 if (isThereAnimator)
                 {
+                    if(Data.speedState == PlayerData.State.walking && moveDirection.y > 0)
+                    {
+                        animator.SetFloat("TurnSpeed", 0.5f);
+                        animatorArms.SetFloat("TurnSpeed", 0.5f);
+                    }
+                    else
+                    if (Data.speedState == PlayerData.State.running && moveDirection.y > 0)
+                    {
+                        animator.SetFloat("TurnSpeed", 1f);
+                        animatorArms.SetFloat("TurnSpeed", 1f);
+                    }
+                    else
+                    {
+                        animator.SetFloat("TurnSpeed", moveDirection.y);
+                        animatorArms.SetFloat("TurnSpeed", moveDirection.y);
+                    }
+                        
+
                     animator.SetFloat("Speed", moveDirection.x);
-                    animator.SetFloat("TurnSpeed", moveDirection.y);
+                    animatorArms.SetFloat("Speed", moveDirection.x);
+
 
                     animator.SetFloat("JumpLeg", moveDirection.x);
                     animator.SetFloat("Jump", moveDirection.y);

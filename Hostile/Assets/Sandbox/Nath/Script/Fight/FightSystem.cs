@@ -10,14 +10,38 @@ public class FightSystem : MonoBehaviour
     private bool usable;
     private bool canTouch;
     private PhotonView PV;
+    public Animator animatorArms;
+    private Camera cam;
 
-    IEnumerator DisableCollider(Collider box)
+    IEnumerator DisableCollider()
     {
         yield return new WaitForSeconds(1.2f);
-        box.isTrigger = false;
         animator.SetLayerWeight(1, 0);
         usable = true;
         canTouch = true;
+    }
+
+    IEnumerator FireRaycast()
+    {
+        yield return new WaitForSeconds(0.6f);
+        Debug.Log("Raycast fired !");
+        RaycastHit hit;
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray,out hit,5))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+            if (hit.collider != null)
+            {
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
+                Debug.Log("Hit smth");
+                TriggerCollider tc = GetComponentInChildren<TriggerCollider>();
+                tc.Raycast_hit(hit);
+            }
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.cyan);
+        }
     }
 
     private void Start()
@@ -25,25 +49,30 @@ public class FightSystem : MonoBehaviour
         usable = true;
         canTouch = true;
         PV = PhotonView.Get(this);
+        cam = GetComponentInChildren<Camera>();
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0) && usable && PV.IsMine)
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            animatorArms.Play("Pickaxe_hit", 0);
+            var anim = this.GetComponent<Animations_State>();
+            Debug.Log("Changed");
+            anim.ChangeEquiped();
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse0) && usable /* && PV.IsMine*/)
         {
             usable = false;
             animator.SetLayerWeight(1, 1);
-            animator.Play("Sword_Right",1);
-            PV.RPC("playAnimation", RpcTarget.Others, "Sword_Right");
-            Collider box;
-            if(GetComponentInChildren<BoxCollider>() != null)
-            {
-                box = GetComponentInChildren<BoxCollider>();
-                updateCollider(box);
-                
-                // attendre 2sec;
-                StartCoroutine(DisableCollider(box)); // Redesactive le trigger de l'arme
-            }
+            animator.Play("Melee", 1);
+            animatorArms.Play("Front_Hit",0);
+            PV.RPC("playAnimation", RpcTarget.Others, "Melee");
+            StartCoroutine(FireRaycast());
+            StartCoroutine(DisableCollider()); // Redesactive le trigger de l'arme
+            //
+
+
 
         }
         
@@ -53,6 +82,7 @@ public class FightSystem : MonoBehaviour
     {
         if (canTouch)
         {
+            Debug.Log(box.name);
             box.isTrigger = true; // Active le trigger de l'arme 
             canTouch = false;
         }
