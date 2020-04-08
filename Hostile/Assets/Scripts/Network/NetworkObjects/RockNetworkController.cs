@@ -22,14 +22,15 @@ public class RockNetworkController : NetworkObjectManager
     }
     #endregion
 
-    public void Break(int ID){
-        pv.RPC("Break_RPC",RpcTarget.AllViaServer,ID);
+    public void DestroyFarmingItem(int ID)
+    {
+        pv.RPC("DestroyFarmingItem_RPC", RpcTarget.AllViaServer, ID);
     }
 
     [PunRPC]
-    public void Break_RPC(int ID){
-        // C'est le code de l'arbre suffit de l'adapter
-        // FarmingItem rock = (FarmingItem)GetNetworkObject(ID);
-        // rock.Fall();
+    public void DestroyFarmingItem_RPC(int ID)
+    {
+        FarmingItem rock = (FarmingItem)GetNetworkObject(ID);
+        rock?.DestroyFarmingItem();
     }
 }

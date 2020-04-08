@@ -58,7 +58,7 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
             {  
                 if (ennemy.GetComponent<FarmingItem>() != null)   
                 {       
-                    if(ennemy.GetComponent<CapsuleCollider>() != null)
+                    if(ennemy.GetComponent<Collider>() != null)
                     {
                         //Debug.Log("not a player");
                         Debug.Log("hit a farmable item");

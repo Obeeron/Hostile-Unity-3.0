@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Planks_Data
   m_EditorClassIdentifier: 
   name: Planks
+  prefabID: 1
   icone: {fileID: 0}
   maxUsure: 0
   decayTime: 0

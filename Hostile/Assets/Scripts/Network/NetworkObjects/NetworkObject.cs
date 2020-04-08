@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class NetworkObject : MonoBehaviour
 {   
-    public int ID;
+    public int ID = -1;
 }

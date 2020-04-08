@@ -53,7 +53,14 @@ public class FarmingItem : NetworkObject
         if (life <= 0f)
         {
             isAlive = false;
-            TreeNetworkController.instance.DestroyFarmingItem(ID);
+            switch(type){
+            case Type.Tree:
+                TreeNetworkController.instance.DestroyFarmingItem(ID);
+                break;
+            case Type.Stone:
+                RockNetworkController.instance.DestroyFarmingItem(ID);
+                break;
+            }
         }
     }
 

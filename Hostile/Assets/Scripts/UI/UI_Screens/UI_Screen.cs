@@ -18,17 +18,21 @@ namespace UI
         public UnityEvent onScreenClose = new UnityEvent();
 
         protected Animator animator;
+        private bool hasAnimation = false;
         private bool active = false;
         public bool Active { get { return active; } }
         #endregion
 
 
         #region Main Methods
-        // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             animator = GetComponent<Animator>();
+            hasAnimation = animator.runtimeAnimatorController != null;
+        }
 
+        void Start()
+        {
             if (m_StartSelectable)
             {
                 EventSystem.current.SetSelectedGameObject(m_StartSelectable.gameObject);
@@ -49,7 +53,8 @@ namespace UI
             active = true;
             onScreenStart?.Invoke();
             HandleAnimator("show");
-            Debug.Log("startScreen");
+            if(!hasAnimation)
+               gameObject.SetActive(true);
         }
 
         public virtual void CloseScreen()
@@ -57,9 +62,11 @@ namespace UI
             active = false;
             onScreenClose?.Invoke();
             HandleAnimator("hide");
-            Debug.Log("closeScreen");
-            if(animator == null)
-               gameObject.SetActive(false);
+            if(!hasAnimation){
+                gameObject.SetActive(false);
+                Debug.Log("blblblblb");
+            }
+                
         }
 
         void HandleAnimator(string trigger)

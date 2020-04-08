@@ -8,6 +8,7 @@ using TMPro;
 public class ItemData : ScriptableObject
 {
     new public string name = "nouvel item";
+    public NetworkItemsController.prefabID prefabID;
     public Sprite icone=null;
     public int maxUsure;
     public float decayTime;

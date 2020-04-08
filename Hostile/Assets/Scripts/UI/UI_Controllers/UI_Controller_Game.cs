@@ -9,6 +9,7 @@ namespace UI
         [Header("Screens")]
         public UI_Screen inventoryBagScreen;
         public UI_Screen hotbarScreen;
+        public UI_Screen craftScreen; 
 
         [Header("UIMode Events")]
         public UnityEvent OnUIModeEnable = new UnityEvent();
@@ -26,15 +27,19 @@ namespace UI
                 Debug.Log("Inventory key pressed!");
                 HandleInventoryKeyPressed();
             }
-                
+            if(playerControls.InGame.Craft.triggered){
+                HandleCraftKeyPressed();
+            }
         }
         #endregion
 
         #region Helper Methods
         void HandleInventoryKeyPressed()
         {
-            if (inUIMode)
+            if (inventoryBagScreen.Active)
             {
+                if(craftScreen.Active)
+                    DisableScreen(craftScreen);
                 SetUIModeActive(false);
                 DisableScreen(inventoryBagScreen);
             }
@@ -43,6 +48,17 @@ namespace UI
                 SetUIModeActive(true);
                 EnableScreen(inventoryBagScreen);
             };
+        }
+
+        void HandleCraftKeyPressed()
+        {
+            if(!inventoryBagScreen.Active)
+                HandleInventoryKeyPressed();
+
+            if(craftScreen.Active)
+                DisableScreen(craftScreen);
+            else
+                EnableScreen(craftScreen);
         }
 
         public void SetUIModeActive(bool state)

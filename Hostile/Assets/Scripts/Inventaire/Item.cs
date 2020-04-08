@@ -138,8 +138,6 @@ public class Item : Interactable
         {
             Debug.Log("Unable to craft item : need more relevant materials");
         }
-
-
     }
 
     public List<int> CheckMaterials_In_Inventory()
