@@ -16,7 +16,7 @@ public class NetworkObjectManager : MonoBehaviour
     protected List<NetworkObject> netObjList;
     public List<NetworkObject> NetObjList {get => netObjList;}
 
-    int referenceCode = 0;
+    public int referenceCode = 0;
 
     protected virtual void Awake()
     {
