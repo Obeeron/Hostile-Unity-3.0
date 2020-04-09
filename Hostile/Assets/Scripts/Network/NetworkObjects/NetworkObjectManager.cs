@@ -16,23 +16,25 @@ public class NetworkObjectManager : MonoBehaviour
     protected List<NetworkObject> netObjList;
     public List<NetworkObject> NetObjList {get => netObjList;}
 
+    int referenceCode = 0;
+
     protected virtual void Awake()
     {
         netObjList = new List<NetworkObject>();
         pv = GetComponent<PhotonView>();
     }
 
-    public void InstantiateNetworkObject(int netObjPrefabID, Vector3 position, Vector3 rotation)
+    public void InstantiateNetworkObject(int netObjPrefabID, Vector3 position, Vector3 rotation, int newRefCode = 0)
     {
 
         //Debug.Log("spawning " + netObjPrefabID);
 
-        pv.RPC("InstantiateNetworkObject_Local", RpcTarget.AllViaServer, netObjPrefabID, position, rotation);
+        pv.RPC("InstantiateNetworkObject_Local", RpcTarget.AllViaServer, netObjPrefabID, position, rotation, newRefCode);
 
     }
 
     [PunRPC]
-    public void InstantiateNetworkObject_Local(int netObjPrefabID, Vector3 position, Vector3 rotation)
+    public void InstantiateNetworkObject_Local(int netObjPrefabID, Vector3 position, Vector3 rotation, int newRefCode = 0)
     {
         try
         {
@@ -40,6 +42,8 @@ public class NetworkObjectManager : MonoBehaviour
             GameObject netObj = Instantiate(netObjPrefabs[netObjPrefabID].gameObject, position, Quaternion.Euler(rotation), parent.transform);
 
             AddToList(netObj.GetComponent<NetworkObject>());
+
+            referenceCode = newRefCode;
 
             //Debug.Log("spawned " + netObjPrefabID);
 
