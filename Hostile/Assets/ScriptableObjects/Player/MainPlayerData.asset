@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: MainPlayerData
   m_EditorClassIdentifier: 
   MaxLife: 100
-  MaxStamina: 125
+  MaxStamina: 100
   MaxHunger: 600
-  Life: 100
-  Stamina: 125
-  Hunger: 434.33856
+  Life: 99.782585
+  Stamina: 100
+  Hunger: 10000000
   Agility: 1
   Dexterity: 1
-  Strength: 1
+  Strength: 1.5000001
   Damage: 5
-  speedState: 0
+  speedState: 1
   isIdle: 1
   isOnJump: 0
-  speed: 3
+  speed: 7

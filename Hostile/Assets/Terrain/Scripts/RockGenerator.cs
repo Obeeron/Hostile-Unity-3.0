@@ -56,6 +56,7 @@ namespace Procedural
                 }
             }
 
+            int layerMask = LayerMask.GetMask("ground");
             j=0;
             //FARMABLE ROCKS
             foreach(Vector2 point in farmableRocksSpawnPoints){
@@ -65,14 +66,33 @@ namespace Procedural
                 if(terrainTypeMap[splatPosX][splatPosY] != TerrainType.Hill){
                     Vector3 spawnPoint = new Vector3(point.x, terrainData.GetHeight((int)point.x,(int)point.y),point.y);
                     RaycastHit hit;
-                    int layerMask = 1 << 11;
-                    if (Physics.Raycast(new Vector3(spawnPoint.x,spawnPoint.y+1,spawnPoint.z), Vector3.down, out hit, layerMask)){
-                        int clusterSize= rdm.Next(1,maxClusterSize);
-                        for(int i=0; i<clusterSize; i++,j++){
-                            Quaternion rotation = Quaternion.Euler(0,rdm.Next(360),0) * Quaternion.FromToRotation(Vector3.up, hit.normal);
-                            spawnPoint = new Vector3(spawnPoint.x+1+(float)rdm.NextDouble()*2,  0,
-                                                    spawnPoint.z+1+(float)rdm.NextDouble()*2);
-                            spawnPoint = new Vector3(spawnPoint.x, terrainData.GetHeight((int)spawnPoint.x,(int)spawnPoint.z),spawnPoint.z);
+                    
+                    // if (Physics.Raycast(new Vector3(spawnPoint.x,spawnPoint.y+1,spawnPoint.z), Vector3.down, out hit, layerMask)){
+                    //     int clusterSize= rdm.Next(1,maxClusterSize+1);
+                    //     for(int i=0; i<clusterSize; i++,j++){
+                    //         Quaternion rotation = Quaternion.identity * Quaternion.Euler(0,rdm.Next(360),0) * Quaternion.FromToRotation(Vector3.up, hit.normal);
+                    //         spawnPoint = new Vector3(spawnPoint.x+1+(float)rdm.NextDouble()*2,  0,
+                    //                                 spawnPoint.z+1+(float)rdm.NextDouble()*2);
+                    //         spawnPoint = new Vector3(spawnPoint.x, terrainData.GetHeight((int)spawnPoint.x,(int)spawnPoint.z),spawnPoint.z);
+                    //         GameObject go = Instantiate(farmableRockPrefab,spawnPoint,rotation,farmableRocksParent);
+                    //         RockNetworkController.instance.AddToList(go.GetComponent<FarmingItem>());
+                    //         if(j%100==0){
+                    //             textSub.text = string.Format("[{0}/{1}] Farmable Rocks Placed.",j,terrainRocksSpawnPoints.Count-j);
+                    //             yield return null;
+                    //         }
+                    //     }
+                    // }
+
+                    int clusterSize= rdm.Next(1,maxClusterSize+1);
+                    for(int i=0; i<clusterSize; i++,j++){
+                        spawnPoint = new Vector3(spawnPoint.x+1+(float)rdm.NextDouble()*2,  0,
+                                                spawnPoint.z+1+(float)rdm.NextDouble()*2);
+                        spawnPoint = new Vector3(spawnPoint.x, terrainData.GetHeight((int)spawnPoint.x,(int)spawnPoint.z),spawnPoint.z);
+                            
+
+                        if (Physics.Raycast(new Vector3(spawnPoint.x,spawnPoint.y+2,spawnPoint.z), Vector3.down, out hit, layerMask)){
+                            j++;
+                            Quaternion rotation = Quaternion.identity * Quaternion.Euler(0,rdm.Next(360),0) * Quaternion.FromToRotation(Vector3.up, hit.normal);
                             GameObject go = Instantiate(farmableRockPrefab,spawnPoint,rotation,farmableRocksParent);
                             RockNetworkController.instance.AddToList(go.GetComponent<FarmingItem>());
                             if(j%100==0){

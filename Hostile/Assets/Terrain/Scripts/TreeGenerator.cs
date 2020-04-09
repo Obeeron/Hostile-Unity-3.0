@@ -22,6 +22,7 @@ namespace Procedural
             List<Vector2> tree_spawnPoints = PoissonDiscSampling.GenerateSpawnPoints(rdm, spacing, mapSize, nbSpawnTriesMax);
             Debug.Log(tree_spawnPoints.Count+" tree points generated");
 
+            int layerMask = LayerMask.GetMask("ground");
             int j=0,k=0;
             foreach(Vector2 point in tree_spawnPoints)
             {
@@ -31,7 +32,6 @@ namespace Procedural
                 if(terrainTypeMap[splatPosX][splatPosY] == TerrainType.Forest)
                 {
                     RaycastHit hit;
-                    int layerMask = 1 << 11;
                     Vector3 spawnPoint = new Vector3(point.x, terrainData.GetHeight((int)point.x,(int)point.y) - 0.5f,point.y);
                     if (Physics.Raycast(new Vector3(spawnPoint.x,spawnPoint.y+5,spawnPoint.z), Vector3.down, out hit, layerMask)){
                         j++;
