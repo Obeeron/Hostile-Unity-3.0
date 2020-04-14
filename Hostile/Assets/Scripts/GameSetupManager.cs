@@ -8,6 +8,8 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
     public UI.UI_Controller_Game uiController;
     public GameObject loadingScreen;
     public StatsController statsController;
+    public PlayerDeath pldeath;
+    public DeathDrop deathdrop;
     public Procedural.WorldGenerator worldGenerator;
     public Terrain terrain;
 
@@ -49,7 +51,8 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
             
         //player movement event setup
         player.GetComponent<Player_Movement>().onJump.AddListener(delegate { statsController.looseStamina(10f); });
-        statsController.OnDeath.AddListener(delegate {PhotonNetwork.Destroy(player.GetComponent<PhotonView>()); });
+        statsController.OnDeath.AddListener(delegate { deathdrop.DropAll(player); });
+        statsController.OnDeath.AddListener(delegate { pldeath.CameraDeath(player); });
     }
 
     private Vector3 GetSpawnPoint(){

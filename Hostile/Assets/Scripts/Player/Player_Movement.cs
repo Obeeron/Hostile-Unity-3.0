@@ -20,7 +20,6 @@ namespace Joueur
         [SerializeField] private PlayerData Data;
 #pragma warning restore 649
         private PlayerControls controls;
-        private Camera camera;
         protected Animator animator;
         private Vector3 movement;
         private Vector3 currentMovement;
@@ -32,7 +31,6 @@ namespace Joueur
         {
             controls = new PlayerControls();
             controls.InGame.Enable();
-            camera = Camera.main;
             animator = this.gameObject.GetComponent<Animator>();
             if (animator == null)
                 isThereAnimator = false;
@@ -138,11 +136,7 @@ namespace Joueur
         {
             onJump?.Invoke();
             if (isThereAnimator)
-            {
                 animator.SetBool("OnGround", false);
-                animatorArms.SetBool("OnGround", false);
-            }
-                
 
             character.slopeLimit = 90f;
             fallingVelocity.y = Mathf.Sqrt(-2f * Physics.gravity.y * 2.0f);
@@ -152,11 +146,7 @@ namespace Joueur
                 yield return null;
             } while (!character.isGrounded);
             if (isThereAnimator)
-            {
                 animator.SetBool("OnGround", true);
-                animatorArms.SetBool("OnGround", true);
-            }
-               
             
             Data.isOnJump = false;
             character.slopeLimit = 45f;

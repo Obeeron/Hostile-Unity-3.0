@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Photon.Pun;
+using UnityEditor;
+using UnityEngine.SceneManagement;
 
 
 namespace Joueur
 {
-    public class StatsController : MonoBehaviour
+    public class StatsController : MonoBehaviourPunCallbacks
     {
     #pragma warning disable 649
         [SerializeField] PlayerData Data;
@@ -18,12 +20,17 @@ namespace Joueur
         public UIBarUpdate barHunger;
         private float staminaTimer = 0.0f;
         private float hungerTimer = 0.0f;
+        private int MenuScene = 0;
+        private bool isAlive = true;
 
         void Update ()
         {
-            refreshStamina();
-            refreshSpeed();
-            refreshHunger();
+            if (isAlive)
+            {
+                refreshStamina();
+                refreshSpeed();
+                refreshHunger();
+            }
         }
 
         private void refreshSpeed()
@@ -138,6 +145,7 @@ namespace Joueur
             if (Data.Life + loss <= 0f)
             {
                 Data.Life = -1f;
+                isAlive = false;
                 OnDeath?.Invoke();
             }
             else
@@ -177,6 +185,13 @@ namespace Joueur
                 Data.Hunger -= loss;
             }
             barHunger?.Barupdate(Data.Hunger/Data.MaxHunger);
+        }
+        
+        public override void OnLeftRoom()
+        {
+            Data.Life = 100f;
+            Data.speedState = PlayerData.State.walking;
+            SceneManager.LoadScene(MenuScene);
         }
     }
 }
