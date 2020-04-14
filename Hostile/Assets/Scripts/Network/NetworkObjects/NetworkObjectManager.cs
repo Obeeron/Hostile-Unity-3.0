@@ -13,7 +13,7 @@ public class NetworkObjectManager : MonoBehaviour
     //public enum prefabID; -- Doit être créé dans les classes filles 
     public List<NetworkObject> netObjPrefabs;
 
-    protected List<NetworkObject> netObjList;
+    public List<NetworkObject> netObjList;
     public List<NetworkObject> NetObjList {get => netObjList;}
 
     public int referenceCode = 0;
@@ -41,10 +41,7 @@ public class NetworkObjectManager : MonoBehaviour
 
             GameObject netObj = Instantiate(netObjPrefabs[netObjPrefabID].gameObject, position, Quaternion.Euler(rotation), parent.transform);
 
-            AddToList(netObj.GetComponent<NetworkObject>());
-
-            referenceCode = newRefCode;
-
+            AddToList(netObj.GetComponent<NetworkObject>(), newRefCode);
             //Debug.Log("spawned " + netObjPrefabID);
 
         }
@@ -60,13 +57,14 @@ public class NetworkObjectManager : MonoBehaviour
         }
     }
 
-    public void AddToList(NetworkObject obj){
+    public void AddToList(NetworkObject obj, int newRefCode){
         if(netObjList.Count == 0)
-            obj.ID = 1;
+            obj.ID = 0;
         else
             obj.ID = netObjList[netObjList.Count-1].ID + 1;
-        //Debug.Log(obj.name);
+        Debug.Log("Voici mon id attribué : " + obj.ID);
         netObjList.Add(obj);
+        referenceCode = newRefCode;
     }
 
     public void DeleteNetworkObject(int ID){

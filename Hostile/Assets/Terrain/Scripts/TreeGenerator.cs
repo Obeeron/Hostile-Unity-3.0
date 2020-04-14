@@ -38,7 +38,7 @@ namespace Procedural
                         Quaternion rotation = Quaternion.Euler(rdm.Next(3),rdm.Next(360),rdm.Next(3));
                         GameObject tree = Instantiate(treePrefabs[rdm.Next(treePrefabs.Length)], spawnPoint, rotation,parent.transform);
                         tree.transform.localScale *=  (float)(minScale + rdm.NextDouble()*(maxScale-minScale));
-                        TreeNetworkController.instance.AddToList(tree.GetComponent<FarmingItem>());
+                        TreeNetworkController.instance.AddToList(tree.GetComponent<FarmingItem>(),0);
                         if(j%5000==0){
                             textSub.text = string.Format("[{0}/{1}] Trees Placed.",j,tree_spawnPoints.Count-j);
                             yield return null;

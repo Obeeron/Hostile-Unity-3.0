@@ -94,7 +94,7 @@ namespace Procedural
                             j++;
                             Quaternion rotation = Quaternion.identity * Quaternion.Euler(0,rdm.Next(360),0) * Quaternion.FromToRotation(Vector3.up, hit.normal);
                             GameObject go = Instantiate(farmableRockPrefab,spawnPoint,rotation,farmableRocksParent);
-                            RockNetworkController.instance.AddToList(go.GetComponent<FarmingItem>());
+                            RockNetworkController.instance.AddToList(go.GetComponent<FarmingItem>(),0);
                             if(j%100==0){
                                 textSub.text = string.Format("[{0}/{1}] Farmable Rocks Placed.",j,terrainRocksSpawnPoints.Count-j);
                                 yield return null;

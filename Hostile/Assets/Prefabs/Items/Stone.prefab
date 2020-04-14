@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1036400726834997749}
   - component: {fileID: 8401756827008154753}
   - component: {fileID: 7314421855463814353}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,3 +115,5 @@ MonoBehaviour:
   usure: 0
   inInventory: 0
   isSelected: 0
+  canBeEquipped: 0
+  equippedIndex: 0

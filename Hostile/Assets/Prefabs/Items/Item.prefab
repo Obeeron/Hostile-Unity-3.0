@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 317498271211545719}
   - component: {fileID: 9123443297512141059}
   - component: {fileID: 8036666843616754003}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,9 +109,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26da4e8b3c7e0974b8e09c8fd95ba49c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: -1
   distance: 5
-  photonView: {fileID: 0}
   itemData: {fileID: 0}
   usure: 0
   inInventory: 0
   isSelected: 0
+  canBeEquipped: 0
+  equippedIndex: 0

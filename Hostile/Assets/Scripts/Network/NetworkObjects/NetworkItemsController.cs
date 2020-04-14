@@ -26,20 +26,24 @@ public class NetworkItemsController : NetworkObjectManager
     {
         LOG,
         PLANK,
-        STONE
+        STONE,
+        CHEST,
+        PICKAXE,
+        SPEAR,
+        AXE
     };
 
-    public void SynchronizeItem(int ID, bool state, Vector3 position)
+    public void SynchronizeItem(int ID, bool state, Vector3 position, bool refreshPos = true)
     {
-        pv.RPC("SynchronizeItem_RPC", RpcTarget.AllViaServer, ID, state, position);
+        pv.RPC("SynchronizeItem_RPC", RpcTarget.AllViaServer, ID, state, position, refreshPos);
     }
 
     [PunRPC]
-    public void SynchronizeItem_RPC(int ID, bool state, Vector3 position)
+    public void SynchronizeItem_RPC(int ID, bool state, Vector3 position, bool refreshPos)
     {
         Item item = (Item)GetNetworkObject(ID);
         item.inInventory = !state;
-        if (state)
+        if (state && refreshPos)
             item.gameObject.transform.position = position;
         item.gameObject.SetActive(state);
     }

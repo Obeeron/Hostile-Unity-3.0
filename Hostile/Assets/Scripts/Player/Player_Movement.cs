@@ -138,7 +138,11 @@ namespace Joueur
         {
             onJump?.Invoke();
             if (isThereAnimator)
+            {
                 animator.SetBool("OnGround", false);
+                animatorArms.SetBool("OnGround", false);
+            }
+                
 
             character.slopeLimit = 90f;
             fallingVelocity.y = Mathf.Sqrt(-2f * Physics.gravity.y * 2.0f);
@@ -148,7 +152,11 @@ namespace Joueur
                 yield return null;
             } while (!character.isGrounded);
             if (isThereAnimator)
+            {
                 animator.SetBool("OnGround", true);
+                animatorArms.SetBool("OnGround", true);
+            }
+               
             
             Data.isOnJump = false;
             character.slopeLimit = 45f;

@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Planks
   prefabID: 1
-  icone: {fileID: 0}
+  icone: {fileID: 21300000, guid: febd0a9c1bc9ef74e898ee5b789b5c76, type: 3}
   maxUsure: 0
-  decayTime: 0
-  persistent: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  Material: []
-  Number: 
+  decayTime: -1
+  persistent: 1
+  mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  material: {fileID: 2100000, guid: 2bf330b825a058b428f24686639a36ca, type: 2}
+  Material:
+  - {fileID: 11400000, guid: d3a36880a0252ed479cfd9f61ae6753e, type: 2}
+  Number: 01000000
   maxSizeStack: 5

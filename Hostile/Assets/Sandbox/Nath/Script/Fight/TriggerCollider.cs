@@ -33,8 +33,10 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
     }
     public void Raycast_hit(RaycastHit hit)
     {
+        Debug.Log("Fired !");
         GameObject other = hit.collider.gameObject;
         GameObject main = GetComponentInParent<CharacterController>().gameObject;
+        Debug.Log(other.name);
         if (other != main) // On vérifie qu'on ne se tappe pas soi-même
         {
             ennemy = other;
@@ -123,14 +125,11 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
             Debug.Log("hit a tree");
             object[] data = (object[])photonEvent.CustomData;
             float dmg = (float)data[0];
-            Debug.Log(ennemy.name);
             if(ennemy != null)
             {
-                Debug.Log("not null");
                 if (ennemy.GetComponent<FarmingItem>() != null)
                 {
                     Debug.Log("Farming item");
-                    Debug.Log(ennemy.GetComponent<FarmingItem>().life);
                     ennemy.GetComponent<FarmingItem>().GetHit(dmg);
                     Debug.Log(ennemy.GetComponent<FarmingItem>().life);
                 }

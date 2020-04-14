@@ -15,7 +15,7 @@ public class FightSystem : MonoBehaviour
 
     IEnumerator DisableCollider()
     {
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1.1f);
         animator.SetLayerWeight(1, 0);
         usable = true;
         canTouch = true;
@@ -24,23 +24,22 @@ public class FightSystem : MonoBehaviour
     IEnumerator FireRaycast()
     {
         yield return new WaitForSeconds(0.6f);
-        Debug.Log("Raycast fired !");
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray,out hit,5))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             if (hit.collider != null)
             {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
-                Debug.Log("Hit smth");
+                Debug.Log("triggerCollider searched");
                 TriggerCollider tc = GetComponentInChildren<TriggerCollider>();
-                tc.Raycast_hit(hit);
+                if (tc != null)
+                {
+
+                    Debug.Log(tc.gameObject.name);
+                    tc.Raycast_hit(hit);
+                }
+
             }
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.cyan);
         }
     }
 
@@ -57,16 +56,16 @@ public class FightSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             animatorArms.Play("Pickaxe_hit", 0);
-            var anim = this.GetComponent<Animations_State>();
-            Debug.Log("Changed");
-            anim.ChangeEquiped();
+            //var anim = this.GetComponent<Animations_State>();
+            //Debug.Log("Changed");
+            //anim.ChangeEquiped();
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) && usable /* && PV.IsMine*/)
         {
             usable = false;
             animator.SetLayerWeight(1, 1);
             animator.Play("Melee", 1);
-            animatorArms.Play("Front_Hit",0);
+            animatorArms.Play("Farm_Hit",0);
             PV.RPC("playAnimation", RpcTarget.Others, "Melee");
             StartCoroutine(FireRaycast());
             StartCoroutine(DisableCollider()); // Redesactive le trigger de l'arme

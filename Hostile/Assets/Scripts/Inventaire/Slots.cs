@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class Slots : MonoBehaviour, IDragHandler,IBeginDragHandler,IEndDragHandler,IPointerEnterHandler,IPointerExitHandler
 {
     public Item item;
+    public int ID;
     public bool isEmpty;
     public GameObject icone;
     public GameObject draggableItem;
