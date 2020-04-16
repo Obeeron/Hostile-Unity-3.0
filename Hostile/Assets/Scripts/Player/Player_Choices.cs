@@ -64,6 +64,17 @@ namespace Joueur
             }
         }
 
+        public void OnEnable()
+        {
+            remainingPoints.text = "" + Skills;
+            LifeText.text = "" + Health;
+            HungerText.text = "" + Hunger;
+            StaminaText.text = "" + Stamina;
+            AgilityText.text = "" + Agility;
+            DexterityText.text = "" + Dexterity;
+            StrengthText.text = "" + Strength;
+        }
+
         public void LifeUp(bool up)
         {
             if (up)
@@ -241,7 +252,15 @@ namespace Joueur
             Data.Life = Health;
             Data.Hunger = Hunger * 60f;
             Data.Stamina = Stamina;
-
+            
+            remainingPoints.text = "" + Skills;
+            LifeText.text = "" + Health;
+            HungerText.text = "" + Hunger;
+            StaminaText.text = "" + Stamina;
+            AgilityText.text = "" + Agility;
+            DexterityText.text = "" + Dexterity;
+            StrengthText.text = "" + Strength;
+            
             this.enabled = false;
         }
     }
