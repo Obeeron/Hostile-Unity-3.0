@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\babag\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\babag\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Hostile.539417595.00" t="ExcludeRecursive" />
-    <e p="C:\Users\babag\Documents\Epita\Projet_S2\cache\Hostile-Unity-3.0\Hostile" t="IncludeRecursive">
+    <e p="C:\Users\babag\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\babag\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Hostile.-658109383.00" t="ExcludeRecursive" />
+    <e p="E:\Hostile-Unity-3.0\Hostile" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Editor" t="Include">
@@ -162,7 +164,61 @@
           </e>
         </e>
         <e p="Plugins" t="Include">
+          <e p="MeshCombiner" t="Include">
+            <e p="Editor" t="Include">
+              <e p="MeshCombinerEditor.cs" t="Include" />
+            </e>
+            <e p="Scripts" t="Include">
+              <e p="MeshCombiner.cs" t="Include" />
+            </e>
+          </e>
+          <e p="TextMesh Pro" t="Include">
+            <e p="Fonts" t="Include">
+              <e p="LiberationSans - OFL.txt" t="Include" />
+            </e>
+            <e p="Resources" t="Include">
+              <e p="LineBreaking Following Characters.txt" t="Include" />
+              <e p="LineBreaking Leading Characters.txt" t="Include" />
+              <e p="Shaders" t="Include">
+                <e p="TMP_Bitmap-Custom-Atlas.shader" t="Include" />
+                <e p="TMP_Bitmap-Mobile.shader" t="Include" />
+                <e p="TMP_Bitmap.shader" t="Include" />
+                <e p="TMP_SDF Overlay.shader" t="Include" />
+                <e p="TMP_SDF-Mobile Masking.shader" t="Include" />
+                <e p="TMP_SDF-Mobile Overlay.shader" t="Include" />
+                <e p="TMP_SDF-Mobile.shader" t="Include" />
+                <e p="TMP_SDF-Surface-Mobile.shader" t="Include" />
+                <e p="TMP_SDF-Surface.shader" t="Include" />
+                <e p="TMP_SDF.shader" t="Include" />
+                <e p="TMP_Sprite.shader" t="Include" />
+                <e p="TMPro.cginc" t="Include" />
+                <e p="TMPro_Properties.cginc" t="Include" />
+                <e p="TMPro_Surface.cginc" t="Include" />
+              </e>
+            </e>
+            <e p="Sprites" t="Include">
+              <e p="EmojiOne Attribution.txt" t="Include" />
+            </e>
+          </e>
           <e p="UMotionEditor" t="Include">
+            <e p="Plugins" t="Include">
+              <e p="MacOS" t="Include">
+                <e p="Editor" t="Include">
+                  <e p="x64" t="Include">
+                    <e p="AutodeskFbxSdkLicense.txt" t="Include" />
+                    <e p="UnityFbxSdkNativeLicense.txt" t="Include" />
+                  </e>
+                </e>
+              </e>
+              <e p="Windows" t="Include">
+                <e p="Editor" t="Include">
+                  <e p="x64" t="Include">
+                    <e p="AutodeskFbxSdkLicense.txt" t="Include" />
+                    <e p="UnityFbxSdkNativeLicense.txt" t="Include" />
+                  </e>
+                </e>
+              </e>
+            </e>
             <e p="Scripts" t="Include">
               <e p="Application" t="Include">
                 <e p="AssetResourcesFile.cs" t="Include" />
@@ -175,6 +231,15 @@
                 <e p="GUICompatibilityUtility.cs" t="Include" />
                 <e p="UMotionSourceEditor.asmdef" t="Include" />
               </e>
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="CameraLit.shader" t="Include" />
+              <e p="ColorUnlit.shader" t="Include" />
+              <e p="ColorUnlitTransparent.shader" t="Include" />
+              <e p="UnlitDashedLine.shader" t="Include" />
+              <e p="UnlitLine.shader" t="Include" />
+              <e p="VertexColorUnlit.shader" t="Include" />
+              <e p="WiresOnly.shader" t="Include" />
             </e>
           </e>
         </e>
@@ -209,6 +274,10 @@
               </e>
             </e>
             <e p="Getting started.txt" t="Include" />
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="LightingManager.cs" t="Include" />
+            <e p="LightingPreset.cs" t="Include" />
           </e>
           <e p="Standard Assets" t="Include">
             <e p="Environment" t="Include">
@@ -248,6 +317,9 @@
               </e>
             </e>
           </e>
+          <e p="Tool Starter Kit" t="Include">
+            <e p="readme.txt" t="Include" />
+          </e>
         </e>
         <e p="Sandbox" t="Include">
           <e p="Baptiste" t="Include">
@@ -273,7 +345,13 @@
           </e>
           <e p="Nath" t="Include">
             <e p="Script" t="Include">
+              <e p="Animations" t="Include">
+                <e p="Animations_State.cs" t="Include" />
+              </e>
               <e p="CraftInventory.cs" t="Include" />
+              <e p="Equipped" t="Include">
+                <e p="Arms_Transform.cs" t="Include" />
+              </e>
               <e p="Fight" t="Include">
                 <e p="FarmSystem.cs" t="Include" />
                 <e p="FightSystem.cs" t="Include" />
@@ -305,8 +383,12 @@
           <e p="Camera" t="Include">
             <e p="Camera_Traveling.cs" t="Include" />
           </e>
+          <e p="Craft" t="Include">
+            <e p="Craft_Controller.cs" t="Include" />
+          </e>
           <e p="GameSetupManager.cs" t="Include" />
           <e p="Inventaire" t="Include">
+            <e p="DeathDrop.cs" t="Include" />
             <e p="Interactable.cs" t="Include" />
             <e p="InteractComponent.cs" t="Include" />
             <e p="Inventaire.cs" t="Include" />
@@ -332,6 +414,7 @@
             <e p="Player_Choices.cs" t="Include" />
             <e p="Player_Movement.cs" t="Include" />
             <e p="PlayerControls.cs" t="Include" />
+            <e p="PlayerDeath.cs" t="Include" />
             <e p="StatsController.cs" t="Include" />
           </e>
           <e p="UI" t="Include">
@@ -344,6 +427,7 @@
               <e p="UI_Controller_WaitingRoom.cs" t="Include" />
             </e>
             <e p="UI_Screens" t="Include">
+              <e p="UI_CraftScreen.cs" t="Include" />
               <e p="UI_QuitScreen.cs" t="Include" />
               <e p="UI_Screen.cs" t="Include" />
               <e p="UI_Screen_MainMenu.cs" t="Include" />

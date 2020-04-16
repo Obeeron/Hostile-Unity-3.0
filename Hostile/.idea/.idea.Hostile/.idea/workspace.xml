@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7fa23388-0f75-4543-b156-5a06780f9d85" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Hostile/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Hostile/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Hostile/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Hostile/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Hostile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Hostile/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Robot Kyl.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Robot Kyl.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sandbox/Obee/Terrain/TerrainObee.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sandbox/Obee/Terrain/TerrainObee.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Player/MainPlayerData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/Player/MainPlayerData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Farming.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Player_Movement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Player_Movement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sandbox/Baptiste/farming/FarmingItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sandbox/Baptiste/farming/FarmingItem.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,10 +24,19 @@
     <setting file="file://$PROJECT_DIR$/Assets/Sandbox/Baptiste/farming/PlayerInterraction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Code/PhotonNetworkPart.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Camera/Camera_Traveling.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/UIBarUpdate.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/UI_Controllers/UI_Controller_Game.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Sandbox/Nath/Script/Fight/TriggerCollider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/UI_Screens/UI_CraftScreen.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Sandbox/Nath/Script/CraftInventory.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Inventaire/Item.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Inventaire/Inventaire.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Sandbox/Nath/Script/Items_Crafting.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Inventaire/InteractComponent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/UIBarUpdate.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Inventaire/DeathDrop.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Network/NetworkObjects/NetworkItemsController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Network/LobbyController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/ScriptableObjects/Player/PlayerData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSetupManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Network/RoomController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Network/PlayerNetworkController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -39,16 +44,15 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/Player_Choices.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/Player_Movement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/Camera_Movement.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Inventaire/InteractComponent.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Sandbox/Baptiste/farming/FarmingItem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/Player_Stats.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/UIBarUpdate.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/StatsController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/Player_Movement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sandbox/Baptiste/farming/FarmingItem.cs" />
       </list>
     </option>
   </component>
@@ -113,6 +117,9 @@
       <workItem from="1586017863522" duration="643000" />
       <workItem from="1586885493109" duration="9000" />
       <workItem from="1586885914771" duration="1000" />
+      <workItem from="1586945323861" duration="1712000" />
+      <workItem from="1586947474762" duration="3573000" />
+      <workItem from="1586954830830" duration="1115000" />
     </task>
     <servers />
   </component>
