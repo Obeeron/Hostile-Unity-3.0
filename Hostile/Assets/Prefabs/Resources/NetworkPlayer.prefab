@@ -247,18 +247,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   footSteps:
-  - {fileID: 8300000, guid: f86e0dc672194044db3f1073d87cbf9a, type: 3}
-  - {fileID: 8300000, guid: c3bfa87caf2a5f440ad9f7cc1fb06ffa, type: 3}
-  - {fileID: 8300000, guid: eada7ce9e58726544808df4dbffbcc88, type: 3}
-  - {fileID: 8300000, guid: 15a3028671b261b45ae7d1703f5aa71a, type: 3}
-  - {fileID: 8300000, guid: 1d6af67615a2009448a29a8fbe0db3a9, type: 3}
-  - {fileID: 8300000, guid: 6022bd7f5a8a3da45ba554e9553150ec, type: 3}
-  - {fileID: 8300000, guid: 0b68b36c223f8ed47a89daa6b7dd9a2e, type: 3}
-  - {fileID: 8300000, guid: 48c747e994b8dac4da780d44b09a4966, type: 3}
-  - {fileID: 8300000, guid: 002e54344f1cf664d80694677d5eadb6, type: 3}
-  - {fileID: 8300000, guid: 375969f0f29e86141942a24dcaed482c, type: 3}
-  - {fileID: 8300000, guid: d9859fde071b0d340ac8f5bfd61d3603, type: 3}
-  - {fileID: 8300000, guid: 1d6af67615a2009448a29a8fbe0db3a9, type: 3}
+  - {fileID: 8300000, guid: 0572360836d02ea46a5b8e5d918534cc, type: 3}
+  - {fileID: 8300000, guid: b4d2dffdf9c1c90489267b1b48b42a15, type: 3}
+  - {fileID: 8300000, guid: 35005f0a96d0a24498c3f73f93068d4b, type: 3}
+  - {fileID: 8300000, guid: 0572360836d02ea46a5b8e5d918534cc, type: 3}
+  - {fileID: 8300000, guid: 199eacef362dc0a459845bb99b72c24c, type: 3}
   GetHit: []
   Die: []
   source: {fileID: 2273320385851076372}
