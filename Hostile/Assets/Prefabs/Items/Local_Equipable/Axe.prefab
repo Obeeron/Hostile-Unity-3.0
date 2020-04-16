@@ -100,6 +100,9 @@ MonoBehaviour:
   inInventory: 0
   isSelected: 0
   canBeEquipped: 1
+  Strength: 2
+  ChoppingStrength: 1
+  MiningStrength: 0
   equippedIndex: 0
 --- !u!114 &2114329607779407499
 MonoBehaviour:

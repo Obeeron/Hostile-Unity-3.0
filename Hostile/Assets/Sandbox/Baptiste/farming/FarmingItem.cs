@@ -7,13 +7,13 @@ public class FarmingItem : NetworkObject
 {
     private bool isAlive = true;
     private GameObject groundcheck;
-    enum Type
+    public enum Type
     {
         Tree,
         Stone
     };
 #pragma warning disable 649
-    [SerializeField] private Type type;
+    public Type type;
     [SerializeField] private int DropNmb;
     [SerializeField] public float life;
     public AudioClip[] sounds;

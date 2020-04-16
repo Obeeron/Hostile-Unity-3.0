@@ -66,11 +66,24 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
                     {
                         //Debug.Log("not a player");
                         //Debug.Log("hit a farmable item");
-                        int j = ennemy.GetComponent<FarmingItem>().sounds.Length;
+                        FarmingItem fItem = ennemy.GetComponent<FarmingItem>();
+                        int j = fItem.sounds.Length;
+                        float strength = 0;
+                        if (fItem.type == FarmingItem.Type.Tree)
+                        {
+                            Debug.Log("my item is a axe");
+                            strength = playerData.ChoppingStrength;
+                        }
+                        else if (fItem.type == FarmingItem.Type.Stone)
+                            strength = playerData.MiningStrength;
+                        else
+                        {
+                            Debug.Log("Hit a farming item with a wrong type");
+                        }
                         int index = rd.Next(0, j);
                         // On envoit un Event
                         byte eventCode = 2;
-                        object[] content = new object[] {playerData.Strength, index};
+                        object[] content = new object[] {strength, index};
                         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
                         SendOptions send = new SendOptions { Reliability = true };
                         PhotonNetwork.RaiseEvent(eventCode, content, raiseEventOptions, send);

@@ -13,6 +13,9 @@ public class Item : Interactable
     public bool inInventory;
     public bool isSelected;
     public bool canBeEquipped;
+    public float Strength;
+    public float ChoppingStrength;
+    public float MiningStrength;
 
     public int equippedIndex;
 

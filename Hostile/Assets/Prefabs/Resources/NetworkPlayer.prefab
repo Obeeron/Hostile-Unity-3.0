@@ -255,6 +255,7 @@ MonoBehaviour:
   GetHit: []
   Die: []
   source: {fileID: 2273320385851076372}
+  isRunning: 0
 --- !u!114 &127209232135512406
 MonoBehaviour:
   m_ObjectHideFlags: 0

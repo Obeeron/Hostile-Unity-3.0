@@ -190,8 +190,7 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
             indexCurrentlyEquipped = index;
             Debug.Log("Switched Weapons");
             return items_Equipable[index];
-        }
-        
+        }   
     }
 
     public void DesEquip()
@@ -208,6 +207,24 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
             if (Equipped != null)
                 Switch(indexCurrentlyEquipped, true);
             equipped = false;
+        }
+    }
+
+    public void ChangeStats(bool equipped)
+    {
+        PlayerData data = player.GetComponent<PlayerData>();
+        if (equipped)
+        {
+            data.ChoppingStrength *= itemSelected.ChoppingStrength;
+            data.MiningStrength *= itemSelected.MiningStrength;
+            data.Strength *= itemSelected.Strength;
+        }
+        else
+        {
+            data.ChoppingStrength = 1;
+            data.MiningStrength = 1;
+            data.Strength = 1;
+
         }
     }
 

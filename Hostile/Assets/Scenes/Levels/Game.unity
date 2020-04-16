@@ -1034,7 +1034,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 524100875}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &65101706
 MonoBehaviour:
@@ -4315,6 +4315,7 @@ Transform:
   - {fileID: 180832921}
   - {fileID: 1597777025}
   - {fileID: 1580539364}
+  - {fileID: 65101705}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8738,14 +8739,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78892e62e8d347b4fb26cec57a6b3719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foundation: {fileID: 2380528668571386188, guid: f9d02cba117636041aa9a0de7c51f7ca,
+  foundation: {fileID: 2380528668571386188, guid: bac2d98d4031e6347a8b7cbd1752a3a9,
     type: 3}
-  pillar: {fileID: 2048320157823307819, guid: c5c3d4952fd4ece499b98c39e00227c5, type: 3}
-  wall: {fileID: 7896720973208790642, guid: 93b61839228d48846925e21bf00290db, type: 3}
-  ceiling: {fileID: 6565702253307657874, guid: 48d321af6ff222745a42c79fbc29c910, type: 3}
-  stair_l: {fileID: 1038987756673395611, guid: c6fbc7a72b49666439a0bc605ce67dc3, type: 3}
-  stair_u: {fileID: 2250896880407278198, guid: 522cb8cf38d8c2a448018144341e6305, type: 3}
-  doorframe: {fileID: 6109710200938738570, guid: 0d414216632213f448eb2d7c89342dd6,
+  pillar: {fileID: 2048320157823307819, guid: d2f4f57473f883c40b6189edf6fea411, type: 3}
+  wall: {fileID: 7896720973208790642, guid: d17420e01e64a5f4aa688c7ab56344f0, type: 3}
+  ceiling: {fileID: 6565702253307657874, guid: 7224f185e2152e0488132e269d1f1d60, type: 3}
+  stair_l: {fileID: 1038987756673395611, guid: 0d31e2bcdd6480740836fa81ab70d67e, type: 3}
+  stair_u: {fileID: 2250896880407278198, guid: c4cdf0246011b5742aee03e21b13835c, type: 3}
+  doorframe: {fileID: 6109710200938738570, guid: 775e21943d6cb3a47b056e489880fd8b,
     type: 3}
   windows: {fileID: 5722751437484712986, guid: af01fb409384ba44e861c8488c339ff8, type: 3}
 --- !u!114 &1585293583
