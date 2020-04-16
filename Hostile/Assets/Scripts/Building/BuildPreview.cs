@@ -116,8 +116,8 @@ namespace BuildingSystem
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log(other);
             if (IsBlockLayer(other.gameObject)){
+                Debug.Log(other);
                 nbBlockingObjects++;
             }
         }
@@ -130,7 +130,7 @@ namespace BuildingSystem
         }
 
         private bool IsBlockLayer(GameObject go){
-            return (go.tag != "Buidling" && BuildCore.instance.blockingLayers == (BuildCore.instance.blockingLayers | (1 << go.layer)));
+            return (go.tag != "Building" && BuildCore.instance.blockingLayers == (BuildCore.instance.blockingLayers | (1 << go.layer)));
         }
     }
 }
