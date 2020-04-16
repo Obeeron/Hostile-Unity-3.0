@@ -12,13 +12,20 @@ public class FightSystem : MonoBehaviour
     private PhotonView PV;
     public Animator animatorArms;
     private Camera cam;
+    public AudioClip[] sounds;
 
     IEnumerator DisableCollider()
     {
-        yield return new WaitForSeconds(1.1f);
+        yield return new WaitForSeconds(1.0f);
         animator.SetLayerWeight(1, 0);
         usable = true;
         canTouch = true;
+    }
+
+    IEnumerator PlaySound(float t, int i)
+    {
+        yield return new WaitForSeconds(t);
+
     }
 
     IEnumerator FireRaycast()

@@ -14,9 +14,11 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
     private PlayerData playerData;
 #pragma warning restore 649
 
+
     private Vector3 impactForce;
     private PhotonView PV;
     private GameObject ennemy;
+    private System.Random rd = new System.Random();
 
     private void Start()
     {
@@ -33,7 +35,7 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
     }
     public void Raycast_hit(RaycastHit hit)
     {
-        Debug.Log("Fired !");
+        //Debug.Log("Fired !");
         GameObject other = hit.collider.gameObject;
         GameObject main = GetComponentInParent<CharacterController>().gameObject;
         Debug.Log(other.name);
@@ -63,10 +65,12 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
                     if(ennemy.GetComponent<Collider>() != null)
                     {
                         //Debug.Log("not a player");
-                        Debug.Log("hit a farmable item");
+                        //Debug.Log("hit a farmable item");
+                        int j = ennemy.GetComponent<FarmingItem>().sounds.Length;
+                        int index = rd.Next(0, j);
                         // On envoit un Event
                         byte eventCode = 2;
-                        object[] content = new object[] { playerData.Strength};
+                        object[] content = new object[] {playerData.Strength, index};
                         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
                         SendOptions send = new SendOptions { Reliability = true };
                         PhotonNetwork.RaiseEvent(eventCode, content, raiseEventOptions, send);
@@ -122,15 +126,29 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
         byte eventCode = photonEvent.Code;
         if(eventCode == 2)
         {
-            Debug.Log("hit a tree");
+            //Debug.Log("hit a tree or a rocks");
             object[] data = (object[])photonEvent.CustomData;
             float dmg = (float)data[0];
+            int i = (int)data[1];
             if(ennemy != null)
             {
-                if (ennemy.GetComponent<FarmingItem>() != null)
+                FarmingItem farm = ennemy.GetComponent<FarmingItem>();
+                if (farm != null)
                 {
-                    Debug.Log("Farming item");
-                    ennemy.GetComponent<FarmingItem>().GetHit(dmg);
+                    AudioSource listener = ennemy.GetComponent<AudioSource>();
+                    if (farm.life == 1)
+                    {
+                        listener.PlayOneShot(farm.sounds[i]);
+                        listener.PlayOneShot(farm.destroyed);
+                    }
+                    else
+                    {
+                        listener.PlayOneShot(farm.sounds[i]);
+                    }
+
+                    //Debug.Log("Farming item");
+                    farm.GetHit(dmg);
+
                     Debug.Log(ennemy.GetComponent<FarmingItem>().life);
                 }
                    

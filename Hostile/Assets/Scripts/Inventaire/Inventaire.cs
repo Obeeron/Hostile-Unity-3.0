@@ -148,13 +148,12 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
                 Item item = (Item)NetworkItemsController.instance.GetNetworkObject(ID);
                 NetworkItemsController.instance.SynchronizeItem(ID, true, handNet.transform.position, false);
                 item.transform.parent = handNet.transform;
-                Debug.Log(item.name.Substring(0, item.name.IndexOf("(")) + "_Network");
+                //Debug.Log(item.name.Substring(0, item.name.IndexOf("(")) + "_Network");
                 foreach (var current in items_Equipable_Network)
                 {
-                    Debug.Log(current.name);
                     if (current.name == (item.name.Substring(0,item.name.IndexOf("("))+"_Network"))
                     {
-                        Debug.Log("Founded");
+                        //Debug.Log("Founded");
                         item.transform.localPosition = current.transform.position;
                         item.transform.localRotation = current.transform.rotation;
                     }
