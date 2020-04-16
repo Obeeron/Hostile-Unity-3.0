@@ -18,8 +18,8 @@ MonoBehaviour:
     key1: {r: 0.40392157, g: 0.46666667, b: 0.58431375, a: 1}
     key2: {r: 0.40392157, g: 0.46666667, b: 0.58431375, a: 1}
     key3: {r: 0.18431827, g: 0.24702033, b: 0.3584906, a: 0}
-    key4: {r: 0.094562136, g: 0.14401256, b: 0.23584908, a: 0}
-    key5: {r: 0.09411765, g: 0.14509805, b: 0.23529412, a: 0}
+    key4: {r: 0.08254717, g: 0.17197329, b: 0.3301887, a: 0}
+    key5: {r: 0.08627451, g: 0.17254902, b: 0.33333334, a: 0}
     key6: {r: 0.1882353, g: 0.24705882, b: 0.36078432, a: 0}
     key7: {r: 0.4039216, g: 0.4666667, b: 0.58431375, a: 0}
     ctime0: 0
@@ -106,15 +106,15 @@ MonoBehaviour:
       time: 0
       value: 0.5
       inSlope: 0
-      outSlope: 10
+      outSlope: 14.285714
       tangentMode: 69
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.05
+      time: 0.035
       value: 1
-      inSlope: 10
+      inSlope: 14.285714
       outSlope: 0
       tangentMode: 69
       weightedMode: 0

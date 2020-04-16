@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5304732541869088606}
   - component: {fileID: 3807481169970512967}
   - component: {fileID: -5977478606717574535}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,6 +51,8 @@ MonoBehaviour:
   usure: 0
   inInventory: 0
   isSelected: 0
+  canBeEquipped: 0
+  equippedIndex: 0
 --- !u!54 &3807481169970512967
 Rigidbody:
   m_ObjectHideFlags: 0
