@@ -26,6 +26,10 @@ namespace Joueur
         private Vector3 fallingVelocity;
         private bool isThereAnimator = true;
         public Animator animatorArms;
+        public Player_Sound_Reference sounds;
+        private AudioSource source;
+
+        private int indexFootStepsSound;
 
         void OnEnable()
         {
@@ -36,7 +40,12 @@ namespace Joueur
                 isThereAnimator = false;
             character = GetComponent<CharacterController>();
         }
-        
+        private void Start()
+        {
+            source = GetComponent<AudioSource>();
+            indexFootStepsSound = 1;
+        }
+
         // Update is called once per frame
         void Update()
         {
@@ -59,9 +68,51 @@ namespace Joueur
 
             Vector2 moveDirection = controls.InGame.Movement.ReadValue<Vector2>();
             currentMovement = (moveDirection.y * transform.forward + moveDirection.x * transform.right).normalized;
+
             
             if (character.isGrounded)
             {
+
+                /*if (moveDirection.x != 0 || moveDirection.y != 0)
+                {
+
+                    if (!source.isPlaying)
+                    {
+                        if (Data.speedState == PlayerData.State.running && moveDirection.y > 0)
+                        {
+                            if(indexFootStepsSound < sounds.footSteps.Length)
+                            {
+                                source.clip = sounds.footSteps[indexFootStepsSound];
+                                indexFootStepsSound++;
+                            }
+                            else
+                            {
+                                source.clip = sounds.footSteps[0];
+                                indexFootStepsSound = 1;
+                            }
+                               
+                            source.Play();
+                            source.pitch = 1.2f;
+                        }
+                        else
+                        {
+                            if (indexFootStepsSound < sounds.footSteps.Length)
+                            {
+                                source.clip = sounds.footSteps[indexFootStepsSound];
+                                indexFootStepsSound++;
+                            }
+                            else
+                            {
+                                source.clip = sounds.footSteps[0];
+                                indexFootStepsSound = 1;
+                            }
+                            source.Play();
+                            source.pitch = 1f;
+                        }
+                        
+                    }
+
+                }*/
                 //for animation
                 if (isThereAnimator)
                 {

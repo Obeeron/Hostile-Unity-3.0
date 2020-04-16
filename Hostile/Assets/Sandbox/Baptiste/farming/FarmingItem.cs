@@ -16,6 +16,9 @@ public class FarmingItem : NetworkObject
     [SerializeField] private Type type;
     [SerializeField] private int DropNmb;
     [SerializeField] public float life;
+    public AudioClip[] sounds;
+
+    public AudioClip destroyed;
 #pragma warning restore
     private int itemDroped;
 
@@ -70,7 +73,7 @@ public class FarmingItem : NetworkObject
                 StartCoroutine(Falling());
                 break;
             case Type.Stone:
-                Destroying();
+                StartCoroutine(WaitToDestroy());
                 break;
         }
     }
@@ -97,6 +100,12 @@ public class FarmingItem : NetworkObject
     {
         yield return new WaitForSeconds(6f);
         StopCoroutine(Falling());
+        Destroying();
+    }
+
+    private IEnumerator WaitToDestroy()
+    {
+        yield return new WaitForSeconds(2);
         Destroying();
     }
 
