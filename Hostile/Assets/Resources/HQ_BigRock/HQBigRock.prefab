@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6046959681718467940}
   - component: {fileID: 1847500653128261504}
   - component: {fileID: 2058934525839470367}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HQBigRock
   m_TagString: Untagged
   m_Icon: {fileID: 0}

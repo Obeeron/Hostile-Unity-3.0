@@ -53,6 +53,9 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
         player.GetComponent<Player_Movement>().onJump.AddListener(delegate { statsController.looseStamina(10f); });
         statsController.OnDeath.AddListener(delegate { deathdrop.DropAll(player); });
         statsController.OnDeath.AddListener(delegate { pldeath.CameraDeath(player); });
+
+        //Build camera ref
+        BuildingSystem.BuildCore.instance.SetCamera(player.GetComponentInChildren<Camera>());
     }
 
     private Vector3 GetSpawnPoint(){

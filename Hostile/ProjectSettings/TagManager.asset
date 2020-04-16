@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Interactable
+  - Foundation_SP
+  - Pillar_SP
+  - Wall_SP
+  - Ceiling_SP
+  - Stair_SP
   layers:
   - Default
   - TransparentFX
@@ -19,9 +24,9 @@ TagManager:
   - transparent
   - ground
   - player
-  - 
-  - 
-  - 
+  - BuildOverview
+  - BuildSnappingPoint
+  - Farmable
   - 
   - 
   - 

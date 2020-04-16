@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 4699967739435152}
   - component: {fileID: 33652085307817142}
   - component: {fileID: 23968705409988316}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Conifer Small BOTD LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4699967739435152
 Transform:
@@ -90,12 +90,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4454104241866706}
   - component: {fileID: 227092337440914680}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Conifer Small BOTD Billboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4454104241866706
 Transform:
@@ -163,12 +163,12 @@ GameObject:
   - component: {fileID: 205709636835153214}
   - component: {fileID: 136614995598757014}
   - component: {fileID: 1794703953414839947}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: PF Conifer Small BOTD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4689083990643298
 Transform:
@@ -256,12 +256,12 @@ GameObject:
   - component: {fileID: 4591230394645006}
   - component: {fileID: 33710429429353474}
   - component: {fileID: 23713938712392732}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Conifer Small BOTD LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4591230394645006
 Transform:
@@ -334,12 +334,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9162621221645765506}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &9162621221645765506
 Transform:

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5992915731753882646}
   - component: {fileID: 4092397740191418674}
   - component: {fileID: 8206104011227519265}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pickaxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}

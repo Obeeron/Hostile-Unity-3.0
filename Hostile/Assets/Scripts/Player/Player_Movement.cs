@@ -157,7 +157,7 @@ namespace Joueur
                
             
             Data.isOnJump = false;
-            character.slopeLimit = 45f;
+            character.slopeLimit = 50f;
         }
 
         private void stateSwap()

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -507967942719060584}
   - component: {fileID: 5533902741833417347}
   - component: {fileID: 3012718606973693811}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Planks
   m_TagString: Untagged
   m_Icon: {fileID: 0}

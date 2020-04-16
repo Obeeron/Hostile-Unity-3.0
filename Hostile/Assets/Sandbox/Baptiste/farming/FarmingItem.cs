@@ -104,12 +104,28 @@ public class FarmingItem : NetworkObject
     {
         Vector3 dropPosition = transform.position;
         dropPosition.y += 1f;
+        Vector3 topPosition = dropPosition + new Vector3(5f, 0f, 0f);
+        Vector3 stonePosition = dropPosition - new Vector3(5f, 0f, 0f);
+        float stoneAngle = 0.1f;
+        if (type == Type.Tree)
+        {
+            topPosition = groundcheck.transform.position;
+        }
         Destroy(gameObject);
         //drop new items here
         while (DropNmb-- > 0)
         {
             NetworkItemsController.instance.InstantiateNetworkObject(itemDroped, dropPosition, Vector3.zero);
-            //Debug.Log(drop.name);
+            if (type == Type.Tree)
+            {
+                dropPosition = Vector3.Lerp(dropPosition, topPosition, 0.1f);
+            }
+            else
+            {
+                dropPosition = Vector3.Slerp(stonePosition, topPosition, stoneAngle);
+                dropPosition += Vector3.forward;
+                stoneAngle += 0.1f;
+            }
         }
     }
 
