@@ -113,9 +113,9 @@ public class FarmingItem : NetworkObject
     {
         Vector3 dropPosition = transform.position;
         dropPosition.y += 1f;
-        Vector3 topPosition = dropPosition + new Vector3(5f, 0f, 0f);
-        Vector3 stonePosition = dropPosition - new Vector3(5f, 0f, 0f);
-        float stoneAngle = 0.1f;
+        Vector3 topPosition = dropPosition;
+        float angle = 0f;
+        float radius = 1.8f;
         if (type == Type.Tree)
         {
             topPosition = groundcheck.transform.position;
@@ -131,9 +131,14 @@ public class FarmingItem : NetworkObject
             }
             else
             {
-                dropPosition = Vector3.Slerp(stonePosition, topPosition, stoneAngle);
-                dropPosition += Vector3.forward;
-                stoneAngle += 0.1f;
+                dropPosition.x = topPosition.x + radius * Mathf.Sin(angle * Mathf.Deg2Rad);
+                dropPosition.z = topPosition.z + radius * Mathf.Cos(angle * Mathf.Deg2Rad);
+                angle += 60f;
+                if (angle >= 380f)
+                {
+                    angle = 0f;
+                    radius += 0.5f;
+                }
             }
         }
     }

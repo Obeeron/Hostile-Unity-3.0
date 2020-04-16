@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Photon.Pun;
 using System;
 using Joueur;
@@ -50,7 +50,11 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
         Inventaire.instance.player = player;
             
         //player movement event setup
-        player.GetComponent<Player_Movement>().onJump.AddListener(delegate { statsController.looseStamina(10f); });
+        Player_Movement movement =  player.GetComponent<Player_Movement>();
+        movement.onJump.AddListener(delegate { statsController.looseStamina(10f); });
+        movement.onFell.AddListener(delegate { 
+            statsController.looseLife(10f);
+        });
         statsController.OnDeath.AddListener(delegate { deathdrop.DropAll(player); });
         statsController.OnDeath.AddListener(delegate { pldeath.CameraDeath(player); });
 
