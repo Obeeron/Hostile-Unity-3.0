@@ -176,8 +176,11 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
             //Debug.Log("My pv " + PV.ViewID + "Ennemy pv is " + pv);
             if(PV.ViewID == pv)
             {
-                GameObject g = GameObject.Find("StatsController");
-                g.GetComponent<Joueur.StatsController>().getHit(dmg);
+                if (Joueur.StatsController.instance.sounds == null)
+                    Joueur.StatsController.instance.sounds = GetComponentInParent<Player_Sound_Reference>();
+                
+
+                Joueur.StatsController.instance.getHit(dmg);
                 //Debug.Log("ur getting hit");
             }
         }

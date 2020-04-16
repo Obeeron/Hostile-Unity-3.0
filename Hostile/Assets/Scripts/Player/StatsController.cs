@@ -37,6 +37,7 @@ namespace Joueur
         private float hungerTimer = 0.0f;
         private int MenuScene = 0;
         private bool isAlive = true;
+        public Player_Sound_Reference sounds;
 
         void Update ()
         {
@@ -186,6 +187,7 @@ namespace Joueur
         public void getHit(float dmg)
         {
             looseLife(dmg);
+            sounds.PlayGetHit();
             Debug.Log("ur gettting hit from getHit in statsController");
         }
 

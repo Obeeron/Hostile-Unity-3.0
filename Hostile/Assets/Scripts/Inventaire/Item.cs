@@ -64,7 +64,7 @@ public class Item : Interactable
     {
         CalculTemps();
         position.y+=1;
-        NetworkItemsController.instance.SynchronizeItem(ID,true,position + new Vector3(2,2,2));
+        NetworkItemsController.instance.SynchronizeItem(ID,true,position + transform.up*2 + transform.forward*2);
     }
 
 

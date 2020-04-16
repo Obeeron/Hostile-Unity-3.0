@@ -76,46 +76,6 @@ namespace Joueur
             if (character.isGrounded)
             {
 
-                /*if (moveDirection.x != 0 || moveDirection.y != 0)
-                {
-
-                    if (!source.isPlaying)
-                    {
-                        if (Data.speedState == PlayerData.State.running && moveDirection.y > 0)
-                        {
-                            if(indexFootStepsSound < sounds.footSteps.Length)
-                            {
-                                source.clip = sounds.footSteps[indexFootStepsSound];
-                                indexFootStepsSound++;
-                            }
-                            else
-                            {
-                                source.clip = sounds.footSteps[0];
-                                indexFootStepsSound = 1;
-                            }
-                               
-                            source.Play();
-                            source.pitch = 1.2f;
-                        }
-                        else
-                        {
-                            if (indexFootStepsSound < sounds.footSteps.Length)
-                            {
-                                source.clip = sounds.footSteps[indexFootStepsSound];
-                                indexFootStepsSound++;
-                            }
-                            else
-                            {
-                                source.clip = sounds.footSteps[0];
-                                indexFootStepsSound = 1;
-                            }
-                            source.Play();
-                            source.pitch = 1f;
-                        }
-                        
-                    }
-
-                }*/
                 //for animation
                 if (isThereAnimator)
                 {
@@ -136,9 +96,33 @@ namespace Joueur
                         animatorArms.SetFloat("TurnSpeed", moveDirection.y);
                     }
                         
+                    if(Data.speedState == PlayerData.State.walking && (moveDirection.x > 0 || moveDirection.x < 0))
+                    {
+                        float val = 0;
+                        if (moveDirection.x > 0)
+                            val = 0.5f;
+                        else
+                            val = -0.5f;
+                        animator.SetFloat("Speed", val);
+                        animatorArms.SetFloat("Speed", val);
+                    }
+                    else if (Data.speedState == PlayerData.State.running && (moveDirection.x > 0 || moveDirection.x < 0))
+                    {
+                        float val = 0;
+                        if (moveDirection.x > 0)
+                            val = 1f;
+                        else
+                            val = -1f;
+                        animator.SetFloat("Speed", val);
+                        animatorArms.SetFloat("Speed",val);
+                    }
+                    else
+                    {
+                        animator.SetFloat("Speed", moveDirection.x);
+                        animatorArms.SetFloat("Speed", moveDirection.x);
+                    }
 
-                    animator.SetFloat("Speed", moveDirection.x);
-                    animatorArms.SetFloat("Speed", moveDirection.x);
+
 
 
                     animator.SetFloat("JumpLeg", moveDirection.x);
