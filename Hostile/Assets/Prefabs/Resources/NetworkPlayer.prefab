@@ -341,6 +341,9 @@ MonoBehaviour:
   onJump:
     m_PersistentCalls:
       m_Calls: []
+  onFell:
+    m_PersistentCalls:
+      m_Calls: []
   Data: {fileID: 11400000, guid: 2f32f42aeb55de44591bc11906113bea, type: 2}
   animatorArms: {fileID: 6010150846408853810}
   sounds: {fileID: 8316199722763432264}

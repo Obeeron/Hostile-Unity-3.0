@@ -71,7 +71,6 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
                         float strength = 0;
                         if (fItem.type == FarmingItem.Type.Tree)
                         {
-                            Debug.Log("my item is a axe");
                             strength = playerData.ChoppingStrength;
                         }
                         else if (fItem.type == FarmingItem.Type.Stone)

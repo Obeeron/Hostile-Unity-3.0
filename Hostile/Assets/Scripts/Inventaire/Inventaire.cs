@@ -170,6 +170,7 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
 
                 //
                 equipped = true;
+                ChangeStats(equipped);
                 Debug.Log("Equipped !");
             }
         }
@@ -207,24 +208,24 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
             if (Equipped != null)
                 Switch(indexCurrentlyEquipped, true);
             equipped = false;
+            ChangeStats(equipped);
         }
     }
 
     public void ChangeStats(bool equipped)
     {
-        PlayerData data = player.GetComponent<PlayerData>();
+        
         if (equipped)
         {
-            data.ChoppingStrength *= itemSelected.ChoppingStrength;
-            data.MiningStrength *= itemSelected.MiningStrength;
-            data.Strength *= itemSelected.Strength;
+            Joueur.StatsController.instance.UpdateChoppingStrength(itemSelected.ChoppingStrength);
+            Joueur.StatsController.instance.UpdateMiningStrength(itemSelected.MiningStrength);
+            Joueur.StatsController.instance.UpdateStrength(itemSelected.Strength);
         }
         else
         {
-            data.ChoppingStrength = 1;
-            data.MiningStrength = 1;
-            data.Strength = 1;
-
+            Joueur.StatsController.instance.UpdateChoppingStrength(0);
+            Joueur.StatsController.instance.UpdateMiningStrength(0);
+            Joueur.StatsController.instance.UpdateStrength(1);
         }
     }
 

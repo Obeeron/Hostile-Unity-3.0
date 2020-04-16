@@ -11,7 +11,22 @@ namespace Joueur
 {
     public class StatsController : MonoBehaviourPunCallbacks
     {
-    #pragma warning disable 649
+
+        #region Singleton
+        public static StatsController instance;
+
+        private void Awake()
+        {
+            if (instance != null)
+            {
+                Debug.LogWarning("il y a dejà une instance de statsController");
+                return;
+            }
+            instance = this;
+        }
+        #endregion
+
+#pragma warning disable 649
         [SerializeField] PlayerData Data;
     #pragma warning restore 649
         public UnityEvent OnDeath;
@@ -33,6 +48,19 @@ namespace Joueur
             }
         }
 
+        public void UpdateChoppingStrength(float st)
+        {
+            Data.ChoppingStrength = st;
+        }
+        public void UpdateMiningStrength(float st)
+        {
+            Data.MiningStrength = st;
+        }
+
+        public void UpdateStrength(float st)
+        {
+            Data.Strength = st;
+        }
         private void refreshSpeed()
         {
             //modifying speed
