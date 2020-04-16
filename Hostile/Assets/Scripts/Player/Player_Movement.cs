@@ -28,6 +28,7 @@ namespace Joueur
         public Animator animatorArms;
         public Player_Sound_Reference sounds;
         private AudioSource source;
+        private Player_Sound_Reference playerSound;
 
         private int indexFootStepsSound;
 
@@ -43,6 +44,7 @@ namespace Joueur
         private void Start()
         {
             source = GetComponent<AudioSource>();
+            playerSound = gameObject.GetComponent<Player_Sound_Reference>();
             indexFootStepsSound = 1;
         }
 
@@ -217,9 +219,11 @@ namespace Joueur
             {
                 case PlayerData.State.walking:
                     Data.speedState = PlayerData.State.running;
+                    playerSound.isRunning = true;
                     break;
                 case PlayerData.State.running:
                     Data.speedState = PlayerData.State.walking;
+                    playerSound.isRunning = false;
                     break;
                 default:
                     break;
@@ -237,6 +241,7 @@ namespace Joueur
             else
             {
                 Data.speedState = PlayerData.State.crouching;
+                playerSound.isRunning = false;
                 if (isThereAnimator)
                 {
                     animator.SetBool("Crouch", true);
