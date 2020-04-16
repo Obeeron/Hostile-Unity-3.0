@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,6 +10,7 @@ namespace Joueur
     public class Player_Movement : MonoBehaviour
     {
         public UnityEvent onJump;
+        public UnityEvent onFell;
 
         private float groundLerp = 0.8f;
         private float airLerp = 0.96f;
@@ -153,6 +154,10 @@ namespace Joueur
                 }
                 else if (Math.Abs(fallingVelocity.y - Physics.gravity.y) > 0.0001f)
                 {
+                    if (fallingVelocity.y < -20f)
+                    {
+                        onFell?.Invoke();
+                    }
                     fallingVelocity.y = Physics.gravity.y;
                 }
 
