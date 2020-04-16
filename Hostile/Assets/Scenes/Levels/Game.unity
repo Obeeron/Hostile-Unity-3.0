@@ -8993,11 +8993,11 @@ MonoBehaviour:
   referenceCode: 0
   playerCamera: {fileID: 0}
   editor_buildingsParent: {fileID: 2013499622}
-  buildingPrefab: {fileID: 6872896968927801828, guid: 806b69a80fffad549a519ea6689265e4,
+  buildingPrefab: {fileID: 6872896968927801828, guid: 181b5227e2780744487f18afeda7794b,
     type: 3}
   avoidOverviewMask:
     serializedVersion: 2
-    m_Bits: 6967
+    m_Bits: 39735
   snappingMask:
     serializedVersion: 2
     m_Bits: 23351
