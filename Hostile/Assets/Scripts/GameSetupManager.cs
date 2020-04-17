@@ -25,6 +25,7 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
         SetupCamera();
         CreatePlayer();
         loadingScreen.SetActive(false);
+        EnablePlayerScripts();
     }
 
     private void SetupCamera()

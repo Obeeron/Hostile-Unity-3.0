@@ -4028,7 +4028,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461612601}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88a3e4e0897bd844d9c49ff56c5f7af2, type: 3}
   m_Name: 
@@ -4040,6 +4040,8 @@ MonoBehaviour:
   barStamina: {fileID: 66136766}
   barHealth: {fileID: 5520400118019585915}
   barHunger: {fileID: 2001927146}
+  sounds: {fileID: 0}
+  gameStarted: 0
 --- !u!4 &461612603
 Transform:
   m_ObjectHideFlags: 0

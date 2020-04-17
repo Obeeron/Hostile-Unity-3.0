@@ -38,7 +38,6 @@ namespace Joueur
         private int MenuScene = 0;
         private bool isAlive = true;
         public Player_Sound_Reference sounds;
-        public bool gameStarted = false;
 
         void Start()
         {
@@ -177,7 +176,7 @@ namespace Joueur
         public void looseLife(float loss)
         {
             staminaTimer = 0f;
-            if (Data.Life + loss <= 0f)
+            if (Data.Life - loss <= 0f)
             {
                 Data.Life = -1f;
                 isAlive = false;

@@ -25,7 +25,6 @@ namespace Joueur
         private Vector3 movement;
         private Vector3 currentMovement;
         public Vector3 fallingVelocity;
-        public float limitfall = Physics.gravity.y * 2f;
         private bool isThereAnimator = true;
         public Animator animatorArms;
         private AudioSource source;
@@ -36,7 +35,11 @@ namespace Joueur
 
         void OnEnable()
         {
-            controls = new PlayerControls();
+            if (Data.controls == null)
+                controls = new PlayerControls();
+            else
+                controls = Data.controls;
+
             controls.InGame.Enable();
             animator = this.gameObject.GetComponent<Animator>();
             if (animator == null)
@@ -50,7 +53,7 @@ namespace Joueur
             playerSound = gameObject.GetComponent<Player_Sound_Reference>();
             indexFootStepsSound = 1;
             onJump.AddListener(delegate { StatsController.instance.looseStamina(10f);});
-            onFell.AddListener(delegate { StatsController.instance.looseLife(10f);});
+            // onFell.AddListener(delegate { StatsController.instance.looseLife(10f);});
         }
 
         // Update is called once per frame
@@ -167,10 +170,6 @@ namespace Joueur
                     }
 
                 }
-
-
-
-
                 if (controls.InGame.Jump.triggered){
                     if (Data.Stamina > 0f)
                     {
@@ -181,9 +180,15 @@ namespace Joueur
                 }
                 else if (Math.Abs(fallingVelocity.y - Physics.gravity.y) > 0.0001f)
                 {
-                    if (fallingVelocity.y < limitfall)
+                    if (fallingVelocity.y < Physics.gravity.y * 2.3f)
                     {
                         onFell?.Invoke();
+                        StatsController.instance.looseLife(15f);
+                    }
+                    else if (fallingVelocity.y < -18f)
+                    {
+                        onFell?.Invoke();
+                        StatsController.instance.looseLife(10f);
                     }
                     fallingVelocity.y = Physics.gravity.y;
                 }

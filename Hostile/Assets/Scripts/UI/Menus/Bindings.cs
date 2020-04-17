@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Bindings : MonoBehaviour
 {
@@ -15,26 +16,27 @@ public class Bindings : MonoBehaviour
     #pragma warning disable 649
     [SerializeField] private PlayerControls binds;
     #pragma warning restore 649
-    private Text Uptext;
-    private Text DownText;
-    private Text LefttText;
-    private Text RightText;
-    private Text JumpText;
-    private Text RunSText;
-    private Text CrouchSText;
+    private TextMeshProUGUI Uptext;
+    private TextMeshProUGUI DownText;
+    private TextMeshProUGUI LefttText;
+    private TextMeshProUGUI RightText;
+    private TextMeshProUGUI JumpText;
+    private TextMeshProUGUI RunSText;
+    private TextMeshProUGUI CrouchSText;
 
     public void Start()
     {
-        binds = new PlayerControls();
+        if (binds == null)
+            ResestControls();
         if (controllsPannel != null)
         {
-            Uptext = controllsPannel.transform.Find("UpBtn").Find("Uptxt").GetComponent<Text>();
-            DownText = controllsPannel.transform.Find("DownBtn").Find("Downtxt").GetComponent<Text>();
-            LefttText = controllsPannel.transform.Find("LeftBtn").Find("Lefttxt").GetComponent<Text>();
-            RightText = controllsPannel.transform.Find("RightBtn").Find("Righttxt").GetComponent<Text>();
-            JumpText = controllsPannel.transform.Find("JumpBtn").Find("Jumptxt").GetComponent<Text>();
-            RunSText = controllsPannel.transform.Find("RunSBtn").Find("RunStxt").GetComponent<Text>();
-            CrouchSText = controllsPannel.transform.Find("CrouchSBtn").Find("CrouchStxt").GetComponent<Text>();
+            Uptext = controllsPannel.transform.Find("UpBtn").Find("Text").GetComponent<TextMeshProUGUI>();
+            DownText = controllsPannel.transform.Find("DownBtn").Find("Text").GetComponent<TextMeshProUGUI>();
+            LefttText = controllsPannel.transform.Find("LeftBtn").Find("Text").GetComponent<TextMeshProUGUI>();
+            RightText = controllsPannel.transform.Find("RightBtn").Find("Text").GetComponent<TextMeshProUGUI>();
+            JumpText = controllsPannel.transform.Find("JumpBtn").Find("Text").GetComponent<TextMeshProUGUI>();
+            RunSText = controllsPannel.transform.Find("RunSBtn").Find("Text").GetComponent<TextMeshProUGUI>();
+            CrouchSText = controllsPannel.transform.Find("CrouchSBtn").Find("Text").GetComponent<TextMeshProUGUI>();
             //Printings Bindings//
             Uptext.text = "" + InputControlPath.ToHumanReadableString(binds.InGame.Movement.bindings[1].effectivePath).Split(new string[] {"[Keyb"}, StringSplitOptions.None)[0];
             DownText.text = "" + InputControlPath.ToHumanReadableString(binds.InGame.Movement.bindings[2].effectivePath).Split(new string[] {"[Keyb"}, StringSplitOptions.None)[0];
@@ -50,11 +52,26 @@ public class Bindings : MonoBehaviour
         }
     }
 
+    public void ResestControls()
+    {
+        binds = new PlayerControls();
+    }
+
+    public void RebindJump()
+    {
+        RemapButtonClicked(binds.InGame.Jump);
+        //JumpText.text = "" + InputControlPath.ToHumanReadableString(binds.InGame.Jump.bindings[0].effectivePath).Split(new string[] {"[Keyb"}, StringSplitOptions.None)[0];
+    }
     
-    void RemapButtonClicked(InputAction actionToRebind)
+    public void RemapButtonClicked(InputAction actionToRebind)
     {
         var rebindOperation = actionToRebind
-            .PerformInteractiveRebinding().Start();
+            .PerformInteractiveRebinding()
+            .WithCancelingThrough("<Keyboard>/#(escape)")
+            .WithControlsExcluding("Mouse")
+            .WithTimeout(2f);
+
+        rebindOperation.Start();
     }
 
     public void OnBackBtnClick()
