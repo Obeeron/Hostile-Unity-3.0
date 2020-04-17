@@ -30,6 +30,7 @@ namespace Joueur
 
         public void Start()
         {
+            resetStart();
             if (Pannel != null)
             {
                 remainingPoints = Pannel.transform.Find("Points").GetComponent<Text>();
@@ -40,13 +41,7 @@ namespace Joueur
                 StaminaText = Pannel.transform.Find("StaminaStats").GetComponent<Text>();
                 HungerText = Pannel.transform.Find("HungerStats").GetComponent<Text>();
                 Cursor.lockState = CursorLockMode.None;
-                remainingPoints.text = "" + Skills;
-                LifeText.text = "" + Health;
-                HungerText.text = "" + Hunger;
-                StaminaText.text = "" + Stamina;
-                AgilityText.text = "" + Agility;
-                DexterityText.text = "" + Dexterity;
-                StrengthText.text = "" + Strength;
+                refreshPannel();
             }
             else 
             {
@@ -64,6 +59,37 @@ namespace Joueur
             }
         }
 
+        private void refreshPannel()
+        {
+            remainingPoints.text = "" + Skills;
+            LifeText.text = "" + Health;
+            HungerText.text = "" + Hunger;
+            StaminaText.text = "" + Stamina;
+            AgilityText.text = "" + Agility;
+            DexterityText.text = "" + Dexterity;
+            StrengthText.text = "" + Strength;
+        }
+
+        private void resetStart()
+        {
+            Data.Life = 100f;
+            Data.MaxStamina = 100f;
+            Data.MaxHunger = 100f;
+            Data.MaxLife = 100;
+            Data.Life = 100;
+            Data.Stamina = 100;
+            Data.Hunger = 600;
+            Data.Agility = 1;
+            Data.Dexterity = 1;
+            Data.Strength = 1;
+            Data.ChoppingStrength = 1;
+            Data.MiningStrength = 1;
+            Data.Damage = 5;
+            Data.speedState = PlayerData.State.walking;
+            Data.isIdle = true;
+            Data.isOnJump = false;
+        }
+
         public void LifeUp(bool up)
         {
             if (up)
@@ -79,8 +105,7 @@ namespace Joueur
                 Health -= 10;
                 Skills++;
             }
-            remainingPoints.text = "" + Skills;
-            LifeText.text = "" + Health;
+            refreshPannel();
         }
 
         public void HungerUp(bool up)
@@ -98,8 +123,7 @@ namespace Joueur
                 Hunger -= 1;
                 Skills++;
             }
-            remainingPoints.text = "" + Skills;
-            HungerText.text = "" + Hunger;
+            refreshPannel();
         }
 
         public void StaminaUp(bool up)
@@ -117,8 +141,7 @@ namespace Joueur
                 Stamina -= 5;
                 Skills++;
             }
-            remainingPoints.text = "" + Skills;
-            StaminaText.text = "" + Stamina;
+            refreshPannel();
         }
 
         public void StrengthUp(bool up)
@@ -136,8 +159,7 @@ namespace Joueur
                 Strength -= 0.1f;
                 Skills++;
             }
-            remainingPoints.text = "" + Skills;
-            StrengthText.text = "" + Strength;
+            refreshPannel();
         }
 
         public void AgilityUp(bool up)
@@ -155,8 +177,7 @@ namespace Joueur
                 Agility -= 0.1f;
                 Skills++;
             }
-            remainingPoints.text = "" + Skills;
-            AgilityText.text = "" + Agility;
+            refreshPannel();
         }
 
         public void DexterityUp(bool up)
@@ -174,8 +195,7 @@ namespace Joueur
                 Dexterity -= 0.1f;
                 Skills++;
             }
-            remainingPoints.text = "" + Skills;
-            DexterityText.text = "" + Dexterity;
+            refreshPannel();
         }
 
         public void Choosing()
@@ -241,14 +261,7 @@ namespace Joueur
             Data.Life = Health;
             Data.Hunger = Hunger * 60f;
             Data.Stamina = Stamina;
-            
-            remainingPoints.text = "" + Skills;
-            LifeText.text = "" + Health;
-            HungerText.text = "" + Hunger;
-            StaminaText.text = "" + Stamina;
-            AgilityText.text = "" + Agility;
-            DexterityText.text = "" + Dexterity;
-            StrengthText.text = "" + Strength;
+            refreshPannel();
             
             this.enabled = false;
         }

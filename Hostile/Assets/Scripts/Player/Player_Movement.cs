@@ -24,7 +24,8 @@ namespace Joueur
         protected Animator animator;
         private Vector3 movement;
         private Vector3 currentMovement;
-        private Vector3 fallingVelocity;
+        public Vector3 fallingVelocity;
+        public float limitfall = Physics.gravity.y * 2f;
         private bool isThereAnimator = true;
         public Animator animatorArms;
         public Player_Sound_Reference sounds;
@@ -47,6 +48,8 @@ namespace Joueur
             source = GetComponent<AudioSource>();
             playerSound = gameObject.GetComponent<Player_Sound_Reference>();
             indexFootStepsSound = 1;
+            onJump.AddListener(delegate { StatsController.instance.looseStamina(10f);});
+            onFell.AddListener(delegate { StatsController.instance.looseLife(10f);});
         }
 
         // Update is called once per frame
@@ -121,10 +124,6 @@ namespace Joueur
                         animator.SetFloat("Speed", moveDirection.x);
                         animatorArms.SetFloat("Speed", moveDirection.x);
                     }
-
-
-
-
                     animator.SetFloat("JumpLeg", moveDirection.x);
                     animator.SetFloat("Jump", moveDirection.y);
                 }
@@ -138,7 +137,7 @@ namespace Joueur
                 }
                 else if (Math.Abs(fallingVelocity.y - Physics.gravity.y) > 0.0001f)
                 {
-                    if (fallingVelocity.y < -20f)
+                    if (fallingVelocity.y < limitfall)
                     {
                         onFell?.Invoke();
                     }

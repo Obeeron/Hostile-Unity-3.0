@@ -38,6 +38,12 @@ namespace Joueur
         private int MenuScene = 0;
         private bool isAlive = true;
         public Player_Sound_Reference sounds;
+        public bool gameStarted = false;
+
+        void Start()
+        {
+            OnDeath.AddListener(delegate { reset();});
+        }
 
         void Update ()
         {
@@ -216,10 +222,30 @@ namespace Joueur
             }
             barHunger?.Barupdate(Data.Hunger/Data.MaxHunger);
         }
+
+        public void reset()
+        {
+            Data.Life = 100f;
+            Data.MaxStamina = 100f;
+            Data.MaxHunger = 100f;
+            Data.MaxLife = 100;
+            Data.Life = 100;
+            Data.Stamina = 100;
+            Data.Hunger = 600;
+            Data.Agility = 1;
+            Data.Dexterity = 1;
+            Data.Strength = 1;
+            Data.ChoppingStrength = 1;
+            Data.MiningStrength = 1;
+            Data.Damage = 5;
+            Data.speedState = PlayerData.State.walking;
+            Data.isIdle = true;
+            Data.isOnJump = false;
+        }
         
         public override void OnLeftRoom()
         {
-            Data.Life = 100f;
+            reset();
             Data.speedState = PlayerData.State.walking;
             SceneManager.LoadScene(MenuScene);
         }

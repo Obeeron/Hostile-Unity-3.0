@@ -27,4 +27,5 @@ public class PlayerData : ScriptableObject
     public bool isIdle;
     public bool isOnJump;
     public float speed;
+    public PlayerControls controls;
 }

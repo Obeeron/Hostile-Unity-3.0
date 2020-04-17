@@ -49,17 +49,17 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
         //UI's player reference
         Inventaire.instance.player = player;
             
-        //player movement event setup
-        Player_Movement movement =  player.GetComponent<Player_Movement>();
-        movement.onJump.AddListener(delegate { statsController.looseStamina(10f); });
-        movement.onFell.AddListener(delegate { 
-            statsController.looseLife(10f);
-        });
+        //player death event setup
         statsController.OnDeath.AddListener(delegate { deathdrop.DropAll(player); });
         statsController.OnDeath.AddListener(delegate { pldeath.CameraDeath(player); });
 
         //Build camera ref
         BuildingSystem.BuildCore.instance.SetCamera(player.GetComponentInChildren<Camera>());
+    }
+
+    private void EnablePlayerScripts()
+    {
+        statsController.enabled = true;
     }
 
     private Vector3 GetSpawnPoint(){
