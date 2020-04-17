@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player_Sound_Reference : MonoBehaviour
 {
     public AudioClip[] footSteps;
+    public AudioClip[] footStepsRocks;
     public AudioClip[] GetHit;
     public AudioClip[] Die;
 
@@ -12,18 +13,19 @@ public class Player_Sound_Reference : MonoBehaviour
     private System.Random rd = new System.Random();
     private AudioClip previousClip;
 
+    public int indexGround = 0;
     public bool isRunning;
 
     public void PlayFootSteps(AnimationEvent animationEvent)
     {
-        if(animationEvent.animatorClipInfo.weight > 0.2)
+        //Debug.Log(animationEvent.animatorClipInfo.clip.name + " // " + animationEvent.animatorClipInfo.weight);
+        if(animationEvent.animatorClipInfo.weight >= 0.5)
         {
-            if(!isRunning)
+            if (!isRunning)
                 source.pitch = Random.Range(0.9f, 1.1f);
             else
                 source.pitch = Random.Range(1.1f, 1.3f);
-            source.volume = Random.Range(0.10f, 0.20f);
-            AudioClip clip = GetAudioClip(1);
+            AudioClip clip = GetAudioClip(indexGround);
             source.PlayOneShot(clip);
         }
     }
@@ -42,8 +44,13 @@ public class Player_Sound_Reference : MonoBehaviour
         AudioClip[] clips;
         switch (indexArray)
         {
-            case 1:
+            case 0:
                 clips = footSteps;
+                source.volume = Random.Range(0.009f, 0.012f);
+                break;
+            case 1:
+                clips = footStepsRocks;
+                source.volume = Random.Range(0.025f, 0.029f);
                 break;
             case 2:
                 clips = GetHit;
@@ -56,6 +63,7 @@ public class Player_Sound_Reference : MonoBehaviour
                 break;
              
         }
+        Debug.Log(indexArray);
         AudioClip selectedClip = clips[Random.Range(0, footSteps.Length - 1)];
 
         while(selectedClip == previousClip && i > 0)

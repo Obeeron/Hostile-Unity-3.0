@@ -252,6 +252,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 35005f0a96d0a24498c3f73f93068d4b, type: 3}
   - {fileID: 8300000, guid: 0572360836d02ea46a5b8e5d918534cc, type: 3}
   - {fileID: 8300000, guid: 199eacef362dc0a459845bb99b72c24c, type: 3}
+  footStepsRocks:
+  - {fileID: 8300000, guid: 537e851bf60af354a990e74a1c3dbaed, type: 3}
+  - {fileID: 8300000, guid: 7151f9c62c4706e42a85f382b413ad77, type: 3}
+  - {fileID: 8300000, guid: 586d1d55cffabfb4aaf694481445d632, type: 3}
+  - {fileID: 8300000, guid: 28653ced20489a645a982281584cd5cd, type: 3}
+  - {fileID: 8300000, guid: 41b6d616259a6d24b99b95ab48372c9d, type: 3}
+  - {fileID: 8300000, guid: cc9cb14c4059c9f458bc7c316ad0dcc0, type: 3}
+  - {fileID: 8300000, guid: f9b0a0a9424b5fe44b044c32d40857f7, type: 3}
+  - {fileID: 8300000, guid: 9a3caa88d01377143bb051c7f6681b24, type: 3}
   GetHit:
   - {fileID: 8300000, guid: 473d9a874e6b43346afcb51819ef739d, type: 3}
   - {fileID: 8300000, guid: 7ee136c4b23048b489381fa1072e3d9b, type: 3}
@@ -264,6 +273,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5fcb1f82d77fc4d4ba2f5fdd51b54441, type: 3}
   - {fileID: 8300000, guid: ca26277e685d3d54785757d522898a92, type: 3}
   source: {fileID: 2273320385851076372}
+  indexGround: 0
   isRunning: 0
 --- !u!114 &127209232135512406
 MonoBehaviour:
@@ -355,7 +365,6 @@ MonoBehaviour:
       m_Calls: []
   Data: {fileID: 11400000, guid: 2f32f42aeb55de44591bc11906113bea, type: 2}
   animatorArms: {fileID: 6010150846408853810}
-  sounds: {fileID: 8316199722763432264}
 --- !u!114 &7893987338759503934
 MonoBehaviour:
   m_ObjectHideFlags: 0

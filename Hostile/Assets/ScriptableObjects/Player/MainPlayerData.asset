@@ -21,6 +21,8 @@ MonoBehaviour:
   Agility: 1
   Dexterity: 1
   Strength: 1.5000001
+  ChoppingStrength: 1
+  MiningStrength: 1
   Damage: 5
   speedState: 0
   isIdle: 1

@@ -10,6 +10,7 @@ TagManager:
   - Wall_SP
   - Ceiling_SP
   - Stair_SP
+  - Rock
   layers:
   - Default
   - TransparentFX

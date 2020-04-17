@@ -62,7 +62,6 @@ public class NetworkObjectManager : MonoBehaviour
             obj.ID = 0;
         else
             obj.ID = netObjList[netObjList.Count-1].ID + 1;
-        Debug.Log("Voici mon id attribué : " + obj.ID);
         netObjList.Add(obj);
         referenceCode = newRefCode;
     }

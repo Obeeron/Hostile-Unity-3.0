@@ -28,9 +28,9 @@ namespace Joueur
         public float limitfall = Physics.gravity.y * 2f;
         private bool isThereAnimator = true;
         public Animator animatorArms;
-        public Player_Sound_Reference sounds;
         private AudioSource source;
         private Player_Sound_Reference playerSound;
+        private Camera cam;
 
         private int indexFootStepsSound;
 
@@ -46,6 +46,7 @@ namespace Joueur
         private void Start()
         {
             source = GetComponent<AudioSource>();
+            cam = GetComponentInChildren<Camera>();
             playerSound = gameObject.GetComponent<Player_Sound_Reference>();
             indexFootStepsSound = 1;
             onJump.AddListener(delegate { StatsController.instance.looseStamina(10f);});
@@ -82,24 +83,41 @@ namespace Joueur
                 //for animation
                 if (isThereAnimator)
                 {
-                    if(Data.speedState == PlayerData.State.walking && moveDirection.y > 0)
+                    if (Data.speedState == PlayerData.State.walking && (moveDirection.y > 0 || moveDirection.y < 0))
                     {
-                        animator.SetFloat("TurnSpeed", 0.5f);
-                        animatorArms.SetFloat("TurnSpeed", 0.5f);
+                        if (moveDirection.y > 0)
+                        {
+                            animator.SetFloat("TurnSpeed", 0.5f);
+                            animatorArms.SetFloat("TurnSpeed", 0.5f);
+                        }
+                        else
+                        {
+                            animator.SetFloat("TurnSpeed", -0.5f);
+                            animatorArms.SetFloat("TurnSpeed", -0.5f);
+                        }
+
                     }
                     else
-                    if (Data.speedState == PlayerData.State.running && moveDirection.y > 0)
+                    if (Data.speedState == PlayerData.State.running && (moveDirection.y > 0 || moveDirection.y < 0))
                     {
-                        animator.SetFloat("TurnSpeed", 1f);
-                        animatorArms.SetFloat("TurnSpeed", 1f);
+                        if (moveDirection.y > 0)
+                        {
+                            animator.SetFloat("TurnSpeed", 1f);
+                            animatorArms.SetFloat("TurnSpeed", 1f);
+                        }
+                        else
+                        {
+                            animator.SetFloat("TurnSpeed", -1f);
+                            animatorArms.SetFloat("TurnSpeed", -1f);
+                        }
                     }
                     else
                     {
                         animator.SetFloat("TurnSpeed", moveDirection.y);
                         animatorArms.SetFloat("TurnSpeed", moveDirection.y);
                     }
-                        
-                    if(Data.speedState == PlayerData.State.walking && (moveDirection.x > 0 || moveDirection.x < 0))
+
+                    if (Data.speedState == PlayerData.State.walking && (moveDirection.x > 0 || moveDirection.x < 0))
                     {
                         float val = 0;
                         if (moveDirection.x > 0)
@@ -117,16 +135,42 @@ namespace Joueur
                         else
                             val = -1f;
                         animator.SetFloat("Speed", val);
-                        animatorArms.SetFloat("Speed",val);
+                        animatorArms.SetFloat("Speed", val);
                     }
                     else
                     {
                         animator.SetFloat("Speed", moveDirection.x);
                         animatorArms.SetFloat("Speed", moveDirection.x);
                     }
+
                     animator.SetFloat("JumpLeg", moveDirection.x);
                     animator.SetFloat("Jump", moveDirection.y);
                 }
+
+                //
+                if (moveDirection.x != 0 || moveDirection.y != 0)
+                {
+                    RaycastHit hit = new RaycastHit();
+                    if (Physics.Raycast(transform.position, Vector3.down, out hit))
+                    {
+                        string tag = hit.collider.gameObject.tag;
+
+                        if (tag == "Rock")
+                        {
+                            Debug.Log(tag);
+                            playerSound.indexGround = 1;
+                        }
+                        else
+                        {
+                            playerSound.indexGround = 0;
+                        }
+                    }
+
+                }
+
+
+
+
                 if (controls.InGame.Jump.triggered){
                     if (Data.Stamina > 0f)
                     {
@@ -171,6 +215,76 @@ namespace Joueur
             character.Move(movement);
             character.Move(fallingVelocity * Time.fixedDeltaTime);
         
+        }
+
+        private void AnimatorChanges(Vector2 moveDirection)
+        {
+            //for animation
+            if (isThereAnimator)
+            {
+                if (Data.speedState == PlayerData.State.walking && (moveDirection.y > 0 || moveDirection.y < 0))
+                {
+                    if (moveDirection.y > 0)
+                    {
+                        animator.SetFloat("TurnSpeed", 0.5f);
+                        animatorArms.SetFloat("TurnSpeed", 0.5f);
+                    }
+                    else
+                    {
+                        animator.SetFloat("TurnSpeed", -0.5f);
+                        animatorArms.SetFloat("TurnSpeed", -0.5f);
+                    }
+
+                }
+                else
+                if (Data.speedState == PlayerData.State.running && (moveDirection.y > 0 || moveDirection.y < 0))
+                {
+                    if (moveDirection.y > 0)
+                    {
+                        animator.SetFloat("TurnSpeed", 1f);
+                        animatorArms.SetFloat("TurnSpeed", 1f);
+                    }
+                    else
+                    {
+                        animator.SetFloat("TurnSpeed", -1f);
+                        animatorArms.SetFloat("TurnSpeed", -1f);
+                    }
+                }
+                else
+                {
+                    animator.SetFloat("TurnSpeed", moveDirection.y);
+                    animatorArms.SetFloat("TurnSpeed", moveDirection.y);
+                }
+
+                if (Data.speedState == PlayerData.State.walking && (moveDirection.x > 0 || moveDirection.x < 0))
+                {
+                    float val = 0;
+                    if (moveDirection.x > 0)
+                        val = 0.5f;
+                    else
+                        val = -0.5f;
+                    animator.SetFloat("Speed", val);
+                    animatorArms.SetFloat("Speed", val);
+                }
+                else if (Data.speedState == PlayerData.State.running && (moveDirection.x > 0 || moveDirection.x < 0))
+                {
+                    float val = 0;
+                    if (moveDirection.x > 0)
+                        val = 1f;
+                    else
+                        val = -1f;
+                    animator.SetFloat("Speed", val);
+                    animatorArms.SetFloat("Speed", val);
+                }
+                else
+                {
+                    animator.SetFloat("Speed", moveDirection.x);
+                    animatorArms.SetFloat("Speed", moveDirection.x);
+                }
+
+                    animator.SetFloat("JumpLeg", moveDirection.x);
+                    animator.SetFloat("Jump", moveDirection.y);
+                }
         }
 
         private IEnumerator Jump()
@@ -223,12 +337,14 @@ namespace Joueur
             if (Data.speedState == PlayerData.State.crouching)
             {
                 Data.speedState = PlayerData.State.walking;
+                cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y + 0.6f ,cam.transform.position.z);
                 if (isThereAnimator)
                         animator.SetBool("Crouch", false);
             }
             else
             {
                 Data.speedState = PlayerData.State.crouching;
+                cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y - 0.6f, cam.transform.position.z);
                 playerSound.isRunning = false;
                 if (isThereAnimator)
                 {

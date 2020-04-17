@@ -13688,6 +13688,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1242653880336161768, guid: e26279a736ae1f845b8ddbda8e5b2219,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1242653880343586850, guid: e26279a736ae1f845b8ddbda8e5b2219,
         type: 3}
       propertyPath: m_Name
@@ -13747,6 +13752,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924736317395754581, guid: e26279a736ae1f845b8ddbda8e5b2219,
+        type: 3}
+      propertyPath: m_TagString
+      value: MainCamera
       objectReference: {fileID: 0}
     - target: {fileID: 5964576436143555993, guid: e26279a736ae1f845b8ddbda8e5b2219,
         type: 3}
