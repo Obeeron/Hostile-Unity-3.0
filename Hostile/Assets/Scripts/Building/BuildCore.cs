@@ -92,7 +92,7 @@ namespace BuildingSystem
         {
             rotationOffset = (rotationOffset+90)%360;
             if(buildPreviewScript.isSnapped && buildPreviewScript.prefab.buildType == BuildType.Stair){
-                buildPreviewScript.UpdateRotation();
+                buildPreviewScript.UpdateSnappedRotation();
             }
         }
 

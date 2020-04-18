@@ -14,6 +14,8 @@ public class FightSystem : MonoBehaviour
     private Camera cam;
     public AudioClip[] sounds;
 
+    public LayerMask layerMask;
+
     IEnumerator DisableCollider()
     {
         yield return new WaitForSeconds(1.0f);
@@ -33,7 +35,7 @@ public class FightSystem : MonoBehaviour
         yield return new WaitForSeconds(0.6f);
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray,out hit,5))
+        if (Physics.Raycast(ray,out hit,5,layerMask))
         {
             if (hit.collider != null)
             {

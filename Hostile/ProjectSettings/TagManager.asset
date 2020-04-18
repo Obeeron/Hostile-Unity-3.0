@@ -10,6 +10,7 @@ TagManager:
   - Wall_SP
   - Ceiling_SP
   - Stair_SP
+  - Building
   - Rock
   layers:
   - Default

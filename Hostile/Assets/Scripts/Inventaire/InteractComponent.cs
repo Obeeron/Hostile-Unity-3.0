@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InteractComponent : MonoBehaviour
 {
+    public LayerMask layerMask;
     Transform cam;
     void Start()
     {
@@ -12,9 +13,8 @@ public class InteractComponent : MonoBehaviour
     void Interaction()
     {
         RaycastHit hit;
-        int mask = ~(1 << 12);
         //si on touche qlqhch vers la où la caméra regarde (jusqu'a 2 m)
-        if (Physics.Raycast(cam.position, cam.forward, out hit, 10f, mask))
+        if (Physics.Raycast(cam.position, cam.forward, out hit, 10f, layerMask))
         {
             //on crée une interactable qui va contenir le composant Interacatable de ce qui a été touché
             Interactable interactable = hit.collider.GetComponent<Interactable>();  

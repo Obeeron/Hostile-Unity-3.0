@@ -41,9 +41,9 @@ namespace BuildingSystem
             ChangeColor();
         }
 
-        public void UpdateRotation()
+        public void UpdateSnappedRotation()
         {
-            transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + BuildCore.instance.RotationOffset,0);
+            transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + 90,0);
         }
 
         public void ChangeColor()

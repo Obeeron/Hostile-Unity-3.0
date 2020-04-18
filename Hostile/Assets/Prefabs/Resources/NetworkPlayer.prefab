@@ -234,6 +234,9 @@ MonoBehaviour:
   animator: {fileID: 1242653880336161768}
   animatorArms: {fileID: 6010150846408853810}
   sounds: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 40759
 --- !u!114 &8316199722763432264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,7 +367,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Data: {fileID: 11400000, guid: 2f32f42aeb55de44591bc11906113bea, type: 2}
+  fallingVelocity: {x: 0, y: 0, z: 0}
   animatorArms: {fileID: 6010150846408853810}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 2049
 --- !u!114 &7893987338759503934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,6 +384,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b78133e851286f43b646138d97c7ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 40759
 --- !u!114 &-8823797284201557823
 MonoBehaviour:
   m_ObjectHideFlags: 0

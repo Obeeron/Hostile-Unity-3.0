@@ -32,6 +32,7 @@ namespace Joueur
         private Camera cam;
 
         private int indexFootStepsSound;
+        public LayerMask layerMask;
 
         void OnEnable()
         {
@@ -154,7 +155,7 @@ namespace Joueur
                 if (moveDirection.x != 0 || moveDirection.y != 0)
                 {
                     RaycastHit hit = new RaycastHit();
-                    if (Physics.Raycast(transform.position, Vector3.down, out hit))
+                    if (Physics.Raycast(transform.position, Vector3.down, out hit,layerMask))
                     {
                         string tag = hit.collider.gameObject.tag;
 
