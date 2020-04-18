@@ -42,19 +42,32 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
         if (other != main) // On vérifie qu'on ne se tappe pas soi-même
         {
             ennemy = other;
+            Debug.Log(ennemy.name);
             if(ennemy.GetComponent<CharacterController>() != null)
             {
-                int pv = other.GetComponent<PhotonView>().ViewID; // on récupère l'id de ce que l'on a touché
+                PhotonView PV = ennemy.GetComponent<PhotonView>();
+                if (PV != null)
+                {
+                    int pv = other.GetComponent<PhotonView>().ViewID;
+                    Debug.Log(pv);
+
+                    byte eventCode = 3;
+                    object[] content = new object[] { playerData.Damage * playerData.Strength, pv };
+                    RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
+                    SendOptions send = new SendOptions { Reliability = true };
+
+                    PhotonNetwork.RaiseEvent(eventCode, content, raiseEventOptions, send);
+                }
+                else
+                {
+                    Debug.Log("weird");
+                }
+                 // on récupère l'id de ce que l'on a touché
+               
                 float strenght = playerData.Strength;
 
                 //On prépare l'event
 
-                byte eventCode = 3;
-                object[] content = new object[] {playerData.Damage * playerData.Strength , pv};
-                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
-                SendOptions send = new SendOptions { Reliability = true };
-
-                PhotonNetwork.RaiseEvent(eventCode, content, raiseEventOptions, send);
                 //PV.RPC("GetHit", RpcTarget.All, strenght, pv);
                 //Hit((int)playerData.Strength, other);
             }
