@@ -16,13 +16,12 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
 
 
     private Vector3 impactForce;
-    private PhotonView PV;
+    public PhotonView PV;
     private GameObject ennemy;
     private System.Random rd = new System.Random();
 
     private void Start()
     {
-        PV = GetComponentInParent<PhotonView>();
     }
     public void OnEnable()
     {
@@ -42,13 +41,12 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
         if (other != main) // On vérifie qu'on ne se tappe pas soi-même
         {
             ennemy = other;
-            Debug.Log(ennemy.name);
             if(ennemy.GetComponent<CharacterController>() != null)
             {
-                PhotonView PV = ennemy.GetComponent<PhotonView>();
-                if (PV != null)
+                PhotonView ennemyPV = ennemy.GetComponent<PhotonView>();
+                if (ennemyPV != null)
                 {
-                    int pv = other.GetComponent<PhotonView>().ViewID;
+                    int pv = ennemyPV.ViewID;
                     Debug.Log(pv);
 
                     byte eventCode = 3;
@@ -176,6 +174,8 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
             float dmg = (float)data[0];
             int pv = (int)data[1];
             //Debug.Log("My pv " + PV.ViewID + "Ennemy pv is " + pv);
+            Debug.Log(this.name);
+            Debug.Log(PV.gameObject.name);
             if(PV.ViewID == pv)
             {
                 if (Joueur.StatsController.instance.sounds == null)

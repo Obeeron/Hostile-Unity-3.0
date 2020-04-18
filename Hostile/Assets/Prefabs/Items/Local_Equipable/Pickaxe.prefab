@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8412271209881488885}
   - component: {fileID: 5992915731753882646}
   - component: {fileID: 4092397740191418674}
-  - component: {fileID: 8206104011227519265}
   m_Layer: 10
   m_Name: Pickaxe
   m_TagString: Untagged
@@ -104,16 +103,3 @@ MonoBehaviour:
   ChoppingStrength: 0
   MiningStrength: 1
   equippedIndex: 1
---- !u!114 &8206104011227519265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8323222347222037546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e4c1db90bbdd9d4e9de8ded24e4ef7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 2f32f42aeb55de44591bc11906113bea, type: 2}

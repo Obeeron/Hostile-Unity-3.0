@@ -44,7 +44,7 @@ public class FightSystem : MonoBehaviour
                 if (tc != null)
                 {
 
-                    Debug.Log(tc.gameObject.name);
+                    //Debug.Log(tc.gameObject.name);
                     tc.Raycast_hit(hit);
                 }
 

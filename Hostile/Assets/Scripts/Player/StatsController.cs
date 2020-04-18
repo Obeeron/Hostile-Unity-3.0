@@ -193,7 +193,6 @@ namespace Joueur
         {
             looseLife(dmg);
             sounds.PlayGetHit();
-            Debug.Log("ur gettting hit from getHit in statsController");
         }
 
         public void gainHunger(float gain)

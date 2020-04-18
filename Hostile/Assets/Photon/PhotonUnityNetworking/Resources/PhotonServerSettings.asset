@@ -40,5 +40,6 @@ MonoBehaviour:
   - SynchronizeItem_RPC
   - SoundHitRPC
   - SoundTree_Local
+  - SoundRock_Local
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1
