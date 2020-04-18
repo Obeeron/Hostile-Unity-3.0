@@ -47,10 +47,27 @@ public class FarmingItem : NetworkObject
     {
         if (isAlive)
         {
+            if (type == Type.Tree)
+                SoundHitTree(ID);
+            else if (type == Type.Stone)
+                SoundHitRock(ID);
             life -= dmg;
             AliveUpdate();
+
         }
     }
+
+    private void SoundHitTree(int ID)
+    {
+        TreeNetworkController.instance.SoundTree(ID);
+    }
+
+    private void SoundHitRock(int ID)
+    {
+        RockNetworkController.instance.SoundRock(ID);
+    }
+
+
     private void AliveUpdate()
     {
         if (life <= 0f)

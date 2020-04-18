@@ -33,4 +33,27 @@ public class RockNetworkController : NetworkObjectManager
         FarmingItem rock = (FarmingItem)GetNetworkObject(ID);
         rock?.DestroyFarmingItem();
     }
+
+    public void SoundRock(int ID)
+    {
+        pv.RPC("SoundRock_Local", RpcTarget.AllViaServer, ID);
+    }
+
+    [PunRPC]
+    public void SoundRock_Local(int ID)
+    {
+        NetworkObject localObj = GetNetworkObject(ID);
+        FarmingItem farm = localObj.GetComponent<FarmingItem>();
+        AudioSource listener = localObj.GetComponent<AudioSource>();
+        int i = Random.Range(0, farm.sounds.Length);
+        if (farm.life == 0)
+        {
+            listener.PlayOneShot(farm.sounds[i]);
+            listener.PlayOneShot(farm.destroyed);
+        }
+        else
+        {
+            listener.PlayOneShot(farm.sounds[i]);
+        }
+    }
 }

@@ -63,7 +63,6 @@ public class Player_Sound_Reference : MonoBehaviour
                 break;
              
         }
-        Debug.Log(indexArray);
         AudioClip selectedClip = clips[Random.Range(0, footSteps.Length - 1)];
 
         while(selectedClip == previousClip && i > 0)

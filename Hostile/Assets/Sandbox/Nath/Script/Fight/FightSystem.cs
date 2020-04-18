@@ -39,7 +39,7 @@ public class FightSystem : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                Debug.Log("triggerCollider searched");
+                //Debug.Log("triggerCollider searched");
                 TriggerCollider tc = GetComponentInChildren<TriggerCollider>();
                 if (tc != null)
                 {

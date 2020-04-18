@@ -161,7 +161,6 @@ namespace Joueur
 
                         if (tag == "Rock")
                         {
-                            Debug.Log(tag);
                             playerSound.indexGround = 1;
                         }
                         else
@@ -344,6 +343,8 @@ namespace Joueur
             {
                 Data.speedState = PlayerData.State.walking;
                 cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y + 0.6f ,cam.transform.position.z);
+                character.center = new Vector3(character.center.x, 0.9f, character.center.z);
+                character.height = 1.85f;
                 if (isThereAnimator)
                         animator.SetBool("Crouch", false);
             }
@@ -351,6 +352,8 @@ namespace Joueur
             {
                 Data.speedState = PlayerData.State.crouching;
                 cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y - 0.6f, cam.transform.position.z);
+                character.center = new Vector3(character.center.x, 0.6f, character.center.z);
+                character.height = 1.2f;
                 playerSound.isRunning = false;
                 if (isThereAnimator)
                 {

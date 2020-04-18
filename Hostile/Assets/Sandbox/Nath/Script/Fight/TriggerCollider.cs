@@ -38,13 +38,13 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
         //Debug.Log("Fired !");
         GameObject other = hit.collider.gameObject;
         GameObject main = GetComponentInParent<CharacterController>().gameObject;
-        Debug.Log(other.name);
+        //Debug.Log(other.name);
         if (other != main) // On vérifie qu'on ne se tappe pas soi-même
         {
             ennemy = other;
-            if(ennemy.GetComponentInParent<CharacterController>() != null)
+            if(ennemy.GetComponent<CharacterController>() != null)
             {
-                int pv = other.GetComponentInParent<PhotonView>().ViewID; // on récupère l'id de ce que l'on a touché
+                int pv = other.GetComponent<PhotonView>().ViewID; // on récupère l'id de ce que l'on a touché
                 float strenght = playerData.Strength;
 
                 //On prépare l'event
@@ -147,21 +147,10 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
                 FarmingItem farm = ennemy.GetComponent<FarmingItem>();
                 if (farm != null)
                 {
-                    AudioSource listener = ennemy.GetComponent<AudioSource>();
-                    if (farm.life == 1)
-                    {
-                        listener.PlayOneShot(farm.sounds[i]);
-                        listener.PlayOneShot(farm.destroyed);
-                    }
-                    else
-                    {
-                        listener.PlayOneShot(farm.sounds[i]);
-                    }
-
                     //Debug.Log("Farming item");
                     farm.GetHit(dmg);
 
-                    Debug.Log(ennemy.GetComponent<FarmingItem>().life);
+                    //Debug.Log(ennemy.GetComponent<FarmingItem>().life);
                 }
                    
             }

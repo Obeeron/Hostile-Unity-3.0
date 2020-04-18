@@ -1053,7 +1053,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 23d2ffb6b33d336469fa235ff0323f62, type: 3}
   - {fileID: 8300000, guid: 65efc730131b0074c8033b7cb6ba9adb, type: 3}
   - {fileID: 8300000, guid: 0739ef8f8ecd3744eaccd9e076350f39, type: 3}
-  Farm_Rock: []
+  Tree_Destroyed: {fileID: 8300000, guid: f8612589111f74c4b9c50f1dd1e20598, type: 3}
+  Farm_Rock:
+  - {fileID: 8300000, guid: 766651d1d90847c4e986cb2353222dc3, type: 3}
+  - {fileID: 8300000, guid: 3475669ca3bdf9e4aa3882ee611aa3bf, type: 3}
+  - {fileID: 8300000, guid: e3ecb7bb143cb144d8f7c73edf193985, type: 3}
+  - {fileID: 8300000, guid: 7914a7ddd8488874a9d08526c0189d44, type: 3}
+  Rock_Destroyed: {fileID: 8300000, guid: b3178160b9ad67841af021a9713b98b1, type: 3}
   Footsteps: []
 --- !u!1001 &66136763
 PrefabInstance:

@@ -57,6 +57,7 @@ public class NetworkObjectManager : MonoBehaviour
         }
     }
 
+
     public void AddToList(NetworkObject obj, int newRefCode){
         if(netObjList.Count == 0)
             obj.ID = 0;

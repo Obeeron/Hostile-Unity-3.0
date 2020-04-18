@@ -140,7 +140,7 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
             {
                 hand = arms.Arms.gameObject;
                 handNet = arms.Arms_Network.gameObject;
-                Debug.Log("Trying to equip");
+                //Debug.Log("Trying to equip");
 
                 //Réseau
 

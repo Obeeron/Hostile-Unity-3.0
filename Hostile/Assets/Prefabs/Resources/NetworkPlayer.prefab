@@ -368,6 +368,7 @@ MonoBehaviour:
       m_Calls: []
   Data: {fileID: 11400000, guid: 2f32f42aeb55de44591bc11906113bea, type: 2}
   fallingVelocity: {x: 0, y: 0, z: 0}
+  limitfall: -19.62
   animatorArms: {fileID: 6010150846408853810}
   layerMask:
     serializedVersion: 2

@@ -33,4 +33,27 @@ public class TreeNetworkController : NetworkObjectManager
         FarmingItem tree = (FarmingItem)GetNetworkObject(ID);
         tree?.DestroyFarmingItem();
     }
+
+    public void SoundTree(int ID)
+    {
+        pv.RPC("SoundTree_Local", RpcTarget.AllViaServer, ID);
+    }
+
+    [PunRPC]
+    public void SoundTree_Local(int ID)
+    {
+        NetworkObject localObj = GetNetworkObject(ID);
+        FarmingItem farm = localObj.GetComponent<FarmingItem>();
+        AudioSource listener = localObj.GetComponent<AudioSource>();
+        int i = Random.Range(0, farm.sounds.Length);
+        if (farm.life == 0)
+        {
+            listener.PlayOneShot(farm.sounds[i]);
+            listener.PlayOneShot(farm.destroyed);
+        }
+        else
+        {
+            listener.PlayOneShot(farm.sounds[i]);
+        }
+    }
 }
