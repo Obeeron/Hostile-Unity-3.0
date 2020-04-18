@@ -80,7 +80,7 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
         {
             initializeItemsLocal();
             initializeItemsNetwork();
-            itemSelected = slots[selectedSlotIndex].item;
+            itemSelected = slots[selectedSlotIndex].item[0];
             Equip();
         }
     }
@@ -235,8 +235,10 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
         slots[selectedSlotIndex].Selected(false);
 
         //desequip if neded
-        itemSelected = slots[selectedSlotIndex].item;
-        if(itemSelected != null && equipped)
+        itemSelected = null;
+        if (slots[selectedSlotIndex].item.Count > 0)
+            itemSelected = slots[selectedSlotIndex].item[0];
+        if (itemSelected != null && equipped)
         {
             if (itemSelected.canBeEquipped)
             {
@@ -255,8 +257,10 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
 
         slots[selectedSlotIndex].Selected(true);
         //equip if needed
-        itemSelected = slots[selectedSlotIndex].item;
-        if(itemSelected != null)
+        itemSelected = null;
+        if (slots[selectedSlotIndex].item.Count > 0)
+            itemSelected = slots[selectedSlotIndex].item[0];
+        if (itemSelected != null)
         {
             if (itemSelected.canBeEquipped)
             {
@@ -268,7 +272,27 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
     
     public bool Add(Item item)
     {
-        if (items.Count >= espaceDisponible)
+        foreach (Slots s in slots)
+            if (s.isEmpty == false && s.isAddable(item))
+            {
+
+                s.Add(item);
+                items.Add(item);
+                return true;
+            }
+
+        for (int i = 0; i < nbSlots; i++)
+        {
+
+            if (slots[i].isAddable(item))
+            {
+                slots[i].Add(item);
+                items.Add(item);
+                return true;
+            }
+        }
+        return false;
+        /*if (items.Count >= espaceDisponible)
         {
             Debug.Log("Pas assez d'espace dans l'inventaire");
             return false;
@@ -287,21 +311,23 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
         }  
 
         throw new Exception("Inventaire.Add : incohérence : espace dispo dans l'inventaire mais slot tous remplis");  
+    */
     }
 
     private void Drop()
     {
-        Item droppedItem = slots[selectedSlotIndex].item;
+        Item droppedItem = slots[selectedSlotIndex].item[0];
         droppedItem.Drop(player.transform.position);
-        RemoveofList(slots[selectedSlotIndex].item);
-        DesEquip();
+        RemoveofList(slots[selectedSlotIndex].item[0]);
+        if(slots[selectedSlotIndex].isEmpty)
+            DesEquip();
     }
 
     public void RemoveofList(Item item)
     {
         items.Remove(item);
         
-        slots[selectedSlotIndex].Reset2();
+        slots[selectedSlotIndex].Suppr();
     }
 
     public void RemoveofCraft(Item item,int j)
@@ -310,13 +336,14 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
         bool end = false;
         foreach(Slots slot in slots)
         {
-            if (slot.item == item && !end)
+            if (slot.isEmpty==false && slot.isSameItem(item) && !end)
             {
-                slot.isEmpty = true;
-                slot.item = null;
+                slot.Suppr();
+                //slot.isEmpty = true;
+                //slot.item = null;
                 //slot.GetComponentInChildren<Image>().sprite = null;
-                slot.icone.GetComponent<Image>().sprite = null;
-                slot.icone.SetActive(false);
+                //slot.icone.GetComponent<Image>().sprite = null;
+                //slot.icone.SetActive(false);
                 end = true;
             }
         }

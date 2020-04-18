@@ -2,10 +2,12 @@
 using UnityEngine;
 using System;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class Slots : MonoBehaviour, IDragHandler,IBeginDragHandler,IEndDragHandler,IPointerEnterHandler,IPointerExitHandler
 {
-    public Item item;
+    public List<Item> item = new List<Item>();
+    public int nbItem;
     public int ID;
     public bool isEmpty;
     public GameObject icone;
@@ -14,31 +16,69 @@ public class Slots : MonoBehaviour, IDragHandler,IBeginDragHandler,IEndDragHandl
     public Sprite slotSelected;
     public Sprite slotUnselected;
     public bool isSelected;
+    Text txt;
 
-    
+
     public void Selected(bool isSelected)
     {
         this.isSelected = isSelected;
         GetComponent<Image>().sprite = (isSelected) ? slotSelected : slotUnselected;
     }
-
+    public bool isSameItem(Item itemRecu)
+    {
+        return itemRecu.itemData.name == item[0].itemData.name;
+    }
+    public bool isRestePlace(Item itemRecu)
+    {
+        return itemRecu.itemData.maxSizeStack > nbItem;
+    }
+    public bool isAddable(Item itemRecu)
+    {
+        if (isEmpty)
+            return true;
+        if (isSameItem(itemRecu) && isRestePlace(itemRecu))
+            return true;
+        return false;
+    }
     public void Add(Item itemRecu)
     {
         if (itemRecu == null) return;
         isEmpty = false;
-        item = itemRecu;
-        icone.GetComponent<Image>().sprite = item.itemData.icone;
-        icone.gameObject.SetActive(true);
+        item.Add(itemRecu);
+        if (nbItem == 0)
+        {
+            icone.GetComponent<Image>().sprite = itemRecu.itemData.icone;
+            icone.gameObject.SetActive(true);
+        }
+        nbItem++;
+        txt = GetComponentInChildren<Text>();
+        txt.text = "" + nbItem;
     }
    
 
     public void Reset2()
     {
         //Debug.Log("item " + item.name + " droppé");
+        nbItem = 0;
         isEmpty = true;
-        item = null;
+        item = new List<Item>();
         icone.GetComponent<Image>().sprite = null;
         icone.SetActive(false);
+        txt = GetComponentInChildren<Text>();
+        txt.text = "" + nbItem;
+    }
+    public void Suppr()
+    {
+        if (nbItem == 1){
+            Console.WriteLine("lol");
+            Reset2();
+        }
+        else{
+            nbItem--;
+            item.RemoveAt(nbItem - 1);
+            txt = GetComponentInChildren<Text>();
+            txt.text = "" + nbItem;
+        }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -70,20 +110,22 @@ public class Slots : MonoBehaviour, IDragHandler,IBeginDragHandler,IEndDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(!isEmpty && Inventaire.instance.hoveredSlot!=null)
+        if (!isEmpty && Inventaire.instance.hoveredSlot != null)
         {
             draggableItem.SetActive(false);
-            Item itemInt = item;
+            List<Item> itemInt = item;
             this.Reset2();
-            this.Add(Inventaire.instance.hoveredSlot.item);
+            foreach (Item a in Inventaire.instance.hoveredSlot.item)
+                this.Add(a);
             Inventaire.instance.hoveredSlot.Reset2();
-            Inventaire.instance.hoveredSlot.Add(itemInt);
+            foreach (Item b in itemInt)
+                Inventaire.instance.hoveredSlot.Add(b);
 
         }
-        if(!isEmpty)
+        if (!isEmpty)
         {
             icone.SetActive(true);
             draggableItem.SetActive(false);
-        }  
+        }
     }
 }
