@@ -26,7 +26,7 @@ namespace Joueur
         }
         #endregion
 
-#pragma warning disable 649
+    #pragma warning disable 649
         [SerializeField] PlayerData Data;
     #pragma warning restore 649
         public UnityEvent OnDeath;
@@ -35,6 +35,9 @@ namespace Joueur
         public UIBarUpdate barHunger;
         private float staminaTimer = 0.0f;
         private float hungerTimer = 0.0f;
+        private float crouchSpeed = 2f;
+        private float walkSpeed = 5f;
+        private float runSpeed = 8f;
         private int MenuScene = 0;
         private bool isAlive = true;
         public Player_Sound_Reference sounds;
@@ -73,13 +76,13 @@ namespace Joueur
             switch (Data.speedState)
             {
                 case PlayerData.State.crouching:
-                    Data.speed = 3.0f * Data.Agility;
+                    Data.speed = crouchSpeed * Data.Agility;
                     break;
                 case PlayerData.State.running:
-                    Data.speed = 7.0f * Data.Agility;
+                    Data.speed = runSpeed * Data.Agility;
                     break;
                 default:
-                    Data.speed = 3.0f * Data.Agility;
+                    Data.speed = walkSpeed * Data.Agility;
                     break;
             }
         }

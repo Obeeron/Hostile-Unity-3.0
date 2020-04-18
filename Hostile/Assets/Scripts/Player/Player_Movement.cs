@@ -210,7 +210,7 @@ namespace Joueur
                     multiplier = 2.0f;//modify this multiplier to change the curve of the fall. closer to 0 mean curve symetrical else fall way faster.
                 }
                 fallingVelocity.y += (Time.fixedDeltaTime * multiplier * Physics.gravity.y);// the longer the player fall, the faster he falls.
-                movement = Vector3.Lerp(Time.fixedDeltaTime * (Data.speed * 1.4f)* currentMovement, movement, airLerp);
+                movement = Vector3.Lerp(Time.fixedDeltaTime * Data.speed* currentMovement, movement, airLerp);
             }
             else
             {
