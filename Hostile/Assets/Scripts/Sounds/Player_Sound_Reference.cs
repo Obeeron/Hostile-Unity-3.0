@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Player_Sound_Reference : MonoBehaviour
 {
@@ -15,6 +16,13 @@ public class Player_Sound_Reference : MonoBehaviour
 
     public int indexGround = 0;
     public bool isRunning;
+    private PhotonView PV;
+
+    private void Start()
+    {
+        PV = GetComponent<PhotonView>();
+    }
+
 
     public void PlayFootSteps(AnimationEvent animationEvent)
     {
@@ -30,12 +38,20 @@ public class Player_Sound_Reference : MonoBehaviour
         }
     }
 
-    public void PlayGetHit()
+    public void PlayGetHit(int pv)
     {
-        source.pitch = Random.Range(0.9f, 1.1f);
-        source.volume = Random.Range(0.60f, 0.70f);
-        AudioClip clip = GetAudioClip(2);
-        source.PlayOneShot(clip);
+        PV.RPC("PlayGetHit_Local", RpcTarget.AllViaServer, pv);
+    }
+
+    [PunRPC]
+    public void PlayGetHit_Local(int pv)
+    {
+        if(PV.ViewID == pv)
+        {
+            source.pitch = Random.Range(0.9f, 1.1f);
+            source.volume = Random.Range(0.60f, 0.70f);
+            source.PlayOneShot(GetAudioClip(2));
+        }
     }
 
     private AudioClip GetAudioClip(int indexArray)

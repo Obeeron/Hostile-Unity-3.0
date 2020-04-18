@@ -171,7 +171,6 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
                 //
                 equipped = true;
                 ChangeStats(equipped);
-                Debug.Log("Equipped !");
             }
         }
         
@@ -189,7 +188,6 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
             items_Equipable[indexCurrentlyEquipped].SetActive(false);
             items_Equipable[index].gameObject.SetActive(true);
             indexCurrentlyEquipped = index;
-            Debug.Log("Switched Weapons");
             return items_Equipable[index];
         }   
     }

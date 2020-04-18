@@ -189,10 +189,10 @@ namespace Joueur
             barHealth?.Barupdate(Data.Life/Data.MaxLife);
         }
 
-        public void getHit(float dmg)
+        public void getHit(float dmg, int pv = 0)
         {
             looseLife(dmg);
-            sounds.PlayGetHit();
+            sounds.PlayGetHit(pv);
         }
 
         public void gainHunger(float gain)

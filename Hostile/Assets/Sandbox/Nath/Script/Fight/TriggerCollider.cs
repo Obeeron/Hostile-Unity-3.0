@@ -47,8 +47,6 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
                 if (ennemyPV != null)
                 {
                     int pv = ennemyPV.ViewID;
-                    Debug.Log(pv);
-
                     byte eventCode = 3;
                     object[] content = new object[] { playerData.Damage * playerData.Strength, pv };
                     RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
@@ -174,15 +172,13 @@ public class TriggerCollider : MonoBehaviour, IOnEventCallback
             float dmg = (float)data[0];
             int pv = (int)data[1];
             //Debug.Log("My pv " + PV.ViewID + "Ennemy pv is " + pv);
-            Debug.Log(this.name);
-            Debug.Log(PV.gameObject.name);
             if(PV.ViewID == pv)
             {
                 if (Joueur.StatsController.instance.sounds == null)
                     Joueur.StatsController.instance.sounds = GetComponentInParent<Player_Sound_Reference>();
                 
 
-                Joueur.StatsController.instance.getHit(dmg);
+                Joueur.StatsController.instance.getHit(dmg, pv);
                 //Debug.Log("ur getting hit");
             }
         }
