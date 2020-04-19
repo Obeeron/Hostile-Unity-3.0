@@ -36,17 +36,17 @@ namespace Joueur
 
         void OnEnable()
         {
-            if (Data.controls == null)
+            if (Data.controls is null)
                 controls = new PlayerControls();
             else
                 controls = Data.controls;
-
             controls.InGame.Enable();
             animator = this.gameObject.GetComponent<Animator>();
             if (animator == null)
                 isThereAnimator = false;
             character = GetComponent<CharacterController>();
         }
+
         private void Start()
         {
             source = GetComponent<AudioSource>();
