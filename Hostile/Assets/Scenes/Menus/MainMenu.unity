@@ -3349,6 +3349,12 @@ PrefabInstance:
       propertyPath: waitingPannel
       value: 
       objectReference: {fileID: 1180834148}
+    - target: {fileID: 9000755620580092833, guid: 172f1e46c7e714648ac753ea5302cf12,
+        type: 3}
+      propertyPath: m_Action
+      value: 
+      objectReference: {fileID: 6641250097539217935, guid: 3c9092f4b8051cc4c861769ae0238f89,
+        type: 3}
     - target: {fileID: 9000755620580092834, guid: 172f1e46c7e714648ac753ea5302cf12,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4704,6 +4710,17 @@ PrefabInstance:
       propertyPath: waitingPannel
       value: 
       objectReference: {fileID: 1180834148}
+    - target: {fileID: 9000755620580092833, guid: 172f1e46c7e714648ac753ea5302cf12,
+        type: 3}
+      propertyPath: m_BindingIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000755620580092833, guid: 172f1e46c7e714648ac753ea5302cf12,
+        type: 3}
+      propertyPath: m_Action
+      value: 
+      objectReference: {fileID: -5397566596348731050, guid: 3c9092f4b8051cc4c861769ae0238f89,
+        type: 3}
     - target: {fileID: 9000755620580092834, guid: 172f1e46c7e714648ac753ea5302cf12,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5464,6 +5481,12 @@ PrefabInstance:
       propertyPath: waitingPannel
       value: 
       objectReference: {fileID: 1180834148}
+    - target: {fileID: 9000755620580092833, guid: 172f1e46c7e714648ac753ea5302cf12,
+        type: 3}
+      propertyPath: m_Action
+      value: 
+      objectReference: {fileID: -8381518324118408592, guid: 3c9092f4b8051cc4c861769ae0238f89,
+        type: 3}
     - target: {fileID: 9000755620580092834, guid: 172f1e46c7e714648ac753ea5302cf12,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7128,6 +7151,17 @@ PrefabInstance:
       propertyPath: waitingPannel
       value: 
       objectReference: {fileID: 1180834148}
+    - target: {fileID: 9000755620580092833, guid: 172f1e46c7e714648ac753ea5302cf12,
+        type: 3}
+      propertyPath: m_Action
+      value: 
+      objectReference: {fileID: -5397566596348731050, guid: 3c9092f4b8051cc4c861769ae0238f89,
+        type: 3}
+    - target: {fileID: 9000755620580092833, guid: 172f1e46c7e714648ac753ea5302cf12,
+        type: 3}
+      propertyPath: m_BindingIndex
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 9000755620580092834, guid: 172f1e46c7e714648ac753ea5302cf12,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7359,6 +7393,17 @@ PrefabInstance:
       propertyPath: onCompleted.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1180834148}
+    - target: {fileID: 9000755620580092833, guid: 172f1e46c7e714648ac753ea5302cf12,
+        type: 3}
+      propertyPath: m_Action
+      value: 
+      objectReference: {fileID: -5397566596348731050, guid: 3c9092f4b8051cc4c861769ae0238f89,
+        type: 3}
+    - target: {fileID: 9000755620580092833, guid: 172f1e46c7e714648ac753ea5302cf12,
+        type: 3}
+      propertyPath: m_BindingIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9000755620580092834, guid: 172f1e46c7e714648ac753ea5302cf12,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9023,7 +9068,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Action
       value: 
-      objectReference: {fileID: -6301120193754825411, guid: 3c9092f4b8051cc4c861769ae0238f89,
+      objectReference: {fileID: -5397566596348731050, guid: 3c9092f4b8051cc4c861769ae0238f89,
         type: 3}
     - target: {fileID: 9000755620580092833, guid: 172f1e46c7e714648ac753ea5302cf12,
         type: 3}
@@ -9064,6 +9109,11 @@ PrefabInstance:
         type: 3}
       propertyPath: onStarted.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000755620580092833, guid: 172f1e46c7e714648ac753ea5302cf12,
+        type: 3}
+      propertyPath: m_BindingIndex
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9000755620580092834, guid: 172f1e46c7e714648ac753ea5302cf12,
         type: 3}
@@ -10143,6 +10193,12 @@ PrefabInstance:
       propertyPath: waitingPannel
       value: 
       objectReference: {fileID: 1180834148}
+    - target: {fileID: 9000755620580092833, guid: 172f1e46c7e714648ac753ea5302cf12,
+        type: 3}
+      propertyPath: m_Action
+      value: 
+      objectReference: {fileID: -6301120193754825411, guid: 3c9092f4b8051cc4c861769ae0238f89,
+        type: 3}
     - target: {fileID: 9000755620580092834, guid: 172f1e46c7e714648ac753ea5302cf12,
         type: 3}
       propertyPath: m_LocalPosition.x
