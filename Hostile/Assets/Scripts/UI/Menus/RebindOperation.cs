@@ -66,6 +66,7 @@ public class RebindOperation : MonoBehaviour
             .WithCancelingThrough("<Keyboard>/escape")
             .WithControlsExcluding("Mouse")
             .WithControlsExcluding(action.bindings[m_BindingIndex].effectivePath)
+            .WithTimeout(10f)
             .OnCancel(
                 operation =>
                 {
@@ -78,13 +79,14 @@ public class RebindOperation : MonoBehaviour
                     onCompleted?.Invoke();
                 }
             );
-        onStarted?.Invoke();
         rebindOperation.Start();
+        onStarted?.Invoke();
         Debug.Log("started");
         while (!rebindOperation.canceled && !rebindOperation.completed)
         {
             yield return null;
         }
+        rebindOperation.Dispose();
         Debug.Log("Stopped");
     }    
     

@@ -3254,6 +3254,7 @@ MonoBehaviour:
   - {fileID: 1312465824}
   - {fileID: 1384659546}
   - {fileID: 898841416}
+  action: {fileID: 0}
 --- !u!1 &633201054
 GameObject:
   m_ObjectHideFlags: 0
@@ -7404,6 +7405,11 @@ PrefabInstance:
       propertyPath: m_BindingIndex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9000755620580092833, guid: 172f1e46c7e714648ac753ea5302cf12,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9000755620580092834, guid: 172f1e46c7e714648ac753ea5302cf12,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9115,6 +9121,11 @@ PrefabInstance:
       propertyPath: m_BindingIndex
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 9000755620580092833, guid: 172f1e46c7e714648ac753ea5302cf12,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9000755620580092834, guid: 172f1e46c7e714648ac753ea5302cf12,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9219,6 +9230,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000755620580092838, guid: 172f1e46c7e714648ac753ea5302cf12,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1437924282}
+    - target: {fileID: 9000755620580092838, guid: 172f1e46c7e714648ac753ea5302cf12,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: rebind
       objectReference: {fileID: 0}
     - target: {fileID: 9000755620580092861, guid: 172f1e46c7e714648ac753ea5302cf12,
         type: 3}

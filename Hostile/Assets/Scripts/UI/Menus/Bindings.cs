@@ -11,6 +11,7 @@ public class Bindings : MonoBehaviour
 
     [Tooltip("list of rebindOperation fro reset all. Add every rebindOperation to this.")]
     [SerializeField] private List<RebindOperation> resetList;
+    [SerializeField] private InputActionReference action;
 
     public void ResetAll()
     {
@@ -19,5 +20,4 @@ public class Bindings : MonoBehaviour
             rb.reset();
         }
     }
-
 }
