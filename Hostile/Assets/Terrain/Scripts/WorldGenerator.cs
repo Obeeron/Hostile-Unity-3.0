@@ -9,7 +9,7 @@ namespace Procedural{
     {
         private TerrainGenerator terrainGenerator;
         private TreeGenerator treeGenerator;
-        private GrassGenerator grassGenerator;
+        private VegetationGenerator vegetationGenerator;
         private TextureGenerator textureGenerator;
         private RockGenerator rockGenerator;
 
@@ -25,7 +25,7 @@ namespace Procedural{
         {
             terrainGenerator = GetComponent<TerrainGenerator>();
             treeGenerator = GetComponent<TreeGenerator>();
-            grassGenerator = GetComponent<GrassGenerator>();
+            vegetationGenerator = GetComponent<VegetationGenerator>();
             textureGenerator = GetComponent<TextureGenerator>();
             rockGenerator = GetComponent<RockGenerator>();
         }
@@ -45,6 +45,8 @@ namespace Procedural{
             yield return StartCoroutine(SpawnTrees());
             textMain.text = "Generating Grass..";
             yield return StartCoroutine(SpawnGrass());
+            textMain.text = "Generating Bushes..";
+            yield return StartCoroutine(SpawnBush());
             GameObject.FindObjectOfType<GameSetupManager>().AfterWorldGeneration();
         }
 
@@ -73,7 +75,12 @@ namespace Procedural{
 
         public IEnumerator SpawnGrass()
         {
-            yield return StartCoroutine(grassGenerator.GenerateGrass(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm,textSub));
+            yield return StartCoroutine(vegetationGenerator.GenerateGrass(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm,textSub));
+        }
+
+        public IEnumerator SpawnBush()
+        {
+            yield return StartCoroutine(vegetationGenerator.GenerateBush(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm,textSub));
         }
 
         public void GenerateViaEditor(){
@@ -83,7 +90,8 @@ namespace Procedural{
                 terrainTypeMap[i] = new TerrainType[terrain.terrainData.alphamapWidth];
             terrainGenerator.GenerateTerrain(rdm,textSub);
             textureGenerator.GenerateTextures(terrain.terrainData, terrainTypeMap, terrainGenerator.maxAltitude, rdm,textSub);
-            grassGenerator.GenerateGrass(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm,textSub);
+            vegetationGenerator.GenerateGrass(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm,textSub);
+            vegetationGenerator.GenerateBush(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm,textSub);
         }
     }
 

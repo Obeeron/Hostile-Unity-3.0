@@ -45,6 +45,14 @@ public class Item : Interactable
         PickUp();
     }
 
+    public override string GetMainInteractMessage(){
+        return "PICK UP";
+    }   
+
+    public override string GetSubInteractMessage(){
+        return itemData.name;
+    }
+
     
     void PickUp()
     {

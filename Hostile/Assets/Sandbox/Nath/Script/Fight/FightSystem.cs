@@ -64,7 +64,7 @@ public class FightSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            animatorArms.Play("Pickaxe_hit", 0);
+            //animatorArms.Play("Pickaxe_hit", 0);
             //var anim = this.GetComponent<Animations_State>();
             //Debug.Log("Changed");
             //anim.ChangeEquiped();

@@ -2,6 +2,7 @@ using UnityEngine;
 using Photon.Pun;
 using System;
 using Joueur;
+using System.Collections.Generic;
 
 public class GameSetupManager : MonoBehaviourPunCallbacks
 {
@@ -12,6 +13,7 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
     public DeathDrop deathdrop;
     public Procedural.WorldGenerator worldGenerator;
     public Terrain terrain;
+    public List<GameObject> players;
 
     void Start()
     {
@@ -40,6 +42,7 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
         Cursor.visible = false;
 
         GameObject player = PhotonNetwork.Instantiate("NetworkPlayer", GetSpawnPoint(), Quaternion.identity);
+        players.Add(player);
         Debug.Log("Avatar created");
         
         //UIModeSwitch Events
