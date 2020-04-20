@@ -192,7 +192,7 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
         }   
     }
 
-    public void DesEquip()
+    public void DesEquip(bool drop = false)
     {
         if (itemSelected.canBeEquipped)
         {
@@ -201,7 +201,8 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
             if(Equipped_Network != null)
             {
                 int ID = itemSelected.ID;
-                NetworkItemsController.instance.SynchronizeItem(ID, false, new Vector3(0,0,0),false);
+                if(!drop)
+                    NetworkItemsController.instance.SynchronizeItem(ID, false, new Vector3(0,0,0),false);
             }
             if (Equipped != null)
                 Switch(indexCurrentlyEquipped, true);
@@ -319,8 +320,9 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
         Item droppedItem = slots[selectedSlotIndex].item[0];
         droppedItem.Drop(player.transform.position);
         RemoveofList(slots[selectedSlotIndex].item[0]);
-        if(slots[selectedSlotIndex].isEmpty)
-            DesEquip();
+        if (slots[selectedSlotIndex].isEmpty)
+            DesEquip(true);
+
     }
 
     public void RemoveofList(Item item)

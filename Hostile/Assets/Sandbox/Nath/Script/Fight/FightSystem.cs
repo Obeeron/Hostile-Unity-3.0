@@ -35,7 +35,7 @@ public class FightSystem : MonoBehaviour
         yield return new WaitForSeconds(0.6f);
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray,out hit,5,layerMask))
+        if (Physics.Raycast(ray,out hit,2.5f,layerMask))
         {
             if (hit.collider != null)
             {

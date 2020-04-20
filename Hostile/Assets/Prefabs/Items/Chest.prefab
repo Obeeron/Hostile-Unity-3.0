@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7405903539638824187}
   - component: {fileID: 8770955619730701183}
   - component: {fileID: 4890409644334881125}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,11 +49,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   distance: 5
+  interactMessage: 
   itemData: {fileID: 11400000, guid: 453758ab86dbaf145a1d747b87d6cfec, type: 2}
   usure: 0
   inInventory: 0
   isSelected: 0
   canBeEquipped: 0
+  Strength: 0
+  ChoppingStrength: 0
+  MiningStrength: 0
   equippedIndex: 0
 --- !u!54 &-3425066066111506857
 Rigidbody:

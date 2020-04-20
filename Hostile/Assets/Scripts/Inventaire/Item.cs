@@ -72,7 +72,11 @@ public class Item : Interactable
     {
         CalculTemps();
         position.y+=1;
-        NetworkItemsController.instance.SynchronizeItem(ID,true,position + transform.up*2 + transform.forward*2);
+        if (canBeEquipped)
+        {
+            NetworkItemsController.instance.SynchronizeItemEquip(ID, true, position, Quaternion.identity, 0, true);
+        }
+        NetworkItemsController.instance.SynchronizeItem(ID,true,position);
     }
 
 

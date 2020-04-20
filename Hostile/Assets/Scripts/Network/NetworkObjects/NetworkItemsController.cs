@@ -40,9 +40,9 @@ public class NetworkItemsController : NetworkObjectManager
         pv.RPC("SynchronizeItem_RPC", RpcTarget.AllViaServer, ID, state, position, refreshPos);
     }
 
-    public void SynchronizeItemEquip(int ID, bool state, Vector3 position, Quaternion rotation, int id)
+    public void SynchronizeItemEquip(int ID, bool state, Vector3 position, Quaternion rotation, int id, bool drop = false)
     {
-        pv.RPC("SynchronizeItemEquip_RPC", RpcTarget.AllViaServer, ID, state, position, rotation, id);
+        pv.RPC("SynchronizeItemEquip_RPC", RpcTarget.AllViaServer, ID, state, position, rotation, id, drop);
     }
 
     [PunRPC]
@@ -57,25 +57,33 @@ public class NetworkItemsController : NetworkObjectManager
 
 
     [PunRPC]
-    public void SynchronizeItemEquip_RPC(int ID, bool state, Vector3 position, Quaternion rotation, int parentID)
+    public void SynchronizeItemEquip_RPC(int ID, bool state, Vector3 position, Quaternion rotation, int parentID, bool drop = false)
     {
         Item item = (Item)GetNetworkObject(ID);
         item.inInventory = !state;
         if (state)
         {
-
-            foreach (GameObject player in gameSetupManager.players)
+            if (drop)
             {
-                if(player.GetComponent<PhotonView>().ViewID == parentID)
+                item.transform.parent = null;
+                item.gameObject.transform.position = position;
+                item.gameObject.transform.rotation = rotation;
+                item.gameObject.SetActive(true);
+                //item.enabled = true;
+            }
+            else
+            {
+                foreach (GameObject player in gameSetupManager.players)
                 {
-                    item.transform.parent = player.GetComponentInChildren<Arms_Transform>().Arms_Network;
-                    item.gameObject.transform.localPosition = position;
-                    item.gameObject.transform.localRotation = rotation;
+                    if (player.GetComponent<PhotonView>().ViewID == parentID)
+                    {
+                        item.transform.parent = player.GetComponentInChildren<Arms_Transform>().Arms_Network;
+                        item.gameObject.transform.localPosition = position;
+                        item.gameObject.transform.localRotation = rotation;
+                    }
                 }
-
+                item.gameObject.SetActive(state);
             }
         }
-            
-        item.gameObject.SetActive(state);
     }
 }
