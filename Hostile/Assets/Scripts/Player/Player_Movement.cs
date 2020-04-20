@@ -36,10 +36,7 @@ namespace Joueur
 
         void OnEnable()
         {
-            if (Data.controls is null)
-                controls = new PlayerControls();
-            else
-                controls = Data.controls;
+            controls = new PlayerControls();
             controls.InGame.Enable();
             animator = this.gameObject.GetComponent<Animator>();
             if (animator == null)

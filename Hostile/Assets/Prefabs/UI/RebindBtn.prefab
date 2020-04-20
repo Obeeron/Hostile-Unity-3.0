@@ -142,10 +142,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 696b249ec24ab2a42a6a503a86a22c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Action: {fileID: 0}
+  m_BindingIndex: 0
+  m_DisplayStringOptions: 4
   bindText: {fileID: 9000755620836131255}
-  refaction: {fileID: 0}
-  Data: {fileID: 11400000, guid: 2f32f42aeb55de44591bc11906113bea, type: 2}
-  btn: {fileID: 9000755620580092838}
+  onStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onCancelled:
+    m_PersistentCalls:
+      m_Calls: []
+  onCompleted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &9000755620836131249
 GameObject:
   m_ObjectHideFlags: 0

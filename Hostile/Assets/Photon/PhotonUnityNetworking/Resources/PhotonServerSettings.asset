@@ -29,19 +29,17 @@ MonoBehaviour:
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
-  - Break_RPC
   - ClickRpc
   - DeleteNetworkObject_RPC
   - DestroyFarmingItem_RPC
   - DestroyRpc
   - InstantiateNetworkObject_Local
   - playAnimation
-  - RPC_SynchTimer
-  - SynchronizeItem_RPC
-  - SoundHitRPC
-  - SoundTree_Local
-  - SoundRock_Local
   - PlayGetHit_Local
+  - RPC_SynchTimer
+  - SoundRock_Local
+  - SoundTree_Local
+  - SynchronizeItem_RPC
   - SynchronizeItemEquip_RPC
   DisableAutoOpenWizard: 1
-  ShowSettings: 1
+  ShowSettings: 0
