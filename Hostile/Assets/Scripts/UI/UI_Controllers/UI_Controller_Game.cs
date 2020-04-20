@@ -17,6 +17,10 @@ namespace UI
         public UnityEvent OnUIModeDisable = new UnityEvent();
 
         private bool inUIMode = false;
+
+        public GameObject crossHair;
+        public TextMeshProUGUI text_InteractMain;
+        public TextMeshProUGUI text_InteractSub;
         #endregion
 
         #region Main Methods

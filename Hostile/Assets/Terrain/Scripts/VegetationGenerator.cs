@@ -43,12 +43,12 @@ namespace Procedural
                 int detailPosY = (int)(point.y*terrainData.detailHeight/mapSize.y);
                 int detailPosX = (int)(point.x*terrainData.detailWidth/mapSize.x);
 
-                if(terrainTypeMap[splatPosX][splatPosY] != TerrainType.Hill)
+                if(terrainTypeMap[splatPosX][splatPosY] == TerrainType.Plain)
                 {
                     j++;
                     int grassPrefabIndex = UnityEngine.Random.Range(0,nbGrassPrefabs);
                     detailMapData[grassPrefabIndex][detailPosY,detailPosX] = 1;
-                    if(j%100000==0){
+                    if(j%1000000==0){
                         textSub.text = string.Format("[{0}/{1}] Grass Placed.",j,grass_spawnPoints.Count-k);
                         yield return null;
                     }

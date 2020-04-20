@@ -17,9 +17,9 @@ public class Raycaster : MonoBehaviour
     public float maxDistance = 2.5f;
     public LayerMask layerMask;
 
-    private GameObject crossHair;
-    private TextMeshProUGUI text_InteractMain;
-    private TextMeshProUGUI text_InteractSub;
+    public GameObject crossHair;
+    public TextMeshProUGUI text_InteractMain;
+    public TextMeshProUGUI text_InteractSub;
 
     private Interactable interactable;
     private TriggerCollider triggerCollider;
@@ -28,9 +28,6 @@ public class Raycaster : MonoBehaviour
     void Start()
     {    
         cam = GetComponentInChildren<Camera>();
-        crossHair = GameObject.Find("crossHair");
-        text_InteractMain = GameObject.Find("text_InteractMain").GetComponent<TextMeshProUGUI>();
-        text_InteractSub = GameObject.Find("text_InteractSub").GetComponent<TextMeshProUGUI>();
         
         target = null;
         text_InteractMain.gameObject.SetActive(false);

@@ -237,6 +237,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 40759
+  crossHair: {fileID: 0}
+  text_InteractMain: {fileID: 0}
+  text_InteractSub: {fileID: 0}
 --- !u!114 &6237107701639993624
 MonoBehaviour:
   m_ObjectHideFlags: 0

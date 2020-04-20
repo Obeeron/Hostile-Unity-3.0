@@ -52,6 +52,10 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
 
         //UI's player reference
         Inventaire.instance.player = player;
+        Raycaster raycaster = player.GetComponent<Raycaster>();
+        raycaster.crossHair = uiController.crossHair;
+        raycaster.text_InteractMain = uiController.text_InteractMain;
+        raycaster.text_InteractSub = uiController.text_InteractSub;
             
         //player death event setup
         statsController.OnDeath.AddListener(delegate { deathdrop.DropAll(player); });
