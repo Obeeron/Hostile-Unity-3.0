@@ -3988,6 +3988,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c49e37ffc272071439d410822da57b15, type: 2}
+    - target: {fileID: 4060825886788870107, guid: 21c64f973f2a8dd4bb2035feb921c809,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4405256155145640888, guid: 21c64f973f2a8dd4bb2035feb921c809,
         type: 3}
       propertyPath: m_LocalRotation.x

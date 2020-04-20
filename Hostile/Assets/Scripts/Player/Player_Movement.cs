@@ -54,6 +54,7 @@ namespace Joueur
             playerSound = gameObject.GetComponent<Player_Sound_Reference>();
             indexFootStepsSound = 1;
             onJump.AddListener(delegate { StatsController.instance.looseStamina(10f);});
+            animatorArms.SetBool("OnGround", true);
             // onFell.AddListener(delegate { StatsController.instance.looseLife(10f);});
         }
 

@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxLife: 100
   MaxStamina: 100
-  MaxHunger: 600
+  MaxHunger: 100
   Life: 100
   Stamina: 100
-  Hunger: 0
+  Hunger: 600
   Agility: 1
   Dexterity: 1
-  Strength: 1.5000001
+  Strength: 1
   ChoppingStrength: 1
   MiningStrength: 1
   Damage: 5
   speedState: 0
   isIdle: 1
   isOnJump: 0
-  speed: 3
+  speed: 8
