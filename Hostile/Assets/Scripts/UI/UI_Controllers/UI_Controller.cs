@@ -8,6 +8,16 @@ namespace UI
 {
     public class UI_Controller : MonoBehaviour
     {
+        #region Singleton
+        public static UI_Controller instance;
+        void Awake()
+        {
+            if(instance == null){
+                instance = this;
+            }
+        }
+        #endregion
+
         #region Variables
         [Header("Main Properties")]
         public UI_Screen m_startScreen;

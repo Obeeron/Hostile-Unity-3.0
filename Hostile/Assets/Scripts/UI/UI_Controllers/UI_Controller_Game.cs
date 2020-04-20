@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using TMPro;
 using UnityEngine.Events;
 
 namespace UI
