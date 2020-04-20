@@ -50,6 +50,11 @@ public class FightSystem : MonoBehaviour
 
             }
         }
+        else
+        {
+            Player_Sound_Reference player_Sound = gameObject.GetComponent<Player_Sound_Reference>();
+            player_Sound.Play(PV.ViewID, 4); //woosh
+        }
     }
 
     private void Start()

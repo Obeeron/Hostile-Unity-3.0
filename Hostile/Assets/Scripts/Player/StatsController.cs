@@ -195,7 +195,7 @@ namespace Joueur
         public void getHit(float dmg, int pv = 0)
         {
             looseLife(dmg);
-            sounds.PlayGetHit(pv);
+            sounds.Play(pv,2,1); //hit
         }
 
         public void gainHunger(float gain)

@@ -9,8 +9,10 @@ public class Player_Sound_Reference : MonoBehaviour
     public AudioClip[] footStepsRocks;
     public AudioClip[] GetHit;
     public AudioClip[] Die;
+    public AudioClip[] Woosh;
 
     public AudioSource source;
+    public AudioSource source2;
     private System.Random rd = new System.Random();
     private AudioClip previousClip;
 
@@ -38,22 +40,31 @@ public class Player_Sound_Reference : MonoBehaviour
         }
     }
 
-    public void PlayGetHit(int pv)
+    public void Play(int pv, int i, int sourceIndex)
     {
-        PV.RPC("PlayGetHit_Local", RpcTarget.AllViaServer, pv);
+        PV.RPC("Play_Local", RpcTarget.AllViaServer, pv, i, sourceIndex);
     }
 
     [PunRPC]
-    public void PlayGetHit_Local(int pv)
+    public void Play_Local(int pv, int i, int sourceIndex)
     {
         if(PV.ViewID == pv)
         {
-            source.pitch = Random.Range(0.9f, 1.1f);
-            source.volume = Random.Range(0.60f, 0.70f);
-            source.PlayOneShot(GetAudioClip(2));
+            if(sourceIndex == 0)
+            {
+                source.pitch = Random.Range(0.9f, 1.1f);
+                source.volume = Random.Range(0.60f, 0.70f);
+                source.PlayOneShot(GetAudioClip(i));
+            }
+            else
+            {
+                source2.pitch = Random.Range(0.9f, 1.1f);
+                source2.volume = Random.Range(0.60f, 0.70f);
+                source2.PlayOneShot(GetAudioClip(i));
+            }
+
         }
     }
-
     private AudioClip GetAudioClip(int indexArray)
     {
         int i = 3;
@@ -73,6 +84,9 @@ public class Player_Sound_Reference : MonoBehaviour
                 break;
             case 3:
                 clips = Die;
+                break;
+            case 4:
+                clips = Woosh;
                 break;
             default:
                 clips = footSteps;
