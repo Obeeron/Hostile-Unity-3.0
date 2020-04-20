@@ -102,7 +102,6 @@ public class NetworkObjectManager : MonoBehaviour
         int a = 0;
         int b = NetObjList.Count-1;
         int m = -1;
-        Debug.Log("Desired ID"+ID);
         while(a<=b){
             m = (a+b)/2;
             if(ID < netObjList[m].ID)

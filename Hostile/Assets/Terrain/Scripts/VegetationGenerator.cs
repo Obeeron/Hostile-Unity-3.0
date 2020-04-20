@@ -14,10 +14,11 @@ namespace Procedural
         int nbGrassPrefabs = 1;
 
         [Header("Bush scattering properties")]
-        public int nbBushPrefabs = 4;
+        public Transform bushParent;
+        public GameObject[] bushPrefabs;
         public float bush_minScale = 1;
         public float bush_maxScale = 1.2f;
-        public float nbMaxBush = 5000;
+        [Range(0f,1f)] public float bushDensity = 0.005f;
 
         public IEnumerator GenerateGrass(TerrainData terrainData, Vector2 mapSize, TerrainType[][] terrainTypeMap, System.Random rdm, TMPro.TextMeshProUGUI textSub)
         {
@@ -42,12 +43,12 @@ namespace Procedural
                 int detailPosY = (int)(point.y*terrainData.detailHeight/mapSize.y);
                 int detailPosX = (int)(point.x*terrainData.detailWidth/mapSize.x);
 
-                if(terrainTypeMap[splatPosX][splatPosY] == TerrainType.Plain)
+                if(terrainTypeMap[splatPosX][splatPosY] != TerrainType.Hill)
                 {
                     j++;
                     int grassPrefabIndex = UnityEngine.Random.Range(0,nbGrassPrefabs);
                     detailMapData[grassPrefabIndex][detailPosY,detailPosX] = 1;
-                    if(j%10000==0){
+                    if(j%100000==0){
                         textSub.text = string.Format("[{0}/{1}] Grass Placed.",j,grass_spawnPoints.Count-k);
                         yield return null;
                     }
@@ -65,48 +66,44 @@ namespace Procedural
             }
         }
 
-        public IEnumerator GenerateBush(TerrainData terrainData, Vector2 mapSize, TerrainType[][] terrainTypeMap, System.Random rdm, TMPro.TextMeshProUGUI textSub)
+        public IEnumerator GenerateBush(Terrain terrain, Vector2 mapSize, TerrainType[][] terrainTypeMap, System.Random rdm, TMPro.TextMeshProUGUI textSub)
         {
-            if(nbBushPrefabs == 0) yield break;
-
-            textSub.text = "Initializing Detail Map..";
-            yield return null;
-            List<int[,]> detailMapData = new List<int[,]>();
-            int i;
-            for(i=0; i<nbBushPrefabs; i++) 
-                detailMapData.Add(new int[terrainData.detailHeight, terrainData.detailWidth]);
+            if(bushPrefabs.Length == 0) yield break;
             
-            i=0;
+            Vector2 point;
+            int splatPosX;
+            int splatPosY;
+            Vector3 spawnPoint;
+            Quaternion rotation;
+            GameObject tree;
+
+            int nbMaxBush = (int)(mapSize.x*mapSize.y*bushDensity);
+            int i=0;
             while(i<nbMaxBush){
-                Vector2 point = new Vector2((float)(rdm.NextDouble()*mapSize.x), (float)(rdm.NextDouble()*mapSize.y));
+                point = new Vector2((float)(rdm.NextDouble()*mapSize.x), (float)(rdm.NextDouble()*mapSize.y));
 
-                int splatPosY = (int)(point.y*terrainData.alphamapHeight/mapSize.y);
-                int splatPosX = (int)(point.x*terrainData.alphamapWidth/mapSize.x);
-                int detailPosY = (int)(point.y*terrainData.detailHeight/mapSize.y);
-                int detailPosX = (int)(point.x*terrainData.detailWidth/mapSize.x);
+                splatPosY = (int)(point.y*terrain.terrainData.alphamapHeight/mapSize.y);
+                splatPosX = (int)(point.x*terrain.terrainData.alphamapWidth/mapSize.x);
 
-                switch(terrainTypeMap[splatPosX][splatPosY]){
-                    case TerrainType.Forest:
-                    case TerrainType.Plain:
-                        i++;
-                        int bushPrefabIndex = rdm.Next(nbBushPrefabs);
-                        detailMapData[bushPrefabIndex][detailPosY,detailPosX] = 1;
-                        if(i%500==0){
-                            textSub.text = string.Format("[{0}/{1}] Bush Placed.",i,nbMaxBush);
-                            yield return null;
-                        }
-                        break;
-                    default:
-                        nbMaxBush--;
-                        break;
+                if(terrainTypeMap[splatPosX][splatPosY] == TerrainType.Forest){
+                    i++;
+
+                    spawnPoint = new Vector3(point.x, terrain.terrainData.GetHeight((int)point.x,(int)point.y) - 0.5f,point.y);
+                    rotation = Quaternion.Euler(0,rdm.Next(360),0);
+                    tree = Instantiate(bushPrefabs[rdm.Next(bushPrefabs.Length)], spawnPoint, rotation,bushParent);
+                    tree.transform.localScale *=  (float)(bush_minScale + rdm.NextDouble()*(bush_maxScale-bush_minScale));
+
+                    if(i%500==0){
+                        textSub.text = string.Format("[{0}/{1}] Bush Placed.",i,nbMaxBush);
+                        yield return null;
+                    }
+               }
+               else{
+                    nbMaxBush--;
                 }
             }
 
-            // write all detail data to terrain data:
-            for (i = 0; i < nbBushPrefabs; i++)
-            {
-                terrainData.SetDetailLayer(0, 0, nbGrassPrefabs+i, detailMapData[i]);
-            }
+            terrain.Flush();
         }
     }
 }

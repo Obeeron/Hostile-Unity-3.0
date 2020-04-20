@@ -80,7 +80,7 @@ namespace Procedural{
 
         public IEnumerator SpawnBush()
         {
-            yield return StartCoroutine(vegetationGenerator.GenerateBush(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm,textSub));
+            yield return StartCoroutine(vegetationGenerator.GenerateBush(terrain,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm,textSub));
         }
 
         public void GenerateViaEditor(){
@@ -91,7 +91,7 @@ namespace Procedural{
             terrainGenerator.GenerateTerrain(rdm,textSub);
             textureGenerator.GenerateTextures(terrain.terrainData, terrainTypeMap, terrainGenerator.maxAltitude, rdm,textSub);
             vegetationGenerator.GenerateGrass(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm,textSub);
-            vegetationGenerator.GenerateBush(terrain.terrainData,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm,textSub);
+            vegetationGenerator.GenerateBush(terrain,new Vector2(terrainGenerator.height,terrainGenerator.width), terrainTypeMap, rdm,textSub);
         }
     }
 
