@@ -10,6 +10,7 @@ public class Player_Sound_Reference : MonoBehaviour
     public AudioClip[] GetHit;
     public AudioClip[] Die;
     public AudioClip[] Woosh;
+    public AudioClip[] Landing;
 
     public AudioSource source;
     public AudioSource source2;
@@ -50,17 +51,28 @@ public class Player_Sound_Reference : MonoBehaviour
     {
         if(PV.ViewID == pv)
         {
-            if(sourceIndex == 0)
+            switch (sourceIndex)
             {
-                source.pitch = Random.Range(0.9f, 1.1f);
-                source.volume = Random.Range(0.60f, 0.70f);
-                source.PlayOneShot(GetAudioClip(i));
-            }
-            else
-            {
-                source2.pitch = Random.Range(0.9f, 1.1f);
-                source2.volume = Random.Range(0.60f, 0.70f);
-                source2.PlayOneShot(GetAudioClip(i));
+                case 0:
+                    source.pitch = Random.Range(0.9f, 1.1f);
+                    source.volume = Random.Range(0.60f, 0.70f);
+                    source.PlayOneShot(GetAudioClip(i));
+                    break;
+                case 1:
+                    source2.pitch = Random.Range(0.9f, 1.1f);
+                    source2.volume = Random.Range(0.60f, 0.70f);
+                    source2.PlayOneShot(GetAudioClip(i));
+                    break;
+                case 2:
+                    source2.pitch = Random.Range(0.9f, 1.1f);
+                    source2.volume = Random.Range(0.20f, 0.30f);
+                    source2.PlayOneShot(GetAudioClip(i));
+                    break;
+                default:
+                    source.pitch = Random.Range(0.9f, 1.1f);
+                    source.volume = Random.Range(0.60f, 0.70f);
+                    source.PlayOneShot(GetAudioClip(i));
+                    break;
             }
 
         }
@@ -87,6 +99,9 @@ public class Player_Sound_Reference : MonoBehaviour
                 break;
             case 4:
                 clips = Woosh;
+                break;
+            case 5:
+                clips = Landing;
                 break;
             default:
                 clips = footSteps;

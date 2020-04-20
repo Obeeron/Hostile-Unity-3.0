@@ -220,75 +220,6 @@ namespace Joueur
         
         }
 
-        private void AnimatorChanges(Vector2 moveDirection)
-        {
-            //for animation
-            if (isThereAnimator)
-            {
-                if (Data.speedState == PlayerData.State.walking && (moveDirection.y > 0 || moveDirection.y < 0))
-                {
-                    if (moveDirection.y > 0)
-                    {
-                        animator.SetFloat("TurnSpeed", 0.5f);
-                        animatorArms.SetFloat("TurnSpeed", 0.5f);
-                    }
-                    else
-                    {
-                        animator.SetFloat("TurnSpeed", -0.5f);
-                        animatorArms.SetFloat("TurnSpeed", -0.5f);
-                    }
-
-                }
-                else
-                if (Data.speedState == PlayerData.State.running && (moveDirection.y > 0 || moveDirection.y < 0))
-                {
-                    if (moveDirection.y > 0)
-                    {
-                        animator.SetFloat("TurnSpeed", 1f);
-                        animatorArms.SetFloat("TurnSpeed", 1f);
-                    }
-                    else
-                    {
-                        animator.SetFloat("TurnSpeed", -1f);
-                        animatorArms.SetFloat("TurnSpeed", -1f);
-                    }
-                }
-                else
-                {
-                    animator.SetFloat("TurnSpeed", moveDirection.y);
-                    animatorArms.SetFloat("TurnSpeed", moveDirection.y);
-                }
-
-                if (Data.speedState == PlayerData.State.walking && (moveDirection.x > 0 || moveDirection.x < 0))
-                {
-                    float val = 0;
-                    if (moveDirection.x > 0)
-                        val = 0.5f;
-                    else
-                        val = -0.5f;
-                    animator.SetFloat("Speed", val);
-                    animatorArms.SetFloat("Speed", val);
-                }
-                else if (Data.speedState == PlayerData.State.running && (moveDirection.x > 0 || moveDirection.x < 0))
-                {
-                    float val = 0;
-                    if (moveDirection.x > 0)
-                        val = 1f;
-                    else
-                        val = -1f;
-                    animator.SetFloat("Speed", val);
-                    animatorArms.SetFloat("Speed", val);
-                }
-                else
-                {
-                    animator.SetFloat("Speed", moveDirection.x);
-                    animatorArms.SetFloat("Speed", moveDirection.x);
-                }
-
-                    animator.SetFloat("JumpLeg", moveDirection.x);
-                    animator.SetFloat("Jump", moveDirection.y);
-                }
-        }
 
         private IEnumerator Jump()
         {
@@ -312,6 +243,7 @@ namespace Joueur
                 animator.SetBool("OnGround", true);
                 animatorArms.SetBool("OnGround", true);
             }
+            playerSound.Play(gameObject.GetComponent<PhotonView>().ViewID, 5, 2);
                
             
             Data.isOnJump = false;

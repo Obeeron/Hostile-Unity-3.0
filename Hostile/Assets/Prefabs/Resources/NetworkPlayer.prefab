@@ -299,8 +299,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 294b14f13242e4e418c2df9aaf2f0245, type: 3}
   - {fileID: 8300000, guid: 48ed7eb09a8d21b419a230731f57f848, type: 3}
   - {fileID: 8300000, guid: 529181e1d0ef8ed4ba641258637033b4, type: 3}
+  Landing:
+  - {fileID: 8300000, guid: db6670b02d8bd9f4d887bbed125b1141, type: 3}
+  - {fileID: 8300000, guid: 197f52cd44bad8341b1010d44cf305f5, type: 3}
   source: {fileID: 2273320385851076372}
-  souce2: {fileID: 3195870685908136149}
+  source2: {fileID: 3195870685908136149}
   indexGround: 0
   isRunning: 0
 --- !u!114 &127209232135512406
