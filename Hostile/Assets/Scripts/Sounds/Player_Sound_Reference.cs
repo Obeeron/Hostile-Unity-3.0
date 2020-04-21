@@ -11,9 +11,11 @@ public class Player_Sound_Reference : MonoBehaviour
     public AudioClip[] Die;
     public AudioClip[] Woosh;
     public AudioClip[] Landing;
+    public AudioClip[] Breathing;
 
     public AudioSource source;
     public AudioSource source2;
+    public AudioSource source3;
     private System.Random rd = new System.Random();
     private AudioClip previousClip;
 
@@ -77,6 +79,28 @@ public class Player_Sound_Reference : MonoBehaviour
 
         }
     }
+
+    public void PlayBreathing(int pv, int i)
+    {
+        PV.RPC("PlayBreathing_RPC", RpcTarget.AllViaServer,pv, i);
+    }
+
+    [PunRPC]
+    public void PlayBreathing_RPC(int pv, int i)
+    {
+        if(i == 0) //breathing IN
+        {
+            source3.clip = Breathing[0];
+            source3.loop = true;
+            source3.volume = 0.05f;
+            source3.Play();
+            StartCoroutine(FadeIn(source3,3,0.5f));
+        }
+        else
+        {
+            StartCoroutine(FadeOut(source3, 4));
+        }
+    }
     private AudioClip GetAudioClip(int indexArray)
     {
         int i = 3;
@@ -103,6 +127,9 @@ public class Player_Sound_Reference : MonoBehaviour
             case 5:
                 clips = Landing;
                 break;
+            case 6:
+                clips = Breathing;
+                break;
             default:
                 clips = footSteps;
                 break;
@@ -116,5 +143,36 @@ public class Player_Sound_Reference : MonoBehaviour
             i--;
         }
         return selectedClip;
+    }
+
+    public IEnumerator FadeOut(AudioSource audioSource, float FadeTime)
+    {
+        float startVolume = audioSource.volume;
+
+        while (audioSource.volume > 0)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
+
+            yield return null;
+        }
+
+        audioSource.Stop();
+    }
+
+    public IEnumerator FadeIn(AudioSource audioSource, float FadeTime, float maxVolume)
+    {
+        float startVolume = 0.1f;
+
+        audioSource.volume = 0;
+        audioSource.Play();
+
+        while (audioSource.volume < maxVolume)
+        {
+            audioSource.volume += startVolume * Time.deltaTime / FadeTime;
+
+            yield return null;
+        }
+
+        audioSource.volume = maxVolume;
     }
 }

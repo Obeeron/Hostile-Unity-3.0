@@ -46,6 +46,8 @@ public class FightSystem : MonoBehaviour
 
                     //Debug.Log(tc.gameObject.name);
                     tc.Raycast_hit(hit);
+                    Player_Sound_Reference player_Sound = gameObject.GetComponent<Player_Sound_Reference>();
+                    player_Sound.PlayBreathing(PV.ViewID, 1);
                 }
 
             }
@@ -54,6 +56,7 @@ public class FightSystem : MonoBehaviour
         {
             Player_Sound_Reference player_Sound = gameObject.GetComponent<Player_Sound_Reference>();
             player_Sound.Play(PV.ViewID, 4, 1); //woosh
+            player_Sound.PlayBreathing(PV.ViewID, 0);
         }
     }
 

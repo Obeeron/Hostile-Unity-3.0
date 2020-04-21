@@ -43,5 +43,6 @@ MonoBehaviour:
   - SynchronizeItemEquip_RPC
   - PlayWoosh_Local
   - Play_Local
+  - PlayBreathing_RPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
