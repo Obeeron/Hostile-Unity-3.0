@@ -182,11 +182,15 @@ namespace Joueur
                     {
                         onFell?.Invoke();
                         StatsController.instance.looseLife(15f);
+                        // Debug.Log("Bigfelt");
+                        // StatsController.instance.getHit(15f); bug cause imediate death
                     }
                     else if (fallingVelocity.y < -18f)
                     {
                         onFell?.Invoke();
                         StatsController.instance.looseLife(10f);
+                        // Debug.Log("felt");
+                        // StatsController.instance.getHit(10f); bug cause imediate death
                     }
                     fallingVelocity.y = Physics.gravity.y;
                 }

@@ -12,6 +12,12 @@ public class LightingManager : MonoBehaviour
     [SerializeField, Min(0)] private int cycleLength = 1500; 
     [SerializeField, Range(0, 1500)] private float timeOfDay = 0f;
     #pragma warning restore 649
+    private float timepercent;
+
+    public float TimePercent
+    {
+        get => timepercent;
+    }
 
     void Start()
     {
@@ -28,7 +34,8 @@ public class LightingManager : MonoBehaviour
             timeOfDay += Time.deltaTime;
             timeOfDay %= cycleLength;
         }
-        UpdateLighting(timeOfDay / cycleLength); 
+        timepercent = timeOfDay / cycleLength;
+        UpdateLighting(timepercent);
     }
 
     private void UpdateLighting(float timePercent)

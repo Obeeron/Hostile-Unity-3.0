@@ -27,19 +27,28 @@ namespace Joueur
         #endregion
 
     #pragma warning disable 649
+        [Header("Datas")]
         [SerializeField] PlayerData Data;
+        [SerializeField] LightingManager timeref;
+        [Header("UI Reference")]
+        [SerializeField] public UIBarUpdate barStamina;
+        [SerializeField] public UIBarUpdate barHealth;
+        [SerializeField] public UIBarUpdate barHunger;
+        [Header("Event")]
+        [SerializeField] public UnityEvent OnDeath;
     #pragma warning restore 649
-        public UnityEvent OnDeath;
-        public UIBarUpdate barStamina;
-        public UIBarUpdate barHealth;
-        public UIBarUpdate barHunger;
+        
         private float staminaTimer = 0.0f;
         private float hungerTimer = 0.0f;
+        private float coldTimer = 0.0f;
         private float crouchSpeed = 2f;
         private float walkSpeed = 5f;
         private float runSpeed = 8f;
         private int MenuScene = 0;
         private bool isAlive = true;
+        private bool isStarving = false;
+        private bool isLowStamina = false;
+        private bool isNight = false;
         public Player_Sound_Reference sounds;
 
         void Start()
@@ -55,6 +64,19 @@ namespace Joueur
                 refreshSpeed();
                 refreshHunger();
             }
+            checkday();
+            if (isNight)
+            {
+                //FIXME
+            }
+        }
+
+        private void checkday()
+        {
+            if (timeref.TimePercent >= 60f)
+                isNight = true;
+            else
+                isNight = false;
         }
 
         public void UpdateChoppingStrength(float st)
@@ -79,7 +101,13 @@ namespace Joueur
                     Data.speed = crouchSpeed * Data.Agility;
                     break;
                 case PlayerData.State.running:
-                    Data.speed = runSpeed * Data.Agility;
+                    if (isLowStamina)
+                    {
+                        float decreasingSpeed = Data.Stamina / (Data.MaxStamina/10f);
+                        Data.speed = Mathf.Lerp(walkSpeed, runSpeed, decreasingSpeed);
+                    }
+                    else
+                        Data.speed = runSpeed * Data.Agility;
                     break;
                 default:
                     Data.speed = walkSpeed * Data.Agility;
@@ -111,6 +139,10 @@ namespace Joueur
                         break;
                 }
             }
+            if(Data.Stamina <= Data.MaxStamina/10f)
+                isLowStamina = true;
+            else
+                isLowStamina = false;
         }
 
         private void refreshHunger()
@@ -119,11 +151,15 @@ namespace Joueur
             {
                 looseHunger(1*Time.deltaTime);
             }
-            hungerTimer -= Time.deltaTime;
             if (Data.Hunger <= 0f)
             {
-                looseLife(0.4f * Time.deltaTime);
+                if (hungerTimer <= -11f)
+                {
+                    hungerTimer = -1.0f;
+                    this.getHit(2f);
+                }
             }
+            hungerTimer -= Time.deltaTime;
         }
 
         private void checkTimer()

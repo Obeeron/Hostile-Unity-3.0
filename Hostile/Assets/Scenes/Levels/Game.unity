@@ -4491,12 +4491,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: 2f32f42aeb55de44591bc11906113bea, type: 2}
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls: []
+  timeref: {fileID: 1207330211}
   barStamina: {fileID: 66136766}
   barHealth: {fileID: 5520400118019585915}
   barHunger: {fileID: 2001927146}
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
   sounds: {fileID: 0}
 --- !u!4 &461612603
 Transform:
