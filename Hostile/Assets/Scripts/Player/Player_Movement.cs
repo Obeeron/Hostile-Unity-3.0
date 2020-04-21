@@ -14,6 +14,7 @@ namespace Joueur
 
         private float groundLerp = 0.8f;
         private float airLerp = 0.96f;
+        private float jumpHeight = 1.3f;
         
         CharacterController character;
 
@@ -236,7 +237,7 @@ namespace Joueur
                 
 
             character.slopeLimit = 90f;
-            fallingVelocity.y = Mathf.Sqrt(-2f * Physics.gravity.y * 2.0f);
+            fallingVelocity.y = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
             Data.isOnJump = true;
             do
             {

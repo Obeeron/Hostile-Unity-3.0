@@ -133,15 +133,17 @@ public class FarmingItem : NetworkObject
         Vector3 topPosition = dropPosition;
         float angle = 0f;
         float radius = 1.8f;
+        Vector3 rotation = Vector3.zero;
         if (type == Type.Tree)
         {
             topPosition = groundcheck.transform.position;
+            rotation =  new Vector3(90f, 0, 0);
         }
         Destroy(gameObject);
         //drop new items here
         while (DropNmb-- > 0)
         {
-            NetworkItemsController.instance.InstantiateNetworkObject(itemDroped, dropPosition, Vector3.zero);
+            NetworkItemsController.instance.InstantiateNetworkObject(itemDroped, dropPosition, rotation);
             if (type == Type.Tree)
             {
                 dropPosition = Vector3.Lerp(dropPosition, topPosition, 0.1f);

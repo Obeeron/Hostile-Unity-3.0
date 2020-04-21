@@ -41,9 +41,9 @@ namespace Joueur
         private float staminaTimer = 0.0f;
         private float hungerTimer = 0.0f;
         private float coldTimer = 0.0f;
-        private float crouchSpeed = 2f;
-        private float walkSpeed = 5f;
-        private float runSpeed = 8f;
+        [SerializeField] private float crouchSpeed = 2f;
+        [SerializeField] private float walkSpeed = 3.5f;
+        [SerializeField] private float runSpeed = 5f;
         private int MenuScene = 0;
         private bool isAlive = true;
         private bool isStarving = false;
