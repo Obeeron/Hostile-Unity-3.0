@@ -51,9 +51,13 @@ namespace Joueur
         private bool isNight = false;
         public Player_Sound_Reference sounds;
 
+        private bool isBreathless = false;
+        private PhotonView PV;
+
         void Start()
         {
             OnDeath.AddListener(delegate { reset();});
+            PV = sounds.gameObject.GetComponent<PhotonView>();
         }
 
         void Update ()
@@ -68,6 +72,18 @@ namespace Joueur
             if (isNight)
             {
                 //FIXME
+            }
+            if (isLowStamina && !isBreathless && sounds.source3.volume < 0.00033f)
+            {
+                Debug.Log(PV.gameObject.name);
+                sounds.PlayBreathing(PV.ViewID, 0);
+                isBreathless = true;
+            }
+            if(!isLowStamina && isBreathless && sounds.source3.volume > 0.00033f)
+            {
+                Debug.Log("not anymore !");
+                sounds.PlayBreathing(PV.ViewID, 1);
+                isBreathless = false;
             }
         }
 

@@ -26,7 +26,9 @@ public class Player_Sound_Reference : MonoBehaviour
     private void Start()
     {
         PV = GetComponent<PhotonView>();
+        Joueur.StatsController.instance.sounds = this;
     }
+
 
 
     public void PlayFootSteps(AnimationEvent animationEvent)
@@ -88,18 +90,22 @@ public class Player_Sound_Reference : MonoBehaviour
     [PunRPC]
     public void PlayBreathing_RPC(int pv, int i)
     {
-        if(i == 0) //breathing IN
+        if(PV.ViewID == pv)
         {
-            source3.clip = Breathing[0];
-            source3.loop = true;
-            source3.volume = 0.05f;
-            source3.Play();
-            StartCoroutine(FadeIn(source3,3,0.5f));
+            if (i == 0) //breathing IN
+            {
+                source3.clip = Breathing[0];
+                source3.loop = true;
+                source3.volume = 0.05f;
+                source3.Play();
+                StartCoroutine(FadeIn(source3, 0.8f, 0.35f));
+            }
+            else
+            {
+                StartCoroutine(FadeOut(source3, 2f));
+            }
         }
-        else
-        {
-            StartCoroutine(FadeOut(source3, 4));
-        }
+
     }
     private AudioClip GetAudioClip(int indexArray)
     {
@@ -149,14 +155,13 @@ public class Player_Sound_Reference : MonoBehaviour
     {
         float startVolume = audioSource.volume;
 
-        while (audioSource.volume > 0)
+        while (audioSource.volume > 0.000f)
         {
             audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
 
             yield return null;
         }
-
-        audioSource.Stop();
+        Debug.Log("stopped");
     }
 
     public IEnumerator FadeIn(AudioSource audioSource, float FadeTime, float maxVolume)
@@ -172,7 +177,7 @@ public class Player_Sound_Reference : MonoBehaviour
 
             yield return null;
         }
-
+        Debug.Log("max volume");
         audioSource.volume = maxVolume;
     }
 }
