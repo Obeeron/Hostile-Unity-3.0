@@ -8,7 +8,7 @@ public class RockNetworkController : NetworkObjectManager
     #region Singleton 
     //on crée une unique instance accessible de partout
     public static RockNetworkController instance;
-
+    private int localID;
     //appelé avant le start
     protected override void Awake ()
     {
@@ -24,14 +24,16 @@ public class RockNetworkController : NetworkObjectManager
 
     public void DestroyFarmingItem(int ID)
     {
+        localID = ID;
         pv.RPC("DestroyFarmingItem_RPC", RpcTarget.AllViaServer, ID);
     }
 
     [PunRPC]
     public void DestroyFarmingItem_RPC(int ID)
     {
+        bool spawn = localID == ID;
         FarmingItem rock = (FarmingItem)GetNetworkObject(ID);
-        rock?.DestroyFarmingItem();
+        rock?.DestroyFarmingItem(spawn);
     }
 
     public void SoundRock(int ID)

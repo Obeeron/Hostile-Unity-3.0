@@ -8,7 +8,7 @@ public class TreeNetworkController : NetworkObjectManager
     #region Singleton 
     //on crée une unique instance accessible de partout
     public static TreeNetworkController instance;
-
+    private int localID;
     //appelé avant le start
     protected override void Awake()
     {
@@ -24,14 +24,16 @@ public class TreeNetworkController : NetworkObjectManager
 
     public void DestroyFarmingItem(int ID)
     {
+        localID = ID;
         pv.RPC("DestroyFarmingItem_RPC", RpcTarget.AllViaServer, ID);
     }
 
     [PunRPC]
     public void DestroyFarmingItem_RPC(int ID)
     {
+        bool spawn = localID == ID;
         FarmingItem tree = (FarmingItem)GetNetworkObject(ID);
-        tree?.DestroyFarmingItem();
+        tree?.DestroyFarmingItem(spawn);
     }
 
     public void SoundTree(int ID)

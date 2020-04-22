@@ -84,18 +84,19 @@ public class FarmingItem : NetworkObject
         }
     }
 
-    public void DestroyFarmingItem(){
-        switch(type){
+    public void DestroyFarmingItem(bool spawn = false){
+        switch(type)
+        {
             case Type.Tree:
-                StartCoroutine(Falling());
+                StartCoroutine(Falling(spawn));
                 break;
             case Type.Stone:
-                StartCoroutine(WaitToDestroy());
+                StartCoroutine(WaitToDestroy(spawn));
                 break;
         }
     }
 
-    private IEnumerator Falling()
+    private IEnumerator Falling(bool spawn = false)
     {
         transform.position += new Vector3(0, 2f, 0);
         gameObject.layer = 10;
@@ -104,29 +105,29 @@ public class FarmingItem : NetworkObject
         //itemRigid.constraints = RigidbodyConstraints.FreezeRotation;
         //yield return new WaitForSeconds(0.2f);
         itemRigid.constraints = RigidbodyConstraints.FreezeRotationY;
-        StartCoroutine(Timed());
+        StartCoroutine(Timed(spawn));
         do
         {
             yield return null;
         }while (!isonground());
         StopCoroutine(Timed());
-        Destroying();
+        Destroying(spawn);
     }
 
-    private IEnumerator Timed()
+    private IEnumerator Timed(bool spawn = false)
     {
         yield return new WaitForSeconds(6f);
         StopCoroutine(Falling());
-        Destroying();
+        Destroying(spawn);
     }
 
-    private IEnumerator WaitToDestroy()
+    private IEnumerator WaitToDestroy(bool spawn = false)
     {
         yield return new WaitForSeconds(2);
-        Destroying();
+        Destroying(spawn);
     }
 
-    private void Destroying()
+    private void Destroying(bool spawn = false)
     {
         Vector3 dropPosition = transform.position;
         dropPosition.y += 1f;
@@ -141,22 +142,25 @@ public class FarmingItem : NetworkObject
         }
         Destroy(gameObject);
         //drop new items here
-        while (DropNmb-- > 0)
+        if (spawn)
         {
-            NetworkItemsController.instance.InstantiateNetworkObject(itemDroped, dropPosition, rotation);
-            if (type == Type.Tree)
+            while (DropNmb-- > 0)
             {
-                dropPosition = Vector3.Lerp(dropPosition, topPosition, 0.1f);
-            }
-            else
-            {
-                dropPosition.x = topPosition.x + radius * Mathf.Sin(angle * Mathf.Deg2Rad);
-                dropPosition.z = topPosition.z + radius * Mathf.Cos(angle * Mathf.Deg2Rad);
-                angle += 60f;
-                if (angle >= 380f)
+                NetworkItemsController.instance.InstantiateNetworkObject(itemDroped, dropPosition, rotation);
+                if (type == Type.Tree)
                 {
-                    angle = 0f;
-                    radius += 0.5f;
+                    dropPosition = Vector3.Lerp(dropPosition, topPosition, 0.1f);
+                }
+                else
+                {
+                    dropPosition.x = topPosition.x + radius * Mathf.Sin(angle * Mathf.Deg2Rad);
+                    dropPosition.z = topPosition.z + radius * Mathf.Cos(angle * Mathf.Deg2Rad);
+                    angle += 60f;
+                    if (angle >= 380f)
+                    {
+                        angle = 0f;
+                        radius += 0.5f;
+                    }
                 }
             }
         }
