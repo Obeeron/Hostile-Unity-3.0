@@ -74,7 +74,7 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
             changeSelection();
     }
 
-    void InitializeItems()
+    public void InitializeItems()
     {
         if (player != null)
         {

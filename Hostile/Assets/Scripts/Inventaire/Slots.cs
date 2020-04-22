@@ -16,7 +16,7 @@ public class Slots : MonoBehaviour, IDragHandler,IBeginDragHandler,IEndDragHandl
     public Sprite slotSelected;
     public Sprite slotUnselected;
     public bool isSelected;
-    Text txt;
+    public GameObject txt;
 
 
     public void Selected(bool isSelected)
@@ -51,8 +51,8 @@ public class Slots : MonoBehaviour, IDragHandler,IBeginDragHandler,IEndDragHandl
             icone.gameObject.SetActive(true);
         }
         nbItem++;
-        txt = GetComponentInChildren<Text>();
-        txt.text = "" + nbItem;
+        txt.GetComponentInChildren<Text>().text = "" + nbItem;
+        txt.SetActive(true);
     }
    
 
@@ -64,8 +64,8 @@ public class Slots : MonoBehaviour, IDragHandler,IBeginDragHandler,IEndDragHandl
         item = new List<Item>();
         icone.GetComponent<Image>().sprite = null;
         icone.SetActive(false);
-        txt = GetComponentInChildren<Text>();
-        txt.text = "" + nbItem;
+        txt.GetComponentInChildren<Text>().text = "" + nbItem; ;
+        txt.SetActive(false);
     }
     public void Suppr()
     {
@@ -76,8 +76,7 @@ public class Slots : MonoBehaviour, IDragHandler,IBeginDragHandler,IEndDragHandl
         else{
             nbItem--;
             item.RemoveAt(nbItem - 1);
-            txt = GetComponentInChildren<Text>();
-            txt.text = "" + nbItem;
+            txt.GetComponentInChildren<Text>().text = "" + nbItem; ;
         }
     }
     public void OnPointerEnter(PointerEventData eventData)

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: ad635adfbb19f6a4c8c2f5d53ffc86f4
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Numberpile
+  fontNames:
+  - Numberpile
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 11f0a904aa197f54aa70c34adf4ffe77, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
