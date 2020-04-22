@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 
+    AppIdRealtime: 37531178-ee94-4d6c-bc8a-984b3daa3a60
     AppIdChat: 
     AppIdVoice: 
     AppVersion: 
@@ -28,6 +28,19 @@ MonoBehaviour:
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
-  RpcList: []
-  DisableAutoOpenWizard: 0
+  RpcList:
+  - ClickRpc
+  - DeleteNetworkObject_RPC
+  - DestroyFarmingItem_RPC
+  - DestroyRpc
+  - InstantiateNetworkObject_Local
+  - Play_Local
+  - playAnimation
+  - PlayBreathing_RPC
+  - RPC_SynchTimer
+  - SoundRock_Local
+  - SoundTree_Local
+  - SynchronizeItem_RPC
+  - SynchronizeItemEquip_RPC
+  DisableAutoOpenWizard: 1
   ShowSettings: 0

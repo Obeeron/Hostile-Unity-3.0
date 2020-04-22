@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Pickaxe
   prefabID: 0
-  icone: {fileID: 21300000, guid: 80dee3c5d8075c144a29c6f6995725bb, type: 3}
+  icone: {fileID: 21300000, guid: be60c2d690d6a984fabd8801b25a6bc0, type: 3}
   maxUsure: 50
   decayTime: -1
   persistent: 1

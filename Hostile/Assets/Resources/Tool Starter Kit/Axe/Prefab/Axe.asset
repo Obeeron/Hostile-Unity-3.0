@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Axe
   prefabID: 6
-  icone: {fileID: 21300000, guid: 38a2159911ff34b439b16a0f150b4055, type: 3}
+  icone: {fileID: 21300000, guid: affaa86a0c6a9af409cbc5d831cf58d2, type: 3}
   maxUsure: 0
   decayTime: -1
   persistent: 1
