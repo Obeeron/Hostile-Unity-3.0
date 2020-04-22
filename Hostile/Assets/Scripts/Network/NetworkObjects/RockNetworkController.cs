@@ -8,7 +8,7 @@ public class RockNetworkController : NetworkObjectManager
     #region Singleton 
     //on crée une unique instance accessible de partout
     public static RockNetworkController instance;
-    private int localID;
+    private int localID = -1;
     //appelé avant le start
     protected override void Awake ()
     {
