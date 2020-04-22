@@ -4523,6 +4523,9 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+  crouchSpeed: 2
+  walkSpeed: 4
+  runSpeed: 5.5
   sounds: {fileID: 0}
 --- !u!4 &461612603
 Transform:
@@ -5279,6 +5282,7 @@ MonoBehaviour:
   statsController: {fileID: 461612602}
   pldeath: {fileID: 442155014}
   deathdrop: {fileID: 442155015}
+  basicCamera: {fileID: 34253611}
   worldGenerator: {fileID: 415397196}
   terrain: {fileID: 40343476}
   players: []

@@ -11,6 +11,7 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
     public StatsController statsController;
     public PlayerDeath pldeath;
     public DeathDrop deathdrop;
+    public Camera basicCamera;
     public Procedural.WorldGenerator worldGenerator;
     public Terrain terrain;
     public List<GameObject> players;
@@ -59,7 +60,7 @@ public class GameSetupManager : MonoBehaviourPunCallbacks
             
         //player death event setup
         statsController.OnDeath.AddListener(delegate { deathdrop.DropAll(player); });
-        statsController.OnDeath.AddListener(delegate { pldeath.CameraDeath(player); });
+        statsController.OnDeath.AddListener(delegate { pldeath.CameraDeath(basicCamera, player); });
 
         //Build camera ref
         BuildingSystem.BuildCore.instance.SetCamera(player.GetComponentInChildren<Camera>());
