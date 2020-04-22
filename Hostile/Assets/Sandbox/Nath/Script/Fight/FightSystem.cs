@@ -24,12 +24,6 @@ public class FightSystem : MonoBehaviour
         canTouch = true;
     }
 
-    IEnumerator PlaySound(float t, int i)
-    {
-        yield return new WaitForSeconds(t);
-
-    }
-
     IEnumerator FireRaycast()
     {
         yield return new WaitForSeconds(0.6f);
@@ -53,7 +47,7 @@ public class FightSystem : MonoBehaviour
         else
         {
             Player_Sound_Reference player_Sound = gameObject.GetComponent<Player_Sound_Reference>();
-            player_Sound.Play(PV.ViewID, 4, 1); //woosh
+            player_Sound.Play(this.transform.position, 4, 1); //woosh
         }
     }
 
@@ -61,33 +55,33 @@ public class FightSystem : MonoBehaviour
     {
         usable = true;
         canTouch = true;
-        PV = PhotonView.Get(this);
+        PV = gameObject.GetComponent<PhotonView>();
         cam = GetComponentInChildren<Camera>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (PV.IsMine)
         {
-            //animatorArms.Play("Pickaxe_hit", 0);
-            //var anim = this.GetComponent<Animations_State>();
-            //Debug.Log("Changed");
-            //anim.ChangeEquiped();
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                //animatorArms.Play("Pickaxe_hit", 0);
+                //var anim = this.GetComponent<Animations_State>();
+                //Debug.Log("Changed");
+                //anim.ChangeEquiped();
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse0) && usable /* && PV.IsMine*/)
+            {
+                usable = false;
+                animator.SetLayerWeight(1, 1);
+                animator.Play("Melee", 1);
+                animatorArms.Play("Farm_Hit", 0);
+                PV.RPC("playAnimation", RpcTarget.Others, "Melee");
+                StartCoroutine(FireRaycast());
+                StartCoroutine(DisableCollider()); // Redesactive le trigger de l'arme
+            }
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0) && usable /* && PV.IsMine*/)
-        {
-            usable = false;
-            animator.SetLayerWeight(1, 1);
-            animator.Play("Melee", 1);
-            animatorArms.Play("Farm_Hit",0);
-            PV.RPC("playAnimation", RpcTarget.Others, "Melee");
-            StartCoroutine(FireRaycast());
-            StartCoroutine(DisableCollider()); // Redesactive le trigger de l'arme
-            //
 
-
-
-        }
         
     }
 

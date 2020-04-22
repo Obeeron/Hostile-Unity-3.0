@@ -58,6 +58,7 @@ public class Inventaire : MonoBehaviour//, IBeginDragHandler, IEndDragHandler, I
 
     public GameObject player;
 
+
     private void Start()
     {
         InitializeInventory();
