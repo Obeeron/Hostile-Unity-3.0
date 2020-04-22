@@ -248,7 +248,7 @@ namespace Joueur
                 animator.SetBool("OnGround", true);
                 animatorArms.SetBool("OnGround", true);
             }
-            playerSound.Play(gameObject.GetComponent<PhotonView>().ViewID, 5, 2);
+            playerSound.Play(this.transform.position, 5, 2);
                
             
             Data.isOnJump = false;

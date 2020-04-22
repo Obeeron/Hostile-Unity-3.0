@@ -247,7 +247,7 @@ namespace Joueur
         public void getHit(float dmg, int pv = 0)
         {
             looseLife(dmg);
-            sounds.Play(pv,2,1); //hit
+            sounds.Play(sounds.gameObject.transform.position,2,1); //hit
         }
 
         public void gainHunger(float gain)

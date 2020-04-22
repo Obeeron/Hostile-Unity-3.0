@@ -401,7 +401,11 @@ MonoBehaviour:
   nbSpawnTriesMax: 3
   minScale: 1
   maxScale: 1
-  parent: {fileID: 1181811297}
+  bushParent: {fileID: 0}
+  bushPrefabs: []
+  bush_minScale: 1
+  bush_maxScale: 1.2
+  bushDensity: 0.005
 --- !u!1 &494941967
 GameObject:
   m_ObjectHideFlags: 0

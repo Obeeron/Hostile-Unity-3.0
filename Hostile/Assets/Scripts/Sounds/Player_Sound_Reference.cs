@@ -45,41 +45,43 @@ public class Player_Sound_Reference : MonoBehaviour
         }
     }
 
-    public void Play(int pv, int i, int sourceIndex)
+    public void Play(Vector3 position, int i, int sourceIndex)
     {
-        PV.RPC("Play_Local", RpcTarget.AllViaServer, pv, i, sourceIndex);
+        PV.RPC("Play_Local", RpcTarget.AllViaServer, position, i, sourceIndex);
     }
 
     [PunRPC]
-    public void Play_Local(int pv, int i, int sourceIndex)
+    public void Play_Local(Vector3 position, int i, int sourceIndex)
     {
-        if(PV.ViewID == pv)
-        {
+            float volume = 0;
             switch (sourceIndex)
             {
                 case 0:
                     source.pitch = Random.Range(0.9f, 1.1f);
-                    source.volume = Random.Range(0.60f, 0.70f);
-                    source.PlayOneShot(GetAudioClip(i));
+                    volume = Random.Range(0.60f, 0.70f);
+                    AudioSource.PlayClipAtPoint(GetAudioClip(i), position, volume);
                     break;
                 case 1:
                     source2.pitch = Random.Range(0.9f, 1.1f);
-                    source2.volume = Random.Range(0.60f, 0.70f);
-                    source2.PlayOneShot(GetAudioClip(i));
+                    volume = Random.Range(0.60f, 0.70f);
+                    AudioSource.PlayClipAtPoint(GetAudioClip(i), position, volume);
                     break;
                 case 2:
                     source2.pitch = Random.Range(0.9f, 1.1f);
-                    source2.volume = Random.Range(0.20f, 0.30f);
-                    source2.PlayOneShot(GetAudioClip(i));
+                    volume = Random.Range(0.20f, 0.30f);
+                    AudioSource.PlayClipAtPoint(GetAudioClip(i), position, volume);
                     break;
                 default:
                     source.pitch = Random.Range(0.9f, 1.1f);
-                    source.volume = Random.Range(0.60f, 0.70f);
-                    source.PlayOneShot(GetAudioClip(i));
-                    break;
+                    volume = Random.Range(0.60f, 0.70f);
+                    AudioSource.PlayClipAtPoint(GetAudioClip(i), position, volume);
+                break;
             }
 
-        }
+        
+
+
+        
     }
 
     public void PlayBreathing(int pv, int i)

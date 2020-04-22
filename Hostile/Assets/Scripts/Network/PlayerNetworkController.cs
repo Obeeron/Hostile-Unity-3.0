@@ -1,28 +1,27 @@
 ﻿using UnityEngine;
 using Photon.Pun;
+using System.Collections.Generic;
 
 public class PlayerNetworkController : MonoBehaviour
 {
-#pragma warning disable 649
-    [SerializeField] MonoBehaviour[] ignoredScripts;
-#pragma warning restore 649
-    public GameObject Arms;
     public GameObject Root;
     public GameObject Armature;
+    public GameObject Camera;
     PhotonView phView;
 
     void Start()
     {
         phView = GetComponent<PhotonView>();
-        if (!phView.IsMine)
+        if (phView.IsMine)
         {
-            foreach (var script in ignoredScripts)
-                script.enabled = false;
-            GetComponentInChildren<Camera>().enabled = false;
-            GetComponentInChildren<AudioListener>().enabled = false;
-            Arms.SetActive(false);
+            Root.SetActive(false);
+            MonoBehaviour[] allScripts = GetComponents<MonoBehaviour>();
+            foreach (var script in allScripts){
+                Debug.Log(script);
+                script.enabled = true;
+            }
         }
         else
-            Root.SetActive(false);
+            Camera.SetActive(false);
     }
 }
