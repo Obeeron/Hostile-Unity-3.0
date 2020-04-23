@@ -18,11 +18,6 @@ MonoBehaviour:
   Life: 100
   Stamina: 100
   Hunger: 600
-  MaxStamina: 125
-  MaxHunger: 600
-  Life: 100
-  Stamina: 125
-  Hunger: 415.38873
   Agility: 1
   Dexterity: 1
   Strength: 1
@@ -32,4 +27,4 @@ MonoBehaviour:
   speedState: 0
   isIdle: 1
   isOnJump: 0
-  speed: 5
+  speed: 4

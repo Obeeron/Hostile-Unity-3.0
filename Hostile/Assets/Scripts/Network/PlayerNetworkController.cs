@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class PlayerNetworkController : MonoBehaviour
 {
     public GameObject Root;
+    public GameObject Arms;
     public GameObject Armature;
     public GameObject Camera;
     PhotonView phView;
@@ -15,6 +16,7 @@ public class PlayerNetworkController : MonoBehaviour
         if (phView.IsMine)
         {
             Root.SetActive(false);
+            Arms.SetActive(true);
             MonoBehaviour[] allScripts = GetComponents<MonoBehaviour>();
             foreach (var script in allScripts){
                 Debug.Log(script);
