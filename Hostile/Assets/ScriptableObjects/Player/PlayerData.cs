@@ -20,11 +20,13 @@ public class PlayerData : ScriptableObject
     public float Agility = 1;
     public float Dexterity = 1;
     public float Strength = 1;
+    public float ColdResistance = 1; // modified by armures or items only
     public float ChoppingStrength = 1;
     public float MiningStrength = 1;
     public float Damage = 5;
     public State speedState;
     public bool isIdle;
     public bool isOnJump;
+    public bool isInHome = false;
     public float speed;
 }

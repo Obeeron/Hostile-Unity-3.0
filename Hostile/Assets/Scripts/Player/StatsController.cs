@@ -41,9 +41,18 @@ namespace Joueur
         private float staminaTimer = 0.0f;
         private float hungerTimer = 0.0f;
         private float coldTimer = 0.0f;
+        private float coldCounter = 0.0f;
+        [Header("Speeds")]
         [SerializeField] private float crouchSpeed = 2f;
         [SerializeField] private float walkSpeed = 4f;
         [SerializeField] private float runSpeed = 5.5f;
+        [Header("Environment variables")]
+        [Tooltip("Time, in second, resisting cold without equipment.")]
+        [SerializeField] private float maxColdTimer = 30f;
+        [Tooltip("Second between each cold damage taken.")]
+        [SerializeField] private float maxColdCounter = 5f;
+        [Tooltip("Damage dealt per 5 seconds when player is freezing.")]
+        [SerializeField] private float coldDamage = 2f;
         private int MenuScene = 0;
         private bool isAlive = true;
         private bool isStarving = false;
@@ -67,12 +76,18 @@ namespace Joueur
                 refreshStamina();
                 refreshSpeed();
                 refreshHunger();
+                refreshCold();
             }
             checkday();
             if (isNight)
             {
-                //FIXME
+                if (Data.isInHome) //add other equipment that can protect from cold
+                    WarmingUp();
+                else
+                    Freezing();
             }
+            else
+                WarmingUp();
             if (isLowStamina && !isBreathless && sounds.source3.volume < 0.00033f)
             {
                 Debug.Log(PV.gameObject.name);
@@ -87,6 +102,42 @@ namespace Joueur
             }
         }
 
+        private void WarmingUp()
+        {
+            if (coldTimer > 0f)
+            {
+                coldTimer = coldTimer - Time.deltaTime * 4f;
+                if (coldTimer < 0)
+                {
+                    coldTimer = 0f;
+                    coldCounter = 0.0f;
+                }
+            }
+        }
+
+        private void Freezing()
+        {
+            if (coldTimer < maxColdTimer)
+                coldTimer += Time.deltaTime;
+            
+            if (coldTimer > maxColdTimer)
+                coldTimer = maxColdTimer;
+        }
+
+        private void refreshCold()
+        {
+            if (coldTimer > 0)
+            {
+                if (coldCounter >= maxColdCounter)
+                {
+                    getHit(coldDamage / Data.ColdResistance);
+                    coldCounter = 0.0f;
+                }
+                else
+                    coldCounter += Time.deltaTime;
+            }
+        }
+        
         private void checkday()
         {
             if (timeref.TimePercent >= 60f)
@@ -108,6 +159,7 @@ namespace Joueur
         {
             Data.Strength = st;
         }
+
         private void refreshSpeed()
         {
             //modifying speed
