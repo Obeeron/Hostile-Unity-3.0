@@ -20,6 +20,7 @@ namespace Joueur
 
 #pragma warning disable 649
         [SerializeField] private PlayerData Data;
+        [SerializeField] private float MaxFallingVellocity = 1f;
 #pragma warning restore 649
         private PlayerControls controls;
         protected Animator animator;
@@ -179,6 +180,8 @@ namespace Joueur
                 }
                 else if (Math.Abs(fallingVelocity.y - Physics.gravity.y) > 0.0001f)
                 {
+                    if (fallingVelocity.y < MaxFallingVellocity)
+                        MaxFallingVellocity = fallingVelocity.y;
                     if (fallingVelocity.y < Physics.gravity.y * 2.3f)
                     {
                         onFell?.Invoke();
@@ -210,7 +213,7 @@ namespace Joueur
                 float multiplier = 1f;
                 if (fallingVelocity.y < 0f) 
                 {
-                    multiplier = 2.0f;//modify this multiplier to change the curve of the fall. closer to 0 mean curve symetrical else fall way faster.
+                    multiplier = 1.7f;//modify this multiplier to change the curve of the fall. closer to 0 mean curve symetrical else fall way faster.
                 }
                 fallingVelocity.y += (Time.fixedDeltaTime * multiplier * Physics.gravity.y);// the longer the player fall, the faster he falls.
                 movement = Vector3.Lerp(Time.fixedDeltaTime * Data.speed* currentMovement, movement, airLerp);
