@@ -400,6 +400,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Data: {fileID: 11400000, guid: 2f32f42aeb55de44591bc11906113bea, type: 2}
+  MaxFallingVellocity: 1
   fallingVelocity: {x: 0, y: 0, z: 0}
   animatorArms: {fileID: 6010150846408853810}
   layerMask:
