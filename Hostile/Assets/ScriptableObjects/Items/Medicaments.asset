@@ -1,24 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 960dcc9a7a781044595907f560c922fc, type: 3}
-  m_Name: Medicaments
-  m_EditorClassIdentifier: 
-  name: medicament
-  icone: {fileID: 21300000, guid: 178ee5ad3a9521b41970a1a1b1921688, type: 3}
-  maxUsure: 1
-  decayTime: 300
-  persistent: 0
-  mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 0}
-  Material: []
-  Number: 
-  maxSizeStack: 2
+version https://git-lfs.github.com/spec/v1
+oid sha256:4ee467c98082b5c5cf70a5b18c7c99467cdd06a28b91b447e57ae4b7aeeb4e57
+size 708

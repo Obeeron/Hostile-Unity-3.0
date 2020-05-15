@@ -1,30 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 023d5097cc8b183438b6cab55334500d, type: 3}
-  m_Name: MainPlayerData
-  m_EditorClassIdentifier: 
-  MaxLife: 100
-  MaxStamina: 100
-  MaxHunger: 100
-  Life: 100
-  Stamina: 100
-  Hunger: 600
-  Agility: 1
-  Dexterity: 1
-  Strength: 1
-  ChoppingStrength: 1
-  MiningStrength: 1
-  Damage: 5
-  speedState: 0
-  isIdle: 1
-  isOnJump: 0
-  speed: 4
+version https://git-lfs.github.com/spec/v1
+oid sha256:6ee161d7351cc741e74fe3597a1ea694d00a2791f7c86376521335aa76f1a0b0
+size 673

@@ -1,27 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 960dcc9a7a781044595907f560c922fc, type: 3}
-  m_Name: Spear_Data
-  m_EditorClassIdentifier: 
-  name: Spear
-  prefabID: 0
-  icone: {fileID: 21300000, guid: 79f2e1597c3e0884aa94c49497b7c8f3, type: 3}
-  maxUsure: 50
-  decayTime: -1
-  persistent: 1
-  mesh: {fileID: 4300000, guid: 2f8fbb438e34627408e96bc46db472a3, type: 3}
-  material: {fileID: 2100000, guid: 9efa93b9390ea164eb791d8b59ea2cb5, type: 2}
-  Material:
-  - {fileID: 11400000, guid: d3a36880a0252ed479cfd9f61ae6753e, type: 2}
-  - {fileID: 11400000, guid: bf32b98125ac7f64ca664c6b484474ed, type: 2}
-  Number: 0100000001000000
-  maxSizeStack: 1
+version https://git-lfs.github.com/spec/v1
+oid sha256:0d6e2b974ef59ee7bf695236120a5059e6854350ac9e8e6987d906f9dec940be
+size 933

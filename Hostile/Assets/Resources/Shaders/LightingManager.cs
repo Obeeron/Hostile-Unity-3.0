@@ -13,10 +13,16 @@ public class LightingManager : MonoBehaviour
     [SerializeField, Range(0, 1500)] private float timeOfDay = 0f;
     #pragma warning restore 649
     private float timepercent;
+    private bool isDay = true;
 
     public float TimePercent
     {
         get => timepercent;
+    }
+
+    public bool IsDay
+    {
+        get => isDay;
     }
 
     void Start()
@@ -51,9 +57,15 @@ public class LightingManager : MonoBehaviour
             directionalLight.intensity = preset.IntensityCurve.Evaluate(timePercent)*1.3f;
             //RenderSettings.ambientIntensity = preset.IntensityCurve.Evaluate(timePercent);
             if(timeOfDay<cycleLength*0.6)
+            {
                 directionalLight.transform.localRotation = Quaternion.Euler(new Vector3((timePercent/0.6f * 180f), 170f, 0));
-            else
+                if(!isDay) isDay = true;
+            }
+            else{
                 directionalLight.transform.localRotation = Quaternion.Euler(new Vector3(180f+((timePercent-0.6f)/0.4f * 180f), 170f, 0));
+                if(isDay) isDay = false;
+            }
+                
         }
     }
 }

@@ -1,16 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1063058285, guid: 448d62fcada76fd4ab5702190add98fd, type: 3}
-  m_Name: EditorUndoStackPointer
-  m_EditorClassIdentifier: 
-  "\u0389\u038A\u0389\u038A\u0389\u038A\u0389\u038A\u038A\u038A\u038A\u0389\u038A\u0389\u038A\u0389\u0389\u038A\u0389\u038A\u0389\u038A\u0389\u038A\u0389\u038A\u0389\u0389\u038A\u0389\u0389\u038A\u0389\u038A\u038A\u0389\u0389\u038A\u038A\u0389\u0389\u038A\u0389\u038A\u038A\u0389\u038A": 
-  "\u038A\u038A\u0389\u038A\u038A\u0389\u0389\u0389\u038A\u0389\u038A\u038A\u038A\u0389\u038A\u0389\u0389\u0389\u038A\u0389\u038A\u0389\u038A\u038A\u038A\u038A\u038A\u0389\u0389\u0389\u0389\u0389\u038A\u038A\u0389\u038A\u0389\u0389\u0389\u0389\u038A\u038A\u0389\u038A\u0389\u0389\u0389": -1
+version https://git-lfs.github.com/spec/v1
+oid sha256:e244b3a024fa20f590202f8ff50d21055ccccb4fcdf423a36b046c762d81ac9c
+size 1010
